@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Class">
+      <UniqueIdentifier>{476f9434-2d79-4e6f-baa8-78c4e7158dcc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\Singleton">
+      <UniqueIdentifier>{de4aaabd-112e-40e7-911d-25d8dfa91f69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLib">
+      <UniqueIdentifier>{9e2c7a4c-f665-4ddb-bc13-d2e8f7140f43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLib\Interface">
+      <UniqueIdentifier>{fcc5f081-2346-46e8-a544-b972c0dab517}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLib\Interface\IWnd">
+      <UniqueIdentifier>{dfa17cd3-9952-4201-9b7d-654c4df71053}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLib\Interface\IDX">
+      <UniqueIdentifier>{9936ad78-e2a2-4feb-8eb6-99bcb0e27afd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLib\Interface\IDX3D">
+      <UniqueIdentifier>{3370e7e1-e503-4563-aca4-9a7492092d93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLib\Interface\ID3DPP">
+      <UniqueIdentifier>{4a6f18ce-5d8a-4d82-a36d-54735b78f198}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLib\Wnd">
+      <UniqueIdentifier>{a58dfa25-185c-4826-8116-b74f03b20a35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLib\DX">
+      <UniqueIdentifier>{754e404b-2c54-4c17-8b8c-129dc05e4a2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLib\DX3D">
+      <UniqueIdentifier>{fdeb7d07-4575-434d-9e5d-f0665c9d0d44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLib\D3DPP">
+      <UniqueIdentifier>{983a517e-b66d-41ce-9b28-eabe4fdce402}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLib\DXInput">
+      <UniqueIdentifier>{fee3217c-e5be-47c2-8c6c-54950aa4a698}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLib\Camera">
+      <UniqueIdentifier>{1469507a-2a24-4057-a494-e44b933d0534}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLib\ColorBlender">
+      <UniqueIdentifier>{a5cbda0e-8a4b-45e1-9140-d999a0c812a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLib\LightSetter">
+      <UniqueIdentifier>{9d26b08a-c625-478e-a6bb-c99c7405b11f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLib\CustomVertexEditor">
+      <UniqueIdentifier>{a111770e-7b94-479e-99c8-b48710178360}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLib\TexStorage">
+      <UniqueIdentifier>{65bb6956-207d-4138-85d7-a2ecbae4dbdb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLib\Interface\IDXInput">
+      <UniqueIdentifier>{178170a3-f42a-4225-8133-26daac3d8bdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLib\InputDev">
+      <UniqueIdentifier>{129238c6-2488-40ba-9dca-06806bfc04b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLib\InputDev\Mouse">
+      <UniqueIdentifier>{01bf814e-5256-483e-bac3-e6f2fce2775f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLib\InputDev\Keyboard">
+      <UniqueIdentifier>{357d788e-b5a7-4b63-8038-28814221820f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Class\Singleton\Singleton.cpp">
+      <Filter>Class\Singleton</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLib\Interface\IWnd\IWnd.cpp">
+      <Filter>GameLib\Interface\IWnd</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLib\Interface\IDX\IDX.cpp">
+      <Filter>GameLib\Interface\IDX</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLib\Interface\IDX3D\IDX3D.cpp">
+      <Filter>GameLib\Interface\IDX3D</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLib\Interface\ID3DPP\ID3DPP.cpp">
+      <Filter>GameLib\Interface\ID3DPP</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLib\Camera\Camera.cpp">
+      <Filter>GameLib\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLib\ColorBlender\ColorBlender.cpp">
+      <Filter>GameLib\ColorBlender</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLib\CustomVertexEditor\CustomVertexEditor.cpp">
+      <Filter>GameLib\CustomVertexEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLib\D3DPP\D3DPP.cpp">
+      <Filter>GameLib\D3DPP</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLib\DX\DX.cpp">
+      <Filter>GameLib\DX</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLib\DX3D\DX3D.cpp">
+      <Filter>GameLib\DX3D</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLib\DXInput\DXInput.cpp">
+      <Filter>GameLib\DXInput</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLib\LightSetter\LightSetter.cpp">
+      <Filter>GameLib\LightSetter</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLib\TexStorage\TexStorage.cpp">
+      <Filter>GameLib\TexStorage</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLib\Wnd\Wnd.cpp">
+      <Filter>GameLib\Wnd</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLib\Interface\IDXInput\IDXInput.cpp">
+      <Filter>GameLib\Interface\IDXInput</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLib\InputDev\Keyboard\Keyboard.cpp">
+      <Filter>GameLib\InputDev\Keyboard</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLib\InputDev\Mouse\Mouse.cpp">
+      <Filter>GameLib\InputDev\Mouse</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLib\InputDev\InputDev.cpp">
+      <Filter>GameLib\InputDev</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Class\Singleton\Singleton.h">
+      <Filter>Class\Singleton</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLib\Interface\IWnd\IWnd.h">
+      <Filter>GameLib\Interface\IWnd</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLib\Interface\IDX\IDX.h">
+      <Filter>GameLib\Interface\IDX</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLib\Interface\IDX3D\IDX3D.h">
+      <Filter>GameLib\Interface\IDX3D</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLib\Interface\ID3DPP\ID3DPP.h">
+      <Filter>GameLib\Interface\ID3DPP</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLib\Camera\Camera.h">
+      <Filter>GameLib\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLib\ColorBlender\ColorBlender.h">
+      <Filter>GameLib\ColorBlender</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLib\CustomVertexEditor\CustomVertexEditor.h">
+      <Filter>GameLib\CustomVertexEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLib\D3DPP\D3DPP.h">
+      <Filter>GameLib\D3DPP</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLib\DX\DX.h">
+      <Filter>GameLib\DX</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLib\DX3D\DX3D.h">
+      <Filter>GameLib\DX3D</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLib\DXInput\DXInput.h">
+      <Filter>GameLib\DXInput</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLib\TexStorage\TexStorage.h">
+      <Filter>GameLib\TexStorage</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLib\Wnd\Wnd.h">
+      <Filter>GameLib\Wnd</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLib\Interface\IDXInput\IDXInput.h">
+      <Filter>GameLib\Interface\IDXInput</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLib\InputDev\Keyboard\Keyboard.h">
+      <Filter>GameLib\InputDev\Keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLib\InputDev\Mouse\Mouse.h">
+      <Filter>GameLib\InputDev\Mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLib\InputDev\InputDev.h">
+      <Filter>GameLib\InputDev</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLib\LightSetter\LightSetter.h">
+      <Filter>GameLib\LightSetter</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="UML.txt">
+      <Filter>リソース ファイル</Filter>
+    </Text>
+  </ItemGroup>
+</Project>
