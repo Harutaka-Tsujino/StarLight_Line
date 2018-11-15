@@ -32,7 +32,7 @@ interface IDX3D
 
 'Wndクラスの LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM)で用いる
 '使用時DX3DDevがロストする可能性がある
-+ {abstract} ChangeWndMode() : VOID
++ {abstract} ToggleWndMode() : VOID
 }
 
 'DX3Dクラスに関係する
@@ -90,7 +90,7 @@ class Wnd
 - Create(const HINSTANCE hInst,const TCHAR* pAppName) : VOID
 
 'ウィンドウを生成するときにProcの関数ポインタが必要なのでstatic
-'IDX3D経由でDX3DのメソッドChangeWndMode()を用いる
+'IDX3D経由でDX3DのメソッドToggleWndMode()を用いる
 - {static} WndProc(HWND, UINT, WPARAM, LPARAM) : LRESULT CALLBACK
 }
 
@@ -124,7 +124,7 @@ class D3DPP
 + GetD3DPRESENT_PARAMETERS() : D3DPRESENT_PARAMETERS&
 
 '切り替えた後にD3DPPを再度入手する必要はない
-+ SwitchD3DPPWndMode() : VOID
++ ToggleD3DPPWndMode() : VOID
 
 - InitD3DPP(HWND) :VOID
 }
@@ -153,7 +153,7 @@ class DX3D
 + CleanUpRendering() : VOID
 
 '使用時DX3DDevがロストする可能性がある
-+ ChangeWndMode() : VOID
++ ToggleWndMode() : VOID
 
 '先にDXクラスを生成する
 - Create(LPDIRECT3D9) : VOID

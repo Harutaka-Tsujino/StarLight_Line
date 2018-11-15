@@ -2,13 +2,19 @@
 #define I_WND_H
 
 #include <windows.h>
-#include <d3dx9.h>
+
+struct SurfaceVal
+{
+public:
+	INT m_x = 0;
+	INT m_y = 0;
+};
 
 class IWnd
 {
 public:
-	virtual const HWND& GetHWND() = 0;
-	virtual D3DXVECTOR2 GetWndSize() = 0;
+	virtual inline const HWND& GetHWND() const = 0;
+	virtual inline SurfaceVal GetWndSize() const = 0;
 };
 
 #endif // !I_WND_H

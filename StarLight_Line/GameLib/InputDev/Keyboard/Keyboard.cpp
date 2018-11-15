@@ -5,41 +5,6 @@
 #include "../InputDev.h"
 #include "Keyboard.h"
 
-Keyboard::Keyboard(IWnd* pIWnd, IDXInput* pIDXInput) :InputDev(pIWnd, pIDXInput)
-{
-}
-
-VOID Keyboard::UpdataInputState()
-{
-	AcquireInputState();
-	CheckInputStateDetatils();
-}
-
-VOID Keyboard::StorePrevInputState()
-{
-	memcpy(m_prevDiks, m_diks, sizeof(BYTE) * 256);
-}
-
-BOOL Keyboard::IsPressed(INT key)
-{
-	return(m_details[key] == PRESS);
-}
-
-BOOL Keyboard::IsHeld(INT key)
-{
-	return(m_details[key] == HOLD);
-}
-
-BOOL Keyboard::IsReleased(INT key)
-{
-	return(m_details[key] == RELEASE);
-}
-
-BOOL Keyboard::IsNeutral(INT key)
-{
-	return(m_details[key] == NEUTRAL);
-}
-
 VOID Keyboard::Create(LPDIRECTINPUT8 pDXInput)
 {
 	pDXInput->CreateDevice(
@@ -53,7 +18,7 @@ VOID Keyboard::Create(LPDIRECTINPUT8 pDXInput)
 					DISCL_NONEXCLUSIVE | DISCL_BACKGROUND);
 }
 
-VOID Keyboard::AcquireInputState()
+inline VOID Keyboard::AcquireInputState()
 {
 	m_pDInputDev->Acquire();		//キーボードの状態を取得する権限の取得
 

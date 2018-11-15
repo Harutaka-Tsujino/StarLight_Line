@@ -7,11 +7,8 @@
 #include "../Interface/ID3DPP/ID3DPP.h"
 #include "DX3D.h"
 
-DX3D::DX3D(IWnd* pIWnd, IDX* pIDX, ID3DPP* pID3DPP) :m_rHWND(pIWnd->GetHWND())
+DX3D::DX3D(IWnd* pIWnd, IDX* pIDX, ID3DPP* pID3DPP) :m_rHWND(pIWnd->GetHWND()), m_pID3DPP(pID3DPP)
 {
-	m_pID3DPP = pID3DPP;
-	m_pD3DPP = m_pID3DPP->GetD3DPRESENT_PARAMETERS();
-
 	Create(pIDX->GetLPDIRECT3D9());
 
 	DefaultColorBlending();
@@ -24,39 +21,34 @@ DX3D::~DX3D()
 	m_pDX3DDev->Release();
 }
 
-const LPDIRECT3DDEVICE9& DX3D::GetLPDIRECT3DDEVICE9()
-{
-	return m_pDX3DDev;
-}
-
-VOID DX3D::PrepareRendering()
+inline VOID DX3D::PrepareRendering()
 {
 	m_pDX3DDev->Clear(
-				0, 
-				NULL, 
+				0,
+				NULL,
 				D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER,
-				D3DCOLOR_XRGB(0, 0, 0),	//画面をクリアするときの色
+				D3DCOLOR_XRGB(0, 0, 0),			//画面をクリアするときの色
 				1.f,
 				0);
 
 	m_pDX3DDev->BeginScene();
 }
 
-VOID DX3D::CleanUpRendering()
+inline VOID DX3D::CleanUpRendering()
 {
 	m_pDX3DDev->EndScene();
 	m_pDX3DDev->Present(
-					NULL,
-					NULL,
-					NULL,
-					NULL);
+				NULL,
+				NULL,
+				NULL,
+				NULL);
 }
 
-VOID DX3D::ChangeWndMode()
+VOID DX3D::ToggleWndMode()
 {
-	m_pID3DPP->SwitchD3DPPWndMode();
+	D3DPRESENT_PARAMETERS D3DPP = m_pID3DPP->ToggleD3DPPWndMode();
 
-	HRESULT hr = m_pDX3DDev->Reset(m_pD3DPP);	//スワップチェーンのタイプ、サイズ、およびフォーマットをリセット
+	HRESULT hr = m_pDX3DDev->Reset(&D3DPP);	//スワップチェーンのタイプ、サイズ、およびフォーマットをリセット
 	if (FAILED(hr))
 	{
 		OnFailedChangeWndMode(hr);
@@ -64,7 +56,7 @@ VOID DX3D::ChangeWndMode()
 		return;
 	}
 
-	LONG overlapWindowStyle	= (m_pD3DPP->Windowed) ? WS_OVERLAPPEDWINDOW : WS_POPUP;
+	LONG overlapWindowStyle	= (D3DPP.Windowed) ? WS_OVERLAPPEDWINDOW : WS_POPUP;
 	LONG windowStyle		= overlapWindowStyle | WS_VISIBLE;
 
 	SetWindowLong(
@@ -78,11 +70,13 @@ VOID DX3D::ChangeWndMode()
 
 VOID DX3D::Create(LPDIRECT3D9 pD3D)
 {
+	D3DPRESENT_PARAMETERS D3DPP = m_pID3DPP->GetD3DPRESENT_PARAMETERS();
+
 	if (pD3D->CreateDevice(	//描画をハードウェアに依存させる 軽い
 				D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL,
 				m_rHWND,
 				D3DCREATE_HARDWARE_VERTEXPROCESSING | D3DCREATE_MULTITHREADED,
-				m_pD3DPP,
+				&D3DPP,
 				&m_pDX3DDev))
 	{
 		return;
@@ -97,7 +91,7 @@ VOID DX3D::Create(LPDIRECT3D9 pD3D)
 				D3DADAPTER_DEFAULT, D3DDEVTYPE_REF,
 				m_rHWND,
 				D3DCREATE_MIXED_VERTEXPROCESSING | D3DCREATE_MULTITHREADED,
-				m_pD3DPP, 
+				&D3DPP,
 				&m_pDX3DDev))
 	{
 		return;
@@ -115,17 +109,19 @@ VOID DX3D::OnFailedChangeWndMode(HRESULT resetRetVal)
 {
 	if (resetRetVal == D3DERR_DEVICELOST)
 	{
-		return;								//デバイスがロストとしたときの対処
+		return;				//デバイスがロストとしたときの対処
 	}
 
-	DestroyWindow(m_rHWND);					//WM_DESTROYをWndProcに投げる
+	DestroyWindow(m_rHWND);	//WM_DESTROYをWndProcに投げる
 }
 
-VOID DX3D::InitViewPort()
+inline VOID DX3D::InitViewPort()
 {
+	D3DPRESENT_PARAMETERS D3DPP = m_pID3DPP->GetD3DPRESENT_PARAMETERS();
+
 	D3DVIEWPORT9 viewPort;
-	viewPort.Width	= m_pD3DPP->BackBufferWidth;
-	viewPort.Height = m_pD3DPP->BackBufferHeight;
+	viewPort.Width	= D3DPP.BackBufferWidth;
+	viewPort.Height = D3DPP.BackBufferHeight;
 	viewPort.MinZ	= 0.0f;
 	viewPort.MaxZ	= 1.0f;
 	viewPort.X		= 0;

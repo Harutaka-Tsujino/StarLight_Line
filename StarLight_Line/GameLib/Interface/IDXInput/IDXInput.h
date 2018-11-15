@@ -6,7 +6,7 @@
 class IDXInput
 {
 public:
-	virtual const LPDIRECTINPUT8& GetLPDIRECTINPUT8() = 0;
+	virtual inline const LPDIRECTINPUT8& GetLPDIRECTINPUT8() const = 0;
 };
 
 #endif // !I_DX_INPUT_H

@@ -7,7 +7,7 @@
 class IDX
 {
 public:
-	virtual const LPDIRECT3D9& GetLPDIRECT3D9() = 0;
+	virtual inline const LPDIRECT3D9& GetLPDIRECT3D9() const = 0;
 };
 
 #endif // !I_DX_H

@@ -4,8 +4,8 @@
 class ID3DPP
 {
 public:
-	virtual D3DPRESENT_PARAMETERS* GetD3DPRESENT_PARAMETERS() = 0;
-	virtual VOID SwitchD3DPPWndMode() = 0;
+	virtual inline D3DPRESENT_PARAMETERS GetD3DPRESENT_PARAMETERS() = 0;
+	virtual D3DPRESENT_PARAMETERS ToggleD3DPPWndMode() = 0;
 };
 
 #endif // !I_D3DPP_H

@@ -5,39 +5,10 @@
 #include "../InputDev.h"
 #include "Mouse.h"
 
-Mouse::Mouse(IWnd* pIWnd, IDXInput* pIDXInput) :InputDev(pIWnd, pIDXInput)
-{
-}
-
 VOID Mouse::UpdataInputState()
 {
 	AcquireInputState();
 	CheckInputStateDetatils();
-}
-
-VOID Mouse::StorePrevInputState()
-{
-	memcpy(&m_prevState, &m_state, sizeof(DIMOUSESTATE));
-}
-
-BOOL Mouse::IsPressed(INT key)
-{
-	return(m_details[key] == PRESS);
-}
-
-BOOL Mouse::IsHeld(INT key)
-{
-	return(m_details[key] == HOLD);
-}
-
-BOOL Mouse::IsReleased(INT key)
-{
-	return(m_details[key] == RELEASE);
-}
-
-BOOL Mouse::IsNeutral(INT key)
-{
-	return(m_details[key] == NEUTRAL);
 }
 
 VOID Mouse::Create(LPDIRECTINPUT8 pDXInput)
@@ -63,7 +34,7 @@ VOID Mouse::Create(LPDIRECTINPUT8 pDXInput)
 	m_pDInputDev->SetProperty(DIPROP_AXISMODE, &mouseProp.diph);
 }
 
-VOID Mouse::AcquireInputState()
+inline VOID Mouse::AcquireInputState()
 {
 	m_pDInputDev->Acquire();						//マウスの状態を取得する権限の取得
 

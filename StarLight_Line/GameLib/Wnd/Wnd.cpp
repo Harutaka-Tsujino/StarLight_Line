@@ -1,33 +1,13 @@
 ﻿#include <windows.h>
 #include <d3dx9.h>
 
-#include "../Interface/IDX3D/IDX3D.h"
 #include "Wnd.h"
 
-IDX3D* Wnd::m_pIDX3D = nullptr;
-
-Wnd::Wnd(const HINSTANCE hInst, const TCHAR* pAppName, IDX3D* pIDX3D)
+Wnd::Wnd(const HINSTANCE hInst, const TCHAR* pAppName)
 {
-	m_pIDX3D = pIDX3D;
-
 	ZeroMemory(&m_msg, sizeof(MSG));
 
 	Create(hInst, pAppName);
-}
-
-const HWND& Wnd::GetHWND()
-{
-	return m_hWnd;
-}
-
-const MSG& Wnd::GetMSG()
-{
-	return m_msg;
-}
-
-D3DXVECTOR2 Wnd::GetWndSize()
-{
-	return m_WND_SIZE;
 }
 
 BOOL Wnd::ExistsWinMSG()
@@ -37,10 +17,10 @@ BOOL Wnd::ExistsWinMSG()
 		TranslateMessage(&m_msg);
 		DispatchMessage(&m_msg);
 
-		return FALSE;
+		return TRUE;
 	}
 
-	return TRUE;
+	return FALSE;
 }
 
 VOID Wnd::Create(const HINSTANCE hInst, const TCHAR* pAppName)
@@ -64,7 +44,7 @@ VOID Wnd::Create(const HINSTANCE hInst, const TCHAR* pAppName)
 				pAppName,pAppName,
 				WS_OVERLAPPEDWINDOW | WS_VISIBLE,
 				CW_USEDEFAULT, CW_USEDEFAULT, 
-				(INT)m_WND_SIZE.x, (INT)m_WND_SIZE.y, 
+				(INT)m_WND_SIZE.m_x, (INT)m_WND_SIZE.m_y, 
 				NULL, NULL, 
 				hInst,
 				NULL);
@@ -85,12 +65,12 @@ LRESULT CALLBACK Wnd::WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam
 		break;
 
 	case WM_KEYDOWN:
-		if(wParam == VK_ESCAPE)PostQuitMessage(0);			//プログラムの終了メッセージを投げる
+		if (wParam == VK_ESCAPE) PostQuitMessage(0);		//プログラムの終了メッセージを投げる
 
 		break;
 
 	case WM_SYSKEYDOWN:										// Alt + 特殊キーの処理に使う
-		if (wParam == VK_RETURN)m_pIDX3D->ChangeWndMode();	//デバイスロストの危険性あり
+		if (wParam == VK_RETURN);							//意図した空の制御
 	
 		break;
 	}

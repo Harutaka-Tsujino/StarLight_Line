@@ -19,21 +19,40 @@ enum DIM
 class Mouse :public InputDev
 {
 public:
-	Mouse(IWnd* pIWnd, IDXInput* pIDXInput);
+	Mouse(IWnd* pIWnd, IDXInput* pIDXInput) : InputDev(pIWnd, pIDXInput) {};
 	~Mouse() {};
 
 	VOID UpdataInputState();					//メインループの始まりで用いる
-	VOID StorePrevInputState();					//メインループの終わりで用いる
 
-	BOOL IsPressed(INT key);
-	BOOL IsHeld(INT key);
-	BOOL IsReleased(INT key);
-	BOOL IsNeutral(INT key);
+	inline VOID StorePrevInputState()			//メインループの終わりで用いる
+	{
+		memcpy(&m_prevState, &m_state, sizeof(DIMOUSESTATE));
+	}
+
+	inline BOOL IsPressed(INT key) const
+	{
+		return(m_details[key] == PRESS);
+	}
+
+	inline BOOL IsHeld(INT key) const
+	{
+		return(m_details[key] == HOLD);
+	}
+
+	inline BOOL IsReleased(INT key) const
+	{
+		return(m_details[key] == RELEASE);
+	}
+
+	inline BOOL IsNeutral(INT key) const
+	{
+		return(m_details[key] == NEUTRAL);
+	}
 
 private:
 	VOID Create(LPDIRECTINPUT8 pDXInput);		//基底クラスのコンストラクタでCreate(LPDIRECTINPUT8 pDXInput)を呼ぶ
 
-	VOID AcquireInputState();
+	inline VOID AcquireInputState();
 	VOID CheckInputStateDetatils();				//AcquireInputState()を読んだ後に用いる
 
 	DIMOUSESTATE m_state;

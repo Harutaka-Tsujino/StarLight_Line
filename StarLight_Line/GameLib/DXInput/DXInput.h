@@ -5,15 +5,19 @@
 #include <d3dx9.h>
 #include <dinput.h>
 
+#include "../Interface/IDXInput/IDXInput.h"
 #include "../Interface/IWnd/IWnd.h"
 
-class DXInput
+class DXInput :public IDXInput
 {
 public:
 	DXInput(IWnd* pIWnd);				//Create()を呼ぶ
 	~DXInput();
 
-	const LPDIRECTINPUT8& GetLPDIRECTINPUT8();
+	inline const LPDIRECTINPUT8& GetLPDIRECTINPUT8() const
+	{
+		return m_pDXInput;
+	}
 
 private:
 	VOID Create();

@@ -7,8 +7,7 @@
 class IDX3D
 {
 public:
-	virtual const LPDIRECT3DDEVICE9& GetLPDIRECT3DDEVICE9() = 0;
-	virtual VOID ChangeWndMode() = 0;	//使用時DX3DDevがロストする可能性がある
+	virtual inline const LPDIRECT3DDEVICE9& GetLPDIRECT3DDEVICE9() const = 0;
 };
 
 #endif // !I_DX3D_H

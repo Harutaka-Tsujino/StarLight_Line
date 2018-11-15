@@ -4,13 +4,18 @@
 #include <windows.h>
 #include <d3dx9.h>
 
-class DX
+#include "../Interface/IDX/IDX.h" 
+
+class DX :public IDX
 {
 public:
-	DX();									//Create()を呼ぶ
+	DX();
 	~DX();
 
-	const LPDIRECT3D9& GetLPDIRECT3D9();
+	inline const LPDIRECT3D9& GetLPDIRECT3D9() const
+	{
+		return m_pD3D;
+	}
 
 private:
 	VOID Create();							//他DX機能の基盤となるので初めに生成する

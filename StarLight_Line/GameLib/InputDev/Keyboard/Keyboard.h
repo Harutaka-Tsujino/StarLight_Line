@@ -10,25 +10,48 @@
 class Keyboard :public InputDev
 {
 public:
-	Keyboard(IWnd* pIWnd, IDXInput* pIDXInput);
+	Keyboard(IWnd* pIWnd, IDXInput* pIDXInput) :InputDev(pIWnd, pIDXInput) {};
 	~Keyboard() {};
 
-	VOID UpdataInputState();
-	VOID StorePrevInputState();
+	VOID UpdataInputState()				//メインループの始まりで用いる
+	{
+		AcquireInputState();
+		CheckInputStateDetatils();
+	}
 
-	BOOL IsPressed(INT key);
-	BOOL IsHeld(INT key);
-	BOOL IsReleased(INT key);
-	BOOL IsNeutral(INT key);
+	inline VOID StorePrevInputState()	//メインループの終わりで用いる
+	{
+		memcpy(m_prevDiks, m_diks, sizeof(DIMOUSESTATE));
+	}
+
+	inline BOOL IsPressed(INT key) const
+	{
+		return(m_details[key] == PRESS);
+	}
+
+	inline BOOL IsHeld(INT key) const
+	{
+		return(m_details[key] == HOLD);
+	}
+
+	inline BOOL IsReleased(INT key) const
+	{
+		return(m_details[key] == RELEASE);
+	}
+
+	inline BOOL IsNeutral(INT key) const
+	{
+		return(m_details[key] == NEUTRAL);
+	}
 
 private:
 	VOID Create(LPDIRECTINPUT8 pDXInput);
 
-	VOID AcquireInputState();
+	inline VOID AcquireInputState();
 	VOID CheckInputStateDetatils();
 
-	BYTE m_diks[256];		//現在ののフレームでキーが押されていた場合上位ビットが立つ
-	BYTE m_prevDiks[256];	//前回のフレームでキーが押されていた場合上位ビットが立つ
+	BYTE m_diks[256];					//現在ののフレームでキーが押されていた場合上位ビットが立つ
+	BYTE m_prevDiks[256];				//前回のフレームでキーが押されていた場合上位ビットが立つ
 
 	InputDetatail m_details[256];
 };

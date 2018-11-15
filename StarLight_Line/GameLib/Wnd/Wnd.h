@@ -4,32 +4,41 @@
 #include <windows.h>
 #include <d3dx9.h>
 
-#include "../Interface/IDX3D/IDX3D.h"
+#include "../Interface/IWnd/IWnd.h"
 
-class Wnd
+class Wnd :public IWnd
 {
 public:
-	Wnd(const HINSTANCE hInst, const TCHAR* pAppName, IDX3D* pIDX3D);						//WinMainからHINSTANCEを取得 Crate()を呼ぶ
+	Wnd(const HINSTANCE hInst, const TCHAR* pAppName);                                      //WinMainからHINSTANCEを取得 Crate()を呼ぶ
 	~Wnd() {};
 
-	const HWND& GetHWND();
-	const MSG& GetMSG();
-	D3DXVECTOR2 GetWndSize();
+	inline const HWND& GetHWND() const
+	{
+		return m_hWnd;
+	}
+
+	inline const MSG& GetMSG() const
+	{
+		return m_msg;
+	}
+
+	inline SurfaceVal GetWndSize() const
+	{
+		return m_WND_SIZE;
+	}
 
 	BOOL ExistsWinMSG();
 
 private:
 	VOID Create(const HINSTANCE hInst, const TCHAR* pAppName);
 
-	static LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam);	//ウィンドウを生成するときにProcの関数ポインタが必要なのでstatic
-																							//IDX3D経由でDX3DのメソッドChangeWndMode()を呼ぶ
+	static LRESULT CALLBACK WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam);    //ウィンドウを生成するときにProcの関数ポインタが必要なのでstatic
+																							//IDX3D経由でDX3DのメソッドToggleWndMode()を呼ぶ
 	HWND m_hWnd = nullptr;
 
 	MSG m_msg;
 
-	static IDX3D* m_pIDX3D;																	//WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)で用いるのでstatic
-
-	const D3DXVECTOR2 m_WND_SIZE = { 1280.0f, 720.0f };
+	const SurfaceVal m_WND_SIZE = { 1280, 720 };
 };
 
 #endif // !WND_H
