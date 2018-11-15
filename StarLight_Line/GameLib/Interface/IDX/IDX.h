@@ -1,7 +1,6 @@
 ﻿#ifndef I_DX_H
 #define I_DX_H
 
-#include <windows.h>
 #include <d3dx9.h>
 
 class IDX

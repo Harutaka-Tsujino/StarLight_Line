@@ -1,5 +1,6 @@
 ﻿#ifndef SINGLETON_H
 #define SINGLETON_H
+
 #include <windows.h>
 #include <memory>
 
@@ -14,7 +15,6 @@ protected:
 
 private:
 	std::unique_ptr<T> ptr;
-
 }
 
 #endif // !SINGLETON_H

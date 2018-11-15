@@ -1,6 +1,7 @@
 ﻿#include <windows.h>
 #include <dinput.h>
 
+#include "../Interface/IWnd/IWnd.h"
 #include "../Interface/IDXInput/IDXInput.h"
 #include "InputDev.h"
 

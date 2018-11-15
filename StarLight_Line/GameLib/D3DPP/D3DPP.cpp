@@ -1,7 +1,6 @@
 ﻿#include <windows.h>
 #include <d3dx9.h>
 
-#include "../Interface/IWnd/IWnd.h"
 #include "D3DPP.h"
 
 D3DPRESENT_PARAMETERS D3DPP::ToggleD3DPPWndMode()

@@ -1,5 +1,4 @@
 ﻿#include <windows.h>
-#include <d3dx9.h>
 
 #include "Wnd.h"
 

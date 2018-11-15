@@ -1,6 +1,8 @@
 ﻿#ifndef I_D3DPP_H
 #define I_D3DPP_H
 
+#include <d3dx9.h>
+
 class ID3DPP
 {
 public:

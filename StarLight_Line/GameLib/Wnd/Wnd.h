@@ -2,7 +2,6 @@
 #define WND_H
 
 #include <windows.h>
-#include <d3dx9.h>
 
 #include "../Interface/IWnd/IWnd.h"
 

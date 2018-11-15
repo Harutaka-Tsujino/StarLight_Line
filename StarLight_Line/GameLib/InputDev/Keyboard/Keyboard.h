@@ -5,6 +5,7 @@
 #include <dinput.h>
 
 #include "../../Interface/IDXInput/IDXInput.h"
+#include "../../Interface/IWnd/IWnd.h"
 #include "../InputDev.h"
 
 class Keyboard :public InputDev

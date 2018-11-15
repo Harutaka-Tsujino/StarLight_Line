@@ -1,8 +1,6 @@
 ﻿#include <windows.h>
 #include <dinput.h>
 
-#include "../../Interface/IDXInput/IDXInput.h"
-#include "../InputDev.h"
 #include "Keyboard.h"
 
 VOID Keyboard::Create(LPDIRECTINPUT8 pDXInput)
