@@ -123,44 +123,34 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Class\Singleton\Singleton.cpp" />
-    <ClCompile Include="GameLib\Camera\Camera.cpp" />
-    <ClCompile Include="GameLib\ColorBlender\ColorBlender.cpp" />
-    <ClCompile Include="GameLib\CustomVertexEditor\CustomVertexEditor.cpp" />
-    <ClCompile Include="GameLib\D3DPP\D3DPP.cpp" />
-    <ClCompile Include="GameLib\DX3D\DX3D.cpp" />
-    <ClCompile Include="GameLib\DXInput\DXInput.cpp" />
     <ClCompile Include="GameLib\DX\DX.cpp" />
-    <ClCompile Include="GameLib\InputDev\InputDev.cpp" />
-    <ClCompile Include="GameLib\InputDev\Keyboard\Keyboard.cpp" />
-    <ClCompile Include="GameLib\InputDev\Mouse\Mouse.cpp" />
-    <ClCompile Include="GameLib\Interface\ID3DPP\ID3DPP.cpp" />
-    <ClCompile Include="GameLib\Interface\IDX3D\IDX3D.cpp" />
-    <ClCompile Include="GameLib\Interface\IDXInput\IDXInput.cpp" />
-    <ClCompile Include="GameLib\Interface\IDX\IDX.cpp" />
-    <ClCompile Include="GameLib\Interface\IWnd\IWnd.cpp" />
-    <ClCompile Include="GameLib\LightSetter\LightSetter.cpp" />
-    <ClCompile Include="GameLib\TexStorage\TexStorage.cpp" />
+    <ClCompile Include="GameLib\DX\DX3D\Camera\Camera.cpp" />
+    <ClCompile Include="GameLib\DX\DX3D\ColorBlender\ColorBlender.cpp" />
+    <ClCompile Include="GameLib\DX\DX3D\CustomVertexEditor\CustomVertexEditor.cpp" />
+    <ClCompile Include="GameLib\DX\DX3D\D3DPP\D3DPP.cpp" />
+    <ClCompile Include="GameLib\DX\DX3D\DX3D.cpp" />
+    <ClCompile Include="GameLib\DX\DX3D\Light\Light.cpp" />
+    <ClCompile Include="GameLib\DX\DX3D\TexStorage\TexStorage.cpp" />
+    <ClCompile Include="GameLib\DX\DXInput\DXInput.cpp" />
+    <ClCompile Include="GameLib\DX\DXInput\InputDev\InputDev.cpp" />
+    <ClCompile Include="GameLib\DX\DXInput\InputDev\Keyboard\Keyboard.cpp" />
+    <ClCompile Include="GameLib\DX\DXInput\InputDev\Mouse\Mouse.cpp" />
     <ClCompile Include="GameLib\Wnd\Wnd.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Class\Singleton\Singleton.h" />
-    <ClInclude Include="GameLib\Camera\Camera.h" />
-    <ClInclude Include="GameLib\ColorBlender\ColorBlender.h" />
-    <ClInclude Include="GameLib\CustomVertexEditor\CustomVertexEditor.h" />
-    <ClInclude Include="GameLib\D3DPP\D3DPP.h" />
-    <ClInclude Include="GameLib\DX3D\DX3D.h" />
-    <ClInclude Include="GameLib\DXInput\DXInput.h" />
     <ClInclude Include="GameLib\DX\DX.h" />
-    <ClInclude Include="GameLib\InputDev\InputDev.h" />
-    <ClInclude Include="GameLib\InputDev\Keyboard\Keyboard.h" />
-    <ClInclude Include="GameLib\InputDev\Mouse\Mouse.h" />
-    <ClInclude Include="GameLib\Interface\ID3DPP\ID3DPP.h" />
-    <ClInclude Include="GameLib\Interface\IDX3D\IDX3D.h" />
-    <ClInclude Include="GameLib\Interface\IDXInput\IDXInput.h" />
-    <ClInclude Include="GameLib\Interface\IDX\IDX.h" />
-    <ClInclude Include="GameLib\Interface\IWnd\IWnd.h" />
-    <ClInclude Include="GameLib\LightSetter\LightSetter.h" />
-    <ClInclude Include="GameLib\TexStorage\TexStorage.h" />
+    <ClInclude Include="GameLib\DX\DX3D\Camera\Camera.h" />
+    <ClInclude Include="GameLib\DX\DX3D\ColorBlender\ColorBlender.h" />
+    <ClInclude Include="GameLib\DX\DX3D\CustomVertexEditor\CustomVertexEditor.h" />
+    <ClInclude Include="GameLib\DX\DX3D\D3DPP\D3DPP.h" />
+    <ClInclude Include="GameLib\DX\DX3D\DX3D.h" />
+    <ClInclude Include="GameLib\DX\DX3D\Light\Light.h" />
+    <ClInclude Include="GameLib\DX\DX3D\TexStorage\TexStorage.h" />
+    <ClInclude Include="GameLib\DX\DXInput\DXInput.h" />
+    <ClInclude Include="GameLib\DX\DXInput\InputDev\InputDev.h" />
+    <ClInclude Include="GameLib\DX\DXInput\InputDev\Keyboard\Keyboard.h" />
+    <ClInclude Include="GameLib\DX\DXInput\InputDev\Mouse\Mouse.h" />
     <ClInclude Include="GameLib\Wnd\Wnd.h" />
   </ItemGroup>
   <ItemGroup>

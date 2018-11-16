@@ -3,9 +3,14 @@
 
 #include <windows.h>
 
-#include "../Interface/IWnd/IWnd.h"
+struct SurfaceVal
+{
+public:
+	int m_x = 0;
+	int m_y = 0;
+};
 
-class Wnd :public IWnd
+class Wnd
 {
 public:
 	Wnd(const HINSTANCE hInst, const TCHAR* pAppName);                                      //WinMainからHINSTANCEを取得 Crate()を呼ぶ

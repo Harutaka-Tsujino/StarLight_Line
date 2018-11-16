@@ -1,7 +1,6 @@
 ﻿#ifndef SINGLETON_H
 #define SINGLETON_H
 
-#include <windows.h>
 #include <memory>
 
 template <class T>

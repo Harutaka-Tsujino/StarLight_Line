@@ -1,18 +1,9 @@
-﻿#include <windows.h>
-#include <d3dx9.h>
+﻿#include"DX.h"
+
+#include <windows.h>
 #include <tchar.h>
 
-#include"DX.h"
-
-DX::DX()
-{
-	Create();
-}
-
-DX::~DX()
-{
-	m_pD3D->Release();
-}
+#include <d3dx9.h>
 
 VOID DX::Create()
 {
