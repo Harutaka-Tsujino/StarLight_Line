@@ -3,8 +3,6 @@
 
 #include <memory>
 
-//#include "../../GameLib/GameLib.h"
-
 template <class T>
 class Singleton
 {

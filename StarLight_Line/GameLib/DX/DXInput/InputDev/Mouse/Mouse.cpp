@@ -4,14 +4,6 @@
 
 #include <dinput.h>
 
-#include <crtdbg.h>
-
-#include <cstdio>
-#include <cstdlib>
-
-#define _CRTDBG_MAP_ALLOC
-#define new ::new(_NORMAL_BLOCK, __FILE__, __LINE__)
-
 VOID Mouse::Create(LPDIRECTINPUT8 pDXInput)
 {
 	pDXInput->CreateDevice(
