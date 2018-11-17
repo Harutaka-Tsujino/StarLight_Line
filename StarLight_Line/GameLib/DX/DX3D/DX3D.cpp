@@ -32,39 +32,42 @@ VOID DX3D::ToggleWndMode()
 
 VOID DX3D::Create(LPDIRECT3D9 pD3D)
 {
-	D3DPRESENT_PARAMETERS D3DPP = m_D3DPP->ToggleD3DPPWndMode();
+	D3DPRESENT_PARAMETERS D3DPP = m_D3DPP->GetD3DPRESENT_PARAMETERS();
 
-	if (pD3D->CreateDevice(	//描画をハードウェアに依存させる 軽い
-				D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL,
-				m_HWND,
-				D3DCREATE_HARDWARE_VERTEXPROCESSING | D3DCREATE_MULTITHREADED,
-				&D3DPP,
-				&m_pDX3DDev))
+	if (SUCCEEDED(pD3D->CreateDevice(	//描画をハードウェアに依存させる 軽い
+						D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL,
+						m_HWND,
+						D3DCREATE_HARDWARE_VERTEXPROCESSING | D3DCREATE_MULTITHREADED,
+						&D3DPP,
+						&m_pDX3DDev)))
 	{
 		return;
 	}
 
-	MessageBox(0, 
+	MessageBox(
+		0, 
 		_T("HALモードでDIRECT3Dデバイスを作成できません\nREFモードで再試行します"),
 		NULL, 
 		MB_OK);
 
-	if (pD3D->CreateDevice(	//描画をソフトウェアに依存させる 重い
-				D3DADAPTER_DEFAULT, D3DDEVTYPE_REF,
-				m_HWND,
-				D3DCREATE_MIXED_VERTEXPROCESSING | D3DCREATE_MULTITHREADED,
-				&D3DPP,
-				&m_pDX3DDev))
+	if (SUCCEEDED(pD3D->CreateDevice(	//描画をソフトウェアに依存させる 重い
+						D3DADAPTER_DEFAULT, D3DDEVTYPE_REF,
+						m_HWND,
+						D3DCREATE_MIXED_VERTEXPROCESSING | D3DCREATE_MULTITHREADED,
+						&D3DPP,
+						&m_pDX3DDev)))
 	{
 		return;
 	}
 
-	MessageBox(0,
+	MessageBox(
+		0,
 		_T("DIRECT3Dデバイスの作成に失敗しました"),
 		NULL, 
 		MB_OK);
 
-	DestroyWindow(m_HWND);	//WM_DESTROYをWndProcに投げる
+	//DestroyWindow(m_HWND);	//WM_DESTROYをWndProcに投げる
+	PostQuitMessage(0);
 }
 
 VOID DX3D::OnFailedChangeWndMode(HRESULT resetRetVal)

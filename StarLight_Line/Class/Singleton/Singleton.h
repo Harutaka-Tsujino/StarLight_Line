@@ -3,17 +3,21 @@
 
 #include <memory>
 
+//#include "../../GameLib/GameLib.h"
+
 template <class T>
 class Singleton
 {
 public:
-
-protected:
 	Singleton() {};
 	~Singleton() {};
 
-private:
-	std::unique_ptr<T> ptr;
-}
+	inline static T& GetInstance()
+	{
+		static std::unique_ptr<T> ptr(new T());
+
+		return *ptr;
+	}
+};
 
 #endif // !SINGLETON_H

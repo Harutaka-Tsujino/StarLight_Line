@@ -27,12 +27,12 @@ public:
 		m_rpDX3D_DEV->LightEnable(index, FALSE);
 	}
 
-	inline VOID validateLighting() const
+	inline VOID EnableLighting() const
 	{
 		m_rpDX3D_DEV->SetRenderState(D3DRS_LIGHTING, TRUE);
 	}
 
-	inline VOID invalidateLighting() const
+	inline VOID DisableLighting() const
 	{
 		m_rpDX3D_DEV->SetRenderState(D3DRS_LIGHTING, FALSE);
 	}
@@ -42,20 +42,20 @@ public:
 		m_rpDX3D_DEV->SetRenderState(D3DRS_AMBIENT, aRGB);
 	}
 
-	inline VOID validateSpecular() const
+	inline VOID EnableSpecular() const
 	{
 		m_rpDX3D_DEV->SetRenderState(D3DRS_SPECULARENABLE, TRUE);
 	}
 
-	inline VOID invlidateSpecular() const
+	inline VOID DisaableSpecular() const
 	{
 		m_rpDX3D_DEV->SetRenderState(D3DRS_SPECULARENABLE, FALSE);
 	}
 
 	VOID DefaultLighting() const	//ウィンドウモードを切り替えた時には再設定する必要がある
 	{
-		validateLighting();
-		validateSpecular();
+		EnableLighting();
+		EnableSpecular();
 	}
 
 private:

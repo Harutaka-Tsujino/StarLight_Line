@@ -12,6 +12,7 @@
 #include "TexStorage\TexStorage.h"
 #include "Camera\Camera.h"
 #include "CustomVertexEditor\CustomVertexEditor.h"
+#include"Renderer\Renderer.h"
 
 class DX3D
 {
@@ -36,21 +37,24 @@ public:
 
 		m_pCustomVertex = new CustomVertexEditor(m_pDX3DDev);
 
+		m_pRenderer = new Renderer(m_pDX3DDev);
+
 		InitViewPort();
 	}
 
 	~DX3D()
 	{
+		delete m_pRenderer;
 		delete m_pCustomVertex;
 		delete m_pCamera;
+		delete m_pTexStorage;
 		delete m_pLight;
 		delete m_pColorBlender;
 		delete m_D3DPP;
-		delete m_pTexStorage;
 		m_pDX3DDev->Release();
 	}
 
-	inline VOID PrepareRendering()							//メインループの始まりで用いる
+	inline VOID PrepareRendering() const					//メインループの始まりで用いる
 	{
 		m_pDX3DDev->Clear(
 					0,
@@ -63,7 +67,7 @@ public:
 		m_pDX3DDev->BeginScene();
 	}
 
-	inline VOID CleanUpRendering()							//メインループの終わりで用いる
+	inline VOID CleanUpRendering() const					//メインループの終わりで用いる
 	{
 		m_pDX3DDev->EndScene();
 		m_pDX3DDev->Present(
@@ -105,14 +109,14 @@ public:
 		m_pLight->OffLight(index);
 	}
 
-	inline VOID validateLighting() const
+	inline VOID EnableLighting() const
 	{
-		m_pLight->validateLighting();
+		m_pLight->EnableLighting();
 	}
 
-	inline VOID invalidateLighting() const
+	inline VOID DisableLighting() const
 	{
-		m_pLight->invalidateLighting();
+		m_pLight->DisableLighting();
 	}
 
 	inline VOID ChangeAmbientIntensity(DWORD aRGB) const
@@ -120,14 +124,14 @@ public:
 		m_pLight->ChangeAmbientIntensity(aRGB);
 	}
 
-	inline VOID validateSpecular() const
+	inline VOID EnableSpecular() const
 	{
-		m_pLight->validateSpecular();
+		m_pLight->EnableSpecular();
 	}
 
-	inline VOID invlidateSpecular() const
+	inline VOID DisaableSpecular() const
 	{
-		m_pLight->invlidateSpecular();
+		m_pLight->DisaableSpecular();
 	}
 
 	inline VOID DefaultLighting() const						//ウィンドウモードを切り替えた時には再設定する必要がある
@@ -165,17 +169,17 @@ public:
 		m_pCamera->SetCameraPos(rCameraPos);
 	}
 
-	inline VOID GetEyePt(D3DXVECTOR3* pEyePoint) const
+	inline VOID GetCameraEyePt(D3DXVECTOR3* pEyePoint) const
 	{
 		m_pCamera->GetCameraPos(pEyePoint);
 	}
 
-	inline VOID SetEyePt(FLOAT x, FLOAT y, FLOAT z)
+	inline VOID SetCameraEyePt(FLOAT x, FLOAT y, FLOAT z)
 	{
 		m_pCamera->SetEyePt(x, y, z);
 	}
 
-	inline VOID SetEyePt(const D3DXVECTOR3& rEyePt)
+	inline VOID SetCameraEyePt(const D3DXVECTOR3& rEyePt)
 	{
 		m_pCamera->SetEyePt(rEyePt);
 	}
@@ -190,7 +194,7 @@ public:
 		m_pCamera->GetProj(pProj);
 	}
 
-	VOID SetTransform()
+	VOID SetCameraTransform()
 	{
 		m_pCamera->SetTransform();
 	}
@@ -200,56 +204,66 @@ public:
 		m_pCamera->TransBillBoard(pWorld);
 	}
 
-	inline VOID RotateXYZ(CustomVertex* pCustomVertices, const D3DXVECTOR3& rDeg, const D3DXVECTOR3& rRelativeRotateCenter) const
+	inline VOID RotateRectXYZ(CustomVertex* pCustomVertices, const D3DXVECTOR3& rDeg, const D3DXVECTOR3& rRelativeRotateCenter) const
 	{
 		m_pCustomVertex->RotateXYZ(pCustomVertices, rDeg, rRelativeRotateCenter);
 	}
 
-	inline VOID RotateX(CustomVertex* pCustomVertices, FLOAT deg, const D3DXVECTOR3& rRelativeRotateCenter) const
+	inline VOID RotateRectX(CustomVertex* pCustomVertices, FLOAT deg, const D3DXVECTOR3& rRelativeRotateCenter) const
 	{
 		m_pCustomVertex->RotateX(pCustomVertices, deg, rRelativeRotateCenter);
 	}
 
-	inline VOID RotateY(CustomVertex* pCustomVertices, FLOAT deg, const D3DXVECTOR3& rRelativeRotateCenter) const
+	inline VOID RotateRectY(CustomVertex* pCustomVertices, FLOAT deg, const D3DXVECTOR3& rRelativeRotateCenter) const
 	{
 		m_pCustomVertex->RotateY(pCustomVertices, deg, rRelativeRotateCenter);
 	}
 
-	inline VOID RotateZ(CustomVertex* pCustomVertices, FLOAT deg, const D3DXVECTOR3& rRelativeRotateCenter) const
+	inline VOID RotateRectZ(CustomVertex* pCustomVertices, FLOAT deg, const D3DXVECTOR3& rRelativeRotateCenter) const
 	{
 		m_pCustomVertex->RotateZ(pCustomVertices, deg, rRelativeRotateCenter);
 	}
 
-	inline VOID Rescale(CustomVertex* pCustomVertices, const D3DXVECTOR2& rScaleRate) const
+	inline VOID RescaleRect(CustomVertex* pCustomVertices, const D3DXVECTOR2& rScaleRate) const
 	{
 		m_pCustomVertex->Rescale(pCustomVertices, rScaleRate);
 	}
 
-	inline VOID Move(CustomVertex* pCustomVertices, const D3DXVECTOR3& rMovement) const
+	inline VOID MoveRect(CustomVertex* pCustomVertices, const D3DXVECTOR3& rMovement) const
 	{
 		m_pCustomVertex->Move(pCustomVertices, rMovement);
 	}
 
-	inline VOID Locale(CustomVertex* pCustomVertices, const D3DXVECTOR3& rPos) const
+	inline VOID LocaleRect(CustomVertex* pCustomVertices, const D3DXVECTOR3& rPos) const
 	{
 		m_pCustomVertex->Locale(pCustomVertices, rPos);
 	}
 
-	inline VOID SetTexUV(CustomVertex* pCustomVertices,
+	inline VOID SetRectTexUV(CustomVertex* pCustomVertices,
 		FLOAT startTU = 0.0f, FLOAT startTV = 0.0f, FLOAT endTU = 1.0f, FLOAT endTV = 1.0f) const
 	{
 		m_pCustomVertex->SetTexUV(pCustomVertices, startTU, startTV, endTU, endTV);
 	}
 
-	inline VOID SetColor(CustomVertex *pCustomVertices, DWORD color) const
+	inline VOID SetRectColor(CustomVertex *pCustomVertices, DWORD color) const
 	{
 		m_pCustomVertex->SetColor(pCustomVertices, color);
 	}
 
-	inline VOID Create(CustomVertex *pCustomVertices, const D3DXVECTOR3& rCenter, const D3DXVECTOR2& rHalfScale,
+	inline VOID CreateRect(CustomVertex *pCustomVertices, const D3DXVECTOR3& rCenter, const D3DXVECTOR2& rHalfScale,
 		DWORD color = 0xFFFFFFFF, FLOAT startTU = 0.0f, FLOAT startTV = 0.0f, FLOAT endTU = 1.0f, FLOAT endTV = 1.0f) const
 	{
 		m_pCustomVertex->Create(pCustomVertices, rCenter, rHalfScale, color, startTU, startTV, endTU, endTV);
+	}
+
+	//inline VOID Render(const FbxRelated& rFBXModel, const D3DXMATRIX& pMatWorld, const LPDIRECT3DTEXTURE9 pTexture = nullptr) const
+	//{
+	//	m_pRenderer->Render(rFBXModel, pMatWorld, pTexture);
+	//}
+
+	inline VOID Render(const CustomVertex* pCustomVertices, const LPDIRECT3DTEXTURE9 pTexture = nullptr) const
+	{
+		m_pRenderer->Render(pCustomVertices, pTexture);
 	}
 
 private:
@@ -274,6 +288,8 @@ private:
 	Camera* m_pCamera = nullptr;
 
 	CustomVertexEditor* m_pCustomVertex = nullptr;
+
+	Renderer* m_pRenderer = nullptr;
 };
 
 #endif // !DX3D_H

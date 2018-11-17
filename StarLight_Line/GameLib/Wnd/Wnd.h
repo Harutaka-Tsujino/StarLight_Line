@@ -31,6 +31,13 @@ public:
 		return m_WND_SIZE;
 	}
 
+	inline BOOL IsPostedQuitMessage() const
+	{
+		if (m_msg.message == WM_QUIT) return TRUE;
+
+		return FALSE;
+	}
+
 	BOOL ExistsWinMSG();
 
 private:

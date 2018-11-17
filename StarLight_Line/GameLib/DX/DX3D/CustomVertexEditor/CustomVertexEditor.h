@@ -1,4 +1,8 @@
-﻿#ifndef CUSTOM_VERTEX_EDITOR_H
+﻿/**
+* @brief 頂点データ構造体とその構造体の編集を行うクラスのヘッダ
+* @author Harutaka Tsujino
+*/
+#ifndef CUSTOM_VERTEX_EDITOR_H
 #define CUSTOM_VERTEX_EDITOR_H
 
 #include <windows.h>
@@ -6,7 +10,6 @@
 #include <d3dx9.h>
 
 /**
-* @struct CustomVertex
 * @brief 頂点データ
 */
 struct CustomVertex
@@ -28,12 +31,10 @@ public:
 	~CustomVertexEditor() {};
 
 	/**
-	* @fn inline VOID RotateXYZ(CustomVertex* pCustomVertices, const D3DXVECTOR3& rDeg, const D3DXVECTOR3& rRelativeRotateCenter) const
 	* @brief XYZ順に回転を行う
-	* @param (pCustomVertices) 頂点データ配列の先頭アドレス
-	* @param (rDeg) 回転をさせる度数法での角度
-	* @param (rRelativeRotateCenter) どれほど回転の中心が矩形の中心よりずれているか
-	* @return なし
+	* @param pCustomVertices		頂点データ配列の先頭アドレス
+	* @param rDeg					回転をさせる度数法での角度
+	* @param rRelativeRotateCenter	どれほど回転の中心が矩形の中心よりずれているか
 	* @detail 回転行列を作成し、矩形の中心を求め回転の中心を原点に移動させ、回転行列を用いて回転を行い原点へ移動させた分元に戻す
 	*/
 	inline VOID RotateXYZ(CustomVertex* pCustomVertices, const D3DXVECTOR3& rDeg, const D3DXVECTOR3& rRelativeRotateCenter) const
@@ -84,21 +85,17 @@ public:
 	}
 
 	/**
-	* @fn inline VOID Rescale(CustomVertex* pCustomVertices, const D3DXVECTOR2& rScaleRate) const
 	* @brief 矩形を拡縮させる
-	* @param (pCustomVertices) 頂点データ配列の先頭アドレス
-	* @param (rScaleRate) 拡縮率
-	* @return なし
+	* @param pCustomVertices	頂点データ配列の先頭アドレス
+	* @param rScaleRate			拡縮率
 	* @detail 矩形の中心を求め幅と高さを割り出し、拡縮率を幅と高さに掛け合わせ、矩形の中心点から再構成させる
 	*/
 	inline VOID Rescale(CustomVertex* pCustomVertices, const D3DXVECTOR2& rScaleRate) const;
 
 	/**
-	* @fn inline VOID Move(CustomVertex* pCustomVertices, const D3DXVECTOR3& rMovement) const
 	* @brief 矩形を移動させる
-	* @param (pCustomVertices) 頂点データ配列の先頭アドレス
-	* @param (rMovement) 移動量
-	* @return なし
+	* @param pCustomVertices	頂点データ配列の先頭アドレス
+	* @param rMovement			移動量
 	*/
 	inline VOID Move(CustomVertex* pCustomVertices, const D3DXVECTOR3& rMovement) const
 	{
@@ -112,11 +109,9 @@ public:
 	}
 
 	/**
-	* @fn inline VOID Move(CustomVertex* pCustomVertices, const D3DXVECTOR3* pMovement) const
 	* @brief 矩形を引数の位置に再配置させる
-	* @param (pCustomVertices) 頂点データ配列の先頭アドレス
-	* @param (rPos) 矩形を移動させる座標
-	* @return なし
+	* @param pCustomVertices	頂点データ配列の先頭アドレス
+	* @param rPos				矩形を移動させる座標
 	*/
 	inline VOID Locale(CustomVertex* pCustomVertices, const D3DXVECTOR3& rPos) const
 	{
@@ -127,15 +122,12 @@ public:
 	}
 
 	/**
-	* @fn inline VOID SetTexUV(CustomVertex* pCustomVertices,
-	* FLOAT startTU = 0.0f, FLOAT startTV = 0.0f, FLOAT endTU = 1.0f, FLOAT endTV = 1.0f) const
 	* @brief テクスチャ座標を引数の座標に変更させる
-	* @param (pCustomVertices) 頂点データ配列の先頭アドレス
-	* @param (startTU) x方向のテクスチャ座標の始まりの値
-	* @param (startTV) y方向のテクスチャ座標の始まりの値
-	* @param (endTU) x方向のテクスチャ座標の終わりの値
-	* @param (endTV) y方向のテクスチャ座標の終わりの値
-	* @return なし
+	* @param pCustomVertices	頂点データ配列の先頭アドレス
+	* @param startTU			x方向のテクスチャ座標の始まりの値
+	* @param startTV			y方向のテクスチャ座標の始まりの値
+	* @param endTU				x方向のテクスチャ座標の終わりの値
+	* @param endTV				y方向のテクスチャ座標の終わりの値
 	*/
 	inline VOID SetTexUV(CustomVertex* pCustomVertices,
 		FLOAT startTU = 0.0f, FLOAT startTV = 0.0f, FLOAT endTU = 1.0f, FLOAT endTV = 1.0f) const
@@ -147,27 +139,29 @@ public:
 		}
 	}
 
-	inline VOID SetColor(CustomVertex *pCustomVertices, DWORD color) const
+	/**
+	* @brief テクスチャ座標を引数の座標に変更させる
+	* @param pCustomVertices	頂点データ配列の先頭アドレス
+	* @param color				アルファ値入りのカラーコード ARGB
+	*/
+	inline VOID SetColor(CustomVertex *pCustomVertices, DWORD aRGB) const
 	{
 		for (int i = 0; i < m_RECT_VERTICES_NUM; ++i)
 		{
-			pCustomVertices[i].m_aRGB = color;
+			pCustomVertices[i].m_aRGB = aRGB;
 		}
 	}
 
 	/**
-	* @fn inline VOID Create(CustomVertex *pCustomVertices, const D3DXVECTOR3& rCenter, const D3DXVECTOR2& rHalfScale,
-	*	DWORD color = 0xFFFFFFFF, FLOAT startTU = 0.0f, FLOAT startTV = 0.0f, FLOAT endTU = 1.0f, FLOAT endTV = 1.0f) const
 	* @brief 頂点データ構造体に引数の値を代入させる
-	* @param (pCustomVertices) 頂点データ配列の先頭アドレス
-	* @param (rCenter) 矩形の中心
-	* @param (rHalfScale) 矩形の高さ幅の半分
-	* @param (color) 頂点の色カラーコードARGB
-	* @param (startTU) x方向のテクスチャ座標の始まりの値
-	* @param (startTV) y方向のテクスチャ座標の始まりの値
-	* @param (endTU) x方向のテクスチャ座標の終わりの値
-	* @param (endTV) y方向のテクスチャ座標の終わりの値
-	* @return なし
+	* @param pCustomVertices	頂点データ配列の先頭アドレス
+	* @param rCenter			矩形の中心
+	* @param rHalfScale			矩形の高さ幅の半分
+	* @param color				頂点の色カラーコードARGB
+	* @param startTU			x方向のテクスチャ座標の始まりの値
+	* @param startTV			y方向のテクスチャ座標の始まりの値
+	* @param endTU				x方向のテクスチャ座標の終わりの値
+	* @param endTV				y方向のテクスチャ座標の終わりの値
 	*/
 	inline VOID Create(CustomVertex *pCustomVertices, const D3DXVECTOR3& rCenter, const D3DXVECTOR2& rHalfScale,
 		DWORD color = 0xFFFFFFFF, FLOAT startTU = 0.0f, FLOAT startTV = 0.0f, FLOAT endTU = 1.0f, FLOAT endTV = 1.0f) const

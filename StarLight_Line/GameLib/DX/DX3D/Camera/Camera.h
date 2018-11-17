@@ -82,9 +82,9 @@ public:
 private:
 	const LPDIRECT3DDEVICE9& m_rpDX3D_DEV = nullptr;
 
-	D3DXVECTOR3 m_cameraPos;
-	D3DXVECTOR3 m_eyePt;
-	D3DXVECTOR3 m_cameraOverhead;
+	D3DXVECTOR3 m_cameraPos			= { 0.0f,0.0f,0.0f };
+	D3DXVECTOR3 m_eyePt				= { 0.0f,0.0f,1.0f };
+	D3DXVECTOR3 m_cameraOverhead	= { 0.0f,1.0f,0.0f };
 
 	D3DXMATRIX m_view;
 	D3DXMATRIX m_proj;

@@ -5,13 +5,18 @@
 
 #include <dinput.h>
 
+#include <crtdbg.h>
+
+#include <cstdio>
+#include <cstdlib>
+
+#define _CRTDBG_MAP_ALLOC
+#define new ::new(_NORMAL_BLOCK, __FILE__, __LINE__)
+
 class InputDev
 {
 public:
-	InputDev(HWND hWnd, LPDIRECTINPUT8 pDXInput) :m_HWND(hWnd)
-	{
-		Create(pDXInput);
-	}
+	InputDev(HWND hWnd) :m_HWND(hWnd) {};
 
 	~InputDev()
 	{
@@ -35,8 +40,6 @@ protected:
 		I_D_NEUTRAL,									//前回と現在のフレームで押されていない間TRUE
 		I_D_MAX
 	};
-
-	virtual VOID Create(LPDIRECTINPUT8 pDXInput) = 0;
 
 	virtual VOID AcquireInputState() = 0;
 	virtual VOID CheckInputStateDetatils() = 0;

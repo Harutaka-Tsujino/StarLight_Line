@@ -53,6 +53,12 @@
     <Filter Include="GameLib\DX\DX3D\Light">
       <UniqueIdentifier>{9d26b08a-c625-478e-a6bb-c99c7405b11f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameLib\DX\DX3D\Renderer">
+      <UniqueIdentifier>{19855f31-332e-49f3-9f0d-d433c53b86c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main">
+      <UniqueIdentifier>{8105f22e-1cbd-4057-9eb6-3bcee876702f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Class\Singleton\Singleton.cpp">
@@ -97,6 +103,15 @@
     <ClCompile Include="GameLib\DX\DX3D\Light\Light.cpp">
       <Filter>GameLib\DX\DX3D\Light</Filter>
     </ClCompile>
+    <ClCompile Include="GameLib\DX\DX3D\Renderer\Renderer.cpp">
+      <Filter>GameLib\DX\DX3D\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLib\GameLib.cpp">
+      <Filter>GameLib</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\Main.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Class\Singleton\Singleton.h">
@@ -140,6 +155,15 @@
     </ClInclude>
     <ClInclude Include="GameLib\DX\DX3D\Light\Light.h">
       <Filter>GameLib\DX\DX3D\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLib\DX\DX3D\Renderer\Renderer.h">
+      <Filter>GameLib\DX\DX3D\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLib\GameLib.h">
+      <Filter>GameLib</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\Main.h">
+      <Filter>Main</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

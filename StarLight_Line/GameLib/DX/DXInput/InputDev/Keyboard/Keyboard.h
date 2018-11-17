@@ -7,10 +7,22 @@
 
 #include "../InputDev.h"
 
+#include <crtdbg.h>
+
+#include <cstdio>
+#include <cstdlib>
+
+#define _CRTDBG_MAP_ALLOC
+#define new ::new(_NORMAL_BLOCK, __FILE__, __LINE__)
+
 class Keyboard :public InputDev
 {
 public:
-	Keyboard(HWND hWnd, LPDIRECTINPUT8 pDXInput) : InputDev(hWnd, pDXInput) {};
+	Keyboard(HWND hWnd, LPDIRECTINPUT8 pDXInput) : InputDev(hWnd)
+	{
+		Create(pDXInput);
+	};
+
 	~Keyboard() {};
 
 	inline VOID UpdataInputState()		//メインループの始まりで用いる
@@ -49,6 +61,8 @@ private:
 
 	inline VOID AcquireInputState()
 	{
+		*m_pDInputDev;
+
 		m_pDInputDev->Acquire();		//キーボードの状態を取得する権限の取得
 
 		m_pDInputDev->GetDeviceState(	//キーボードの状態を取得

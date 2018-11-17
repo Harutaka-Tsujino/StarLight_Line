@@ -30,14 +30,208 @@ public:
 		m_pD3D->Release();
 	}
 
-	inline VOID UpdataInputState()						//メインループの始まりで用いる
+	inline VOID PrepareMessageLoop() const					//メインループの始まりで用いる
 	{
+		m_pDX3D->PrepareRendering();
 		m_pDXInput->UpdataInputState();
 	}
 
-	inline VOID StorePrevInputState()					//メインループの終わりで用いる
+	inline VOID CleanUpMessageLoop() const					//メインループの終わりで用いる
 	{
+		m_pDX3D->CleanUpRendering();
 		m_pDXInput->StorePrevInputState();
+	}
+
+	inline VOID ToggleWndMode()								//使用時DX3DDevがロストする可能性がある
+	{
+		m_pDX3D->ToggleWndMode();
+	}
+
+	inline VOID DefaultBlendMode() const					//通常合成
+	{
+		m_pDX3D->DefaultBlendMode();
+	}
+
+	inline VOID AddtionBlendMode() const					//加算合成
+	{
+		m_pDX3D->AddtionBlendMode();
+	}
+
+	inline VOID DefaultColorBlending() const				//ウィンドウモードを切り替えた時には再設定する必要がある
+	{
+		m_pDX3D->DefaultColorBlending();
+	}
+
+	inline VOID SetLight(const D3DLIGHT9& rLight, DWORD index) const
+	{
+		m_pDX3D->SetLight(rLight, index);
+	}
+
+	inline VOID OnLight(DWORD index) const
+	{
+		m_pDX3D->OnLight(index);
+	}
+
+	inline VOID OffLight(DWORD index) const
+	{
+		m_pDX3D->OffLight(index);
+	}
+
+	inline VOID EnableLighting() const
+	{
+		m_pDX3D->EnableLighting();
+	}
+
+	inline VOID DisableLighting() const
+	{
+		m_pDX3D->DisableLighting();
+	}
+
+	inline VOID ChangeAmbientIntensity(DWORD aRGB) const
+	{
+		m_pDX3D->ChangeAmbientIntensity(aRGB);
+	}
+
+	inline VOID EnableSpecular() const
+	{
+		m_pDX3D->EnableSpecular();
+	}
+
+	inline VOID DisaableSpecular() const
+	{
+		m_pDX3D->DisaableSpecular();
+	}
+
+	inline VOID DefaultLighting() const						//ウィンドウモードを切り替えた時には再設定する必要がある
+	{
+		m_pDX3D->DefaultLighting();
+	}
+
+	inline VOID CreateTex(const TCHAR* pTexKey, const TCHAR* pTexPath)
+	{
+		m_pDX3D->CreateTex(pTexKey, pTexPath);
+	}
+
+	inline VOID ReleaseTex()
+	{
+		m_pDX3D->ReleaseTex();
+	}
+
+	inline const LPDIRECT3DTEXTURE9 GetTex(const TCHAR* pTexKey)
+	{
+		return m_pDX3D->GetTex(pTexKey);
+	}
+
+	inline VOID GetCameraPos(D3DXVECTOR3* pCameraPos) const
+	{
+		m_pDX3D->GetCameraPos(pCameraPos);
+	}
+
+	inline VOID SetCameraPos(FLOAT x, FLOAT y, FLOAT z)
+	{
+		m_pDX3D->SetCameraPos(x, y, z);
+	}
+
+	inline VOID SetCameraPos(const D3DXVECTOR3& rCameraPos)
+	{
+		m_pDX3D->SetCameraPos(rCameraPos);
+	}
+
+	inline VOID GetCameraEyePt(D3DXVECTOR3* pEyePoint) const
+	{
+		m_pDX3D->GetCameraPos(pEyePoint);
+	}
+
+	inline VOID SetCameraEyePt(FLOAT x, FLOAT y, FLOAT z)
+	{
+		m_pDX3D->SetCameraEyePt(x, y, z);
+	}
+
+	inline VOID SetCameraEyePt(const D3DXVECTOR3& rEyePt)
+	{
+		m_pDX3D->SetCameraEyePt(rEyePt);
+	}
+
+	inline VOID GetView(D3DXMATRIX* pView) const
+	{
+		m_pDX3D->GetView(pView);
+	}
+
+	inline VOID GetProj(D3DXMATRIX* pProj) const
+	{
+		m_pDX3D->GetProj(pProj);
+	}
+
+	VOID SetCameraTransform()
+	{
+		m_pDX3D->SetCameraTransform();
+	}
+
+	inline VOID TransBillBoard(D3DXMATRIX* pWorld) const
+	{
+		m_pDX3D->TransBillBoard(pWorld);
+	}
+
+	inline VOID RotateRectXYZ(CustomVertex* pCustomVertices, const D3DXVECTOR3& rDeg, const D3DXVECTOR3& rRelativeRotateCenter) const
+	{
+		m_pDX3D->RotateRectXYZ(pCustomVertices, rDeg, rRelativeRotateCenter);
+	}
+
+	inline VOID RotateRectX(CustomVertex* pCustomVertices, FLOAT deg, const D3DXVECTOR3& rRelativeRotateCenter) const
+	{
+		m_pDX3D->RotateRectX(pCustomVertices, deg, rRelativeRotateCenter);
+	}
+
+	inline VOID RotateRectY(CustomVertex* pCustomVertices, FLOAT deg, const D3DXVECTOR3& rRelativeRotateCenter) const
+	{
+		m_pDX3D->RotateRectY(pCustomVertices, deg, rRelativeRotateCenter);
+	}
+
+	inline VOID RotateRectZ(CustomVertex* pCustomVertices, FLOAT deg, const D3DXVECTOR3& rRelativeRotateCenter) const
+	{
+		m_pDX3D->RotateRectZ(pCustomVertices, deg, rRelativeRotateCenter);
+	}
+
+	inline VOID RescaleRect(CustomVertex* pCustomVertices, const D3DXVECTOR2& rScaleRate) const
+	{
+		m_pDX3D->RescaleRect(pCustomVertices, rScaleRate);
+	}
+
+	inline VOID MoveRect(CustomVertex* pCustomVertices, const D3DXVECTOR3& rMovement) const
+	{
+		m_pDX3D->MoveRect(pCustomVertices, rMovement);
+	}
+
+	inline VOID LocaleRect(CustomVertex* pCustomVertices, const D3DXVECTOR3& rPos) const
+	{
+		m_pDX3D->LocaleRect(pCustomVertices, rPos);
+	}
+
+	inline VOID SetRectTexUV(CustomVertex* pCustomVertices,
+		FLOAT startTU = 0.0f, FLOAT startTV = 0.0f, FLOAT endTU = 1.0f, FLOAT endTV = 1.0f) const
+	{
+		m_pDX3D->SetRectTexUV(pCustomVertices, startTU, startTV, endTU, endTV);
+	}
+
+	inline VOID SetRectColor(CustomVertex *pCustomVertices, DWORD color) const
+	{
+		m_pDX3D->SetRectColor(pCustomVertices, color);
+	}
+
+	inline VOID CreateRect(CustomVertex *pCustomVertices, const D3DXVECTOR3& rCenter, const D3DXVECTOR2& rHalfScale,
+		DWORD color = 0xFFFFFFFF, FLOAT startTU = 0.0f, FLOAT startTV = 0.0f, FLOAT endTU = 1.0f, FLOAT endTV = 1.0f) const
+	{
+		m_pDX3D->CreateRect(pCustomVertices, rCenter, rHalfScale, color, startTU, startTV, endTU, endTV);
+	}
+
+	//inline VOID Render(const FbxRelated& rFBXModel, const D3DXMATRIX& pMatWorld, const LPDIRECT3DTEXTURE9 pTexture = nullptr) const
+	//{
+	//	m_pRenderer->Render(rFBXModel, pMatWorld, pTexture);
+	//}
+
+	inline VOID Render(const CustomVertex* pCustomVertices, const LPDIRECT3DTEXTURE9 pTexture = nullptr) const
+	{
+		m_pDX3D->Render(pCustomVertices, pTexture);
 	}
 
 	inline BOOL MouseIsPressed(INT key) const

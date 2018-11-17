@@ -7,6 +7,14 @@
 
 #include "../InputDev.h"
 
+#include <crtdbg.h>
+
+#include <cstdio>
+#include <cstdlib>
+
+#define _CRTDBG_MAP_ALLOC
+#define new ::new(_NORMAL_BLOCK, __FILE__, __LINE__)
+
 enum DIM
 {
 	DIM_RIGHT,
@@ -19,7 +27,11 @@ enum DIM
 class Mouse :public InputDev
 {
 public:
-	Mouse(HWND hWnd, LPDIRECTINPUT8 pDXInput) : InputDev(hWnd, pDXInput) {};
+	Mouse(HWND hWnd, LPDIRECTINPUT8 pDXInput) : InputDev(hWnd)
+	{
+		Create(pDXInput);
+	};
+
 	~Mouse() {};
 
 	inline VOID UpdataInputState()						//メインループの始まりで用いる
