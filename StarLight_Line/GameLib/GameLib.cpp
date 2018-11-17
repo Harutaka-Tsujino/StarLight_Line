@@ -15,8 +15,8 @@ VOID GameLib::RunFunc(VOID(*pMainFunc)())
 {
 	timeBeginPeriod(1);	//ŽžŠÔ‚Ì—LŒø”Žš‚ÌÝ’è
 
-	DWORD frameSyncPrev = timeGetTime();
-	DWORD frameSyncCurrent = timeGetTime();
+	DWORD frameSyncPrev		= timeGetTime();
+	DWORD frameSyncCurrent	= timeGetTime();
 
 	while (!m_pWnd->IsPostedQuitMessage())
 	{

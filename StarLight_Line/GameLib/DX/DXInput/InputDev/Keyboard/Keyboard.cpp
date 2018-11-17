@@ -31,7 +31,7 @@ VOID Keyboard::CheckInputStateDetatils()
 	BOOL isInputted		= FALSE;
 
 	const INT KEYBOARD_KEYS_MAX = 256;
-	ZeroMemory(m_details, sizeof(BOOL) * KEYBOARD_KEYS_MAX * I_D_MAX);
+	ZeroMemory(m_details, sizeof(BOOL) * KEYBOARD_KEYS_MAX);
 	for (INT i = 0; i < KEYBOARD_KEYS_MAX; ++i)
 	{
 		isInputtedPrev	= IsInputted(m_prevDiks[i]);

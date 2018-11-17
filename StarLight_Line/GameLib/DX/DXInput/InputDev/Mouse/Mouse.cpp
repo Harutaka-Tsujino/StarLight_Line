@@ -40,7 +40,7 @@ VOID Mouse::CheckInputStateDetatils()
 	BOOL isInputtedPrev	= FALSE;
 	BOOL isInputted		= FALSE;
 
-	ZeroMemory(&m_details, sizeof(BOOL) * DIM::DIM_MAX * I_D_MAX);
+	ZeroMemory(&m_details, sizeof(BOOL) * DIM::DIM_MAX);
 	for (INT i = 0; i < DIM_MAX; ++i)
 	{
 		isInputtedPrev	= IsInputted(m_prevState.rgbButtons[i]);
