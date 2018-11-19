@@ -24,7 +24,7 @@ INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR szStr, INT iCmdSh
 
 	GameLib::Create(hInst, _T("HelloWorld"));
 
-	GameLib& rGameLib = GameLib::GetRef();
+	GameLib& rGameLib = GameLib::GetInstance();
 
 	rGameLib.RunFunc(Func);
 }

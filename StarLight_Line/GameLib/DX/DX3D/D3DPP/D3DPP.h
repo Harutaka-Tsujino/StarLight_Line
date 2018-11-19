@@ -5,7 +5,7 @@
 
 #include <d3dx9.h>
 
-#include "../../../Wnd/Wnd.h"
+#include "../../../../Struct/SurfaceVal/SurfaceVal.h"
 
 class D3DPP
 {

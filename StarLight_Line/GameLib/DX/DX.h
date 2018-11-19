@@ -1,14 +1,23 @@
-﻿#ifndef DX_H
+﻿/**
+* @brief DX関係クラスのFacadeのヘッダ
+* @author Harutaka-Tsujino
+*/
+
+#ifndef DX_H
 #define DX_H
 
 #include <windows.h>
 
 #include <d3dx9.h>
 
-#include "../Wnd/Wnd.h"
+#include "../../Struct/SurfaceVal/SurfaceVal.h"
 #include "DX3D\DX3D.h"
 #include "DXInput\DXInput.h"
+#include "../../Struct/CustomVertex/CustomVertex.h"
 
+/**
+* @brief DX関係クラスのFacade
+*/
 class DX
 {
 public:
@@ -24,19 +33,23 @@ public:
 	~DX()
 	{
 		delete m_pDX3D;
-
 		delete m_pDXInput;
-
 		m_pD3D->Release();
 	}
 
-	inline VOID PrepareMessageLoop() const					//メインループの始まりで用いる
+	/**
+	* @brief 描画の開始処理と入力状態の更新を行う,メッセージループの始まりで呼ぶ
+	*/
+	inline VOID PrepareMessageLoop() const
 	{
 		m_pDX3D->PrepareRendering();
 		m_pDXInput->UpdataInputState();
 	}
 
-	inline VOID CleanUpMessageLoop() const					//メインループの終わりで用いる
+	/**
+	* @brief 描画の終了処理と入力状態の保存を行う,メッセージループの終わりで呼ぶ
+	*/
+	inline VOID CleanUpMessageLoop() const
 	{
 		m_pDX3D->CleanUpRendering();
 		m_pDXInput->StorePrevInputState();
@@ -218,7 +231,7 @@ public:
 		m_pDX3D->SetRectColor(pCustomVertices, color);
 	}
 
-	inline VOID CreateRect(CustomVertex *pCustomVertices, const D3DXVECTOR3& rCenter, const D3DXVECTOR2& rHalfScale,
+	inline VOID CreateRect(CustomVertex *pCustomVertices, const D3DXVECTOR3& rCenter, const D3DXVECTOR3& rHalfScale,
 		DWORD color = 0xFFFFFFFF, FLOAT startTU = 0.0f, FLOAT startTV = 0.0f, FLOAT endTU = 1.0f, FLOAT endTV = 1.0f) const
 	{
 		m_pDX3D->CreateRect(pCustomVertices, rCenter, rHalfScale, color, startTU, startTV, endTU, endTV);

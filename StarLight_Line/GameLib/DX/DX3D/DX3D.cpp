@@ -5,6 +5,33 @@
 
 #include <d3dx9.h>
 
+#include "D3DPP\D3DPP.h"
+
+DX3D::DX3D(HWND hWnd, SurfaceVal wndSize, LPDIRECT3D9 pD3D)
+	:m_HWND(hWnd), m_D3DPP(new D3DPP(m_HWND, wndSize))
+{
+	Create(pD3D);
+
+	m_pDX3DDev->SetRenderState(D3DRS_ZENABLE, TRUE);
+	m_pDX3DDev->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+
+	m_pColorBlender = new ColorBlender(m_pDX3DDev);
+	m_pColorBlender->DefaultColorBlending();
+
+	m_pLight = new Light(m_pDX3DDev);
+	m_pLight->DefaultLighting();
+
+	m_pTexStorage = new TexStorage(m_pDX3DDev);
+
+	m_pCamera = new Camera(m_pDX3DDev);
+
+	m_pCustomVertex = new CustomVertexEditor(m_pDX3DDev);
+
+	m_pRenderer = new Renderer(m_pDX3DDev);
+
+	InitViewPort();
+}
+
 VOID DX3D::ToggleWndMode()
 {
 	D3DPRESENT_PARAMETERS D3DPP = m_D3DPP->ToggleD3DPPWndMode();
@@ -66,8 +93,7 @@ VOID DX3D::Create(LPDIRECT3D9 pD3D)
 		NULL, 
 		MB_OK);
 
-	//DestroyWindow(m_HWND);	//WM_DESTROYをWndProcに投げる
-	PostQuitMessage(0);
+	DestroyWindow(m_HWND);	//WM_DESTROYをWndProcに投げる
 }
 
 VOID DX3D::OnFailedChangeWndMode(HRESULT resetRetVal)

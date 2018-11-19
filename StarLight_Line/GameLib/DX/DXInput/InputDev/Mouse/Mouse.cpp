@@ -4,6 +4,8 @@
 
 #include <dinput.h>
 
+#include "../../../../../Enum/DIM/DIM.h"
+
 VOID Mouse::Create(LPDIRECTINPUT8 pDXInput)
 {
 	pDXInput->CreateDevice(
@@ -32,7 +34,7 @@ VOID Mouse::CheckInputStateDetatils()
 	BOOL isInputtedPrev	= FALSE;
 	BOOL isInputted		= FALSE;
 
-	ZeroMemory(&m_details, sizeof(BOOL) * DIM::DIM_MAX);
+	ZeroMemory(&m_details, sizeof(BOOL) * DIM_MAX);
 	for (INT i = 0; i < DIM_MAX; ++i)
 	{
 		isInputtedPrev	= IsInputted(m_prevState.rgbButtons[i]);
@@ -40,11 +42,11 @@ VOID Mouse::CheckInputStateDetatils()
 
 		if (isInputtedPrev)
 		{
-			m_details[i] = (isInputted) ? I_D_HOLD : I_D_RELEASE;
+			m_details[i] = (isInputted) ? IND_HOLD : IND_RELEASE;
 
 			continue;
 		}
 
-		m_details[i] = (isInputted) ? I_D_PRESS : I_D_NEUTRAL;
+		m_details[i] = (isInputted) ? IND_PRESS : IND_NEUTRAL;
 	}
 }

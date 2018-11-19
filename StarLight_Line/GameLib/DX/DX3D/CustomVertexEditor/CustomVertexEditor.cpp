@@ -4,6 +4,9 @@
 
 #include <d3dx9.h>
 
+#include "../../../../Struct/CustomVertex/CustomVertex.h"
+#include "../../../../Struct/ObjData/ObjData.h"
+
 VOID CustomVertexEditor::Rotate(CustomVertex* pCustomVertices, 
 	const D3DXVECTOR3& rRelativeRotateCenter, const D3DXMATRIX& rRotate) const
 {

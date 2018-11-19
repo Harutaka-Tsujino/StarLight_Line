@@ -59,6 +59,51 @@
     <Filter Include="Main">
       <UniqueIdentifier>{8105f22e-1cbd-4057-9eb6-3bcee876702f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Class\IBaseWorking">
+      <UniqueIdentifier>{26742d65-9e9f-42b8-96b3-31f520d835af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager">
+      <UniqueIdentifier>{a48a2863-de58-43bc-881b-62ee4f25424f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene">
+      <UniqueIdentifier>{f7d25a0d-8fb8-4c2c-a9db-64cdc2d48b43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\TitleScene">
+      <UniqueIdentifier>{fc00e2fe-f459-4188-8e67-3c43070df8e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager">
+      <UniqueIdentifier>{e2dde8e6-d454-4802-92ea-e98069f0e0c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj">
+      <UniqueIdentifier>{f2d24b02-e207-4914-a065-299a27100f92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\TitleSceneObj">
+      <UniqueIdentifier>{7a98d0b7-6971-407b-af63-f02768a923c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Struct">
+      <UniqueIdentifier>{8850d8c1-00e6-4068-b0f7-b7318a5a76e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enum">
+      <UniqueIdentifier>{cba5354e-a90c-4b49-b331-77bebd19171a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Struct\SurfaceVal">
+      <UniqueIdentifier>{209ee8f5-b651-40a2-b3bd-3d461154dd83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enum\OBJ_TYPE">
+      <UniqueIdentifier>{ec7a2f4a-e075-4275-95f2-a97fd7e8940a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Struct\ObjData">
+      <UniqueIdentifier>{caa23057-5255-4006-b12f-636b00c19b01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enum\SCENE_KIND">
+      <UniqueIdentifier>{c8221f38-29aa-49ba-b427-025a183741bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enum\DIM">
+      <UniqueIdentifier>{b2bf99e6-7153-4ab7-97aa-70b243f5d9f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Struct\CustomVertex">
+      <UniqueIdentifier>{fb5bf39f-5a96-457e-930e-c03a075e96ec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Class\Singleton\Singleton.cpp">
@@ -106,11 +151,32 @@
     <ClCompile Include="GameLib\DX\DX3D\Renderer\Renderer.cpp">
       <Filter>GameLib\DX\DX3D\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="Main\Main.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\IBaseWorking.cpp">
+      <Filter>Class\IBaseWorking</Filter>
+    </ClCompile>
     <ClCompile Include="GameLib\GameLib.cpp">
       <Filter>GameLib</Filter>
     </ClCompile>
-    <ClCompile Include="Main\Main.cpp">
-      <Filter>Main</Filter>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\SceneManager.cpp">
+      <Filter>Class\IBaseWorking\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\Scene.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\TitleScene\TitleScene.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\TitleScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\ObjManager.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\Obj.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\TitleSceneObj\TitleSceneObj.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\TitleSceneObj</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -164,6 +230,45 @@
     </ClInclude>
     <ClInclude Include="Main\Main.h">
       <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\IBaseWorking.h">
+      <Filter>Class\IBaseWorking</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\SceneManager.h">
+      <Filter>Class\IBaseWorking\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\TitleScene\TitleScene.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\TitleScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\ObjManager.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\Obj.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\TitleSceneObj\TitleSceneObj.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\TitleSceneObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\Scene.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Struct\ObjData\ObjData.h">
+      <Filter>Struct\ObjData</Filter>
+    </ClInclude>
+    <ClInclude Include="Struct\SurfaceVal\SurfaceVal.h">
+      <Filter>Struct\SurfaceVal</Filter>
+    </ClInclude>
+    <ClInclude Include="Enum\OBJ_TYPE\OBJ_TYPE.h">
+      <Filter>Enum\OBJ_TYPE</Filter>
+    </ClInclude>
+    <ClInclude Include="Enum\SCENE_KIND\SCENE_KIND.h">
+      <Filter>Enum\SCENE_KIND</Filter>
+    </ClInclude>
+    <ClInclude Include="Enum\DIM\DIM.h">
+      <Filter>Enum\DIM</Filter>
+    </ClInclude>
+    <ClInclude Include="Struct\CustomVertex\CustomVertex.h">
+      <Filter>Struct\CustomVertex</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,3 +1,8 @@
+/**
+* @brief 汎用クラスのFacadeのヘッダ
+* @author Harutaka-Tsujino
+*/
+
 #ifndef GAME_LIB_H
 #define GAME_LIB_H
 
@@ -8,8 +13,12 @@
 #include "../Class/Singleton/Singleton.h"
 #include "Wnd\Wnd.h"
 #include "DX\DX.h"
+#include "../Struct/CustomVertex/CustomVertex.h"
 
-class GameLib :Singleton<GameLib>
+/**
+* @brief 汎用クラスのFacade,ウィンドウ生成やDX関係の初期化も行う
+*/
+class GameLib :public Singleton<GameLib>
 {
 public:
 	friend class Singleton<GameLib>;
@@ -20,6 +29,11 @@ public:
 		delete m_pWnd;
 	};
 
+	/**
+	* @brief ウィンドウを生成しDX関係を初期化する,一番初めにこれを呼ぶ
+	* @param hInst インスタンスのハンドル
+	* @param pAppName アプリケーションの名前のポインタ
+	*/
 	inline static VOID Create(const HINSTANCE hInst, const TCHAR* pAppName)
 	{
 		if (m_pWnd) return;
@@ -31,12 +45,11 @@ public:
 
 		GetInstance();
 	}
-	
-	inline static GameLib& GetRef()
-	{
-		return GetInstance();
-	}
 
+	/**
+	* @brief メッセージループを作成し引数で与えられた関数を60fpsで回す
+	* @param メッセージループで回す関数のポインタ
+	*/
 	VOID RunFunc(VOID(*pMainFunc)());
 
 	inline SurfaceVal GetWndSize() const
@@ -220,7 +233,7 @@ public:
 		m_pDX->SetRectColor(pCustomVertices, color);
 	}
 
-	inline VOID CreateRect(CustomVertex *pCustomVertices, const D3DXVECTOR3& rCenter, const D3DXVECTOR2& rHalfScale,
+	inline VOID CreateRect(CustomVertex *pCustomVertices, const D3DXVECTOR3& rCenter, const D3DXVECTOR3& rHalfScale,
 		DWORD color = 0xFFFFFFFF, FLOAT startTU = 0.0f, FLOAT startTV = 0.0f, FLOAT endTU = 1.0f, FLOAT endTV = 1.0f) const
 	{
 		m_pDX->CreateRect(pCustomVertices, rCenter, rHalfScale, color, startTU, startTV, endTU, endTV);

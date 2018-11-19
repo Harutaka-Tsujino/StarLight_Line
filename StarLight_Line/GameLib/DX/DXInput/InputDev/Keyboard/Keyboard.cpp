@@ -31,11 +31,11 @@ VOID Keyboard::CheckInputStateDetatils()
 
 		if (isInputtedPrev)
 		{
-			m_details[i] = (isInputted) ? I_D_HOLD : I_D_RELEASE;
+			m_details[i] = (isInputted) ? IND_HOLD : IND_RELEASE;
 
 			continue;
 		}
 
-		m_details[i] = (isInputted) ? I_D_PRESS : I_D_NEUTRAL;
+		m_details[i] = (isInputted) ? IND_PRESS : IND_NEUTRAL;
 	}
 }

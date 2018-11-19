@@ -268,7 +268,7 @@ class CustomVertexEditor
 '中心座標から矩形を作成する
 + CreateRect(CustomVertex* pCustomVertices,\n const D3DXVECTOR3& rCenter, const D3DXVECTOR2& rHalfScale,\n DWORD aRGB,\n FLOAT startTU, FLOAT startTV, FLOAT endTU, FLOAT endTV) : VOID
 '矩形を生成した後回転も行う
-+ CreateRect(CustomVertex* pCustomVertices, const ObjectData&) : VOID
++ CreateRect(CustomVertex* pCustomVertices, const ObjData&) : VOID
 
 'rRelativeRotateCenterは回転の中心を矩形の中心からどのくらいずらすか
 + RotateX(CustomVertex* pCustomVertices, FLOAT degree,\n const D3DXVECTOR3& rRelativeRotateCenter) : VOID

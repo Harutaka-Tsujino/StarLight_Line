@@ -1,4 +1,9 @@
-﻿#ifndef DX_INPUT_H
+﻿/**
+* @brief 入力デバイス関係クラスのFacadeのヘッダ
+* @author Harutaka-Tsujino
+*/
+
+#ifndef DX_INPUT_H
 #define DX_INPUT_H
 
 #include <windows.h>
@@ -10,6 +15,9 @@
 #include "InputDev\Mouse\Mouse.h"
 #include "InputDev\Keyboard\Keyboard.h"
 
+/**
+* @brief 入力デバイス関係クラスのFacade
+*/
 class DXInput
 {
 public:
@@ -29,13 +37,19 @@ public:
 		m_pDXInput->Release();
 	}
 
-	inline VOID UpdataInputState()						//メインループの始まりで用いる
+	/**
+	* @brief マウスとキーボードの入力状態の更新を行う,メッセージループの始まりで呼ぶ
+	*/
+	inline VOID UpdataInputState()
 	{
 		m_pMouse->UpdataInputState();
 		m_pKeyboard->UpdataInputState();
 	}
 
-	inline VOID StorePrevInputState()					//メインループの終わりで用いる
+	/**
+	* @brief マウスとキーボードの入力状態の保存を行う,メッセージループの終わりで呼ぶ
+	*/
+	inline VOID StorePrevInputState()
 	{
 		m_pMouse->StorePrevInputState();
 		m_pKeyboard->StorePrevInputState();

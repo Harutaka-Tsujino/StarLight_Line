@@ -1,47 +1,33 @@
-﻿#ifndef DX3D_H
+﻿/**
+* @brief 描画関係クラスのFacadeのヘッダ
+* @author Harutaka-Tsujino
+*/
+
+#ifndef DX3D_H
 #define DX3D_H
 
 #include <windows.h>
 
 #include <d3dx9.h>
 
-#include "../../Wnd/Wnd.h"
 #include "D3DPP\D3DPP.h"
 #include "ColorBlender\ColorBlender.h"
 #include "Light\Light.h"
 #include "TexStorage\TexStorage.h"
 #include "Camera\Camera.h"
 #include "CustomVertexEditor\CustomVertexEditor.h"
-#include"Renderer\Renderer.h"
+#include "Renderer\Renderer.h"
+#include "../../../Struct/SurfaceVal/SurfaceVal.h"
+#include "../../../Struct/CustomVertex/CustomVertex.h"
+#include "../../../Struct/ObjData/ObjData.h"
 
+/**
+* @brief 描画関係クラスのFacade
+*/
 class DX3D
 {
 public:
-	DX3D(HWND hWnd, SurfaceVal wndSize, LPDIRECT3D9 pD3D)
-		:m_HWND(hWnd), m_D3DPP(new D3DPP(m_HWND, wndSize))	//Create(LPDIRECT3D9) InitViewPort()を呼ぶ
-	{
-		Create(pD3D);
-
-		m_pDX3DDev->SetRenderState(D3DRS_ZENABLE, TRUE);
-		m_pDX3DDev->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
-
-		m_pColorBlender = new ColorBlender(m_pDX3DDev);
-		m_pColorBlender->DefaultColorBlending();
-
-		m_pLight = new Light(m_pDX3DDev);
-		m_pLight->DefaultLighting();
-
-		m_pTexStorage = new TexStorage(m_pDX3DDev);
-
-		m_pCamera = new Camera(m_pDX3DDev);
-
-		m_pCustomVertex = new CustomVertexEditor(m_pDX3DDev);
-
-		m_pRenderer = new Renderer(m_pDX3DDev);
-
-		InitViewPort();
-	}
-
+	DX3D(HWND hWnd, SurfaceVal wndSize, LPDIRECT3D9 pD3D);	//Create(LPDIRECT3D9) InitViewPort()を呼ぶ
 	~DX3D()
 	{
 		delete m_pRenderer;
@@ -54,7 +40,10 @@ public:
 		m_pDX3DDev->Release();
 	}
 
-	inline VOID PrepareRendering() const					//メインループの始まりで用いる
+	/**
+	* @brief 描画の削除及び描画の開始宣言,メッセージループの始まりで呼ぶ
+	*/
+	inline VOID PrepareRendering() const
 	{
 		m_pDX3DDev->Clear(
 					0,
@@ -67,7 +56,10 @@ public:
 		m_pDX3DDev->BeginScene();
 	}
 
-	inline VOID CleanUpRendering() const					//メインループの終わりで用いる
+	/**
+	* @brief 描画の終了宣言及びバックバッファの入れ替え,メッセージループの終わりで呼ぶ
+	*/
+	inline VOID CleanUpRendering() const
 	{
 		HRESULT hr;
 		hr = m_pDX3DDev->EndScene();
@@ -78,7 +70,10 @@ public:
 					NULL);
 	}
 	
-	VOID ToggleWndMode();									//使用時DX3DDevがロストする可能性がある
+	/**
+	* @brief ウィンドウモードの切替,3Dデバイスがロストする危険性がある
+	*/
+	VOID ToggleWndMode();
 
 	inline VOID DefaultBlendMode() const					//通常合成
 	{
@@ -251,10 +246,15 @@ public:
 		m_pCustomVertex->SetColor(pCustomVertices, color);
 	}
 
-	inline VOID CreateRect(CustomVertex *pCustomVertices, const D3DXVECTOR3& rCenter, const D3DXVECTOR2& rHalfScale,
+	inline VOID CreateRect(CustomVertex *pCustomVertices, const D3DXVECTOR3& rCenter, const D3DXVECTOR3& rHalfScale,
 		DWORD color = 0xFFFFFFFF, FLOAT startTU = 0.0f, FLOAT startTV = 0.0f, FLOAT endTU = 1.0f, FLOAT endTV = 1.0f) const
 	{
 		m_pCustomVertex->Create(pCustomVertices, rCenter, rHalfScale, color, startTU, startTV, endTU, endTV);
+	}
+
+	inline VOID CreateRect(CustomVertex *pCustomVertices,const ObjData& rObjData) const
+	{
+		m_pCustomVertex->Create(pCustomVertices, rObjData);
 	}
 
 	//inline VOID Render(const FbxRelated& rFBXModel, const D3DXMATRIX& pMatWorld, const LPDIRECT3DTEXTURE9 pTexture = nullptr) const

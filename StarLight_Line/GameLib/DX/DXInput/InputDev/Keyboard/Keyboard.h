@@ -1,4 +1,9 @@
-﻿#ifndef KEYBOARD_H
+﻿/**
+* @brief キーボードクラスのヘッダ
+* @author Harutaka-Tsujino
+*/
+
+#ifndef KEYBOARD_H
 #define KEYBOARD_H
 
 #include <windows.h>
@@ -7,6 +12,9 @@
 
 #include "../InputDev.h"
 
+/**
+* @brief キーボードクラス,基底クラスのInputDevを参照して下さい
+*/
 class Keyboard :public InputDev
 {
 public:
@@ -30,22 +38,22 @@ public:
 
 	inline BOOL IsPressed(INT key) const
 	{
-		return (m_details[key] == I_D_PRESS);
+		return (m_details[key] == IND_PRESS);
 	}
 
 	inline BOOL IsHeld(INT key) const
 	{
-		return (m_details[key] == I_D_HOLD);
+		return (m_details[key] == IND_HOLD);
 	}
 
 	inline BOOL IsReleased(INT key) const
 	{
-		return (m_details[key] == I_D_RELEASE);
+		return (m_details[key] == IND_RELEASE);
 	}
 
 	inline BOOL IsNeutral(INT key) const
 	{
-		return (m_details[key] == I_D_NEUTRAL);
+		return (m_details[key] == IND_NEUTRAL);
 	}
 
 private:

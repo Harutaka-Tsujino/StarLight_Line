@@ -9,7 +9,7 @@
 
 #include <d3dx9.h>
 
-#include "../CustomVertexEditor/CustomVertexEditor.h"
+#include "../../../../Struct/CustomVertex/CustomVertex.h"
 
 /**
 * @class Renderer

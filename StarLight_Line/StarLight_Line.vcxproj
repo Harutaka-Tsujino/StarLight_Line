@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -126,6 +126,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Class\IBaseWorking\IBaseWorking.cpp" />
+    <ClCompile Include="Class\IBaseWorking\SceneManager\SceneManager.cpp" />
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\ObjManager.cpp" />
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\Obj.cpp" />
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\TitleSceneObj\TitleSceneObj.cpp" />
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\Scene.cpp" />
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\TitleScene\TitleScene.cpp" />
     <ClCompile Include="Class\Singleton\Singleton.cpp" />
     <ClCompile Include="GameLib\DX\DX.cpp" />
     <ClCompile Include="GameLib\DX\DX3D\Camera\Camera.cpp" />
@@ -145,7 +152,17 @@
     <ClCompile Include="Main\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Class\IBaseWorking\IBaseWorking.h" />
+    <ClInclude Include="Class\IBaseWorking\SceneManager\SceneManager.h" />
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\ObjManager.h" />
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\Obj.h" />
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\TitleSceneObj\TitleSceneObj.h" />
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\Scene.h" />
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\TitleScene\TitleScene.h" />
     <ClInclude Include="Class\Singleton\Singleton.h" />
+    <ClInclude Include="Enum\DIM\DIM.h" />
+    <ClInclude Include="Enum\OBJ_TYPE\OBJ_TYPE.h" />
+    <ClInclude Include="Enum\SCENE_KIND\SCENE_KIND.h" />
     <ClInclude Include="GameLib\DX\DX.h" />
     <ClInclude Include="GameLib\DX\DX3D\Camera\Camera.h" />
     <ClInclude Include="GameLib\DX\DX3D\ColorBlender\ColorBlender.h" />
@@ -162,6 +179,9 @@
     <ClInclude Include="GameLib\GameLib.h" />
     <ClInclude Include="GameLib\Wnd\Wnd.h" />
     <ClInclude Include="Main\Main.h" />
+    <ClInclude Include="Struct\CustomVertex\CustomVertex.h" />
+    <ClInclude Include="Struct\ObjData\ObjData.h" />
+    <ClInclude Include="Struct\SurfaceVal\SurfaceVal.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="UML.txt" />

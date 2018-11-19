@@ -9,20 +9,8 @@
 
 #include <d3dx9.h>
 
-/**
-* @brief 頂点データ
-*/
-struct CustomVertex
-{
-public:
-	D3DXVECTOR3 m_pos;			//! 座標
-
-	FLOAT m_rHW = 1.0f;			//! 重みの逆数 基本1
-
-	DWORD m_aRGB = 0xFFFFFFFF;	//! 色カラーコードARGB
-
-	D3DXVECTOR2 m_texUV;		//! テクスチャの座標
-};
+#include "../../../../Struct/CustomVertex/CustomVertex.h"
+#include "../../../../Struct/ObjData/ObjData.h"
 
 class CustomVertexEditor
 {
@@ -52,6 +40,25 @@ public:
 		RotateZ(pCustomVertices, 
 			rDeg.z, 
 			rRelativeRotateCenter);
+	}
+
+	inline VOID RotateXYZ(CustomVertex* pCustomVertices, const D3DXVECTOR3& rDeg) const
+	{
+		D3DXVECTOR3 relativeRotateCenter(0.0f, 0.0f, 0.0f);
+
+		RotateX(
+			pCustomVertices,
+			rDeg.x,
+			relativeRotateCenter);
+
+		RotateY(
+			pCustomVertices,
+			rDeg.y,
+			relativeRotateCenter);
+
+		RotateZ(pCustomVertices,
+			rDeg.z,
+			relativeRotateCenter);
 	}
 
 	inline VOID RotateX(CustomVertex* pCustomVertices, FLOAT deg, const D3DXVECTOR3& rRelativeRotateCenter) const
@@ -154,16 +161,16 @@ public:
 
 	/**
 	* @brief 頂点データ構造体に引数の値を代入させる
-	* @param pCustomVertices	頂点データ配列の先頭アドレス
-	* @param rCenter			矩形の中心
-	* @param rHalfScale			矩形の高さ幅の半分
-	* @param color				頂点の色カラーコードARGB
-	* @param startTU			x方向のテクスチャ座標の始まりの値
-	* @param startTV			y方向のテクスチャ座標の始まりの値
-	* @param endTU				x方向のテクスチャ座標の終わりの値
-	* @param endTV				y方向のテクスチャ座標の終わりの値
+	* @param pCustomVertices[out]	頂点データ配列の先頭アドレス
+	* @param rCenter				矩形の中心
+	* @param rHalfScale				矩形の高さ幅の半分
+	* @param color					頂点の色カラーコードARGB
+	* @param startTU				x方向のテクスチャ座標の始まりの値
+	* @param startTV				y方向のテクスチャ座標の始まりの値
+	* @param endTU					x方向のテクスチャ座標の終わりの値
+	* @param endTV					y方向のテクスチャ座標の終わりの値
 	*/
-	inline VOID Create(CustomVertex *pCustomVertices, const D3DXVECTOR3& rCenter, const D3DXVECTOR2& rHalfScale,
+	inline VOID Create(CustomVertex *pCustomVertices, const D3DXVECTOR3& rCenter, const D3DXVECTOR3& rHalfScale,
 		DWORD color = 0xFFFFFFFF, FLOAT startTU = 0.0f, FLOAT startTV = 0.0f, FLOAT endTU = 1.0f, FLOAT endTV = 1.0f) const
 	{
 		for (int i = 0; i < m_RECT_VERTICES_NUM; ++i)
@@ -179,6 +186,18 @@ public:
 			pCustomVertices, 
 			startTU, startTV,
 			endTU, endTV);
+	}
+
+	inline VOID Create(CustomVertex *pCustomVertices, const ObjData& rObj) const
+	{
+		Create(
+			pCustomVertices,
+			rObj.m_center, rObj.m_halfScale,
+			rObj.m_aRGB,
+			0.0f, 0.0f,
+			1.0f, 1.0f);
+
+		RotateXYZ(pCustomVertices, rObj.m_deg);
 	}
 
 public:

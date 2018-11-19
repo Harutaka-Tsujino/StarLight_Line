@@ -1,6 +1,8 @@
-﻿#include <windows.h>
+﻿#include "Wnd.h"
 
-#include "Wnd.h"
+#include <windows.h>
+
+#include "../../Struct/SurfaceVal/SurfaceVal.h"
 
 Wnd::Wnd(const HINSTANCE hInst, const TCHAR* pAppName)
 {

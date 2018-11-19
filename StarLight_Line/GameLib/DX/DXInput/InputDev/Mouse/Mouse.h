@@ -1,4 +1,9 @@
-﻿#ifndef MOUSE_H
+﻿/**
+* @brief マウスクラスのヘッダ
+* @author Harutaka-Tsujino
+*/
+
+#ifndef MOUSE_H
 #define MOUSE_H
 
 #include <windows.h>
@@ -6,16 +11,11 @@
 #include <dinput.h>
 
 #include "../InputDev.h"
+#include "../../../../../Enum/DIM/DIM.h"
 
-enum DIM
-{
-	DIM_RIGHT,
-	DIM_LEFT,
-	DIM_SUB_1,
-	DIM_SUB_2,
-	DIM_MAX
-};
-
+/**
+* @brief マウスクラス,基底クラスのInputDevを参照して下さい
+*/
 class Mouse :public InputDev
 {
 public:
@@ -39,26 +39,26 @@ public:
 
 	inline BOOL IsPressed(INT key) const
 	{
-		return (m_details[key] == I_D_PRESS);
+		return (m_details[key] == IND_PRESS);
 	}
 
 	inline BOOL IsHeld(INT key) const
 	{
-		return (m_details[key] == I_D_HOLD);
+		return (m_details[key] == IND_HOLD);
 	}
 
 	inline BOOL IsReleased(INT key) const
 	{
-		return (m_details[key] == I_D_RELEASE);
+		return (m_details[key] == IND_RELEASE);
 	}
 
 	inline BOOL IsNeutral(INT key) const
 	{
-		return (m_details[key] == I_D_NEUTRAL);
+		return (m_details[key] == IND_NEUTRAL);
 	}
 
 private:
-	VOID Create(LPDIRECTINPUT8 pDXInput);				//基底クラスのコンストラクタでCreate(LPDIRECTINPUT8 pDXInput)を呼ぶ
+	VOID Create(LPDIRECTINPUT8 pDXInput);
 
 	inline VOID AcquireInputState()
 	{
