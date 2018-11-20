@@ -181,7 +181,7 @@ public:
 	* @param endTU x方向のテクスチャ座標の終わりの値
 	* @param endTV y方向のテクスチャ座標の終わりの値
 	*/
-	inline VOID Create(CustomVertex *pCustomVertices, const D3DXVECTOR3& rCenter, const D3DXVECTOR3& rHalfScale,
+	inline VOID Create(CustomVertex* pCustomVertices, const D3DXVECTOR3& rCenter, const D3DXVECTOR3& rHalfScale,
 		DWORD aRGB = 0xFFFFFFFF, FLOAT startTU = 0.0f, FLOAT startTV = 0.0f, FLOAT endTU = 1.0f, FLOAT endTV = 1.0f) const
 	{
 		for (int i = 0; i < m_RECT_VERTICES_NUM; ++i)

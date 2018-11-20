@@ -167,7 +167,7 @@
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\TitleSceneObj</Filter>
     </ClCompile>
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\Obj.cpp">
-      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\Enum</Filter>
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -255,11 +255,11 @@
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\Enum\SCENE_KIND.h">
       <Filter>Class\IBaseWorking\SceneManager\Scene\Enum</Filter>
     </ClInclude>
-    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\Enum\OBJ_TYPE.h">
-      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj</Filter>
-    </ClInclude>
     <ClInclude Include="GameLib\Wnd\Data\RectSize.h">
       <Filter>GameLib\Wnd\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\Enum\OBJ_TYPE.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\Enum</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

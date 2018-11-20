@@ -14,7 +14,7 @@ class Obj :public IBaseWorking
 public:
 	Obj(OBJ_TYPE objectType, FLOAT z) :m_rGameLib(GameLib::GetInstance()),
 		m_WND_SIZE(m_rGameLib.GetWndSize()), m_OBJECT_TYPE(objectType), m_Z(z) {};
-	~Obj() {};
+	virtual ~Obj() {};
 
 	inline OBJ_TYPE GetObjectType() const
 	{

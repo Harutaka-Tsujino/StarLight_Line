@@ -19,7 +19,7 @@ class InputDev
 public:
 	InputDev(HWND hWnd) :m_HWND(hWnd) {};
 
-	~InputDev()
+	virtual ~InputDev()
 	{
 		m_pDInputDev->Release();
 	}
