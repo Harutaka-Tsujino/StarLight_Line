@@ -8,7 +8,7 @@
 #include "../../Singleton/Singleton.h"
 #include "../IBaseWorking.h"
 #include "Scene\Scene.h"
-#include "../../../Enum/SCENE_KIND/SCENE_KIND.h"
+#include "Scene\Enum\SCENE_KIND.h"
 #include "Scene\TitleScene\TitleScene.h"
 
 class SceneManager :public IBaseWorking, public Singleton<SceneManager>

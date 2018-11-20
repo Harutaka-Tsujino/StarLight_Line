@@ -4,7 +4,7 @@
 
 #include <dinput.h>
 
-#include "../../../../../Enum/DIM/DIM.h"
+#include "Enum\DIM.h"
 
 VOID Mouse::Create(LPDIRECTINPUT8 pDXInput)
 {

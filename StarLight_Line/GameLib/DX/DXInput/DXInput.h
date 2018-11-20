@@ -113,4 +113,4 @@ private:
 	InputDev* m_pKeyboard	= nullptr;
 };
 
-#endif // !DX_INPUT_H
+#endif //! DX_INPUT_H

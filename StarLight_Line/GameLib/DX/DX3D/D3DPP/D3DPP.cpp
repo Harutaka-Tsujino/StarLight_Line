@@ -4,7 +4,7 @@
 
 #include <d3dx9.h>
 
-#include "../../../../Struct/SurfaceVal/SurfaceVal.h"
+#include "../../../Wnd/Data/RectSize.h"
 
 VOID D3DPP::InitD3DPP(D3DPRESENT_PARAMETERS* pD3DPP)
 {

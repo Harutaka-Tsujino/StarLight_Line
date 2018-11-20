@@ -7,7 +7,7 @@
 
 #include "D3DPP\D3DPP.h"
 
-DX3D::DX3D(HWND hWnd, SurfaceVal wndSize, LPDIRECT3D9 pD3D)
+DX3D::DX3D(HWND hWnd, RectSize wndSize, LPDIRECT3D9 pD3D)
 	:m_HWND(hWnd), m_D3DPP(new D3DPP(m_HWND, wndSize))
 {
 	Create(pD3D);

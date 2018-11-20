@@ -10,10 +10,11 @@
 
 #include <d3dx9.h>
 
-#include "../../Struct/SurfaceVal/SurfaceVal.h"
+#include "../Wnd/Data/RectSize.h"
 #include "DX3D\DX3D.h"
 #include "DXInput\DXInput.h"
-#include "../../Struct/CustomVertex/CustomVertex.h"
+#include "DX3D\CustomVertexEditor\Data\CustomVertex.h"
+#include "DX3D\CustomVertexEditor\Data\ObjData.h"
 
 /**
 * @brief DX関係クラスのFacade
@@ -21,7 +22,7 @@
 class DX
 {
 public:
-	DX(HWND hWnd, SurfaceVal wndSize) :m_HWND(hWnd)
+	DX(HWND hWnd, RectSize wndSize) :m_HWND(hWnd)
 	{
 		Create();
 
@@ -226,15 +227,20 @@ public:
 		m_pDX3D->SetRectTexUV(pCustomVertices, startTU, startTV, endTU, endTV);
 	}
 
-	inline VOID SetRectColor(CustomVertex *pCustomVertices, DWORD color) const
+	inline VOID SetRectColor(CustomVertex *pCustomVertices, DWORD aRGB) const
 	{
-		m_pDX3D->SetRectColor(pCustomVertices, color);
+		m_pDX3D->SetRectColor(pCustomVertices, aRGB);
 	}
 
 	inline VOID CreateRect(CustomVertex *pCustomVertices, const D3DXVECTOR3& rCenter, const D3DXVECTOR3& rHalfScale,
-		DWORD color = 0xFFFFFFFF, FLOAT startTU = 0.0f, FLOAT startTV = 0.0f, FLOAT endTU = 1.0f, FLOAT endTV = 1.0f) const
+		DWORD aRGB = 0xFFFFFFFF, FLOAT startTU = 0.0f, FLOAT startTV = 0.0f, FLOAT endTU = 1.0f, FLOAT endTV = 1.0f) const
 	{
-		m_pDX3D->CreateRect(pCustomVertices, rCenter, rHalfScale, color, startTU, startTV, endTU, endTV);
+		m_pDX3D->CreateRect(pCustomVertices, rCenter, rHalfScale, aRGB, startTU, startTV, endTU, endTV);
+	}
+
+	inline VOID CreateRect(CustomVertex *pCustomVertices,const ObjData& rObjData) const
+	{
+		m_pDX3D->CreateRect(pCustomVertices, rObjData);
 	}
 
 	//inline VOID Render(const FbxRelated& rFBXModel, const D3DXMATRIX& pMatWorld, const LPDIRECT3DTEXTURE9 pTexture = nullptr) const
@@ -299,4 +305,4 @@ private:
 	DXInput* m_pDXInput = nullptr;
 };
 
-#endif // !DX_H
+#endif //! DX_H

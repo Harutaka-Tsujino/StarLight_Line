@@ -1,7 +1,8 @@
 /**
-* @brief 描画を行うクラスのヘッダ
+* @brief 描画クラスのヘッダ
 * @author Harutaka Tsujino
 */
+
 #ifndef RENDERER_H
 #define RENDERER_H
 
@@ -9,11 +10,10 @@
 
 #include <d3dx9.h>
 
-#include "../../../../Struct/CustomVertex/CustomVertex.h"
+#include "../CustomVertexEditor/Data/CustomVertex.h"
 
 /**
-* @class Renderer
-* @brief 描画を行う
+* @brief FBX(予定)とCustomVertexの描画クラス
 */
 class Renderer
 {
@@ -26,16 +26,14 @@ public:
 	* @param rFBXModel FBXのクラス モデルを読み込んだ後でないといけない
 	* @param rMatWorld 拡大回転移動行列をまとめた行列
 	* @param pTexture モデルに張り付けるテクスチャのポインタ デフォルトで存在している場合はnullptr
-	* @detail　rMatWorldをSetTransform,pTextureをセットした後 FbxRelatedのメソッドを用い描画する
 	*/
 	//inline VOID Render(const FbxRelated& rFBXModel
 	//, const D3DXMATRIX& pMatWorld, const LPDIRECT3DTEXTURE9 pTexture = nullptr) const;
 
 	/**
-	* @brief 2Dの描画を行う
+	* @brief CustomVertexの描画を行う
 	* @param pCustomVertices 描画する矩形の頂点データの先頭ポインタ
 	* @param pTexture ポリゴンに張り付けるテクスチャのポインタ
-	* @detail pTextureをセットした後、DrawPrimitiveUpを用い描画する
 	*/
 	inline VOID Render(const CustomVertex* pCustomVertices, const LPDIRECT3DTEXTURE9 pTexture = nullptr) const
 	{
@@ -56,4 +54,4 @@ public:
 	const LPDIRECT3DDEVICE9& m_rpDX3D_DEV = nullptr;
 };
 
-#endif // !RENDERER_H
+#endif //! RENDERER_H

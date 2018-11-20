@@ -2,7 +2,7 @@
 
 #include <windows.h>
 
-#include "../../Struct/SurfaceVal/SurfaceVal.h"
+#include "Data\RectSize.h"
 
 Wnd::Wnd(const HINSTANCE hInst, const TCHAR* pAppName)
 {

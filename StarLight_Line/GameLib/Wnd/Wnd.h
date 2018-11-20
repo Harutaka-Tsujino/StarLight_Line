@@ -3,7 +3,7 @@
 
 #include <windows.h>
 
-#include "../../Struct/SurfaceVal/SurfaceVal.h"
+#include "Data\RectSize.h"
 
 class Wnd
 {
@@ -21,7 +21,7 @@ public:
 		return m_msg;
 	}
 
-	inline SurfaceVal GetWndSize() const
+	inline RectSize GetWndSize() const
 	{
 		return m_WND_SIZE;
 	}
@@ -44,7 +44,7 @@ private:
 
 	MSG m_msg;
 
-	const SurfaceVal m_WND_SIZE = { 1280, 720 };
+	const RectSize m_WND_SIZE = { 1280, 720 };
 };
 
 #endif // !WND_H

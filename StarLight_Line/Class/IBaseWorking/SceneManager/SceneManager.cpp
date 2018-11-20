@@ -3,7 +3,7 @@
 #include <windows.h>
 
 #include "Scene\Scene.h"
-#include "../../../Enum/SCENE_KIND/SCENE_KIND.h"
+#include "Scene\Enum\SCENE_KIND.h"
 #include "Scene\TitleScene\TitleScene.h"
 
 inline VOID SceneManager::Factory()

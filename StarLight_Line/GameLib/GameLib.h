@@ -13,7 +13,8 @@
 #include "../Class/Singleton/Singleton.h"
 #include "Wnd\Wnd.h"
 #include "DX\DX.h"
-#include "../Struct/CustomVertex/CustomVertex.h"
+#include "DX\DX3D\CustomVertexEditor\Data\CustomVertex.h"
+#include "DX\DX3D\CustomVertexEditor\Data\ObjData.h"
 
 /**
 * @brief 汎用クラスのFacade,ウィンドウ生成やDX関係の初期化も行う
@@ -52,7 +53,7 @@ public:
 	*/
 	VOID RunFunc(VOID(*pMainFunc)());
 
-	inline SurfaceVal GetWndSize() const
+	inline RectSize GetWndSize() const
 	{
 		return m_pWnd->GetWndSize();
 	}
@@ -228,15 +229,20 @@ public:
 		m_pDX->SetRectTexUV(pCustomVertices, startTU, startTV, endTU, endTV);
 	}
 
-	inline VOID SetRectColor(CustomVertex *pCustomVertices, DWORD color) const
+	inline VOID SetRectColor(CustomVertex *pCustomVertices, DWORD aRGB) const
 	{
-		m_pDX->SetRectColor(pCustomVertices, color);
+		m_pDX->SetRectColor(pCustomVertices, aRGB);
 	}
 
 	inline VOID CreateRect(CustomVertex *pCustomVertices, const D3DXVECTOR3& rCenter, const D3DXVECTOR3& rHalfScale,
-		DWORD color = 0xFFFFFFFF, FLOAT startTU = 0.0f, FLOAT startTV = 0.0f, FLOAT endTU = 1.0f, FLOAT endTV = 1.0f) const
+		DWORD aRGB = 0xFFFFFFFF, FLOAT startTU = 0.0f, FLOAT startTV = 0.0f, FLOAT endTU = 1.0f, FLOAT endTV = 1.0f) const
 	{
-		m_pDX->CreateRect(pCustomVertices, rCenter, rHalfScale, color, startTU, startTV, endTU, endTV);
+		m_pDX->CreateRect(pCustomVertices, rCenter, rHalfScale, aRGB, startTU, startTV, endTU, endTV);
+	}
+
+	inline VOID CreateRect(CustomVertex *pCustomVertices, const ObjData& rObjData) const
+	{
+		m_pDX->CreateRect(pCustomVertices, rObjData);
 	}
 
 	//inline VOID Render(const FbxRelated& rFBXModel, const D3DXMATRIX& pMatWorld, const LPDIRECT3DTEXTURE9 pTexture = nullptr) const
@@ -297,4 +303,4 @@ private:
 	static DX* m_pDX;
 };
 
-#endif // !GAME_LIB_H
+#endif //! GAME_LIB_H

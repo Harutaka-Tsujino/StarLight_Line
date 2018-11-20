@@ -17,9 +17,9 @@
 #include "Camera\Camera.h"
 #include "CustomVertexEditor\CustomVertexEditor.h"
 #include "Renderer\Renderer.h"
-#include "../../../Struct/SurfaceVal/SurfaceVal.h"
-#include "../../../Struct/CustomVertex/CustomVertex.h"
-#include "../../../Struct/ObjData/ObjData.h"
+#include "../../Wnd/Data/RectSize.h"
+#include "CustomVertexEditor\Data\CustomVertex.h"
+#include "CustomVertexEditor\Data\ObjData.h"
 
 /**
 * @brief 描画関係クラスのFacade
@@ -27,7 +27,7 @@
 class DX3D
 {
 public:
-	DX3D(HWND hWnd, SurfaceVal wndSize, LPDIRECT3D9 pD3D);	//Create(LPDIRECT3D9) InitViewPort()を呼ぶ
+	DX3D(HWND hWnd, RectSize wndSize, LPDIRECT3D9 pD3D);	//Create(LPDIRECT3D9) InitViewPort()を呼ぶ
 	~DX3D()
 	{
 		delete m_pRenderer;
@@ -241,15 +241,15 @@ public:
 		m_pCustomVertex->SetTexUV(pCustomVertices, startTU, startTV, endTU, endTV);
 	}
 
-	inline VOID SetRectColor(CustomVertex *pCustomVertices, DWORD color) const
+	inline VOID SetRectColor(CustomVertex *pCustomVertices, DWORD aRGB) const
 	{
-		m_pCustomVertex->SetColor(pCustomVertices, color);
+		m_pCustomVertex->SetColor(pCustomVertices, aRGB);
 	}
 
 	inline VOID CreateRect(CustomVertex *pCustomVertices, const D3DXVECTOR3& rCenter, const D3DXVECTOR3& rHalfScale,
-		DWORD color = 0xFFFFFFFF, FLOAT startTU = 0.0f, FLOAT startTV = 0.0f, FLOAT endTU = 1.0f, FLOAT endTV = 1.0f) const
+		DWORD aRGB = 0xFFFFFFFF, FLOAT startTU = 0.0f, FLOAT startTV = 0.0f, FLOAT endTU = 1.0f, FLOAT endTV = 1.0f) const
 	{
-		m_pCustomVertex->Create(pCustomVertices, rCenter, rHalfScale, color, startTU, startTV, endTU, endTV);
+		m_pCustomVertex->Create(pCustomVertices, rCenter, rHalfScale, aRGB, startTU, startTV, endTU, endTV);
 	}
 
 	inline VOID CreateRect(CustomVertex *pCustomVertices,const ObjData& rObjData) const
@@ -293,4 +293,4 @@ private:
 	Renderer* m_pRenderer = nullptr;
 };
 
-#endif // !DX3D_H
+#endif //! DX3D_H

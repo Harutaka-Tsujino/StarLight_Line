@@ -80,29 +80,20 @@
     <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\TitleSceneObj">
       <UniqueIdentifier>{7a98d0b7-6971-407b-af63-f02768a923c3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Struct">
-      <UniqueIdentifier>{8850d8c1-00e6-4068-b0f7-b7318a5a76e1}</UniqueIdentifier>
+    <Filter Include="GameLib\DX\DX3D\CustomVertexEditor\Data">
+      <UniqueIdentifier>{74969a96-e2c9-41d8-b01d-6522f00981ad}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Enum">
-      <UniqueIdentifier>{cba5354e-a90c-4b49-b331-77bebd19171a}</UniqueIdentifier>
+    <Filter Include="GameLib\Wnd\Data">
+      <UniqueIdentifier>{7d8a15e2-8a0e-4992-bd5e-a09b441bde9d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Struct\SurfaceVal">
-      <UniqueIdentifier>{209ee8f5-b651-40a2-b3bd-3d461154dd83}</UniqueIdentifier>
+    <Filter Include="GameLib\DX\DXInput\InputDev\Mouse\Enum">
+      <UniqueIdentifier>{f7154b27-688b-4cd7-abb9-d1315a9d2b62}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Enum\OBJ_TYPE">
-      <UniqueIdentifier>{ec7a2f4a-e075-4275-95f2-a97fd7e8940a}</UniqueIdentifier>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\Enum">
+      <UniqueIdentifier>{5d74bf23-2d6d-4649-b50c-af6fcac03cdc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Struct\ObjData">
-      <UniqueIdentifier>{caa23057-5255-4006-b12f-636b00c19b01}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Enum\SCENE_KIND">
-      <UniqueIdentifier>{c8221f38-29aa-49ba-b427-025a183741bd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Enum\DIM">
-      <UniqueIdentifier>{b2bf99e6-7153-4ab7-97aa-70b243f5d9f2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Struct\CustomVertex">
-      <UniqueIdentifier>{fb5bf39f-5a96-457e-930e-c03a075e96ec}</UniqueIdentifier>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\Enum">
+      <UniqueIdentifier>{e8c736f1-3d5c-48f8-86e7-9eb744f294ec}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -172,11 +163,11 @@
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\ObjManager.cpp">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager</Filter>
     </ClCompile>
-    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\Obj.cpp">
-      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj</Filter>
-    </ClCompile>
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\TitleSceneObj\TitleSceneObj.cpp">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\TitleSceneObj</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\Obj.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\Enum</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -252,23 +243,23 @@
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\Scene.h">
       <Filter>Class\IBaseWorking\SceneManager\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Struct\ObjData\ObjData.h">
-      <Filter>Struct\ObjData</Filter>
+    <ClInclude Include="GameLib\DX\DX3D\CustomVertexEditor\Data\CustomVertex.h">
+      <Filter>GameLib\DX\DX3D\CustomVertexEditor\Data</Filter>
     </ClInclude>
-    <ClInclude Include="Struct\SurfaceVal\SurfaceVal.h">
-      <Filter>Struct\SurfaceVal</Filter>
+    <ClInclude Include="GameLib\DX\DX3D\CustomVertexEditor\Data\ObjData.h">
+      <Filter>GameLib\DX\DX3D\CustomVertexEditor\Data</Filter>
     </ClInclude>
-    <ClInclude Include="Enum\OBJ_TYPE\OBJ_TYPE.h">
-      <Filter>Enum\OBJ_TYPE</Filter>
+    <ClInclude Include="GameLib\DX\DXInput\InputDev\Mouse\Enum\DIM.h">
+      <Filter>GameLib\DX\DXInput\InputDev\Mouse\Enum</Filter>
     </ClInclude>
-    <ClInclude Include="Enum\SCENE_KIND\SCENE_KIND.h">
-      <Filter>Enum\SCENE_KIND</Filter>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\Enum\SCENE_KIND.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\Enum</Filter>
     </ClInclude>
-    <ClInclude Include="Enum\DIM\DIM.h">
-      <Filter>Enum\DIM</Filter>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\Enum\OBJ_TYPE.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj</Filter>
     </ClInclude>
-    <ClInclude Include="Struct\CustomVertex\CustomVertex.h">
-      <Filter>Struct\CustomVertex</Filter>
+    <ClInclude Include="GameLib\Wnd\Data\RectSize.h">
+      <Filter>GameLib\Wnd\Data</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

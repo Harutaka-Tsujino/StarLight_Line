@@ -1,19 +1,31 @@
-﻿#ifndef D3DPP_H
+﻿/**
+* @brief バックバッファ関係クラスのヘッダ
+* @author Harutaka Tsujino
+*/
+
+#ifndef D3DPP_H
 #define D3DPP_H
 
 #include <windows.h>
 
 #include <d3dx9.h>
 
-#include "../../../../Struct/SurfaceVal/SurfaceVal.h"
+#include "../../../Wnd/Data/RectSize.h"
 
+/**
+* @brief バックバッファ関係クラス
+*/
 class D3DPP
 {
 public:
-	D3DPP(HWND hWnd, SurfaceVal wndSize) :m_WND_SIZE(wndSize), m_HWND(hWnd) {};	//InitD3DPP(HWND)をよぶ
+	D3DPP(HWND hWnd, RectSize wndSize) :m_WND_SIZE(wndSize), m_HWND(hWnd) {};	//InitD3DPP(HWND)をよぶ
 	~D3DPP() {};
 
-	inline D3DPRESENT_PARAMETERS GetD3DPRESENT_PARAMETERS()						//DX3DDevを作成するときとウィンドウモードを切り替えるときに用いる
+	/**
+	* @brief 現在のウィンドウモードのD3DPRESENT_PARAMETERSを返す
+	* @return 現在のウィンドウモードのD3DPRESENT_PARAMETERS 
+	*/
+	inline D3DPRESENT_PARAMETERS GetD3DPRESENT_PARAMETERS()
 	{
 		D3DPRESENT_PARAMETERS D3DPP;
 		InitD3DPP(&D3DPP);
@@ -21,7 +33,11 @@ public:
 		return D3DPP;
 	}
 
-	inline D3DPRESENT_PARAMETERS ToggleD3DPPWndMode()							//切り替えた後にD3DPPを再度入手する必要はない
+	/**
+	* @brief ウィンドウモードを切り替えそのD3DPRESENT_PARAMETERSを返す
+	* @return ウィンドウモード切替後のD3DPRESENT_PARAMETERS
+	*/
+	inline D3DPRESENT_PARAMETERS ToggleD3DPPWndMode()
 	{
 		m_isWindow = !m_isWindow;
 
@@ -36,9 +52,9 @@ private:
 
 	const HWND m_HWND = nullptr;
 
-	const SurfaceVal m_WND_SIZE;
+	const RectSize m_WND_SIZE;
 
 	BOOL m_isWindow = TRUE;
 };
 
-#endif // !D3DPP_H
+#endif //! D3DPP_H

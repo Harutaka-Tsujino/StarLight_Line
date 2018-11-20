@@ -3,19 +3,19 @@
 * @author Harutaka-Tsujino
 */
 
-#ifndef SURFACE_VAL_H
-#define SURFACE_VAL_H
+#ifndef RECT_SIZE_H
+#define RECT_SIZE_H
 
 #include <windows.h>
 
 /**
-* @brief 平面上で用いられる座標サイズなどの値
+* @brief 平面上で用いられるサイズなどの値
 */
-struct SurfaceVal
+struct RectSize
 {
 public:
 	INT m_x = 0;
 	INT m_y = 0;
 };
 
-#endif //! SURFACE_VAL_H
+#endif //! RECT_SIZE_H
