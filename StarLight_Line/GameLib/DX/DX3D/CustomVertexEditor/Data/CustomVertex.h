@@ -1,5 +1,6 @@
-/**
-* @brief ’¸“_ƒf[ƒ^\‘¢‘Ì‚Ìƒwƒbƒ_
+ï»¿/**
+* @file CustomVertex.h
+* @brief é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿æ§‹é€ ä½“ã®ãƒ˜ãƒƒãƒ€
 * @author Harutaka-Tsujino
 */
 
@@ -10,18 +11,18 @@
 #include <d3dx9.h>
 
 /**
-* @brief ’¸“_ƒf[ƒ^
+* @brief é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿
 */
 struct CustomVertex
 {
 public:
 	D3DXVECTOR3 m_pos;
 
-	FLOAT m_rHW = 1.0f;			//! d‚İ‚Ì‹t” Šî–{1
+	FLOAT m_rHW = 1.0f;			//! é‡ã¿ã®é€†æ•° åŸºæœ¬1
 
 	DWORD m_aRGB = 0xFFFFFFFF;
 
-	D3DXVECTOR2 m_texUV;		//! ƒeƒNƒXƒ`ƒƒ‚ÌÀ•W
+	D3DXVECTOR2 m_texUV;		//! ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®åº§æ¨™
 };
 
 #endif // !CUSTOM_VERTEX_H

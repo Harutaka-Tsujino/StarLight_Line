@@ -1,5 +1,6 @@
-/**
-* @brief ƒV[ƒ“‚Ìí—Ş—ñ‹“‘Ì‚Ìƒwƒbƒ_
+ï»¿/**
+* @file SCENE_KIND.h
+* @brief ã‚·ãƒ¼ãƒ³ã®ç¨®é¡åˆ—æŒ™ä½“ã®ãƒ˜ãƒƒãƒ€
 * @author Harutaka-Tsujino
 */
 
@@ -7,7 +8,7 @@
 #define SCENE_KIND_H
 
 /**
-* @brief ƒV[ƒ“‚Ìí—Ş
+* @brief ã‚·ãƒ¼ãƒ³ã®ç¨®é¡
 */
 enum SCENE_KIND
 {

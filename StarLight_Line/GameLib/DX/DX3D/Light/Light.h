@@ -1,4 +1,5 @@
 ﻿/**
+* @file Light.h
 * @brief ライトクラスのヘッダ
 * @author Harutaka Tsujino
 */

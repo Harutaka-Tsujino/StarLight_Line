@@ -1,5 +1,6 @@
-/**
-* @brief ƒIƒuƒWƒFƒNƒg‚ÌŒ^—ñ‹“‘Ì‚Ìƒwƒbƒ_
+ï»¿/**
+* @file OBJ_TYPE.h
+* @brief ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å‹åˆ—æŒ™ä½“ã®ãƒ˜ãƒƒãƒ€
 * @author Harutaka-Tsujino
 */
 
@@ -7,7 +8,7 @@
 #define OBJ_TYPE_H
 
 /**
-* @brief ƒIƒuƒWƒFƒNƒg‚ÌŒ^
+* @brief ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å‹
 */
 enum OBJ_TYPE
 {
@@ -18,4 +19,4 @@ enum OBJ_TYPE
 	OT_MAX
 };
 
-#endif // !OBJ_TYPE_H
+#endif //! OBJ_TYPE_H

@@ -1,4 +1,5 @@
 ﻿/**
+* @file CustomVertexEditor.h
 * @brief 頂点データ構造体とその構造体の編集を行うクラスのヘッダ
 * @author Harutaka Tsujino
 */
@@ -24,7 +25,7 @@ public:
 
 	/**
 	* @brief XYZ順に回転を行う
-	* @param [ref] pCustomVertices 頂点データ配列の先頭アドレス
+	* @param[in,out] pCustomVertices 頂点データ配列の先頭アドレス
 	* @param rDeg 回転をさせる度数法での角度
 	* @param rRelativeRotateCenter どれほど回転の中心が矩形の中心よりずれているか
 	* @detail 回転行列を作成し、矩形の中心を求め回転の中心を原点に移動させ、回転行列を用いて回転を行い原点へ移動させた分元に戻す
@@ -67,7 +68,7 @@ public:
 
 	/**
 	* @brief x軸で回転させる
-	* @param [ref] pCustomVertices 頂点データ配列の先頭アドレス
+	* @param[in,out] pCustomVertices 頂点データ配列の先頭アドレス
 	* @param 度数法での角度
 	* @param rRelativeRotateCenter どれほど回転の中心が矩形の中心よりずれているか
 	*/
@@ -103,7 +104,7 @@ public:
 
 	/**
 	* @brief 矩形を拡縮させる
-	* @param [ref] pCustomVertices 頂点データ配列の先頭アドレス
+	* @param[in,out] pCustomVertices 頂点データ配列の先頭アドレス
 	* @param rScaleRate 拡縮率
 	* @detail 矩形の中心を求め幅と高さを割り出し、拡縮率を幅と高さに掛け合わせ、矩形の中心点から再構成させる
 	*/
@@ -111,7 +112,7 @@ public:
 
 	/**
 	* @brief 矩形を移動させる
-	* @param [ref] pCustomVertices 頂点データ配列の先頭アドレス
+	* @param[in,out] pCustomVertices 頂点データ配列の先頭アドレス
 	* @param rMovement 移動量
 	*/
 	inline VOID Move(CustomVertex* pCustomVertices, const D3DXVECTOR3& rMovement) const
@@ -127,7 +128,7 @@ public:
 
 	/**
 	* @brief 矩形を引数の位置に再配置させる
-	* @param [ref] pCustomVertices 頂点データ配列の先頭アドレス
+	* @param[in,out] pCustomVertices 頂点データ配列の先頭アドレス
 	* @param rPos 矩形を移動させる座標
 	*/
 	inline VOID Locale(CustomVertex* pCustomVertices, const D3DXVECTOR3& rPos) const
@@ -140,7 +141,7 @@ public:
 
 	/**
 	* @brief テクスチャ座標を引数の座標に変更させる
-	* @param [ref] pCustomVertices 頂点データ配列の先頭アドレス
+	* @param[in,out] pCustomVertices 頂点データ配列の先頭アドレス
 	* @param startTU x方向のテクスチャ座標の始まりの値
 	* @param startTV y方向のテクスチャ座標の始まりの値
 	* @param endTU x方向のテクスチャ座標の終わりの値
@@ -158,7 +159,7 @@ public:
 
 	/**
 	* @brief テクスチャ座標を引数の座標に変更させる
-	* @param [ref] pCustomVertices 頂点データ配列の先頭アドレス
+	* @param[in,out] pCustomVertices 頂点データ配列の先頭アドレス
 	* @param aRGB アルファ値入りのカラーコード ARGB
 	*/
 	inline VOID SetColor(CustomVertex *pCustomVertices, DWORD aRGB) const
@@ -171,7 +172,7 @@ public:
 
 	/**
 	* @brief 頂点データ構造体を引数の値から作成する
-	* @param [out] pCustomVertices 頂点データ配列の先頭アドレス
+	* @param[out] pCustomVertices 頂点データ配列の先頭アドレス
 	* @param rCenter 矩形の中心
 	* @param rHalfScale 矩形の高さ幅の半分
 	* @param aRGB 頂点の色カラーコード
@@ -200,7 +201,7 @@ public:
 
 	/**
 	* @brief 頂点データ構造体を引数の値から作成する 回転も行う
-	* @param [out] pCustomVertices 頂点データ配列の先頭アドレス
+	* @param[out] pCustomVertices 頂点データ配列の先頭アドレス
 	* @param rObj オブジェクトの状態構造体
 	*/
 	inline VOID Create(CustomVertex *pCustomVertices, const ObjData& rObj) const

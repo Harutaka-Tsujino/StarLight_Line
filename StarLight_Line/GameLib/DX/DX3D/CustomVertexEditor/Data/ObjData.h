@@ -1,5 +1,6 @@
-/**
-* @brief •¨‘Ì‚Ìó‘Ô\‘¢‘Ì‚Ìƒwƒbƒ_
+ï»¿/**
+* @file ObjData.h
+* @brief ç‰©ä½“ã®çŠ¶æ…‹æ§‹é€ ä½“ã®ãƒ˜ãƒƒãƒ€
 * @author Harutaka-Tsujino
 */
 
@@ -11,14 +12,14 @@
 #include <d3dx9.h>
 
 /**
-* @brief •¨‘Ì‚Ìó‘Ô
+* @brief ç‰©ä½“ã®çŠ¶æ…‹
 */
 struct ObjData
 {
 	D3DXVECTOR3 m_center	= { 0.0f,0.0f,0.0f };
 	D3DXVECTOR3 m_halfScale = { 0.0f,0.0f,0.0f };
 
-	D3DXVECTOR3 m_deg = { 0.0f,0.0f,0.0f };	//! x y z²‚Ì‡”Ô
+	D3DXVECTOR3 m_deg = { 0.0f,0.0f,0.0f };	//! x y zè»¸ã®é †ç•ª
 
 	DWORD m_aRGB = 0xFFFFFFFF;
 };

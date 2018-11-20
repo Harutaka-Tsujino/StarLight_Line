@@ -1,4 +1,5 @@
 ﻿/**
+* @file TexStorage.h
 * @brief テクスチャ管理クラスのヘッダ
 * @author Harutaka-Tsujino
 */

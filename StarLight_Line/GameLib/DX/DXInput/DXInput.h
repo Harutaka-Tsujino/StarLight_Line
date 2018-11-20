@@ -1,4 +1,5 @@
 ﻿/**
+* @file DXInput.h
 * @brief 入力デバイス関係クラスのFacadeのヘッダ
 * @author Harutaka-Tsujino
 */

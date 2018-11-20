@@ -1,5 +1,6 @@
-/**
-* @brief ”Ä—pƒNƒ‰ƒX‚ÌFacade‚Ìƒwƒbƒ_
+ï»¿/**
+* @file GameLib.h
+* @brief æ±ç”¨ã‚¯ãƒ©ã‚¹ã®Facadeã®ãƒ˜ãƒƒãƒ€
 * @author Harutaka-Tsujino
 */
 
@@ -17,7 +18,7 @@
 #include "DX\DX3D\CustomVertexEditor\Data\ObjData.h"
 
 /**
-* @brief ”Ä—pƒNƒ‰ƒX‚ÌFacade,ƒEƒBƒ“ƒhƒE¶¬‚âDXŠÖŒW‚Ì‰Šú‰»‚às‚¤
+* @brief æ±ç”¨ã‚¯ãƒ©ã‚¹ã®Facade,ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ç”Ÿæˆã‚„DXé–¢ä¿‚ã®åˆæœŸåŒ–ã‚‚è¡Œã†
 */
 class GameLib :public Singleton<GameLib>
 {
@@ -31,9 +32,9 @@ public:
 	};
 
 	/**
-	* @brief ƒEƒBƒ“ƒhƒE‚ğ¶¬‚µDXŠÖŒW‚ğ‰Šú‰»‚·‚é,ˆê”Ô‰‚ß‚É‚±‚ê‚ğŒÄ‚Ô
-	* @param hInst ƒCƒ“ƒXƒ^ƒ“ƒX‚Ìƒnƒ“ƒhƒ‹
-	* @param pAppName ƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚Ì–¼‘O‚Ìƒ|ƒCƒ“ƒ^
+	* @brief ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’ç”Ÿæˆã—DXé–¢ä¿‚ã‚’åˆæœŸåŒ–ã™ã‚‹,ä¸€ç•ªåˆã‚ã«ã“ã‚Œã‚’å‘¼ã¶
+	* @param hInst ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®ãƒãƒ³ãƒ‰ãƒ«
+	* @param pAppName ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã®åå‰ã®ãƒã‚¤ãƒ³ã‚¿
 	*/
 	inline static VOID Create(const HINSTANCE hInst, const TCHAR* pAppName)
 	{
@@ -48,8 +49,8 @@ public:
 	}
 
 	/**
-	* @brief ƒƒbƒZ[ƒWƒ‹[ƒv‚ğì¬‚µˆø”‚Å—^‚¦‚ç‚ê‚½ŠÖ”‚ğ60fps‚Å‰ñ‚·
-	* @param ƒƒbƒZ[ƒWƒ‹[ƒv‚Å‰ñ‚·ŠÖ”‚Ìƒ|ƒCƒ“ƒ^
+	* @brief ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ«ãƒ¼ãƒ—ã‚’ä½œæˆã—å¼•æ•°ã§ä¸ãˆã‚‰ã‚ŒãŸé–¢æ•°ã‚’60fpsã§å›ã™
+	* @param ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ«ãƒ¼ãƒ—ã§å›ã™é–¢æ•°ã®ãƒã‚¤ãƒ³ã‚¿
 	*/
 	VOID RunFunc(VOID(*pMainFunc)());
 
@@ -58,22 +59,22 @@ public:
 		return m_pWnd->GetWndSize();
 	}
 
-	inline VOID ToggleWndMode()								//g—pDX3DDev‚ªƒƒXƒg‚·‚é‰Â”\«‚ª‚ ‚é
+	inline VOID ToggleWndMode()								//ä½¿ç”¨æ™‚DX3DDevãŒãƒ­ã‚¹ãƒˆã™ã‚‹å¯èƒ½æ€§ãŒã‚ã‚‹
 	{
 		m_pDX->ToggleWndMode();
 	}
 
-	inline VOID DefaultBlendMode() const					//’Êí‡¬
+	inline VOID DefaultBlendMode() const					//é€šå¸¸åˆæˆ
 	{
 		m_pDX->DefaultBlendMode();
 	}
 
-	inline VOID AddtionBlendMode() const					//‰ÁZ‡¬
+	inline VOID AddtionBlendMode() const					//åŠ ç®—åˆæˆ
 	{
 		m_pDX->AddtionBlendMode();
 	}
 
-	inline VOID DefaultColorBlending() const				//ƒEƒBƒ“ƒhƒEƒ‚[ƒh‚ğØ‚è‘Ö‚¦‚½‚É‚ÍÄİ’è‚·‚é•K—v‚ª‚ ‚é
+	inline VOID DefaultColorBlending() const				//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ¢ãƒ¼ãƒ‰ã‚’åˆ‡ã‚Šæ›¿ãˆãŸæ™‚ã«ã¯å†è¨­å®šã™ã‚‹å¿…è¦ãŒã‚ã‚‹
 	{
 		m_pDX->DefaultColorBlending();
 	}
@@ -118,7 +119,7 @@ public:
 		m_pDX->DisaableSpecular();
 	}
 
-	inline VOID DefaultLighting() const						//ƒEƒBƒ“ƒhƒEƒ‚[ƒh‚ğØ‚è‘Ö‚¦‚½‚É‚ÍÄİ’è‚·‚é•K—v‚ª‚ ‚é
+	inline VOID DefaultLighting() const						//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ¢ãƒ¼ãƒ‰ã‚’åˆ‡ã‚Šæ›¿ãˆãŸæ™‚ã«ã¯å†è¨­å®šã™ã‚‹å¿…è¦ãŒã‚ã‚‹
 	{
 		m_pDX->DefaultLighting();
 	}

@@ -1,5 +1,6 @@
-/**
-* @brief •½–Êã‚Ì’l\‘¢‘Ì‚Ìƒwƒbƒ_
+ï»¿/**
+* @file RectSize.h
+* @brief å¹³é¢ä¸Šã®å€¤æ§‹é€ ä½“ã®ãƒ˜ãƒƒãƒ€
 * @author Harutaka-Tsujino
 */
 
@@ -9,7 +10,7 @@
 #include <windows.h>
 
 /**
-* @brief •½–Êã‚Å—p‚¢‚ç‚ê‚éƒTƒCƒY‚È‚Ç‚Ì’l
+* @brief å¹³é¢ä¸Šã§ç”¨ã„ã‚‰ã‚Œã‚‹ã‚µã‚¤ã‚ºãªã©ã®å€¤
 */
 struct RectSize
 {

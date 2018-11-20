@@ -1,4 +1,4 @@
-#include "GameLib.h"
+ï»¿#include "GameLib.h"
 
 #include <windows.h>
 
@@ -13,7 +13,7 @@ DX* GameLib::m_pDX = nullptr;
 
 VOID GameLib::RunFunc(VOID(*pMainFunc)())
 {
-	timeBeginPeriod(1);	//ŠÔ‚Ì—LŒø”š‚Ìİ’è
+	timeBeginPeriod(1);	//æ™‚é–“ã®æœ‰åŠ¹æ•°å­—ã®è¨­å®š
 
 	DWORD frameSyncPrev		= timeGetTime();
 	DWORD frameSyncCurrent	= timeGetTime();

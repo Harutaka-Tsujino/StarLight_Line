@@ -1,4 +1,5 @@
-/**
-* @brief ƒGƒ“ƒgƒŠƒ|ƒCƒ“ƒg‚Ìƒwƒbƒ_
+ï»¿/**
+* @file Main.h
+* @brief ã‚¨ãƒ³ãƒˆãƒªãƒã‚¤ãƒ³ãƒˆã®ãƒ˜ãƒƒãƒ€
 * @author Harutaka-Tsujino
 */

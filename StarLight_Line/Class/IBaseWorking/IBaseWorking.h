@@ -1,4 +1,4 @@
-#ifndef I_BASE_WORKING_H
+﻿#ifndef I_BASE_WORKING_H
 #define I_BASE_WORKING_H
 
 #include <windows.h>

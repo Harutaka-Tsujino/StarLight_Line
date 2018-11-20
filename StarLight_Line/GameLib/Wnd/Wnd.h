@@ -1,31 +1,56 @@
-﻿#ifndef WND_H
+﻿/**
+* @file Wnd.h
+* @brief ウィンドウクラスのヘッダ
+* @author Harutaka-Tsujino
+*/
+
+#ifndef WND_H
 #define WND_H
 
 #include <windows.h>
 
 #include "Data\RectSize.h"
 
+/**
+* @brief ウィンドウクラス
+*/
 class Wnd
 {
 public:
 	Wnd(const HINSTANCE hInst, const TCHAR* pAppName);                                      //WinMainからHINSTANCEを取得 Crate()を呼ぶ
 	~Wnd() {};
 
-	inline const HWND& GetHWND() const
+	/**
+	* @brief ウィンドウハンドルを取得する
+	* @return ウィンドウハンドル
+	*/
+	inline const HWND GetHWND() const
 	{
 		return m_hWnd;
 	}
 
-	inline const MSG& GetMSG() const
+	/**
+	* @brief WinMessageの構造体を取得する
+	* @return WinMessageの構造体
+	*/
+	inline MSG GetMSG() const
 	{
 		return m_msg;
 	}
 
+	/**
+	* @brief ウィンドウのサイズを取得する
+	* @return ウィンドウのサイズ
+	*/
 	inline RectSize GetWndSize() const
 	{
 		return m_WND_SIZE;
 	}
 
+	/**
+	* @brief ウィンドウを終了するメッセージが投げられたか
+	* @return 投げられていたらTRUE
+	*/
 	inline BOOL IsPostedQuitMessage() const
 	{
 		if (m_msg.message == WM_QUIT) return TRUE;
@@ -33,6 +58,10 @@ public:
 		return FALSE;
 	}
 
+	/**
+	* @brief WinMessageが何かあるか
+	* @return あればTRUE
+	*/
 	BOOL ExistsWinMSG();
 
 private:

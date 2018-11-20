@@ -1,4 +1,5 @@
 ﻿/**
+* @file ColorBlender.h
 * @brief 色の合成クラスのヘッダ
 * @author Harutaka Tsujino
 */

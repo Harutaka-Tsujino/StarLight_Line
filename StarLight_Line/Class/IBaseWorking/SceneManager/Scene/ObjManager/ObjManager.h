@@ -1,4 +1,4 @@
-#ifndef SCENE_OBJ_MANAGER_H
+ï»¿#ifndef SCENE_OBJ_MANAGER_H
 #define SCENE_OBJ_MANAGER_H
 
 #include <windows.h>
@@ -46,7 +46,7 @@ public:
 
 	inline VOID Render()
 	{
-		std::vector<Obj*>pFarDescendingVec = m_pSceneObjVec;	//‰“‚¢‡‚É•`‰æ‚µ‚È‚¢‚ÆƒAƒ‹ƒtƒ@ƒuƒŒƒ“ƒh‚ª‚¤‚Ü‚­‚¢‚©‚È‚¢ê‡‚ª‚ ‚é
+		std::vector<Obj*>pFarDescendingVec = m_pSceneObjVec;	//é ã„é †ã«æç”»ã—ãªã„ã¨ã‚¢ãƒ«ãƒ•ã‚¡ãƒ–ãƒ¬ãƒ³ãƒ‰ãŒã†ã¾ãã„ã‹ãªã„å ´åˆãŒã‚ã‚‹
 		std::sort(
 				pFarDescendingVec.begin(), pFarDescendingVec.end(), 
 				IsFarther);

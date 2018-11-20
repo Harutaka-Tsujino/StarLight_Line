@@ -1,4 +1,5 @@
 ﻿/**
+* @file Camera.h
 * @brief カメラクラスのヘッダ
 * @author Harutaka Tsujino
 */
@@ -21,7 +22,7 @@ public:
 
 	/**
 	* @brief 現在のカメラの位置を取得する
-	* @param [out] pCameraPos カメラ位置を入れる
+	* @param[out] pCameraPos カメラ位置を入れる
 	*/
 	inline VOID GetCameraPos(D3DXVECTOR3* pCameraPos) const
 	{
@@ -52,7 +53,7 @@ public:
 
 	/**
 	* @brief 現在のカメラの注視点を取得する
-	* @param [out] pEyePoint カメラの注視点を入れる
+	* @param[out] pEyePoint カメラの注視点を入れる
 	*/
 	inline VOID GetEyePt(D3DXVECTOR3* pEyePoint) const
 	{
@@ -83,7 +84,7 @@ public:
 
 	/**
 	* @brief カメラのビュー行列を取得する
-	* @param [out] pView ビュー行列を入れる
+	* @param[out] pView ビュー行列を入れる
 	*/
 	inline VOID GetView(D3DXMATRIX* pView) const
 	{
@@ -92,7 +93,7 @@ public:
 
 	/**
 	* @brief カメラのプロジェクション行列を取得する
-	* @param [out] pProj プロジェクション行列を入れる
+	* @param[out] pProj プロジェクション行列を入れる
 	*/
 	inline VOID GetProj(D3DXMATRIX* pProj) const
 	{
@@ -106,7 +107,7 @@ public:
 
 	/**
 	* @brief 引数の行列をビルボード化する
-	* @param [ref] pWorld ビルボード化する行列のポインタ
+	* @param[in,out] pWorld ビルボード化する行列のポインタ
 	*/
 	inline VOID TransBillBoard(D3DXMATRIX* pWorld) const
 	{

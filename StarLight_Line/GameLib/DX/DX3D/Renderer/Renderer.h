@@ -1,5 +1,6 @@
-/**
-* @brief •`‰æƒNƒ‰ƒX‚Ìƒwƒbƒ_
+ï»¿/**
+* @file Renderer.h
+* @brief æç”»ã‚¯ãƒ©ã‚¹ã®ãƒ˜ãƒƒãƒ€
 * @author Harutaka Tsujino
 */
 
@@ -13,7 +14,7 @@
 #include "../CustomVertexEditor/Data/CustomVertex.h"
 
 /**
-* @brief FBX(—\’è)‚ÆCustomVertex‚Ì•`‰æƒNƒ‰ƒX
+* @brief FBX(äºˆå®š)ã¨CustomVertexã®æç”»ã‚¯ãƒ©ã‚¹
 */
 class Renderer
 {
@@ -22,18 +23,18 @@ public:
 	~Renderer() {};
 
 	/**
-	* @brief FBX‚Ì•`‰æ‚ğs‚¤
-	* @param rFBXModel FBX‚ÌƒNƒ‰ƒX ƒ‚ƒfƒ‹‚ğ“Ç‚İ‚ñ‚¾Œã‚Å‚È‚¢‚Æ‚¢‚¯‚È‚¢
-	* @param rMatWorld Šg‘å‰ñ“]ˆÚ“®s—ñ‚ğ‚Ü‚Æ‚ß‚½s—ñ
-	* @param pTexture ƒ‚ƒfƒ‹‚É’£‚è•t‚¯‚éƒeƒNƒXƒ`ƒƒ‚Ìƒ|ƒCƒ“ƒ^ ƒfƒtƒHƒ‹ƒg‚Å‘¶İ‚µ‚Ä‚¢‚éê‡‚Ínullptr
+	* @brief FBXã®æç”»ã‚’è¡Œã†
+	* @param rFBXModel FBXã®ã‚¯ãƒ©ã‚¹ ãƒ¢ãƒ‡ãƒ«ã‚’èª­ã¿è¾¼ã‚“ã å¾Œã§ãªã„ã¨ã„ã‘ãªã„
+	* @param rMatWorld æ‹¡å¤§å›è»¢ç§»å‹•è¡Œåˆ—ã‚’ã¾ã¨ã‚ãŸè¡Œåˆ—
+	* @param pTexture ãƒ¢ãƒ‡ãƒ«ã«å¼µã‚Šä»˜ã‘ã‚‹ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ãƒã‚¤ãƒ³ã‚¿ ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã§å­˜åœ¨ã—ã¦ã„ã‚‹å ´åˆã¯nullptr
 	*/
 	//inline VOID Render(const FbxRelated& rFBXModel
 	//, const D3DXMATRIX& pMatWorld, const LPDIRECT3DTEXTURE9 pTexture = nullptr) const;
 
 	/**
-	* @brief CustomVertex‚Ì•`‰æ‚ğs‚¤
-	* @param pCustomVertices •`‰æ‚·‚é‹éŒ`‚Ì’¸“_ƒf[ƒ^‚Ìæ“ªƒ|ƒCƒ“ƒ^
-	* @param pTexture ƒ|ƒŠƒSƒ“‚É’£‚è•t‚¯‚éƒeƒNƒXƒ`ƒƒ‚Ìƒ|ƒCƒ“ƒ^
+	* @brief CustomVertexã®æç”»ã‚’è¡Œã†
+	* @param pCustomVertices æç”»ã™ã‚‹çŸ©å½¢ã®é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿ã®å…ˆé ­ãƒã‚¤ãƒ³ã‚¿
+	* @param pTexture ãƒãƒªã‚´ãƒ³ã«å¼µã‚Šä»˜ã‘ã‚‹ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ãƒã‚¤ãƒ³ã‚¿
 	*/
 	inline VOID Render(const CustomVertex* pCustomVertices, const LPDIRECT3DTEXTURE9 pTexture = nullptr) const
 	{
