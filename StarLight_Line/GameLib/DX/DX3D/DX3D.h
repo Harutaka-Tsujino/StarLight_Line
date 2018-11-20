@@ -61,9 +61,8 @@ public:
 	*/
 	inline VOID CleanUpRendering() const
 	{
-		HRESULT hr;
-		hr = m_pDX3DDev->EndScene();
-		hr = m_pDX3DDev->Present(
+		m_pDX3DDev->EndScene();
+		m_pDX3DDev->Present(
 					NULL,
 					NULL,
 					NULL,
