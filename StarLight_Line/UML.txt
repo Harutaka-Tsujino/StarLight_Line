@@ -25,14 +25,14 @@ interface IDX
 + {abstract} GetLPDIRECT3D9() : const LPDIRECT3D9&
 }
 
-'Wnd Camera ColorBlender LightSetter TexStorage Renderer に関係する
+'Wnd Camera ColorBlender Light TexStorage Renderer に関係する
 interface IDX3D
 {
 + {abstract} GetLPDIRECT3DDEVICE9() : const LPDIRECT3DDEVICE9&
 
 'Wndクラスの LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM)で用いる
 '使用時DX3DDevがロストする可能性がある
-+ {abstract} ChangeWndMode() : VOID
++ {abstract} ToggleWndMode() : VOID
 }
 
 'DX3Dクラスに関係する
@@ -50,7 +50,7 @@ friend class Singleton
 - m_pD3DPP : D3DPP*
 - m_pDX3D : DX3D*
 - m_pCamera : Camera*
-- m_pLightSetter : LightSetter*
+- m_pLightSetter : Light*
 - m_pColorBlender : ColorBlender*
 - m_pTexStorage : TexStorage*
 - m_pRenderer : Renderer*
@@ -90,7 +90,7 @@ class Wnd
 - Create(const HINSTANCE hInst,const TCHAR* pAppName) : VOID
 
 'ウィンドウを生成するときにProcの関数ポインタが必要なのでstatic
-'IDX3D経由でDX3DのメソッドChangeWndMode()を用いる
+'IDX3D経由でDX3DのメソッドToggleWndMode()を用いる
 - {static} WndProc(HWND, UINT, WPARAM, LPARAM) : LRESULT CALLBACK
 }
 
@@ -124,7 +124,7 @@ class D3DPP
 + GetD3DPRESENT_PARAMETERS() : D3DPRESENT_PARAMETERS&
 
 '切り替えた後にD3DPPを再度入手する必要はない
-+ SwitchD3DPPWndMode() : VOID
++ ToggleD3DPPWndMode() : VOID
 
 - InitD3DPP(HWND) :VOID
 }
@@ -143,7 +143,7 @@ class DX3D
 'Create(LPDIRECT3D9) InitViewPort()を呼ぶ
 + Ctor(const IWnd*, const IDX*, const ID3PP*)
 
-'Camera ColorBlender LightSetter TexStorage Renderer でIDX3Dを経由して用いる
+'Camera ColorBlender Light TexStorage Renderer でIDX3Dを経由して用いる
 + GetLPDIRECT3DDEVICE9() : const LPDIRECT3DDEVICE9&
 
 'Rendererクラスでもいいが使用者が考えることが増えるためこのクラスにいれた
@@ -153,7 +153,7 @@ class DX3D
 + CleanUpRendering() : VOID
 
 '使用時DX3DDevがロストする可能性がある
-+ ChangeWndMode() : VOID
++ ToggleWndMode() : VOID
 
 '先にDXクラスを生成する
 - Create(LPDIRECT3D9) : VOID
@@ -196,7 +196,7 @@ class ColorBlender
 }
 
 'IDX3DからLPDIRECT3DDEVICE9を取得
-class LightSetter
+class Light
 {
 'メンバイニシャライザで初期化
 - m_rPDX3DDev : LPDIRECT3DDEVICE9&
@@ -268,7 +268,7 @@ class CustomVertexEditor
 '中心座標から矩形を作成する
 + CreateRect(CustomVertex* pCustomVertices,\n const D3DXVECTOR3& rCenter, const D3DXVECTOR2& rHalfScale,\n DWORD aRGB,\n FLOAT startTU, FLOAT startTV, FLOAT endTU, FLOAT endTV) : VOID
 '矩形を生成した後回転も行う
-+ CreateRect(CustomVertex* pCustomVertices, const ObjectData&) : VOID
++ CreateRect(CustomVertex* pCustomVertices, const ObjData&) : VOID
 
 'rRelativeRotateCenterは回転の中心を矩形の中心からどのくらいずらすか
 + RotateX(CustomVertex* pCustomVertices, FLOAT degree,\n const D3DXVECTOR3& rRelativeRotateCenter) : VOID
@@ -282,7 +282,7 @@ class CustomVertexEditor
 
 + SetTexUV(CustomVertex* pCustomVertices,\n FLOAT startTU, FLOAT startTV, FLOAT endTU, FLOAT endTV) : VOID
 
-+ ChangeColor(CustomVertex* pCustomVertices, DWORD aRBG) : VOID
++ ChangeARGB(CustomVertex* pCustomVertices, DWORD aRBG) : VOID
 }
 
 Singleton <|-d- GameLib
@@ -300,7 +300,7 @@ IDX o-- DX3D
 IDX3D o-- Wnd
 IDX3D o-- ColorBlender
 IDX3D o-- Camera
-IDX3D o-- LightSetter
+IDX3D o-- Light
 IDX3D o-- CustomVertexEditor
 IDX3D o-- TexStorage
 IDX3D o-- Renderer
@@ -313,12 +313,12 @@ GameLib *-- D3DPP
 GameLib *-- DX3D
 GameLib *-- ColorBlender
 GameLib *-- Camera
-GameLib *-- LightSetter
+GameLib *-- Light
 GameLib *-- CustomVertexEditor
 GameLib *-l- TexStorage
 GameLib *-- Renderer
 GameLib *-u- DXInput
 
-LightSetter -[hidden]u- Renderer
+Light -[hidden]u- Renderer
 Renderer -[hidden]u- Wnd
 TexStorage -[hidden]u- ColorBlender
