@@ -19,7 +19,7 @@ public:
 		m_pFbxRelatedMap.clear();
 	}
 
-	inline VOID CreateFbx(const TCHAR* pKey, const CHAR * pFilePath)
+	inline VOID CreateFbx(const TCHAR* pKey, const CHAR* pFilePath)
 	{
 		m_pFbxRelatedMap[pKey] = new FbxRelated(m_rpDX3DDev);
 		m_pFbxRelatedMap[pKey]->LoadFbx("pFilePath");

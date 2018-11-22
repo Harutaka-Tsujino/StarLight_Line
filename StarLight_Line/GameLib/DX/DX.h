@@ -254,7 +254,7 @@ public:
 		m_pDX3D->Render(pCustomVertices, pTexture);
 	}
 
-	inline VOID CreateFbx(const TCHAR* pKey, const CHAR * pFilePath)
+	inline VOID CreateFbx(const TCHAR* pKey, const CHAR* pFilePath)
 	{
 		m_pDX3D->CreateFbx(pKey, pFilePath);
 	}
