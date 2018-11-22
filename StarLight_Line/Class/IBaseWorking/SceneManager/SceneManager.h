@@ -38,8 +38,10 @@ public:
 
 	inline VOID SetNextScene(SCENE_KIND nextScene)
 	{
-		m_currentScene = nextScene;
+		m_nextScene = nextScene;
 	}
+
+	VOID Factory();
 
 private:
 	SceneManager() 
@@ -47,8 +49,6 @@ private:
 		m_pScene = new TitleScene();
 	}
 	
-	inline VOID Factory();
-
 	Scene* m_pScene = nullptr;
 
 	SCENE_KIND m_currentScene	= SK_TITLE;

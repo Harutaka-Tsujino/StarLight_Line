@@ -17,6 +17,7 @@
 VOID Func()
 {
 	SceneManager& rSceneManager = SceneManager::GetInstance();
+	rSceneManager.Factory();
 	rSceneManager.Update();
 	rSceneManager.Render();
 }

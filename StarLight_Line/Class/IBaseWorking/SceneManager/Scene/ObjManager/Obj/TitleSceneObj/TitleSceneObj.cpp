@@ -73,17 +73,17 @@ VOID TitleMenu::SelectMenu()
 	switch (m_menuReel[m_CENTER_MENU])
 	{
 	case MK_NEW_GAME:
-		rSceneManager.SetNextScene(SK_GAME);
+		rSceneManager.SetNextScene(SK_STAGE_SELECT);
 
 		break;
 
 	case MK_LOAD_GAME:
-		rSceneManager.SetNextScene(SK_GAME);
+		rSceneManager.SetNextScene(SK_STAGE_SELECT);
 
 		break;
 
 	case MK_END_GAME:
-		rSceneManager.SetNextScene(SK_GAME);
+		rSceneManager.SetNextScene(SK_STAGE_SELECT);
 
 		break;
 
