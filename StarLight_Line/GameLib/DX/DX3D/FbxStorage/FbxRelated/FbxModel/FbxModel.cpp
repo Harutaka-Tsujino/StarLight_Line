@@ -30,11 +30,11 @@ VOID FbxModel::DrawFbx()
 {
 	m_pDevice->SetFVF(MY_FVF);
 
-	for (int i = 0; i < m_pFbxModelData->materialCount; i++)
+	for (D3DMATERIAL9& i : m_pFbxModelData->MaterialData)
 	{
 		if (!m_pFbxModelData->MaterialData.size())continue;
 
-		m_pDevice->SetMaterial(&m_pFbxModelData->MaterialData[i]);
+		m_pDevice->SetMaterial(&i);
 	}
 
 	for (unsigned int n = 0; n < m_pFbxModelData->pTextureData.size(); n++)
@@ -51,52 +51,52 @@ VOID FbxModel::DrawFbx()
 
 VOID FbxModel::SetEmissive(const D3DXVECTOR4* pARGB)
 {
-	for (int i = 0; i < m_pFbxModelData->materialCount; i++)
+	for (D3DMATERIAL9& i : m_pFbxModelData->MaterialData)
 	{
-		m_pFbxModelData->MaterialData[i].Emissive.a = pARGB->x;
-		m_pFbxModelData->MaterialData[i].Emissive.r = pARGB->y;
-		m_pFbxModelData->MaterialData[i].Emissive.g = pARGB->z;
-		m_pFbxModelData->MaterialData[i].Emissive.b = pARGB->w;
+		i.Emissive.a = pARGB->x;
+		i.Emissive.r = pARGB->y;
+		i.Emissive.g = pARGB->z;
+		i.Emissive.b = pARGB->w;
 	}
 }
 
 VOID FbxModel::SetAmbient(const D3DXVECTOR4* pARGB)
 {
-	for (int i = 0; i < m_pFbxModelData->materialCount; i++)
+	for (D3DMATERIAL9& i : m_pFbxModelData->MaterialData)
 	{
-		m_pFbxModelData->MaterialData[i].Ambient.a = pARGB->x;
-		m_pFbxModelData->MaterialData[i].Ambient.r = pARGB->y;
-		m_pFbxModelData->MaterialData[i].Ambient.g = pARGB->z;
-		m_pFbxModelData->MaterialData[i].Ambient.b = pARGB->w;
+		i.Ambient.a = pARGB->x;
+		i.Ambient.r = pARGB->y;
+		i.Ambient.g = pARGB->z;
+		i.Ambient.b = pARGB->w;
 	}
 }
 
 VOID FbxModel::SetDiffuse(const D3DXVECTOR4* pARGB)
 {
-	for (int i = 0; i < m_pFbxModelData->materialCount; i++)
+	for (D3DMATERIAL9& i : m_pFbxModelData->MaterialData)
 	{
-		m_pFbxModelData->MaterialData[i].Diffuse.a = pARGB->x;
-		m_pFbxModelData->MaterialData[i].Diffuse.r = pARGB->y;
-		m_pFbxModelData->MaterialData[i].Diffuse.g = pARGB->z;
-		m_pFbxModelData->MaterialData[i].Diffuse.b = pARGB->w;
+		i.Diffuse.a = pARGB->x;
+		i.Diffuse.r = pARGB->y;
+		i.Diffuse.g = pARGB->z;
+		i.Diffuse.b = pARGB->w;
 	}
 }
 
 VOID FbxModel::SetSpecular(const D3DXVECTOR4* pARGB)
 {
-	for (int i = 0; i < m_pFbxModelData->materialCount; i++)
+	for (D3DMATERIAL9& i : m_pFbxModelData->MaterialData)
 	{
-		m_pFbxModelData->MaterialData[i].Specular.a = pARGB->x;
-		m_pFbxModelData->MaterialData[i].Specular.r = pARGB->y;
-		m_pFbxModelData->MaterialData[i].Specular.g = pARGB->z;
-		m_pFbxModelData->MaterialData[i].Specular.b = pARGB->w;
+		i.Specular.a = pARGB->x;
+		i.Specular.r = pARGB->y;
+		i.Specular.g = pARGB->z;
+		i.Specular.b = pARGB->w;
 	}
 }
 
 VOID FbxModel::SetPower(float power)
 {
-	for (int i = 0; i < m_pFbxModelData->materialCount; i++)
+	for (D3DMATERIAL9& i: m_pFbxModelData->MaterialData)
 	{
-		m_pFbxModelData->MaterialData[i].Power=power;
+		i.Power = power;
 	}
 }
