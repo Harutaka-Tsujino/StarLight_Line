@@ -28,8 +28,18 @@ public:
 	* @param rMatWorld 拡大回転移動行列をまとめた行列
 	* @param pTexture モデルに張り付けるテクスチャのポインタ デフォルトで存在している場合はnullptr
 	*/
-	//inline VOID Render(const FbxRelated& rFBXModel
-	//, const D3DXMATRIX& pMatWorld, const LPDIRECT3DTEXTURE9 pTexture = nullptr) const;
+	inline VOID Render(const FbxRelated& rFBXModel,
+		const D3DXMATRIX& rWorld, const LPDIRECT3DTEXTURE9 pTexture = nullptr) const
+	{
+		m_rpDX3D_DEV->SetTransform(D3DTS_WORLD, &rWorld);
+
+		m_rpDX3D_DEV->SetTexture(0, pTexture);
+
+		for (FbxModel* pI : rFBXModel.m_pModel)
+		{
+			pI->DrawFbx();
+		}
+	}
 
 	/**
 	* @brief CustomVertexの描画を行う

@@ -21,6 +21,8 @@
 #include "../../Wnd/Data/RectSize.h"
 #include "CustomVertexEditor\Data\CustomVertex.h"
 #include "CustomVertexEditor\Data\ObjData.h"
+#include "FbxStorage\FbxStorage.h"
+#include "FbxStorage\FbxRelated\FbxRelated.h"
 
 /**
 * @brief 描画関係クラスのFacade
@@ -31,6 +33,7 @@ public:
 	DX3D(HWND hWnd, RectSize wndSize, LPDIRECT3D9 pD3D);	//Create(LPDIRECT3D9) InitViewPort()を呼ぶ
 	~DX3D()
 	{
+		delete m_pFbxStorage;
 		delete m_pRenderer;
 		delete m_pCustomVertex;
 		delete m_pCamera;
@@ -257,14 +260,24 @@ public:
 		m_pCustomVertex->Create(pCustomVertices, rObjData);
 	}
 
-	//inline VOID Render(const FbxRelated& rFBXModel, const D3DXMATRIX& pMatWorld, const LPDIRECT3DTEXTURE9 pTexture = nullptr) const
-	//{
-	//	m_pRenderer->Render(rFBXModel, pMatWorld, pTexture);
-	//}
+	inline VOID Render(const FbxRelated& rFBXModel, const D3DXMATRIX& rWorld, const LPDIRECT3DTEXTURE9 pTexture = nullptr) const
+	{
+		m_pRenderer->Render(rFBXModel, rWorld, pTexture);
+	}
 
 	inline VOID Render(const CustomVertex* pCustomVertices, const LPDIRECT3DTEXTURE9 pTexture = nullptr) const
 	{
 		m_pRenderer->Render(pCustomVertices, pTexture);
+	}
+
+	inline VOID CreateFbx(const TCHAR* pKey, const CHAR * pFilePath)
+	{
+		m_pFbxStorage->CreateFbx(pKey, pFilePath);
+	}
+
+	inline FbxRelated& GetFbx(const TCHAR* pKey)
+	{
+		return m_pFbxStorage->GetFbx(pKey);
 	}
 
 private:
@@ -291,6 +304,8 @@ private:
 	CustomVertexEditor* m_pCustomVertex = nullptr;
 
 	Renderer* m_pRenderer = nullptr;
+
+	FbxStorage* m_pFbxStorage = nullptr;
 };
 
 #endif //! DX3D_H

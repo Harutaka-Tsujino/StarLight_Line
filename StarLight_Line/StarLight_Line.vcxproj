@@ -90,10 +90,10 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <ConformanceMode>true</ConformanceMode>
+      <ConformanceMode>false</ConformanceMode>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>d3dx9d.lib;d3d9.lib;dinput8.lib;dxguid.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3dx9d.lib;d3d9.lib;dinput8.lib;dxguid.lib;winmm.lib;libfbxsdk-md.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -117,12 +117,12 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <ConformanceMode>true</ConformanceMode>
+      <ConformanceMode>false</ConformanceMode>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>d3dx9d.lib;d3d9.lib;dinput8.lib;dxguid.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3dx9d.lib;d3d9.lib;dinput8.lib;dxguid.lib;winmm.lib;libfbxsdk-md.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -142,6 +142,9 @@
     <ClCompile Include="GameLib\DX\DX3D\CustomVertexEditor\CustomVertexEditor.cpp" />
     <ClCompile Include="GameLib\DX\DX3D\D3DPP\D3DPP.cpp" />
     <ClCompile Include="GameLib\DX\DX3D\DX3D.cpp" />
+    <ClCompile Include="GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxModel\FbxModel.cpp" />
+    <ClCompile Include="GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxRelated.cpp" />
+    <ClCompile Include="GameLib\DX\DX3D\FbxStorage\FbxStorage.cpp" />
     <ClCompile Include="GameLib\DX\DX3D\Light\Light.cpp" />
     <ClCompile Include="GameLib\DX\DX3D\Renderer\Renderer.cpp" />
     <ClCompile Include="GameLib\DX\DX3D\TexStorage\TexStorage.cpp" />
@@ -174,6 +177,9 @@
     <ClInclude Include="GameLib\DX\DX3D\CustomVertexEditor\Data\ObjData.h" />
     <ClInclude Include="GameLib\DX\DX3D\D3DPP\D3DPP.h" />
     <ClInclude Include="GameLib\DX\DX3D\DX3D.h" />
+    <ClInclude Include="GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxModel\FbxModel.h" />
+    <ClInclude Include="GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxRelated.h" />
+    <ClInclude Include="GameLib\DX\DX3D\FbxStorage\FbxStorage.h" />
     <ClInclude Include="GameLib\DX\DX3D\Light\Light.h" />
     <ClInclude Include="GameLib\DX\DX3D\Renderer\Renderer.h" />
     <ClInclude Include="GameLib\DX\DX3D\TexStorage\TexStorage.h" />

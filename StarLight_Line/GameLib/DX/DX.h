@@ -244,14 +244,24 @@ public:
 		m_pDX3D->CreateRect(pCustomVertices, rObjData);
 	}
 
-	//inline VOID Render(const FbxRelated& rFBXModel, const D3DXMATRIX& pMatWorld, const LPDIRECT3DTEXTURE9 pTexture = nullptr) const
-	//{
-	//	m_pRenderer->Render(rFBXModel, pMatWorld, pTexture);
-	//}
+	inline VOID Render(const FbxRelated& rFBXModel, const D3DXMATRIX& rWorld, const LPDIRECT3DTEXTURE9 pTexture = nullptr) const
+	{
+		m_pDX3D->Render(rFBXModel, rWorld, pTexture);
+	}
 
 	inline VOID Render(const CustomVertex* pCustomVertices, const LPDIRECT3DTEXTURE9 pTexture = nullptr) const
 	{
 		m_pDX3D->Render(pCustomVertices, pTexture);
+	}
+
+	inline VOID CreateFbx(const TCHAR* pKey, const CHAR * pFilePath)
+	{
+		m_pDX3D->CreateFbx(pKey, pFilePath);
+	}
+
+	inline FbxRelated& GetFbx(const TCHAR* pKey)
+	{
+		return m_pDX3D->GetFbx(pKey);
 	}
 
 	inline BOOL MouseIsPressed(INT key) const
