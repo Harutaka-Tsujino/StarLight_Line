@@ -55,7 +55,7 @@ VOID FbxModel::SetEmissive(const D3DXVECTOR4* pARGB)
 	{
 		m_pFbxModelData->MaterialData[i].Emissive.a = pARGB->x;
 		m_pFbxModelData->MaterialData[i].Emissive.r = pARGB->y;
-		m_pFbxModelData->MaterialData[i].Emissive.g= pARGB->z;
+		m_pFbxModelData->MaterialData[i].Emissive.g = pARGB->z;
 		m_pFbxModelData->MaterialData[i].Emissive.b = pARGB->w;
 	}
 }
