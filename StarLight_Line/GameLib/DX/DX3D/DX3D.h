@@ -270,7 +270,7 @@ public:
 		m_pRenderer->Render(pCustomVertices, pTexture);
 	}
 
-	inline VOID CreateFbx(const TCHAR* pKey, const CHAR * pFilePath)
+	inline VOID CreateFbx(const TCHAR* pKey, const CHAR* pFilePath)
 	{
 		m_pFbxStorage->CreateFbx(pKey, pFilePath);
 	}
