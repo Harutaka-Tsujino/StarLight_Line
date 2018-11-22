@@ -53,6 +53,14 @@ VOID TitleMenu::Render()
 
 VOID TitleMenu::SelectMenu()
 {
+	static BOOL isFirstFrame = TRUE;
+	if (isFirstFrame)
+	{
+		isFirstFrame = FALSE;
+
+		return;
+	}
+
 	if (m_rGameLib.KeyboardIsPressed(DIK_W) ||
 		m_rGameLib.KeyboardIsPressed(DIK_NUMPAD8) ||
 		m_rGameLib.KeyboardIsPressed(DIK_UP))
