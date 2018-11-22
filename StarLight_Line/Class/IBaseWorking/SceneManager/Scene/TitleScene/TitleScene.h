@@ -6,11 +6,6 @@
 #include "../Scene.h"
 #include "../ObjManager/Obj/Obj.h"
 #include "../ObjManager/Obj/TitleSceneObj/TitleSceneObj.h"
-class TitleBack;
-class TitleLogo;
-class TitleInputPrompt;
-class TitleCometEffect;
-class TitleSmallStarEffect;
 
 class TitleScene :public Scene
 {
