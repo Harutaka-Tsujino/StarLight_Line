@@ -2,6 +2,7 @@
 #define TITLE_SCENE_OBJ_H
 
 #include <windows.h>
+#include <tchar.h>
 
 #include "../Obj.h"
 #include "../../../../../../../GameLib/GameLib.h"

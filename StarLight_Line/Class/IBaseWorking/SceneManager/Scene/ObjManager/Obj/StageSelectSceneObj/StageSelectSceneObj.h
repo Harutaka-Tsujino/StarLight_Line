@@ -2,6 +2,10 @@
 #define STAGE_SELECT_SCENE_OBJ_H
 
 #include <windows.h>
+#include <tchar.h>
+#include <math.h>
+
+#include <d3dx9.h>
 
 #include "../Obj.h"
 

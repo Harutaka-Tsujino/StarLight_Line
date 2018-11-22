@@ -1,6 +1,7 @@
 ﻿#include "TitleSceneObj.h"
 
 #include <windows.h>
+#include <tchar.h>
 
 #include "../Obj.h"
 #include "../../../../../../../GameLib/GameLib.h"

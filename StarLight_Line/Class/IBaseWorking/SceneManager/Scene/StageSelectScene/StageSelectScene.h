@@ -5,6 +5,7 @@
 
 #include "../Scene.h"
 #include "../ObjManager/Obj/Obj.h"
+#include "../ObjManager/Obj/StageSelectSceneObj/StageSelectSceneObj.h"
 
 class StageSelectScene :public Scene
 {
