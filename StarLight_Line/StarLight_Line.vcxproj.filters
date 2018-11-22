@@ -95,6 +95,12 @@
     <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\TitleSceneObj">
       <UniqueIdentifier>{7a98d0b7-6971-407b-af63-f02768a923c3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\StageSelectScene">
+      <UniqueIdentifier>{da3a2aaa-a3b4-4449-9b02-cddd9937d391}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\StageSelectSceneObj">
+      <UniqueIdentifier>{23d9e1e2-581b-4bb8-b81b-6da0dcf37d0f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Class\Singleton\Singleton.cpp">
@@ -168,6 +174,12 @@
     </ClCompile>
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\TitleSceneObj\TitleSceneObj.cpp">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\TitleSceneObj</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\StageSelectScene\StageSelectScene.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\StageSelectScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\StageSelectSceneObj\StageSelectSceneObj.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\StageSelectSceneObj</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -260,6 +272,12 @@
     </ClInclude>
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\TitleSceneObj\TitleSceneObj.h">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\TitleSceneObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\StageSelectScene\StageSelectScene.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\StageSelectScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\StageSelectSceneObj\StageSelectSceneObj.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\StageSelectSceneObj</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
