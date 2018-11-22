@@ -12,7 +12,8 @@ class StageSelectScene :public Scene
 public:
 	StageSelectScene()
 	{
-		
+		m_pObjManager->Resister(static_cast<Obj*>(new StageSelectBack()));
+		m_pObjManager->Resister(static_cast<Obj*>(new StageSelectSceneStageList()));
 	}
 
 	~StageSelectScene() {};
