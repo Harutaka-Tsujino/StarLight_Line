@@ -38,7 +38,7 @@ public:
 		m_rGameLib.SetCameraTransform();
 
 		ObjData data;
-		data.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, 1.0f };
+		data.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, m_Z };
 		data.m_halfScale	= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, 0.0f };
 
 		CustomVertex back[4];
@@ -75,7 +75,7 @@ public:
 	inline VOID Render()
 	{
 		ObjData data;
-		data.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.35f, 0.98f };
+		data.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.35f, m_Z };
 		data.m_halfScale	= { m_WND_SIZE.m_x * 0.29f, m_WND_SIZE.m_y * 0.2f, 0.0f };
 
 		CustomVertex logo[4];
@@ -117,7 +117,7 @@ public:
 		if (!m_isActive) return;
 
 		ObjData data;
-		data.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.78f, 0.98f };
+		data.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.78f, m_Z };
 		data.m_halfScale	= { m_WND_SIZE.m_x * 0.07f, m_WND_SIZE.m_y * 0.035f, 0.0f };
 		CustomVertex inputPrompt[4];
 		data.m_aRGB = D3DCOLOR_ARGB(
