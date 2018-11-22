@@ -13,6 +13,7 @@
 enum SCENE_KIND
 {
 	SK_TITLE,
+	SK_STAGE_SELECT,
 	SK_GAME,
 	SK_MAX
 };
