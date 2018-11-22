@@ -74,6 +74,8 @@ public:
 	*/
 	inline VOID RotateX(CustomVertex* pCustomVertices, FLOAT deg, const D3DXVECTOR3& rRelativeRotateCenter) const
 	{
+		if (deg == 0) return;
+
 		D3DXMATRIX rotate;
 		D3DXMatrixRotationX(&rotate, D3DXToRadian(deg));
 		Rotate(
@@ -84,6 +86,8 @@ public:
 
 	inline VOID RotateY(CustomVertex* pCustomVertices, FLOAT deg, const D3DXVECTOR3& rRelativeRotateCenter) const
 	{
+		if (deg == 0) return;
+
 		D3DXMATRIX rotate;
 		D3DXMatrixRotationY(&rotate, D3DXToRadian(deg));
 		Rotate(
@@ -94,6 +98,8 @@ public:
 
 	inline VOID RotateZ(CustomVertex* pCustomVertices, FLOAT deg, const D3DXVECTOR3& rRelativeRotateCenter) const
 	{
+		if (deg == 0) return;
+
 		D3DXMATRIX rotate;
 		D3DXMatrixRotationZ(&rotate, D3DXToRadian(deg));
 		Rotate(
@@ -108,7 +114,7 @@ public:
 	* @param rScaleRate 拡縮率
 	* @detail 矩形の中心を求め幅と高さを割り出し、拡縮率を幅と高さに掛け合わせ、矩形の中心点から再構成させる
 	*/
-	inline VOID Rescale(CustomVertex* pCustomVertices, const D3DXVECTOR2& rScaleRate) const;
+	VOID Rescale(CustomVertex* pCustomVertices, const D3DXVECTOR2& rScaleRate) const;
 
 	/**
 	* @brief 矩形を移動させる
@@ -162,7 +168,7 @@ public:
 	* @param[in,out] pCustomVertices 頂点データ配列の先頭アドレス
 	* @param aRGB アルファ値入りのカラーコード ARGB
 	*/
-	inline VOID SetColor(CustomVertex *pCustomVertices, DWORD aRGB) const
+	inline VOID SetARGB(CustomVertex *pCustomVertices, DWORD aRGB) const
 	{
 		for (int i = 0; i < m_RECT_VERTICES_NUM; ++i)
 		{

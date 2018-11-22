@@ -228,9 +228,9 @@ public:
 		m_pDX3D->SetRectTexUV(pCustomVertices, startTU, startTV, endTU, endTV);
 	}
 
-	inline VOID SetRectColor(CustomVertex *pCustomVertices, DWORD aRGB) const
+	inline VOID SetRectARGB(CustomVertex *pCustomVertices, DWORD aRGB) const
 	{
-		m_pDX3D->SetRectColor(pCustomVertices, aRGB);
+		m_pDX3D->SetRectARGB(pCustomVertices, aRGB);
 	}
 
 	inline VOID CreateRect(CustomVertex *pCustomVertices, const D3DXVECTOR3& rCenter, const D3DXVECTOR3& rHalfScale,
@@ -274,6 +274,11 @@ public:
 		return m_pDXInput->MouseIsNeutral(key);
 	}
 
+	inline BOOL MouseAnyKeyIsPressed() const
+	{
+		return m_pDXInput->MouseAnyKeyIsPressed();
+	}
+
 	inline BOOL KeyboardIsPressed(INT key) const
 	{
 		return m_pDXInput->KeyboardIsPressed(key);
@@ -292,6 +297,11 @@ public:
 	inline BOOL KeyboardIsNeutral(INT key) const
 	{
 		return m_pDXInput->KeyboardIsNeutral(key);
+	}
+
+	inline BOOL KeyboardAnyKeyIsPressed() const
+	{
+		return m_pDXInput->KeyboardAnyKeyIsPressed();
 	}
 
 private:

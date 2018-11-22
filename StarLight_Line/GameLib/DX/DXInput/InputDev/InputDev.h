@@ -62,6 +62,12 @@ public:
 	*/
 	virtual BOOL IsNeutral(INT key) const = 0;
 
+	/**
+	* @brief 何か入力されたを返す
+	* @return 入力されていたらTRUE
+	*/
+	virtual BOOL AnyKeyIsPressed() const = 0;
+
 protected:
 	enum INPUT_DETAIL
 	{

@@ -58,9 +58,9 @@ public:
 	}
 
 private:
-	inline static BOOL IsFarther(Obj* pCompares, Obj* pCompared)
+	static BOOL IsFarther(const Obj* pCompares, const Obj* pCompared)
 	{
-		return (pCompares->GetZ() >= pCompared->GetZ());
+		return (pCompares->GetZ() > pCompared->GetZ());
 	}
 
 	std::vector<Obj*>m_pSceneObjVec;

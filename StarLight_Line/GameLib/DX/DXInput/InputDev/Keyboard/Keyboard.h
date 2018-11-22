@@ -34,7 +34,7 @@ public:
 
 	inline VOID StorePrevInputState()	//メインループの終わりで用いる
 	{
-		memcpy(m_prevDiks, m_diks, sizeof(DIMOUSESTATE));
+		memcpy(m_prevDiks, m_diks, sizeof(BYTE) * 256);
 	}
 
 	inline BOOL IsPressed(INT key) const
@@ -55,6 +55,17 @@ public:
 	inline BOOL IsNeutral(INT key) const
 	{
 		return (m_details[key] == IND_NEUTRAL);
+	}
+
+	inline BOOL AnyKeyIsPressed() const
+	{
+		const INT KEY_MAX = 256;
+		for (INT i = 0; i < KEY_MAX; ++i)
+		{
+			if (IsPressed(i)) return TRUE;
+		}
+
+		return FALSE;
 	}
 
 private:

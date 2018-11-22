@@ -58,6 +58,16 @@ public:
 		return (m_details[key] == IND_NEUTRAL);
 	}
 
+	inline BOOL AnyKeyIsPressed() const
+	{
+		for (INT i = 0; i < DIM_MAX; ++i)
+		{
+			if (IsPressed(i)) return TRUE;
+		}
+
+		return FALSE;
+	}
+
 private:
 	VOID Create(LPDIRECTINPUT8 pDXInput);
 

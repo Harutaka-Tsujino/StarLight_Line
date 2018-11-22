@@ -77,9 +77,6 @@
     <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj">
       <UniqueIdentifier>{f2d24b02-e207-4914-a065-299a27100f92}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\TitleSceneObj">
-      <UniqueIdentifier>{7a98d0b7-6971-407b-af63-f02768a923c3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameLib\DX\DX3D\CustomVertexEditor\Data">
       <UniqueIdentifier>{74969a96-e2c9-41d8-b01d-6522f00981ad}</UniqueIdentifier>
     </Filter>
@@ -94,6 +91,9 @@
     </Filter>
     <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\Enum">
       <UniqueIdentifier>{e8c736f1-3d5c-48f8-86e7-9eb744f294ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\TitleSceneObj">
+      <UniqueIdentifier>{7a98d0b7-6971-407b-af63-f02768a923c3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -163,11 +163,11 @@
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\ObjManager.cpp">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager</Filter>
     </ClCompile>
-    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\TitleSceneObj\TitleSceneObj.cpp">
-      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\TitleSceneObj</Filter>
-    </ClCompile>
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\Obj.cpp">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\TitleSceneObj\TitleSceneObj.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\TitleSceneObj</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -237,9 +237,6 @@
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\Obj.h">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj</Filter>
     </ClInclude>
-    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\TitleSceneObj\TitleSceneObj.h">
-      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\TitleSceneObj</Filter>
-    </ClInclude>
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\Scene.h">
       <Filter>Class\IBaseWorking\SceneManager\Scene</Filter>
     </ClInclude>
@@ -260,6 +257,9 @@
     </ClInclude>
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\Enum\OBJ_TYPE.h">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\Enum</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\TitleSceneObj\TitleSceneObj.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\TitleSceneObj</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

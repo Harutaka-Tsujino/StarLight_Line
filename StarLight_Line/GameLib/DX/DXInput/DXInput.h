@@ -76,6 +76,11 @@ public:
 		return m_pMouse->IsNeutral(key);
 	}
 
+	inline BOOL MouseAnyKeyIsPressed() const
+	{
+		return m_pMouse->AnyKeyIsPressed();
+	}
+
 	inline BOOL KeyboardIsPressed(INT key) const
 	{
 		return m_pKeyboard->IsPressed(key);
@@ -94,6 +99,11 @@ public:
 	inline BOOL KeyboardIsNeutral(INT key) const
 	{
 		return m_pKeyboard->IsNeutral(key);
+	}
+
+	inline BOOL KeyboardAnyKeyIsPressed() const
+	{
+		return m_pKeyboard->AnyKeyIsPressed();
 	}
 
 private:

@@ -50,7 +50,7 @@ public:
 					0,
 					NULL,
 					D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER,
-					D3DCOLOR_XRGB(0, 0, 0),					//画面をクリアするときの色
+					D3DCOLOR_XRGB(255, 255, 255),					//画面をクリアするときの色
 					1.f,
 					0);
 
@@ -241,9 +241,9 @@ public:
 		m_pCustomVertex->SetTexUV(pCustomVertices, startTU, startTV, endTU, endTV);
 	}
 
-	inline VOID SetRectColor(CustomVertex *pCustomVertices, DWORD aRGB) const
+	inline VOID SetRectARGB(CustomVertex *pCustomVertices, DWORD aRGB) const
 	{
-		m_pCustomVertex->SetColor(pCustomVertices, aRGB);
+		m_pCustomVertex->SetARGB(pCustomVertices, aRGB);
 	}
 
 	inline VOID CreateRect(CustomVertex *pCustomVertices, const D3DXVECTOR3& rCenter, const D3DXVECTOR3& rHalfScale,

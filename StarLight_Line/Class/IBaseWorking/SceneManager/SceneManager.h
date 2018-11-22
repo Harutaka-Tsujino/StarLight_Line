@@ -14,6 +14,8 @@
 class SceneManager :public IBaseWorking, public Singleton<SceneManager>
 {
 public:
+	friend class Singleton<SceneManager>;
+
 	~SceneManager()
 	{
 		delete m_pScene;

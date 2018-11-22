@@ -7,7 +7,7 @@ class IBaseWorking
 {
 public:
 	IBaseWorking() {};
-	virtual ~IBaseWorking() {};
+	virtual ~IBaseWorking() = 0;
 
 	virtual VOID Update() = 0;
 

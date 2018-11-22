@@ -19,7 +19,17 @@ public:
 		delete m_pObjManager;
 	}
 
-private:
+	inline VOID Update()
+	{
+		m_pObjManager->Update();
+	}
+
+	inline VOID Render()
+	{
+		m_pObjManager->Render();
+	}
+
+protected:
 	ObjManager* m_pObjManager = nullptr;
 };
 

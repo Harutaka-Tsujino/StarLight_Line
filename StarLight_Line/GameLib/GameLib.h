@@ -54,6 +54,14 @@ public:
 	*/
 	VOID RunFunc(VOID(*pMainFunc)());
 
+	/**
+	* @brief クライアント領域をm_WND_SIZEと同じにする
+	*/
+	inline VOID ResizeWnd() const
+	{
+		m_pWnd->ResizeWnd();
+	}
+
 	inline RectSize GetWndSize() const
 	{
 		return m_pWnd->GetWndSize();
@@ -230,9 +238,9 @@ public:
 		m_pDX->SetRectTexUV(pCustomVertices, startTU, startTV, endTU, endTV);
 	}
 
-	inline VOID SetRectColor(CustomVertex *pCustomVertices, DWORD aRGB) const
+	inline VOID SetRectARGB(CustomVertex *pCustomVertices, DWORD aRGB) const
 	{
-		m_pDX->SetRectColor(pCustomVertices, aRGB);
+		m_pDX->SetRectARGB(pCustomVertices, aRGB);
 	}
 
 	inline VOID CreateRect(CustomVertex *pCustomVertices, const D3DXVECTOR3& rCenter, const D3DXVECTOR3& rHalfScale,
@@ -276,6 +284,11 @@ public:
 		return m_pDX->MouseIsNeutral(key);
 	}
 
+	inline BOOL MouseAnyKeyIsPressed() const
+	{
+		return m_pDX->MouseAnyKeyIsPressed();
+	}
+
 	inline BOOL KeyboardIsPressed(INT key) const
 	{
 		return m_pDX->KeyboardIsPressed(key);
@@ -294,6 +307,11 @@ public:
 	inline BOOL KeyboardIsNeutral(INT key) const
 	{
 		return m_pDX->KeyboardIsNeutral(key);
+	}
+
+	inline BOOL KeyboardAnyKeyIsPressed() const
+	{
+		return m_pDX->KeyboardAnyKeyIsPressed();
 	}
 
 private:

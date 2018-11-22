@@ -282,7 +282,7 @@ class CustomVertexEditor
 
 + SetTexUV(CustomVertex* pCustomVertices,\n FLOAT startTU, FLOAT startTV, FLOAT endTU, FLOAT endTV) : VOID
 
-+ ChangeColor(CustomVertex* pCustomVertices, DWORD aRBG) : VOID
++ ChangeARGB(CustomVertex* pCustomVertices, DWORD aRBG) : VOID
 }
 
 Singleton <|-d- GameLib

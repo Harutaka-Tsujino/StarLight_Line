@@ -50,7 +50,7 @@ VOID CustomVertexEditor::Rotate(CustomVertex* pCustomVertices,
 	}
 }
 
-inline VOID CustomVertexEditor::Rescale(CustomVertex* pCustomVertices, const D3DXVECTOR2& rScaleRate) const
+VOID CustomVertexEditor::Rescale(CustomVertex* pCustomVertices, const D3DXVECTOR2& rScaleRate) const
 {
 	D3DXVECTOR2 rectCenter(
 		(pCustomVertices[0].m_pos.x + pCustomVertices[2].m_pos.x) * 0.5f,

@@ -64,6 +64,11 @@ public:
 	*/
 	BOOL ExistsWinMSG();
 
+	/**
+	* @brief クライアント領域をm_WND_SIZEと同じにする
+	*/
+	VOID ResizeWnd() const;
+
 private:
 	VOID Create(const HINSTANCE hInst, const TCHAR* pAppName);
 

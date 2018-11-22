@@ -35,7 +35,7 @@ VOID Wnd::Create(const HINSTANCE hInst, const TCHAR* pAppName)
 	wndclass.hInstance		= hInst;
 	wndclass.hIcon			= LoadIcon(NULL, IDI_APPLICATION);
 	wndclass.hCursor		= LoadCursor(NULL, IDC_ARROW);
-	wndclass.hbrBackground	= (HBRUSH)GetStockObject(BLACK_BRUSH);
+	wndclass.hbrBackground	= (HBRUSH)GetStockObject(WHITE_BRUSH);
 	wndclass.lpszMenuName	= NULL;
 	wndclass.lpszClassName	= pAppName;
 	wndclass.hIconSm		= LoadIcon(NULL, IDI_APPLICATION);
@@ -50,10 +50,42 @@ VOID Wnd::Create(const HINSTANCE hInst, const TCHAR* pAppName)
 				hInst,
 				NULL);
 
+	ResizeWnd();
+
 	ShowWindow(m_hWnd, SW_SHOW);
 	UpdateWindow(m_hWnd);
 
 	return;
+}
+
+VOID Wnd::ResizeWnd() const
+{
+	RECT wndRect;
+	GetWindowRect(m_hWnd, &wndRect);
+
+	RECT clientRect;
+	GetClientRect(m_hWnd, &clientRect);
+
+	RectSize wndSize = {
+		wndRect.right - wndRect.left,
+		wndRect.bottom - wndRect.top };
+
+	RectSize clientSize = {
+		clientRect.right - clientRect.left,
+		clientRect.bottom - clientRect.top };
+
+	RectSize frameSize = {
+		wndSize.m_x - clientSize.m_x,
+		wndSize.m_y - clientSize.m_y };
+
+	SetWindowPos(
+		m_hWnd,
+		NULL,
+		CW_USEDEFAULT,
+		CW_USEDEFAULT,
+		m_WND_SIZE.m_x + frameSize.m_x,
+		m_WND_SIZE.m_y + frameSize.m_y,
+		SWP_NOMOVE);
 }
 
 LRESULT CALLBACK Wnd::WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)

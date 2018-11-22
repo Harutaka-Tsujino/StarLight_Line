@@ -1,13 +1,13 @@
-﻿#ifndef SCENE_OBJ_H
-#define SCENE_OBJ_H
+﻿#ifndef OBJ_H
+#define OBJ_H
 
 #include <windows.h>
 
 #include <d3dx9.h>
 
 #include "../../../../IBaseWorking.h"
-#include "../../../../../../GameLib/GameLib.h"
 #include "Enum\OBJ_TYPE.h"
+#include "../../../../../../GameLib/GameLib.h"
 
 class Obj :public IBaseWorking
 {
@@ -35,4 +35,4 @@ protected:
 	const FLOAT m_Z = 1.0f;
 };
 
-#endif // !SCENE_OBJ_H
+#endif //! OBJ_H

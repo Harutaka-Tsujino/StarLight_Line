@@ -1,32 +1,31 @@
-#ifndef TITLE_SCENE_H
+﻿#ifndef TITLE_SCENE_H
 #define TITLE_SCENE_H
 
 #include <windows.h>
 
 #include "../Scene.h"
+#include "../ObjManager/Obj/Obj.h"
+#include "../ObjManager/Obj/TitleSceneObj/TitleSceneObj.h"
+class TitleBack;
+class TitleLogo;
+class TitleInputPrompt;
+class TitleCometEffect;
+class TitleSmallStarEffect;
 
 class TitleScene :public Scene
 {
 public:
-	TitleScene() {};
+	TitleScene()
+	{
+		m_pObjManager->Resister(static_cast<Obj*>(new TitleBack()));
+		m_pObjManager->Resister(static_cast<Obj*>(new TitleLogo()));
+		m_pObjManager->Resister(static_cast<Obj*>(new TitleInputPrompt()));
+		m_pObjManager->Resister(static_cast<Obj*>(new TitleMenu()));
+		m_pObjManager->Resister(static_cast<Obj*>(new TitleCometEffect()));
+		m_pObjManager->Resister(static_cast<Obj*>(new TitleSmallStarEffect()));
+	}
+
 	~TitleScene() {};
-
-	inline VOID Update() {};
-
-	inline VOID Render() {};
-
-	inline BOOL CanShowMenus() const
-	{
-		return m_canShowMenus;
-	}
-
-	inline VOID SetCanShowMenus(BOOL canShowMenu)
-	{
-		m_canShowMenus = canShowMenu;
-	}
-
-private:
-	BOOL m_canShowMenus = FALSE;
 };
 
 #endif // !TITLE_SCENE_H
