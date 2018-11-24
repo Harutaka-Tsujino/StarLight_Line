@@ -60,19 +60,21 @@ VOID Wnd::Create(const HINSTANCE hInst, const TCHAR* pAppName)
 
 VOID Wnd::ResizeWnd() const
 {
-	RECT wndRect;
-	GetWindowRect(m_hWnd, &wndRect);
-
 	RECT clientRect;
 	GetClientRect(m_hWnd, &clientRect);
-
-	RectSize wndSize = {
-		wndRect.right - wndRect.left,
-		wndRect.bottom - wndRect.top };
 
 	RectSize clientSize = {
 		clientRect.right - clientRect.left,
 		clientRect.bottom - clientRect.top };
+
+	if (clientSize.m_y == m_WND_SIZE.m_y) return;
+
+	RECT wndRect;
+	GetWindowRect(m_hWnd, &wndRect);
+
+	RectSize wndSize = {
+		wndRect.right - wndRect.left,
+		wndRect.bottom - wndRect.top };
 
 	RectSize frameSize = {
 		wndSize.m_x - clientSize.m_x,
@@ -86,6 +88,9 @@ VOID Wnd::ResizeWnd() const
 		m_WND_SIZE.m_x + frameSize.m_x,
 		m_WND_SIZE.m_y + frameSize.m_y,
 		SWP_NOMOVE);
+
+	ShowWindow(m_hWnd, SW_SHOW);
+	UpdateWindow(m_hWnd);
 }
 
 LRESULT CALLBACK Wnd::WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
