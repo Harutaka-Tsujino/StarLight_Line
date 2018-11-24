@@ -8,6 +8,7 @@
 #include <d3dx9.h>
 
 #include "../Obj.h"
+#include "../../../StageSelectScene/Enum/STAGE_LEVEL_KIND.h"
 
 class StageSelectBack :public Obj
 {
@@ -24,10 +25,6 @@ public:
 
 	inline VOID Init() const
 	{
-		static BOOL isInitialized = FALSE;
-		if (isInitialized) return;
-		isInitialized = TRUE;
-
 		m_rGameLib.CreateTex(_T("Back"), _T("2DTextures/Title/title_background.png"));
 	}
 
@@ -63,26 +60,17 @@ public:
 
 	inline VOID Init() const
 	{
-		static BOOL isInitialized = FALSE;
-		if (isInitialized) return;
-		isInitialized = TRUE;
-
 		m_rGameLib.CreateTex(_T("Icons"), _T("2DTextures/StageSelect/StageSelect_icons.png"));
 	}
 
-	inline VOID Update() 
-	{
-		const FLOAT ROTATE_SPEED = 1.5f;
-		m_deg +=	ROTATE_SPEED * (m_deg > 0.0f) - 
-					ROTATE_SPEED * (m_deg < 0.0f);
-
-		if (m_deg != 0) return;
-
-		m_deg = ROTATE_SPEED * m_rGameLib.KeyboardIsHeld(DIK_A) -
-				ROTATE_SPEED * m_rGameLib.KeyboardIsHeld(DIK_D);
-	}
+	VOID Update();
 
 	VOID Render();
+
+	inline const BOOL& IsDecided() const
+	{
+		return m_isDecided;
+	}
 
 private:
 	struct StageIconData
@@ -91,8 +79,102 @@ private:
 		FLOAT m_deg;
 	};
 
-	static const INT m_STAGE_ICON_MAX = 12;
+	static const INT m_STAGE_ICONS_MAX = 12;
 	FLOAT m_deg = 0.0f;
+
+	INT m_selectingStage = 0;
+
+	FLOAT m_lengthMulti = 0.0f;
+
+	BOOL m_isDecided = FALSE;
+};
+
+class StageSelectSceneLevelSelecter :public Obj
+{
+public:
+	StageSelectSceneLevelSelecter(const BOOL& m_isDecided) :Obj(OT_TRANSPARENCY, 9.0f), m_rIsDecided(m_isDecided)
+	{
+		Init();
+	}
+
+	~StageSelectSceneLevelSelecter()
+	{
+		m_rGameLib.ReleaseTex();
+	}
+
+	inline VOID Init()
+	{
+		m_rGameLib.CreateTex(_T("LevelBack"), _T("2DTextures/StageSelect/StageSelect_difficultyBack.png"));
+		m_rGameLib.CreateTex(_T("LevelSelectFrame"), _T("2DTextures/StageSelect/StageSelect_difficultySelectFrame.png"));
+	}
+
+	inline VOID Update()
+	{
+		if (!m_rIsDecided) return;
+
+		if (m_rGameLib.KeyboardIsPressed(DIK_D)		||
+			m_rGameLib.KeyboardIsPressed(DIK_RIGHT)	||
+			m_rGameLib.KeyboardIsPressed(DIK_NUMPAD6))
+		{
+			m_level = (m_level < SLK_HARD) ? ++m_level : SLK_HARD;
+		}
+
+		if (m_rGameLib.KeyboardIsPressed(DIK_A)		||
+			m_rGameLib.KeyboardIsPressed(DIK_LEFT)	||
+			m_rGameLib.KeyboardIsPressed(DIK_NUMPAD4))
+		{
+			m_level = (m_level > SLK_EASY) ? --m_level : SLK_EASY;
+		}
+
+		if (m_rGameLib.KeyboardIsPressed(DIK_RETURN))
+		{
+			//ステージの決定
+		}
+	}
+
+	VOID Render();
+
+	const BOOL& m_rIsDecided;
+
+	INT m_level = SLK_EASY;
+};
+
+class StageSelectSceneStages :public Obj
+{
+public:
+	StageSelectSceneStages() :Obj(OT_TRANSPARENCY, 1.0f)
+	{
+		Init();
+	}
+
+	~StageSelectSceneStages()
+	{
+		delete m_pLevelSelecter;
+		delete m_pStageList;
+		m_rGameLib.ReleaseTex();
+	}
+
+	inline VOID Init()
+	{
+		m_pStageList = new StageSelectSceneStageList();
+
+		m_pLevelSelecter = new StageSelectSceneLevelSelecter(m_pStageList->IsDecided());
+	}
+
+	inline VOID Update()
+	{
+		m_pStageList->Update();
+		m_pLevelSelecter->Update();
+	}
+
+	inline VOID Render()
+	{
+		m_pStageList->Render();
+		m_pLevelSelecter->Render();
+	}
+
+	StageSelectSceneStageList* m_pStageList = nullptr;
+	StageSelectSceneLevelSelecter* m_pLevelSelecter = nullptr;
 };
 
 #endif // !STAGE_SELECT_SCENE_OBJ_H
