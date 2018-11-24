@@ -26,7 +26,7 @@ INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR szStr, INT iCmdSh
 {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
-	GameLib::Create(hInst, _T("HelloWorld"));
+	GameLib::Create(hInst, _T("StarLight Line"));
 
 	GameLib& rGameLib = GameLib::GetInstance();
 
