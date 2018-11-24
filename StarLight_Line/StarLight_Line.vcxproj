@@ -166,6 +166,8 @@
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\StageSelectSceneObj\StageSelectSceneObj.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\TitleSceneObj\TitleSceneObj.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\Scene.h" />
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\StageSelectScene\Enum\STAGE_KIND.h" />
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\StageSelectScene\Enum\STAGE_LEVEL_KIND.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\StageSelectScene\StageSelectScene.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\TitleScene\TitleScene.h" />
     <ClInclude Include="Class\Singleton\Singleton.h" />
