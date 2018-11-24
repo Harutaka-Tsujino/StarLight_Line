@@ -9,10 +9,7 @@
 
 VOID SceneManager::Factory()
 {
-	if (m_currentScene == m_nextScene)
-	{
-		return;
-	}
+	if (m_currentScene == m_nextScene || m_isRequestedChangeResent) return;
 
 	m_currentScene = m_nextScene;
 
