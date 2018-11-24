@@ -24,10 +24,6 @@ public:
 
 	inline VOID Init() const
 	{
-		static BOOL isInitialized = FALSE;
-		if (isInitialized) return;
-		isInitialized = TRUE;
-
 		m_rGameLib.CreateTex(_T("Back"), _T("2DTextures/Title/title_background.png"));
 	}
 
@@ -63,10 +59,6 @@ public:
 
 	inline VOID Init() const
 	{
-		static BOOL isInitialized = FALSE;
-		if (isInitialized) return;
-		isInitialized = TRUE;
-
 		m_rGameLib.CreateTex(_T("Logo"), _T("2DTextures/Title/TitleLogo.png"));
 	}
 
@@ -100,10 +92,6 @@ public:
 
 	inline VOID Init() const
 	{
-		static BOOL isInitialized = FALSE;
-		if (isInitialized) return;
-		isInitialized = TRUE;
-
 		m_rGameLib.CreateTex(_T("InputPrompt"), _T("2DTextures/Title/TitleWaitInput.png"));
 	}
 
@@ -162,10 +150,6 @@ public:
 
 	inline VOID Init() const
 	{
-		static BOOL isInitialized = FALSE;
-		if (isInitialized) return;
-		isInitialized = TRUE;
-
 		m_rGameLib.CreateTex(_T("NewGame"), _T("2DTextures/Title/TitleMenuNewGame.png"));
 		m_rGameLib.CreateTex(_T("LoadGame"), _T("2DTextures/Title/TitleMenuLoadGame.png"));
 		m_rGameLib.CreateTex(_T("EndGame"), _T("2DTextures/Title/TitleMenuEndGame.png"));
@@ -231,10 +215,6 @@ public:
 
 	inline VOID Init()
 	{
-		static BOOL isInitialized = FALSE;
-		if (isInitialized) return;
-		isInitialized = TRUE;
-
 		m_rGameLib.CreateTex(_T("Comet"), _T("2DTextures/Title/StarEffect.png"));
 		m_rGameLib.CreateTex(_T("OverComet"), _T("2DTextures/Title/OverStarEffect.png"));
 	}
@@ -273,10 +253,6 @@ public:
 
 	inline VOID Init()
 	{
-		static BOOL isInitialized = FALSE;
-		if (isInitialized) return;
-		isInitialized = TRUE;
-
 		m_rGameLib.CreateTex(_T("SmallStar"), _T("2DTextures/Title/EffectData.png"));
 		m_rGameLib.CreateTex(_T("OverSmallStar"), _T("2DTextures/Title/OverSmallStarEffect.png"));
 	}

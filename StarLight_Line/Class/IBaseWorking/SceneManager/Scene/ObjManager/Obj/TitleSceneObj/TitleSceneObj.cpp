@@ -75,7 +75,8 @@ VOID TitleMenu::SelectMenu()
 		RotateMenuDown();
 	}
 
-	if (!m_rGameLib.KeyboardIsPressed(DIK_RETURN)) return;
+	if (!m_rGameLib.KeyboardIsPressed(DIK_RETURN) &&
+		!m_rGameLib.KeyboardIsHeld(DIK_NUMPADENTER)) return;
 
 	SceneManager& rSceneManager = SceneManager::GetInstance();
 	switch (m_menuReel[m_CENTER_MENU])

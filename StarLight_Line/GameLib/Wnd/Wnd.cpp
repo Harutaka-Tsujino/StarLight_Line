@@ -97,15 +97,10 @@ LRESULT CALLBACK Wnd::WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam
 
 		break;
 
-	case WM_KEYDOWN:
-		if (wParam == VK_ESCAPE) PostQuitMessage(0);		//プログラムの終了メッセージを投げる
-
+	case WM_SYSKEYDOWN:										// Alt + 特殊キーの処理に使う
+		if (wParam == VK_RETURN) PostQuitMessage(0);		//プログラムの終了メッセージを投げる
+	
 		break;
-
-	//case WM_SYSKEYDOWN:										// Alt + 特殊キーの処理に使う
-	//	if (wParam == VK_RETURN);							//意図した空の制御
-	//
-	//	break;
 	}
 
 	return DefWindowProc(hWnd, iMsg, wParam, lParam);
