@@ -16,6 +16,14 @@
 
 VOID Func()
 {
+	GameLib& rGameLib = GameLib::GetInstance();
+
+	if (rGameLib.KeyboardIsHeld(DIK_LALT) &&
+		(rGameLib.KeyboardIsPressed(DIK_RALT)))
+	{
+		rGameLib.ToggleWndMode();
+	}
+
 	SceneManager& rSceneManager = SceneManager::GetInstance();
 	rSceneManager.Factory();
 	rSceneManager.Update();

@@ -30,6 +30,8 @@ VOID GameLib::RunFunc(VOID(*pMainFunc)())
 			continue;
 		}
 
+		m_pWnd->ResizeWnd();
+
 		m_pDX->PrepareMessageLoop();
 
 		pMainFunc();
