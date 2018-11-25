@@ -58,25 +58,7 @@ private:
 		m_pScene = new TitleScene();
 	}
 	
-	inline VOID StageSceneTransration()
-	{
-		GameLib& rGameLib = GameLib::GetInstance();
-
-		ObjData data;
-		const RectSize WND_SIZE = rGameLib.GetWndSize();
-		data.m_center		= { WND_SIZE.m_x * 0.5f, WND_SIZE.m_y * 0.5f, 0.0f };
-		data.m_halfScale	= { WND_SIZE.m_x * 0.5f, WND_SIZE.m_y * 0.5f, 0.0f };
-
-		static INT alpha = 0;
-		alpha += 4 * ((m_isRequestedChangeResent) ? 1 : -1);
-		if (alpha >= 255)	m_isRequestedChangeResent = !(alpha = 255);
-		if (alpha <= 0)		alpha = 0;
-		data.m_aRGB = D3DCOLOR_ARGB(static_cast<UCHAR>(alpha), 0, 0, 0);
-
-		CustomVertex cover[4];
-		rGameLib.CreateRect(cover, data);
-		rGameLib.Render(cover);
-	}
+	VOID StageSceneTransration();
 
 	Scene* m_pScene = nullptr;
 

@@ -61,6 +61,7 @@ public:
 	inline VOID Init() const
 	{
 		m_rGameLib.CreateTex(_T("Icons"), _T("2DTextures/StageSelect/StageSelect_icons.png"));
+		m_rGameLib.CreateTex(_T("BackButton"), _T("2DTextures/StageSelect/StageSelect_BackButton.png"));
 	}
 
 	VOID Update();
@@ -70,6 +71,13 @@ public:
 	inline const BOOL& IsDecided() const
 	{
 		return m_isDecided;
+	}
+
+	inline VOID ActivateStageSelect()
+	{
+		m_lengthMulti = 1.0f;
+
+		m_isDecided = FALSE;
 	}
 
 private:
@@ -87,6 +95,8 @@ private:
 	FLOAT m_lengthMulti = 0.0f;
 
 	BOOL m_isDecided = FALSE;
+
+	BOOL m_backIsSelected = FALSE;
 };
 
 class StageSelectSceneLevelSelecter :public Obj
@@ -106,37 +116,28 @@ public:
 	{
 		m_rGameLib.CreateTex(_T("LevelBack"), _T("2DTextures/StageSelect/StageSelect_difficultyBack.png"));
 		m_rGameLib.CreateTex(_T("LevelSelectFrame"), _T("2DTextures/StageSelect/StageSelect_difficultySelectFrame.png"));
+		m_rGameLib.CreateTex(_T("LevelBackButton"), _T("2DTextures/StageSelect/difficultyselect_backicon.png"));
 	}
 
-	inline VOID Update()
-	{
-		if (!m_rIsDecided) return;
-
-		if (m_rGameLib.KeyboardIsPressed(DIK_D)		||
-			m_rGameLib.KeyboardIsPressed(DIK_RIGHT)	||
-			m_rGameLib.KeyboardIsPressed(DIK_NUMPAD6))
-		{
-			m_level = (m_level < SLK_HARD) ? ++m_level : SLK_HARD;
-		}
-
-		if (m_rGameLib.KeyboardIsPressed(DIK_A)		||
-			m_rGameLib.KeyboardIsPressed(DIK_LEFT)	||
-			m_rGameLib.KeyboardIsPressed(DIK_NUMPAD4))
-		{
-			m_level = (m_level > SLK_EASY) ? --m_level : SLK_EASY;
-		}
-
-		if (m_rGameLib.KeyboardIsPressed(DIK_RETURN))
-		{
-			//ステージの決定
-		}
-	}
+	VOID Update();
 
 	VOID Render();
 
+	inline BOOL ShouldActivateStageSelect() const
+	{
+		return m_shouldActivateStageSelect;
+	}
+
+private:
 	const BOOL& m_rIsDecided;
 
 	INT m_level = SLK_EASY;
+	
+	INT m_alpha = 0;
+	INT m_sceneTranlationAlpha = 0;
+
+	BOOL m_backIsSelected = FALSE;
+	BOOL m_shouldActivateStageSelect = FALSE;
 };
 
 class StageSelectSceneStages :public Obj
@@ -163,14 +164,16 @@ public:
 
 	inline VOID Update()
 	{
+		if (m_pLevelSelecter->ShouldActivateStageSelect()) m_pStageList->ActivateStageSelect();
+
 		m_pStageList->Update();
 		m_pLevelSelecter->Update();
 	}
 
 	inline VOID Render()
 	{
-		m_pStageList->Render();
 		m_pLevelSelecter->Render();
+		m_pStageList->Render();
 	}
 
 	StageSelectSceneStageList* m_pStageList = nullptr;
