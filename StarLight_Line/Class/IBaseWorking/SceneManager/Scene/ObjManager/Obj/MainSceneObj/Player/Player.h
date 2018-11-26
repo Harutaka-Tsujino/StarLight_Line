@@ -38,11 +38,21 @@ public:
 	VOID Render();
 
 private:
+	enum HIT_KEY
+	{
+		UP,
+		DOWN,
+		LEFT,
+		RIGHT,
+	};
+
 	/**
 	*@brief 自機の動きを決める関数
 	*@param PrevPoint 自機が動く前の座標を保存した値
 	*/
 	VOID CanMovePos(const CoordinatePoint& PrevPoint);
+
+	VOID CanMovePoint(CoordinatePoint* PrevPoint, const HIT_KEY& HitKey);
 
 	SurfaceCoordinate m_Speed;
 

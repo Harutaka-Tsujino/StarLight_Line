@@ -11,47 +11,39 @@ VOID Player::Init()
 
 VOID Player::Update()
 {
-	const float FrameNum = 5.f;	//何フレームで割るか(自機のスピードの)
-
 	static CoordinatePoint PlayerPointBuffer = m_PlayerPoint;
+
+	static HIT_KEY HitKey;
 
 	//キー入力によってプレイヤーの動きを決める
 	//y座標の移動
 	if (m_rGameLib.KeyboardIsPressed(DIK_W) &&
 		m_PlayerPoint.y > 0)
 	{
-		memcpy(&PlayerPointBuffer, &m_PlayerPoint, sizeof(CoordinatePoint));
-		--m_PlayerPoint.y;
-		m_Speed.y = (m_BasePos[m_PlayerPoint.y][m_PlayerPoint.x].y - m_PlayerPos.y) / FrameNum;
-		m_Speed.x = 0.0f;
+		HitKey = UP;
+		CanMovePoint(&PlayerPointBuffer, HitKey);
 	}
 
 	if (m_rGameLib.KeyboardIsPressed(DIK_S) &&
 		m_PlayerPoint.y < (m_MAXYARRAYNUM - 1))
 	{
-		memcpy(&PlayerPointBuffer, &m_PlayerPoint, sizeof(CoordinatePoint));
-		++m_PlayerPoint.y;
-		m_Speed.y = (m_BasePos[m_PlayerPoint.y][m_PlayerPoint.x].y - m_PlayerPos.y) / FrameNum;
-		m_Speed.x = 0.0f;
+		HitKey = DOWN;
+		CanMovePoint(&PlayerPointBuffer, HitKey);
 	}
 
 	//x座標の移動
 	if (m_rGameLib.KeyboardIsPressed(DIK_A) &&
 		m_PlayerPoint.x > 0)
 	{
-		memcpy(&PlayerPointBuffer, &m_PlayerPoint, sizeof(CoordinatePoint));
-		--m_PlayerPoint.x;
-		m_Speed.x = (m_BasePos[m_PlayerPoint.y][m_PlayerPoint.x].x - m_PlayerPos.x) / FrameNum;
-		m_Speed.y = 0.0f;
+		HitKey = LEFT;
+		CanMovePoint(&PlayerPointBuffer, HitKey);
 	}
 
 	if (m_rGameLib.KeyboardIsPressed(DIK_D) &&
 		m_PlayerPoint.x < (m_MAXXARRAYNUM - 1))
 	{
-		memcpy(&PlayerPointBuffer, &m_PlayerPoint, sizeof(CoordinatePoint));
-		++m_PlayerPoint.x;
-		m_Speed.x = (m_BasePos[m_PlayerPoint.y][m_PlayerPoint.x].x - m_PlayerPos.x) / FrameNum;
-		m_Speed.y = 0.0f;
+		HitKey = RIGHT;
+		CanMovePoint(&PlayerPointBuffer, HitKey);
 	}
 	
 	CanMovePos(PlayerPointBuffer);
@@ -118,4 +110,43 @@ VOID Player::CanMovePos(const CoordinatePoint& PrevPoint)
 	}
 
 	m_PlayerPos.y = max(min(PrevPos.y, m_PlayerPos.y), NextPos.y);
+}
+
+VOID Player::CanMovePoint(CoordinatePoint* PrevPoint, const HIT_KEY& HitKey)
+{
+	const float FRAMENUM = 5.f;	//何フレームで割るか(自機のスピードの)
+
+	memcpy(PrevPoint, &m_PlayerPoint, sizeof(CoordinatePoint));
+
+	switch (HitKey)
+	{
+	case UP:
+		--m_PlayerPoint.y;
+		break;
+
+	case DOWN:
+		++m_PlayerPoint.y;
+		break;
+
+	case LEFT:
+		--m_PlayerPoint.x;
+		break;
+
+	case RIGHT:
+		++m_PlayerPoint.x;
+		break;
+	}
+
+	if (HitKey == UP || HitKey == DOWN)
+	{
+		m_Speed.y = (m_BasePos[m_PlayerPoint.y][m_PlayerPoint.x].y - m_PlayerPos.y) / FRAMENUM;
+		m_Speed.x = 0.0f;
+	}
+
+	if (HitKey == LEFT || HitKey == RIGHT)
+	{
+		m_Speed.x = (m_BasePos[m_PlayerPoint.y][m_PlayerPoint.x].x - m_PlayerPos.x) / FRAMENUM;
+		m_Speed.y = 0.0f;
+	}
+
 }
