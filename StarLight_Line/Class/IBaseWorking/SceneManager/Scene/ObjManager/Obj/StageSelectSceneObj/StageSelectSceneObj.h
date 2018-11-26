@@ -35,8 +35,8 @@ public:
 		m_rGameLib.SetCameraTransform();
 
 		ObjData data;
-		data.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, m_Z };
-		data.m_halfScale	= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, 0.0f };
+		data.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, m_Z };	//! 現物合わせ
+		data.m_halfScale	= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, 0.0f };	//! 現物合わせ
 
 		CustomVertex back[4];
 		m_rGameLib.CreateRect(back, data);
@@ -88,11 +88,11 @@ private:
 	};
 
 	static const INT m_STAGE_ICONS_MAX = 12;
-	FLOAT m_deg = 0.0f;
+	FLOAT m_deg = 0.0f;			//! 複数のアイコンがなす円の回転角度 大きさが60を超えるとm_selectingStageを変化させ0に戻る
 
 	INT m_selectingStage = 0;
 
-	FLOAT m_lengthMulti = 0.0f;
+	FLOAT m_lengthMulti = 0.0f;	//! 毎フレーム複数のアイコンがなす円の半径を変化させるときに加える長さの倍率
 
 	BOOL m_isDecided = FALSE;
 

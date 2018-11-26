@@ -1,4 +1,10 @@
-﻿#include "TitleSceneObj.h"
+﻿/// @file TitleSceneObj.cpp
+/// <summary>
+/// タイトルシーンで用いるオブジェクト継承クラスのソース
+/// </summary>
+/// @author Harutaka-Tsujino
+
+#include "TitleSceneObj.h"
 
 #include <windows.h>
 #include <tchar.h>
@@ -19,12 +25,11 @@ VOID TitleMenu::Render()
 
 	for (INT i = 0; i < MK_MAX; ++i)
 	{
-		data.m_center = { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * (0.65f + 0.07f * i), m_Z };
-		data.m_halfScale.x = m_WND_SIZE.m_x * 0.055f;
-		data.m_halfScale.y = m_WND_SIZE.m_y * 0.029f;
+		data.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * (0.65f + 0.07f * i), m_Z };	//! 現物合わせ
+		data.m_halfScale	= { m_WND_SIZE.m_x * 0.055f, m_WND_SIZE.m_y * 0.029f ,0.0f };			//! 現物合わせ
 		if (i == m_CENTER_MENU) data.m_halfScale *= CENTER_MENU_SCALE_MULTI;
 
-		data.m_aRGB = D3DCOLOR_ARGB(200, 255, 255, 255);
+		data.m_aRGB = D3DCOLOR_ARGB(200, 255, 255, 255);											//! 現物合わせ
 
 		m_rGameLib.CreateRect(menu, data);
 
@@ -54,24 +59,24 @@ VOID TitleMenu::Render()
 VOID TitleMenu::SelectMenu()
 {
 	static BOOL isFirstFrame = TRUE;
-	if (isFirstFrame)
+	if (isFirstFrame)	//!	PRESS ANY KEYが表示されているときEnterを入力したらそのままメニューを選んでしまうので一度return
 	{
 		isFirstFrame = FALSE;
 
 		return;
 	}
 
-	if (m_rGameLib.UpKeyIsPressed())
+	if (UpKeyIsPressed())
 	{
 		RotateMenuDown();
 	}
 
-	if (m_rGameLib.DownKeyIsPressed())
+	if (DownKeyIsPressed())
 	{
 		RotateMenuUp();
 	}
 
-	if (!m_rGameLib.ReturnKeyIsPressed()) return;
+	if (!ReturnKeyIsPressed()) return;
 
 	SceneManager& rSceneManager = SceneManager::GetInstance();
 	switch (m_menuReel[m_CENTER_MENU])
@@ -107,8 +112,8 @@ VOID TitleCometEffect::Render()
 
 	const D3DXVECTOR3 ROTATE_RELATIVE_POS(0.0f, 0.0f, 0.0f);
 
-	const INT TOP = 0;
-	const INT BOTTOM = 3;
+	FLOAT effectTop		= 0;
+	FLOAT effectBottom	= 0;
 
 	for (INT i = 0; i < EFFECT_DATAS_MAX; ++i)
 	{
@@ -119,18 +124,20 @@ VOID TitleCometEffect::Render()
 
 		m_rGameLib.CreateRect(effectDatas[i].m_vertices, effectDatas[i].m_data);
 
-		if (effectDatas[i].m_vertices[BOTTOM].m_pos.y > 0.0f &&
-			effectDatas[i].m_vertices[TOP].m_pos.y < m_WND_SIZE.m_y)
+		effectTop		= effectDatas[i].m_vertices[0].m_pos.y;
+		effectBottom	= effectDatas[i].m_vertices[3].m_pos.y;
+
+		if (effectBottom > 0.0f && effectTop < m_WND_SIZE.m_y)										//! 画面内にいれば描画する
 		{
 			m_rGameLib.Render(effectDatas[i].m_vertices, m_rGameLib.GetTex(_T("Comet")));
 
-			m_rGameLib.SetRectARGB(effectDatas[i].m_vertices, D3DCOLOR_ARGB(230, 255, 255, 255));
+			m_rGameLib.SetRectARGB(effectDatas[i].m_vertices, D3DCOLOR_ARGB(230, 255, 255, 255));	//! 現物合わせ
 			m_rGameLib.Render(effectDatas[i].m_vertices, m_rGameLib.GetTex(_T("OverComet")));
 
 			continue;
 		}
 
-		if (effectDatas[i].m_vertices[0].m_pos.y > m_WND_SIZE.m_y) effectDatas[i].m_isInit = FALSE;
+		if (effectTop > m_WND_SIZE.m_y) effectDatas[i].m_isInit = FALSE;							//! 画面の下までエフェクトが動いたら初期化する
 
 		InitEffect(&effectDatas[i]);
 	}
@@ -140,12 +147,14 @@ VOID TitleCometEffect::Render()
 
 VOID TitleCometEffect::InitEffect(EffectData* pEffectDatas)
 {
-	if (!m_rGameLib.KeyboardAnyKeyIsPressed() || pEffectDatas->m_isInit || m_isInitInFrame) return;
+	if (!m_rGameLib.KeyboardAnyKeyIsPressed()	||													//! ボタンが押されないとエフェクトを流さないまた一つしか一フレームに初期化しない
+		pEffectDatas->m_isInit					|| 
+		m_isInitInFrame) return;
 
 	m_isInitInFrame = TRUE;
 
 	static const INT EFFECT_COLORS_MAX = 11;
-	static const DWORD EFFECT_COLORS[EFFECT_COLORS_MAX] =
+	static const DWORD EFFECT_COLORS[EFFECT_COLORS_MAX] =											//! ビビッドカラー
 	{
 		D3DCOLOR_ARGB(255, 63, 255, 20),
 		D3DCOLOR_ARGB(255, 20, 255, 95),
@@ -160,16 +169,16 @@ VOID TitleCometEffect::InitEffect(EffectData* pEffectDatas)
 		D3DCOLOR_ARGB(255, 255, 212, 20),
 	};
 
-	pEffectDatas->m_data.m_center = {
+	pEffectDatas->m_data.m_center = {																//! エフェクトの初期位置は乱数を用いて画面の範囲で決定する
 		static_cast<float>(rand() % m_WND_SIZE.m_x + m_WND_SIZE.m_x * 1.5f),
 		-static_cast<float>(rand() % (m_WND_SIZE.m_y * 2) + m_WND_SIZE.m_y * 1.0f),
 		m_Z };
-	pEffectDatas->m_data.m_halfScale = { m_WND_SIZE.m_x * 0.0035f, m_WND_SIZE.m_y * 0.6f, 0.0f };
+	pEffectDatas->m_data.m_halfScale = { m_WND_SIZE.m_x * 0.0035f, m_WND_SIZE.m_y * 0.6f, 0.0f };	//! 現物合わせ
 
 	pEffectDatas->m_data.m_aRGB = EFFECT_COLORS[rand() % EFFECT_COLORS_MAX];
 
-	pEffectDatas->m_data.m_deg.z = 45.0f;
-	const D3DXVECTOR3 MOVEMENT(0.0f, 30.0f, 0.0f);
+	pEffectDatas->m_data.m_deg.z = 45.0f;															//! 星の入射角
+	const D3DXVECTOR3 MOVEMENT(0.0f, 30.0f, 0.0f);													//! 後でこれを星の入射角分回転させて入射角度と移動方向を合わせる
 	D3DXMATRIX rotate;
 	D3DXMatrixRotationZ(&rotate, D3DXToRadian(pEffectDatas->m_data.m_deg.z));
 	D3DXVec3TransformCoord(
@@ -197,10 +206,10 @@ VOID TitleSmallStarEffect::Render()
 			effectDatas[i].m_vertices,
 			sizeof(CustomVertex) * 4);
 
-		const D3DXVECTOR2 OVER_EFFECT_SCALE_MULTI(3.0f, 3.0f);
+		const D3DXVECTOR2 OVER_EFFECT_SCALE_MULTI(3.0f, 3.0f);		//! 現物合わせ
 		m_rGameLib.RescaleRect(OverEffect, OVER_EFFECT_SCALE_MULTI);
 
-		DWORD OverEffectARGB = D3DCOLOR_ARGB(250, 255, 255, 255);
+		DWORD OverEffectARGB = D3DCOLOR_ARGB(250, 255, 255, 255);	//! 現物合わせ
 		m_rGameLib.SetRectARGB(OverEffect, OverEffectARGB);
 
 		m_rGameLib.Render(OverEffect, m_rGameLib.GetTex(_T("OverSmallStar")));
@@ -225,7 +234,7 @@ VOID TitleSmallStarEffect::InitEffect(EffectData* pEffectDatas) const
 	if (pEffectDatas->m_flashCnt != pEffectDatas->m_INIT_CNT) return;
 
 	const INT EFFECT_COLORS_MAX = 11;
-	const D3DXVECTOR4 EFFECT_COLORS[EFFECT_COLORS_MAX] =
+	const D3DXVECTOR4 EFFECT_COLORS[EFFECT_COLORS_MAX] =										//! ビビッドカラー
 	{
 		{ 255, 63, 255, 20 },
 		{ 255, 20, 255, 95 },
@@ -240,16 +249,16 @@ VOID TitleSmallStarEffect::InitEffect(EffectData* pEffectDatas) const
 		{ 255, 255, 212, 20 },
 	};
 
-	pEffectDatas->m_flashCnt = rand() % (m_FLASH_CNT_MAX - m_FLASH_CNT_MIN) + m_FLASH_CNT_MIN;
+	pEffectDatas->m_flashCnt = rand() % (m_FLASH_CNT_MAX - m_FLASH_CNT_MIN) + m_FLASH_CNT_MIN;	//! 乱数の最低値をm_FLASH_CNT_MINにするため
 	pEffectDatas->m_isIncrease = rand() % TRUE;
 
-	pEffectDatas->m_data.m_center = {
+	pEffectDatas->m_data.m_center = {															//! エフェクトの表示位置を座標で決める
 		static_cast<FLOAT>(rand() % m_WND_SIZE.m_x),
 		static_cast<FLOAT>(rand() % m_WND_SIZE.m_y),
 		m_Z };
 	FLOAT halfScale = 0.5f;
-	if (rand() % 2) halfScale = 1.0f;
-	pEffectDatas->m_data.m_halfScale = { halfScale,halfScale,0.0f };
+	if (rand() % 2) halfScale = 1.0f;															//! 1/2の確率で大きさが変わる
+	pEffectDatas->m_data.m_halfScale = { halfScale, halfScale, 0.0f };
 
 	INT selectedARGB = rand() % EFFECT_COLORS_MAX;
 	pEffectDatas->m_aRGB.x = EFFECT_COLORS[selectedARGB].x;
