@@ -17,19 +17,22 @@ VOID BaseStar::Update()
 {
 }
 
-VOID BaseStar::PosOfStarYCoordinate()
+/**
+*@brief ìGÇÃêØÇÃóéÇøÇƒÇ≠ÇÈéûä‘Çê›íËÇ∑ÇÈä÷êî
+*/
+VOID BaseStar::FallStarPosYTime()
 {
 	m_Info.m_Time = (((m_Info.m_Division * 4) + m_Info.m_StarsNumInDivision) * 60.f) / m_Info.m_DropPerMinute;
 }
 
-VOID BaseStar::FollingStarPosYTime(const LONGLONG& rCurrentTime)
+VOID BaseStar::PosOfStarYCoordinate(const LONGLONG& CurrentTime)
 {
-	m_Info.m_Pos.y = (m_Info.m_Time - rCurrentTime / 1000.f);
+	m_Info.m_Pos.y = (m_Info.m_Time - CurrentTime / 1000.f);
 }
 
-VOID BaseStar::SetStarInfo(const struct StarPlace& rStarPlace)
+VOID BaseStar::SetStarInfo(const struct StarPlace& StarPlace)
 {
-	m_Info = rStarPlace;
+	m_Info = StarPlace;
 }
 
 VOID BaseStar::DefaultLight()
