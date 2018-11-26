@@ -2,30 +2,37 @@
 
 VOID Player::Init()
 {
-	m_PlayerPoint.x = m_MAXXARRAYNUM / 2;
-	m_PlayerPoint.y = m_MAXYARRAYNUM / 2;
-	m_Speed.x = m_Speed.y = 0.f;
-	m_PlayerPos.x = m_BasePos[m_PlayerPoint.y][m_PlayerPoint.x].x;	//真ん中に自機を置く
-	m_PlayerPos.y = m_BasePos[m_PlayerPoint.y][m_PlayerPoint.x].y;
+	//長いので省略
+	int* pPoX = &m_PlayerPoint.x;
+	int* pPoY = &m_PlayerPoint.y;
+
+	*pPoX = m_MAXXARRAYNUM / 2;
+	*pPoY = m_MAXYARRAYNUM / 2;
+	m_Speed.x = m_Speed.y = 0.0f;
+	m_PlayerPos.x = m_BasePos[*pPoY][*pPoX].x;	//真ん中に自機を置く
+	m_PlayerPos.y = m_BasePos[*pPoY][*pPoX].y;
 }
 
 VOID Player::Update()
 {
 	static CoordinatePoint PlayerPointBuffer = m_PlayerPoint;
 
-	static HIT_KEY HitKey;
+	HIT_KEY HitKey;
+
+	int* pPoX = &m_PlayerPoint.x;
+	int* pPoY = &m_PlayerPoint.y;
 
 	//キー入力によってプレイヤーの動きを決める
 	//y座標の移動
 	if (m_rGameLib.KeyboardIsPressed(DIK_W) &&
-		m_PlayerPoint.y > 0)
+		*pPoY > 0)
 	{
 		HitKey = UP;
 		CanMovePoint(&PlayerPointBuffer, HitKey);
 	}
 
 	if (m_rGameLib.KeyboardIsPressed(DIK_S) &&
-		m_PlayerPoint.y < (m_MAXYARRAYNUM - 1))
+		*pPoY < (m_MAXYARRAYNUM - 1))
 	{
 		HitKey = DOWN;
 		CanMovePoint(&PlayerPointBuffer, HitKey);
@@ -33,14 +40,14 @@ VOID Player::Update()
 
 	//x座標の移動
 	if (m_rGameLib.KeyboardIsPressed(DIK_A) &&
-		m_PlayerPoint.x > 0)
+		*pPoX > 0)
 	{
 		HitKey = LEFT;
 		CanMovePoint(&PlayerPointBuffer, HitKey);
 	}
 
 	if (m_rGameLib.KeyboardIsPressed(DIK_D) &&
-		m_PlayerPoint.x < (m_MAXXARRAYNUM - 1))
+		*pPoX < (m_MAXXARRAYNUM - 1))
 	{
 		HitKey = RIGHT;
 		CanMovePoint(&PlayerPointBuffer, HitKey);
@@ -83,12 +90,14 @@ VOID Player::Render()
 VOID Player::CanMovePos(const CoordinatePoint& PrevPoint)
 {
 	SurfaceCoordinate PrevPos, NextPos;
+	int* pPoX = &m_PlayerPoint.x;
+	int* pPoY = &m_PlayerPoint.y;
 
 	PrevPos.x = m_BasePos[PrevPoint.y][PrevPoint.x].x;
 	PrevPos.y = m_BasePos[PrevPoint.y][PrevPoint.x].y;
 
-	NextPos.x = m_BasePos[m_PlayerPoint.y][m_PlayerPoint.x].x;
-	NextPos.y = m_BasePos[m_PlayerPoint.y][m_PlayerPoint.x].y;
+	NextPos.y = m_BasePos[*pPoY][*pPoX].y;
+	NextPos.x = m_BasePos[*pPoY][*pPoX].x;
 
 	m_PlayerPos.x += m_Speed.x;
 	m_PlayerPos.y += m_Speed.y;
