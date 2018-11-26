@@ -87,7 +87,7 @@ VOID StageSelectSceneStageList::Render()
 
 	const RectSize ILLUST_SIZE = { 2048, 1024 };
 	const FLOAT ICON_ILLUST_SIZE = 303.0f;
-	const INT ICONS_ILLUST_ROW_MAX = 6;
+	const INT ICONS_ILLUST_ROWS_MAX = 6;
 
 	FLOAT ICON_SCALE_MULTI = 0.0f;
 
@@ -115,10 +115,10 @@ VOID StageSelectSceneStageList::Render()
 
 		stageIconDatas[i].m_objData.m_texUV =
 		{
-			ICON_ILLUST_SIZE * (i % ICONS_ILLUST_ROW_MAX)		/ ILLUST_SIZE.m_x,
-			ICON_ILLUST_SIZE * (i / ICONS_ILLUST_ROW_MAX)		/ ILLUST_SIZE.m_y,
-			ICON_ILLUST_SIZE * (i % ICONS_ILLUST_ROW_MAX + 1)	/ ILLUST_SIZE.m_x,
-			ICON_ILLUST_SIZE * (i / ICONS_ILLUST_ROW_MAX + 1)	/ ILLUST_SIZE.m_y
+			ICON_ILLUST_SIZE * (i % ICONS_ILLUST_ROWS_MAX)		/ ILLUST_SIZE.m_x,
+			ICON_ILLUST_SIZE * (i / ICONS_ILLUST_ROWS_MAX)		/ ILLUST_SIZE.m_y,
+			ICON_ILLUST_SIZE * (i % ICONS_ILLUST_ROWS_MAX + 1)	/ ILLUST_SIZE.m_x,
+			ICON_ILLUST_SIZE * (i / ICONS_ILLUST_ROWS_MAX + 1)	/ ILLUST_SIZE.m_y
 		};
 
 		m_rGameLib.CreateRect(stageIcon, stageIconDatas[i].m_objData);
@@ -253,8 +253,8 @@ VOID StageSelectSceneLevelSelecter::Render()
 	m_rGameLib.Render(select, m_rGameLib.GetTex(_T("LevelSelectFrame")));
 
 	ObjData backButtonData;
-	backButtonData.m_center		= { m_WND_SIZE.m_x * 0.14f, m_WND_SIZE.m_y * 0.17f, m_Z };
-	backButtonData.m_halfScale	= { m_WND_SIZE.m_y * 0.05f, m_WND_SIZE.m_y * 0.05f, 0.0f };
+	backButtonData.m_center		= { m_WND_SIZE.m_x * 0.14f, m_WND_SIZE.m_y * 0.17f, m_Z };									//! 現物合わせ
+	backButtonData.m_halfScale	= { m_WND_SIZE.m_y * 0.05f, m_WND_SIZE.m_y * 0.05f, 0.0f };									//! 現物合わせ
 
 	backButtonData.m_aRGB = D3DCOLOR_ARGB(alpha, 0, 0, 0);
 	if (m_backIsSelected) backButtonData.m_aRGB = D3DCOLOR_ARGB(alpha, 255, 255, 255);
