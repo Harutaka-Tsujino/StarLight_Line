@@ -157,8 +157,12 @@ public:
 
 	inline VOID Update()
 	{
-		if (m_rGameLib.KeyboardAnyKeyIsPressed()) m_isActive = TRUE;
-		if (!m_isActive) return;
+		if (m_rGameLib.KeyboardAnyKeyIsPressed() && !m_isActive)
+		{
+			m_isActive = TRUE;
+
+			return;
+		}
 
 		SelectMenu();
 	}

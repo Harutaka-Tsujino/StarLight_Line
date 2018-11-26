@@ -325,6 +325,31 @@ public:
 		return m_pDX->KeyboardAnyKeyIsPressed();
 	}
 
+	inline BOOL UpKeyIsPressed() const
+	{
+		return m_pDX->UpKeyIsPressed();
+	}
+
+	inline BOOL DownKeyIsPressed() const
+	{
+		return m_pDX->DownKeyIsPressed();
+	}
+
+	inline BOOL RightKeyIsPressed() const
+	{
+		return m_pDX->RightKeyIsPressed();
+	}
+
+	inline BOOL LeftKeyIsPressed() const
+	{
+		return m_pDX->LeftKeyIsPressed();
+	}
+
+	inline BOOL ReturnKeyIsPressed() const
+	{
+		return m_pDX->ReturnKeyIsPressed();
+	}
+
 private:
 	GameLib() {};
 
