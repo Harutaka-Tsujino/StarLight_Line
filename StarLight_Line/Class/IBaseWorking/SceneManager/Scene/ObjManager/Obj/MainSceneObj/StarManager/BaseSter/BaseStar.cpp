@@ -60,10 +60,10 @@ VOID BaseStar::ConvertLocalToWorld(D3DXMATRIX* pMatWorld)
 	D3DXMatrixIdentity(&MatTrans);
 	D3DXMatrixIdentity(&MatScale);
 
-	const float ModelScale = 0.0005f;
+	const float MODELSCALE = 0.0005f;
 
 	// ägëÂ
-	D3DXMatrixScaling(&MatScale, ModelScale, ModelScale, ModelScale);
+	D3DXMatrixScaling(&MatScale, MODELSCALE, MODELSCALE, MODELSCALE);
 
 	// ä|ÇØçáÇÌÇπ
 	D3DXMatrixMultiply(pMatWorld, pMatWorld, &MatScale);

@@ -2,8 +2,8 @@
 
 VOID Player::Init()
 {
-	m_PlayerPoint.x = m_MaxXArrayNum / 2;
-	m_PlayerPoint.y = m_MaxYArrayNum / 2;
+	m_PlayerPoint.x = m_MAXXARRAYNUM / 2;
+	m_PlayerPoint.y = m_MAXYARRAYNUM / 2;
 	m_Speed.x = m_Speed.y = 0.f;
 	m_PlayerPos.x = m_BasePos[m_PlayerPoint.y][m_PlayerPoint.x].x;	//ê^ÇÒíÜÇ…é©ã@ÇíuÇ≠
 	m_PlayerPos.y = m_BasePos[m_PlayerPoint.y][m_PlayerPoint.x].y;
@@ -27,7 +27,7 @@ VOID Player::Update()
 	}
 
 	if (m_rGameLib.KeyboardIsPressed(DIK_S) &&
-		m_PlayerPoint.y < (m_MaxYArrayNum - 1))
+		m_PlayerPoint.y < (m_MAXYARRAYNUM - 1))
 	{
 		memcpy(&PlayerPointBuffer, &m_PlayerPoint, sizeof(CoordinatePoint));
 		++m_PlayerPoint.y;
@@ -46,7 +46,7 @@ VOID Player::Update()
 	}
 
 	if (m_rGameLib.KeyboardIsPressed(DIK_D) &&
-		m_PlayerPoint.x < (m_MaxXArrayNum - 1))
+		m_PlayerPoint.x < (m_MAXXARRAYNUM - 1))
 	{
 		memcpy(&PlayerPointBuffer, &m_PlayerPoint, sizeof(CoordinatePoint));
 		++m_PlayerPoint.x;
@@ -66,12 +66,12 @@ VOID Player::Render()
 	D3DXMatrixIdentity(&MatTrans);
 	D3DXMatrixIdentity(&MatScale);
 
-	const float ModelScale = 0.007f;
+	const float MODELSCALE = 0.007f;
 
 	FbxRelated& rEiwi = m_rGameLib.GetFbx(_T("Eiwi"));
 
 	// ägëÂ
-	D3DXMatrixScaling(&MatScale, ModelScale, ModelScale, ModelScale);
+	D3DXMatrixScaling(&MatScale, MODELSCALE, MODELSCALE, MODELSCALE);
 
 	// ä|ÇØçáÇÌÇπ
 	D3DXMatrixMultiply(&MatWorld, &MatWorld, &MatScale);
@@ -109,7 +109,6 @@ VOID Player::CanMovePos(const CoordinatePoint& PrevPoint)
 	}
 
 	m_PlayerPos.x = max(min(PrevPos.x, m_PlayerPos.x), NextPos.x);
-
 
 	if (m_Speed.y > 0)
 	{
