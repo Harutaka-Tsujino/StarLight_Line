@@ -10,7 +10,7 @@
 VOID SaveDataSaveDatas::Render()
 {
 	ObjData frameData;
-	frameData.m_halfScale = { m_WND_SIZE.m_x * 0.2f, m_WND_SIZE.m_y * 0.12f, 0.0f };	//! 現物合わせ
+	frameData.m_halfScale = { m_WND_SIZE.m_x * 0.2f, m_WND_SIZE.m_y * 0.12f, 0.0f };				//! 現物合わせ
 
 	CustomVertex frame[4];
 
@@ -25,7 +25,7 @@ VOID SaveDataSaveDatas::Render()
 
 	ObjData detailFrameData;
 	detailFrameData.m_center	= { m_WND_SIZE.m_x * 0.75f, m_WND_SIZE.m_y * 0.5f, m_Z };
-	detailFrameData.m_halfScale = { m_WND_SIZE.m_x * 0.2f, m_WND_SIZE.m_y * 0.4f, 0.0f };	//! 現物合わせ
+	detailFrameData.m_halfScale = { m_WND_SIZE.m_x * 0.2f, m_WND_SIZE.m_y * 0.4f, 0.0f };			//! 現物合わせ
 
 	CustomVertex detailFrame[4];
 	m_rGameLib.CreateRect(detailFrame, detailFrameData);
