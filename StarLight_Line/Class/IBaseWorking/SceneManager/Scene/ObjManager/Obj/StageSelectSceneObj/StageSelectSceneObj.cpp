@@ -13,17 +13,14 @@ VOID StageSelectSceneStageList::Update()
 {
 	SceneManager& rSceneManager = SceneManager::GetInstance();
 
-	if ((m_rGameLib.KeyboardIsPressed(DIK_W) ||
-		m_rGameLib.KeyboardIsPressed(DIK_UP) ||
-		m_rGameLib.KeyboardIsPressed(DIK_NUMPAD8)) &&
+	if (m_rGameLib.UpKeyIsPressed() &&
 		m_backIsSelected)
 	{
 		m_backIsSelected = FALSE;
 	}
 
-	if (m_backIsSelected &&
-		(m_rGameLib.KeyboardIsPressed(DIK_RETURN) ||
-		m_rGameLib.KeyboardIsPressed(DIK_NUMPADENTER)))
+	if (m_rGameLib.ReturnKeyIsPressed() &&
+		m_backIsSelected)
 	{
 		rSceneManager.SetNextScene(SK_TITLE);
 
@@ -32,8 +29,7 @@ VOID StageSelectSceneStageList::Update()
 
 	if (m_backIsSelected) return;
 
-	if ((m_rGameLib.KeyboardIsPressed(DIK_RETURN) ||
-		m_rGameLib.KeyboardIsPressed(DIK_NUMPADENTER)) &&
+	if (m_rGameLib.ReturnKeyIsPressed() &&
 		m_deg == 0.0f &&
 		m_lengthMulti == 0.0f)
 	{
@@ -44,9 +40,7 @@ VOID StageSelectSceneStageList::Update()
 
 	if (m_lengthMulti != 0.0f || m_isDecided) return;
 
-	if ((m_rGameLib.KeyboardIsPressed(DIK_S)	||
-		m_rGameLib.KeyboardIsPressed(DIK_DOWN)	||
-		m_rGameLib.KeyboardIsPressed(DIK_NUMPAD2)))
+	if (m_rGameLib.DownKeyIsPressed())
 	{
 		m_backIsSelected = TRUE;
 
@@ -59,12 +53,8 @@ VOID StageSelectSceneStageList::Update()
 
 	if (m_deg != 0) return;
 
-	m_deg = ROTATE_SPEED * (m_rGameLib.KeyboardIsHeld(DIK_D) ||
-							m_rGameLib.KeyboardIsHeld(DIK_RIGHT) ||
-							m_rGameLib.KeyboardIsHeld(DIK_NUMPAD6)) -
-			ROTATE_SPEED * (m_rGameLib.KeyboardIsHeld(DIK_A) ||
-							m_rGameLib.KeyboardIsHeld(DIK_LEFT) ||
-							m_rGameLib.KeyboardIsHeld(DIK_NUMPAD4));
+	m_deg = ROTATE_SPEED * m_rGameLib.RightKeyIsPressed() -
+			ROTATE_SPEED * m_rGameLib.LeftKeyIsPressed();
 }
 
 VOID StageSelectSceneStageList::Render()
@@ -177,27 +167,21 @@ VOID StageSelectSceneLevelSelecter::Update()
 
 	//if (m_sceneTranlationAlpha) return;
 
-	if ((m_rGameLib.KeyboardIsPressed(DIK_W) ||
-		m_rGameLib.KeyboardIsPressed(DIK_UP) ||
-		m_rGameLib.KeyboardIsPressed(DIK_NUMPAD8)))
+	if (m_rGameLib.UpKeyIsPressed())
 	{
 		m_backIsSelected = TRUE;
 
 		return;
 	}
 
-	if ((m_rGameLib.KeyboardIsPressed(DIK_S)	||
-		m_rGameLib.KeyboardIsPressed(DIK_DOWN)	||
-		m_rGameLib.KeyboardIsPressed(DIK_NUMPAD2)))
+	if (m_rGameLib.DownKeyIsPressed())
 	{
 		m_backIsSelected = FALSE;
 
 		return;
 	}
 
-	if (m_backIsSelected &&
-		(m_rGameLib.KeyboardIsPressed(DIK_RETURN) ||
-		m_rGameLib.KeyboardIsPressed(DIK_NUMPADENTER)))
+	if (m_rGameLib.ReturnKeyIsPressed() && m_backIsSelected)
 	{
 		m_shouldActivateStageSelect = TRUE;
 
@@ -206,25 +190,21 @@ VOID StageSelectSceneLevelSelecter::Update()
 
 	if (m_backIsSelected) return;
 
-	if (m_rGameLib.KeyboardIsPressed(DIK_D)		||
-		m_rGameLib.KeyboardIsPressed(DIK_RIGHT) ||
-		m_rGameLib.KeyboardIsPressed(DIK_NUMPAD6))
+	if (m_rGameLib.RightKeyIsPressed())
 	{
 		m_level = (m_level < SLK_HARD) ? ++m_level : SLK_HARD;
 
 		return;
 	}
 
-	if (m_rGameLib.KeyboardIsPressed(DIK_A)		||
-		m_rGameLib.KeyboardIsPressed(DIK_LEFT)  ||
-		m_rGameLib.KeyboardIsPressed(DIK_NUMPAD4))
+	if (m_rGameLib.LeftKeyIsPressed())
 	{
 		m_level = (m_level > SLK_EASY) ? --m_level : SLK_EASY;
 
 		return;
 	}
 
-	if (m_rGameLib.KeyboardIsPressed(DIK_RETURN))
+	if (m_rGameLib.ReturnKeyIsPressed())
 	{
 		//ステージの決定
 		m_sceneTranlationAlpha = 1;

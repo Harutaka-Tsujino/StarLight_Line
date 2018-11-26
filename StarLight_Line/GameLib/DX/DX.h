@@ -315,6 +315,31 @@ public:
 		return m_pDXInput->KeyboardAnyKeyIsPressed();
 	}
 
+	inline BOOL UpKeyIsPressed() const
+	{
+		return m_pDXInput->UpKeyIsPressed();
+	}
+
+	inline BOOL DownKeyIsPressed() const
+	{
+		return m_pDXInput->DownKeyIsPressed();
+	}
+
+	inline BOOL RightKeyIsPressed() const
+	{
+		return m_pDXInput->RightKeyIsPressed();
+	}
+
+	inline BOOL LeftKeyIsPressed() const
+	{
+		return m_pDXInput->LeftKeyIsPressed();
+	}
+
+	inline BOOL ReturnKeyIsPressed() const
+	{
+		return m_pDXInput->ReturnKeyIsPressed();
+	}
+
 private:
 	VOID Create();	//他DX機能の基盤となるので初めに生成する
 

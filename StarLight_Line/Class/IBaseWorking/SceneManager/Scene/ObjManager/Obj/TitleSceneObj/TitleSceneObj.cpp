@@ -61,22 +61,17 @@ VOID TitleMenu::SelectMenu()
 		return;
 	}
 
-	if (m_rGameLib.KeyboardIsPressed(DIK_W) ||
-		m_rGameLib.KeyboardIsPressed(DIK_NUMPAD8) ||
-		m_rGameLib.KeyboardIsPressed(DIK_UP))
-	{
-		RotateMenuUp();
-	}
-
-	if (m_rGameLib.KeyboardIsPressed(DIK_S) ||
-		m_rGameLib.KeyboardIsPressed(DIK_NUMPAD2) ||
-		m_rGameLib.KeyboardIsPressed(DIK_DOWN))
+	if (m_rGameLib.UpKeyIsPressed())
 	{
 		RotateMenuDown();
 	}
 
-	if (!m_rGameLib.KeyboardIsPressed(DIK_RETURN) &&
-		!m_rGameLib.KeyboardIsHeld(DIK_NUMPADENTER)) return;
+	if (m_rGameLib.DownKeyIsPressed())
+	{
+		RotateMenuUp();
+	}
+
+	if (!m_rGameLib.ReturnKeyIsPressed()) return;
 
 	SceneManager& rSceneManager = SceneManager::GetInstance();
 	switch (m_menuReel[m_CENTER_MENU])
@@ -92,7 +87,7 @@ VOID TitleMenu::SelectMenu()
 		break;
 
 	case MK_END_GAME:
-		rSceneManager.SetNextScene(SK_STAGE_SELECT);
+		rSceneManager.SetNextScene(SK_SAVE_DATA);
 
 		break;
 
@@ -249,8 +244,8 @@ VOID TitleSmallStarEffect::InitEffect(EffectData* pEffectDatas) const
 	pEffectDatas->m_isIncrease = rand() % TRUE;
 
 	pEffectDatas->m_data.m_center = {
-		(FLOAT)(rand() % m_WND_SIZE.m_x),
-		(FLOAT)(rand() % m_WND_SIZE.m_y),
+		static_cast<FLOAT>(rand() % m_WND_SIZE.m_x),
+		static_cast<FLOAT>(rand() % m_WND_SIZE.m_y),
 		m_Z };
 	FLOAT halfScale = 0.5f;
 	if (rand() % 2) halfScale = 1.0f;

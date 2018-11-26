@@ -68,6 +68,65 @@ public:
 		return FALSE;
 	}
 
+	inline BOOL UpKeyIsPressed() const
+	{
+		if (IsPressed(DIK_W)		||
+			IsPressed(DIK_NUMPAD8)	||
+			IsPressed(DIK_UP))
+		{
+			return TRUE;
+		}
+
+		return FALSE;
+	}
+
+	inline BOOL DownKeyIsPressed() const
+	{
+		if (IsPressed(DIK_S)		||
+			IsPressed(DIK_NUMPAD2)	||
+			IsPressed(DIK_DOWN))
+		{
+			return TRUE;
+		}
+
+		return FALSE;
+	}
+
+	inline BOOL RightKeyIsPressed() const
+	{
+		if (IsPressed(DIK_D)		||
+			IsPressed(DIK_NUMPAD6)	||
+			IsPressed(DIK_RIGHT))
+		{
+			return TRUE;
+		}
+
+		return FALSE;
+	}
+
+	inline BOOL LeftKeyIsPressed() const
+	{
+		if (IsPressed(DIK_A)		||
+			IsPressed(DIK_NUMPAD4)	||
+			IsPressed(DIK_LEFT))
+		{
+			return TRUE;
+		}
+
+		return FALSE;
+	}
+
+	inline BOOL ReturnKeyIsPressed() const
+	{
+		if (IsPressed(DIK_RETURN) ||
+			IsPressed(DIK_NUMPADENTER))
+		{
+			return TRUE;
+		}
+
+		return FALSE;
+	}
+
 private:
 	VOID Create(LPDIRECTINPUT8 pDXInput);
 
