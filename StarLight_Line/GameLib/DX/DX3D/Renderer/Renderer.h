@@ -12,6 +12,8 @@
 #include <d3dx9.h>
 
 #include "../CustomVertexEditor/Data/CustomVertex.h"
+#include "../FbxStorage/FbxRelated/FbxRelated.h"
+#include "../FbxStorage/FbxRelated/FbxModel/FbxModel.h"
 
 /**
 * @brief FBX(予定)とCustomVertexの描画クラス

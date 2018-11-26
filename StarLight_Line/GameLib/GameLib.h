@@ -8,6 +8,7 @@
 #define GAME_LIB_H
 
 #include <Windows.h>
+#include <tchar.h>
 
 #include <d3dx9.h>
 

@@ -216,8 +216,8 @@ public:
 			pCustomVertices,
 			rObj.m_center, rObj.m_halfScale,
 			rObj.m_aRGB,
-			0.0f, 0.0f,
-			1.0f, 1.0f);
+			rObj.m_texUV.m_startTU, rObj.m_texUV.m_startTV,
+			rObj.m_texUV.m_endTU, rObj.m_texUV.m_endTV);
 
 		RotateXYZ(pCustomVertices, rObj.m_deg);
 	}

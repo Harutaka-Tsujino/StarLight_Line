@@ -1,6 +1,7 @@
 ﻿#include "TitleSceneObj.h"
 
 #include <windows.h>
+#include <tchar.h>
 
 #include "../Obj.h"
 #include "../../../../../../../GameLib/GameLib.h"
@@ -18,7 +19,7 @@ VOID TitleMenu::Render()
 
 	for (INT i = 0; i < MK_MAX; ++i)
 	{
-		data.m_center = { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * (0.65f + 0.07f * i), 0.98f };
+		data.m_center = { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * (0.65f + 0.07f * i), m_Z };
 		data.m_halfScale.x = m_WND_SIZE.m_x * 0.055f;
 		data.m_halfScale.y = m_WND_SIZE.m_y * 0.029f;
 		if (i == m_CENTER_MENU) data.m_halfScale *= CENTER_MENU_SCALE_MULTI;
@@ -52,6 +53,14 @@ VOID TitleMenu::Render()
 
 VOID TitleMenu::SelectMenu()
 {
+	static BOOL isFirstFrame = TRUE;
+	if (isFirstFrame)
+	{
+		isFirstFrame = FALSE;
+
+		return;
+	}
+
 	if (m_rGameLib.KeyboardIsPressed(DIK_W) ||
 		m_rGameLib.KeyboardIsPressed(DIK_NUMPAD8) ||
 		m_rGameLib.KeyboardIsPressed(DIK_UP))
@@ -66,23 +75,24 @@ VOID TitleMenu::SelectMenu()
 		RotateMenuDown();
 	}
 
-	if (!m_rGameLib.KeyboardIsPressed(DIK_RETURN)) return;
+	if (!m_rGameLib.KeyboardIsPressed(DIK_RETURN) &&
+		!m_rGameLib.KeyboardIsHeld(DIK_NUMPADENTER)) return;
 
 	SceneManager& rSceneManager = SceneManager::GetInstance();
 	switch (m_menuReel[m_CENTER_MENU])
 	{
 	case MK_NEW_GAME:
-		rSceneManager.SetNextScene(SK_GAME);
+		rSceneManager.SetNextScene(SK_STAGE_SELECT);
 
 		break;
 
 	case MK_LOAD_GAME:
-		rSceneManager.SetNextScene(SK_GAME);
+		rSceneManager.SetNextScene(SK_STAGE_SELECT);
 
 		break;
 
 	case MK_END_GAME:
-		rSceneManager.SetNextScene(SK_GAME);
+		rSceneManager.SetNextScene(SK_STAGE_SELECT);
 
 		break;
 
@@ -158,7 +168,7 @@ VOID TitleCometEffect::InitEffect(EffectData* pEffectDatas)
 	pEffectDatas->m_data.m_center = {
 		static_cast<float>(rand() % m_WND_SIZE.m_x + m_WND_SIZE.m_x * 1.5f),
 		-static_cast<float>(rand() % (m_WND_SIZE.m_y * 2) + m_WND_SIZE.m_y * 1.0f),
-		0.99f };
+		m_Z };
 	pEffectDatas->m_data.m_halfScale = { m_WND_SIZE.m_x * 0.0035f, m_WND_SIZE.m_y * 0.6f, 0.0f };
 
 	pEffectDatas->m_data.m_aRGB = EFFECT_COLORS[rand() % EFFECT_COLORS_MAX];
@@ -241,7 +251,7 @@ VOID TitleSmallStarEffect::InitEffect(EffectData* pEffectDatas) const
 	pEffectDatas->m_data.m_center = {
 		(FLOAT)(rand() % m_WND_SIZE.m_x),
 		(FLOAT)(rand() % m_WND_SIZE.m_y),
-		0.991f };
+		m_Z };
 	FLOAT halfScale = 0.5f;
 	if (rand() % 2) halfScale = 1.0f;
 	pEffectDatas->m_data.m_halfScale = { halfScale,halfScale,0.0f };

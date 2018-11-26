@@ -8,6 +8,7 @@
 #define DX3D_H
 
 #include <windows.h>
+#include <tchar.h>
 
 #include <d3dx9.h>
 

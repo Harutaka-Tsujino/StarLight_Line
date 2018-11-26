@@ -2,6 +2,7 @@
 #define TITLE_SCENE_OBJ_H
 
 #include <windows.h>
+#include <tchar.h>
 
 #include "../Obj.h"
 #include "../../../../../../../GameLib/GameLib.h"
@@ -23,10 +24,6 @@ public:
 
 	inline VOID Init() const
 	{
-		static BOOL isInitialized = FALSE;
-		if (isInitialized) return;
-		isInitialized = TRUE;
-
 		m_rGameLib.CreateTex(_T("Back"), _T("2DTextures/Title/title_background.png"));
 	}
 
@@ -37,7 +34,7 @@ public:
 		m_rGameLib.SetCameraTransform();
 
 		ObjData data;
-		data.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, 1.0f };
+		data.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, m_Z };
 		data.m_halfScale	= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, 0.0f };
 
 		CustomVertex back[4];
@@ -62,10 +59,6 @@ public:
 
 	inline VOID Init() const
 	{
-		static BOOL isInitialized = FALSE;
-		if (isInitialized) return;
-		isInitialized = TRUE;
-
 		m_rGameLib.CreateTex(_T("Logo"), _T("2DTextures/Title/TitleLogo.png"));
 	}
 
@@ -74,7 +67,7 @@ public:
 	inline VOID Render()
 	{
 		ObjData data;
-		data.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.35f, 0.98f };
+		data.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.35f, m_Z };
 		data.m_halfScale	= { m_WND_SIZE.m_x * 0.29f, m_WND_SIZE.m_y * 0.2f, 0.0f };
 
 		CustomVertex logo[4];
@@ -99,10 +92,6 @@ public:
 
 	inline VOID Init() const
 	{
-		static BOOL isInitialized = FALSE;
-		if (isInitialized) return;
-		isInitialized = TRUE;
-
 		m_rGameLib.CreateTex(_T("InputPrompt"), _T("2DTextures/Title/TitleWaitInput.png"));
 	}
 
@@ -116,7 +105,7 @@ public:
 		if (!m_isActive) return;
 
 		ObjData data;
-		data.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.78f, 0.98f };
+		data.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.78f, m_Z };
 		data.m_halfScale	= { m_WND_SIZE.m_x * 0.07f, m_WND_SIZE.m_y * 0.035f, 0.0f };
 		CustomVertex inputPrompt[4];
 		data.m_aRGB = D3DCOLOR_ARGB(
@@ -161,10 +150,6 @@ public:
 
 	inline VOID Init() const
 	{
-		static BOOL isInitialized = FALSE;
-		if (isInitialized) return;
-		isInitialized = TRUE;
-
 		m_rGameLib.CreateTex(_T("NewGame"), _T("2DTextures/Title/TitleMenuNewGame.png"));
 		m_rGameLib.CreateTex(_T("LoadGame"), _T("2DTextures/Title/TitleMenuLoadGame.png"));
 		m_rGameLib.CreateTex(_T("EndGame"), _T("2DTextures/Title/TitleMenuEndGame.png"));
@@ -230,10 +215,6 @@ public:
 
 	inline VOID Init()
 	{
-		static BOOL isInitialized = FALSE;
-		if (isInitialized) return;
-		isInitialized = TRUE;
-
 		m_rGameLib.CreateTex(_T("Comet"), _T("2DTextures/Title/StarEffect.png"));
 		m_rGameLib.CreateTex(_T("OverComet"), _T("2DTextures/Title/OverStarEffect.png"));
 	}
@@ -272,10 +253,6 @@ public:
 
 	inline VOID Init()
 	{
-		static BOOL isInitialized = FALSE;
-		if (isInitialized) return;
-		isInitialized = TRUE;
-
 		m_rGameLib.CreateTex(_T("SmallStar"), _T("2DTextures/Title/EffectData.png"));
 		m_rGameLib.CreateTex(_T("OverSmallStar"), _T("2DTextures/Title/OverSmallStarEffect.png"));
 	}
