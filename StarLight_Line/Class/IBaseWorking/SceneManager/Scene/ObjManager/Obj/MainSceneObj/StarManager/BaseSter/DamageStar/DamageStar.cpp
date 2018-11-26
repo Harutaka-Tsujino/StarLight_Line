@@ -3,7 +3,7 @@
 VOID DamageStar::Update()
 {
 	m_rGameLib.SetEndTime();
-	FollingStarPosYTime(m_rGameLib.GetMilliSecond());
+	PosOfStarYCoordinate(m_rGameLib.GetMilliSecond());
 }
 
 VOID DamageStar::Render()

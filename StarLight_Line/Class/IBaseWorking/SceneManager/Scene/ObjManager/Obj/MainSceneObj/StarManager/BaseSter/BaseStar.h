@@ -30,11 +30,11 @@ public:
 	virtual VOID Render();
 
 	VOID SetStarInfo(const StarPlace& StarInfo);
-	VOID PosOfStarYCoordinate();								//落ちてくる時間設定関数
+	VOID FallStarPosYTime();									//落ちてくる時間設定関数
 
 protected:
 	VOID InitBaseStar();										//敵に必要な情報の初期化関数
-	VOID FollingStarPosYTime(const LONGLONG& rCurrentTime);		//y座標を移動させる関数
+	VOID PosOfStarYCoordinate(const LONGLONG& CurrentTime);		//y座標を移動させる関数
 	VOID DefaultLight();										//ライトのデフォルト値設定関数
 	VOID ConvertLocalToWorld(D3DXMATRIX* matWorld);				//ローカル座標からワールド座標への変換
 

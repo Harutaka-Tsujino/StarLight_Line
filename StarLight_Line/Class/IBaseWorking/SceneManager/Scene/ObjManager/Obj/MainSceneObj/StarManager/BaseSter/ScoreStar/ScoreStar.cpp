@@ -8,7 +8,7 @@ VOID ScoreStar::Init()
 VOID ScoreStar::Update()
 {
 	m_rGameLib.SetEndTime();
-	FollingStarPosYTime(m_rGameLib.GetMilliSecond());
+	PosOfStarYCoordinate(m_rGameLib.GetMilliSecond());
 }
 
 VOID ScoreStar::Render()
