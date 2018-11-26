@@ -6,6 +6,7 @@
 #include "Scene\Enum\SCENE_KIND.h"
 #include "Scene\TitleScene\TitleScene.h"
 #include "Scene\StageSelectScene\StageSelectScene.h"
+#include "Scene\SaveDataScene\SaveDataScene.h"
 
 VOID SceneManager::Factory()
 {
@@ -34,6 +35,15 @@ VOID SceneManager::Factory()
 
 		m_pScene = new StageSelectScene();
 
+		break;
+
+	case SK_SAVE_DATA:
+		delete m_pScene;
+
+		m_pScene = new SaveDataScene();
+
+		break;
+		
 	default:
 		break;
 	}
