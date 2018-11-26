@@ -22,7 +22,7 @@ public:
 	inline VOID CreateFbx(const TCHAR* pKey, const CHAR* pFilePath)
 	{
 		m_pFbxRelatedMap[pKey] = new FbxRelated(m_rpDX3DDev);
-		m_pFbxRelatedMap[pKey]->LoadFbx("pFilePath");
+		m_pFbxRelatedMap[pKey]->LoadFbx(pFilePath);
 	}
 
 	inline FbxRelated& GetFbx(const TCHAR* pKey)

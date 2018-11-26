@@ -106,31 +106,6 @@ public:
 		return m_pKeyboard->AnyKeyIsPressed();
 	}
 
-	inline BOOL UpKeyIsPressed() const
-	{
-		return m_pKeyboard->UpKeyIsPressed();
-	}
-
-	inline BOOL DownKeyIsPressed() const
-	{
-		return m_pKeyboard->DownKeyIsPressed();
-	}
-
-	inline BOOL RightKeyIsPressed() const
-	{
-		return m_pKeyboard->RightKeyIsPressed();
-	}
-
-	inline BOOL LeftKeyIsPressed() const
-	{
-		return m_pKeyboard->LeftKeyIsPressed();
-	}
-
-	inline BOOL ReturnKeyIsPressed() const
-	{
-		return m_pKeyboard->ReturnKeyIsPressed();
-	}
-
 private:
 	VOID Create() 
 	{

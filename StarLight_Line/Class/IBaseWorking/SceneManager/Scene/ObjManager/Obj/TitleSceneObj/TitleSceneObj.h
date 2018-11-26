@@ -1,4 +1,10 @@
-﻿#ifndef TITLE_SCENE_OBJ_H
+﻿/// @file TitleSceneObj.h
+/// <summary>
+/// タイトルシーンで用いるオブジェクト継承クラスのヘッダ
+/// </summary>
+/// @author Harutaka-Tsujino
+
+#ifndef TITLE_SCENE_OBJ_H
 #define TITLE_SCENE_OBJ_H
 
 #include <windows.h>
@@ -67,8 +73,8 @@ public:
 	inline VOID Render()
 	{
 		ObjData data;
-		data.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.35f, m_Z };
-		data.m_halfScale	= { m_WND_SIZE.m_x * 0.29f, m_WND_SIZE.m_y * 0.2f, 0.0f };
+		data.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.35f, m_Z };	//! 現物合わせ
+		data.m_halfScale	= { m_WND_SIZE.m_x * 0.29f, m_WND_SIZE.m_y * 0.2f, 0.0f };	//! 現物合わせ
 
 		CustomVertex logo[4];
 		m_rGameLib.CreateRect(logo, data);
@@ -105,8 +111,8 @@ public:
 		if (!m_isActive) return;
 
 		ObjData data;
-		data.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.78f, m_Z };
-		data.m_halfScale	= { m_WND_SIZE.m_x * 0.07f, m_WND_SIZE.m_y * 0.035f, 0.0f };
+		data.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.78f, m_Z };		//! 現物合わせ
+		data.m_halfScale	= { m_WND_SIZE.m_x * 0.07f, m_WND_SIZE.m_y * 0.035f, 0.0f };	//! 現物合わせ
 		CustomVertex inputPrompt[4];
 		data.m_aRGB = D3DCOLOR_ARGB(
 						Flash(),
@@ -123,13 +129,13 @@ private:
 		static INT cnt = CNT_MAX;
 
 		const INT ALPHA_MIN = 30;
-		BYTE aRBG = static_cast<int>(cnt * 1.5f) + ALPHA_MIN;
+		BYTE alpha = static_cast<int>(cnt * 1.5f) + ALPHA_MIN;	//! 現物合わせ
 
 		static BOOL canIncrease = FALSE;
 		if (cnt <= 0 || cnt >= CNT_MAX) canIncrease = !cnt;
 		cnt += (canIncrease) ? +1 : -1;
 
-		return aRBG;
+		return alpha;
 	}
 
 	BOOL m_isActive = TRUE;
