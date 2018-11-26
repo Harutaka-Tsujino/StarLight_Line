@@ -9,17 +9,17 @@
 
 VOID StarManager::Init()
 {
-	for (int i = 0;i != m_StarNotes.size();++i)
+	for (BaseStar* pI : m_StarNotes)
 	{
-		(static_cast<BaseStar*>(m_StarNotes[i]))->Init();
+		pI->Init();
 	}
 }
 
 VOID StarManager::Update()
 {
-	for (int i = 0;i != m_StarNotes.size();++i)
+	for (BaseStar* pI : m_StarNotes)
 	{
-		(static_cast<BaseStar*>(m_StarNotes[i]))->Update();
+		pI->Update();
 	}
 }
 
@@ -27,9 +27,9 @@ VOID StarManager::Render()
 {
 	m_rGameLib.SetCameraTransform();
 
-	for (int i = 0;i != m_StarNotes.size();++i)
+	for (BaseStar* pI : m_StarNotes)
 	{
-		(static_cast<BaseStar*>(m_StarNotes[i]))->Render();
+		pI->Render();
 	}
 }
 
@@ -86,7 +86,7 @@ VOID StarManager::Create(const int& rKind)
 VOID StarManager::StarDataToAssign(const int& rArrayNum,const StarPlace& rStarPlace)
 {
 	(static_cast<BaseStar*>(m_StarNotes[rArrayNum]))->SetStarInfo(rStarPlace);
-	(static_cast<BaseStar*>(m_StarNotes[rArrayNum]))->PosOfStarYCoordinate();
+	(static_cast<BaseStar*>(m_StarNotes[rArrayNum]))->FallStarPosYTime();
 }
 
 StarManager::~StarManager()
