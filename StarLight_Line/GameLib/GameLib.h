@@ -17,6 +17,7 @@
 #include "DX\DX.h"
 #include "DX\DX3D\CustomVertexEditor\Data\CustomVertex.h"
 #include "DX\DX3D\CustomVertexEditor\Data\ObjData.h"
+#include "Timer\Timer.h"
 
 /**
 * @brief 汎用クラスのFacade,ウィンドウ生成やDX関係の初期化も行う
@@ -30,6 +31,7 @@ public:
 	{
 		delete m_pDX;
 		delete m_pWnd;
+		delete m_pTimer;
 	};
 
 	/**
@@ -41,10 +43,13 @@ public:
 	{
 		if (m_pWnd) return;
 		if (m_pDX) return;
+		if (m_pTimer) return;
 
 		m_pWnd = new Wnd(hInst, pAppName);
 
 		m_pDX = new DX(m_pWnd->GetHWND(), m_pWnd->GetWndSize());
+
+		m_pTimer = new Timer();
 
 		GetInstance();
 	}
@@ -275,6 +280,36 @@ public:
 		return m_pDX->GetFbx(pKey);
 	}
 
+	inline VOID SetStartTime()
+	{
+		m_pTimer->Start();
+	}
+
+	inline VOID SetEndTime()
+	{
+		m_pTimer->End();
+	}
+
+	inline VOID ResetTime()
+	{
+		m_pTimer->Reset();
+	}
+
+	inline LONGLONG GetSecond()
+	{
+		m_pTimer->GetSecond();
+	}
+
+	inline LONGLONG GetMilliSecond()
+	{
+		m_pTimer->GetMilliSecond();
+	}
+
+	inline LONGLONG GetMicroSecond()
+	{
+		m_pTimer->GetMicroSecond();
+	}
+	
 	inline BOOL MouseIsPressed(INT key) const
 	{
 		return m_pDX->MouseIsPressed(key);
@@ -331,6 +366,8 @@ private:
 	static Wnd* m_pWnd;
 
 	static DX* m_pDX;
+
+	static Timer* m_pTimer;
 };
 
 #endif //! GAME_LIB_H
