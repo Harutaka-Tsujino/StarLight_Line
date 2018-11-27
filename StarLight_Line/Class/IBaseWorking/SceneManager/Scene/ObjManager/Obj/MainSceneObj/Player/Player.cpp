@@ -59,59 +59,33 @@ VOID Player::Update()
 
 VOID Player::Render()
 {
-	D3DXVECTOR3 vecDirection(-0.5f, -1.0f, -1.0f);
-	D3DLIGHT9 light;
-
-	ZeroMemory(&light, sizeof(D3DLIGHT9));
-
-	light.Type = D3DLIGHT_DIRECTIONAL;
-	light.Diffuse.r = 1.5f;
-	light.Diffuse.g = 1.5f;
-	light.Diffuse.b = 1.5f;
-
-	light.Specular.r = 10.0f;
-	light.Specular.b = 10.0f;
-	light.Specular.g = 10.0f;
-
-	light.Ambient.r = 10.f;
-	light.Ambient.b = 10.f;
-	light.Ambient.g = 10.f;
-
-	D3DXVec3Normalize((D3DXVECTOR3*)&light.Direction, &vecDirection);
-
-	m_rGameLib.SetLight(light, 1);
-	light.Range = 200.f;
-
-	D3DXMATRIX MatWorld, matTrans, matScale;
+	m_rGameLib.SetCameraTransform();
+	
+	D3DXMATRIX MatWorld, MatTrans, MatScale;
 	D3DXMatrixIdentity(&MatWorld);
-	D3DXMatrixIdentity(&matTrans);
-	D3DXMatrixIdentity(&matScale);
+	D3DXMatrixIdentity(&MatTrans);
+	D3DXMatrixIdentity(&MatScale);
 
-	const float ModelScale = 0.001f;
+	const float ModelScale = 0.007f;
+
+	FbxRelated& rEiwi = m_rGameLib.GetFbx(_T("Eiwi"));
 
 	// Šg‘å
-	D3DXMatrixScaling(&matScale, ModelScale, ModelScale, ModelScale);
+	D3DXMatrixScaling(&MatScale, ModelScale, ModelScale, ModelScale);
 
 	// Š|‚¯‡‚í‚¹
-	D3DXMatrixMultiply(&MatWorld, &MatWorld, &matScale);
+	D3DXMatrixMultiply(&MatWorld, &MatWorld, &MatScale);
 
 	// ˆÚ“®
-	D3DXMatrixTranslation(&matTrans, m_PlayerPos.x, m_PlayerPos.y, 0.02f);
+	D3DXMatrixTranslation(&MatTrans, m_PlayerPos.x, m_PlayerPos.y, 0.2f);
 
 	// Š|‚¯‡‚í‚¹
-	D3DXMatrixMultiply(&MatWorld, &MatWorld, &matTrans);
+	D3DXMatrixMultiply(&MatWorld, &MatWorld, &MatTrans);
 
-	//FbxRelated* pPlayerModel = m_pFBXStorage->GetFBX(_T("Player"));
+	D3DXVECTOR4 EiwiEmissive(1.0f, 1.0f, 1.0f, 0.0f);
+	rEiwi.SetEmissive(&EiwiEmissive);
 
-	//D3DXVECTOR4 EiwiEmissive(0.0f, 0.3f, 0.3f, 0.01f);
-	//pPlayerModel->SetEmissive(&EiwiEmissive);
-
-
-	//m_pGameManager->Render(pPlayerModel, &MatWorld);
-}
-
-Player::~Player()
-{
+	m_rGameLib.Render(rEiwi, MatWorld, m_rGameLib.GetTex(_T("PlayerTex")));
 }
 
 VOID Player::CanMovePos(const CoordinatePoint& PrevPoint)

@@ -6,10 +6,13 @@
 
 #include "DX\DX.h"
 #include "Wnd\Wnd.h"
+#include "Timer\Timer.h"
 
 Wnd* GameLib::m_pWnd = nullptr;
 
 DX* GameLib::m_pDX = nullptr;
+
+Timer* GameLib::m_pTimer = nullptr;
 
 VOID GameLib::RunFunc(VOID(*pMainFunc)())
 {

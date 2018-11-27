@@ -7,6 +7,7 @@
 #include "Scene\TitleScene\TitleScene.h"
 #include "Scene\StageSelectScene\StageSelectScene.h"
 #include "Scene\SaveDataScene\SaveDataScene.h"
+#include "Scene\MainScene\MainScene.h"
 
 VOID SceneManager::Factory()
 {
@@ -26,7 +27,7 @@ VOID SceneManager::Factory()
 	case SK_GAME:
 		delete m_pScene;
 
-		m_pScene = new TitleScene();
+		m_pScene = new MainScene();
 
 		break;
 

@@ -9,7 +9,7 @@
 class MainBack :public Obj
 {
 public:
-	MainBack() :Obj(OT_BACK, 0.1f)
+	MainBack() :Obj(OT_BACK, 1.0f)
 	{
 		Init();
 	}

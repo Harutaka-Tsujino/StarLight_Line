@@ -9,8 +9,6 @@ VOID MainBack::Init()
 
 VOID MainBack::Render()
 {
-	m_rGameLib.SetCameraTransform();
-
 	ObjData data;
 	data.m_center = { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, 1.0f };
 	data.m_halfScale = { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, 0.0f };

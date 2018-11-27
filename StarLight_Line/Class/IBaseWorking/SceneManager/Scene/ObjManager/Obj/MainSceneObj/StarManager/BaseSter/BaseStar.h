@@ -3,6 +3,8 @@
 
 #include <Windows.h>
 
+#include <d3dx9.h>
+
 struct StarPlace
 {
 	D3DXVECTOR3	m_Pos;				//x,y,zç¿ïW

@@ -8,8 +8,6 @@ VOID DamageStar::Update()
 
 VOID DamageStar::Render()
 {
-	//m_pGameManager->SetTransForm();
-
 	DefaultLight();
 
 	D3DXMATRIX MatWorld;
@@ -20,13 +18,13 @@ VOID DamageStar::Render()
 
 	D3DXMatrixMultiply(&MatWorld, &MatWorld, m_pGameManager->GetCameraProjectionMatrix());*/
 
-	//FbxRelated* pModel = m_FBXStorage->GetFBX(_T("StarFBX"));
+	FbxRelated& rEnemyStar = m_rGameLib.GetFbx(_T("StarFBX"));
 
 	//F‚ÌÝ’è
-	/*D3DXVECTOR4 DamageColor(ColorMax / ColorMax, ColorMax*0.8f / ColorMax, ColorMax*0.8f / ColorMax, ColorMax*0.8f / ColorMax);
-	pModel->SetEmissive(&DamageColor);
+	D3DXVECTOR4 DamageColor(ColorMax / ColorMax, ColorMax*0.8f / ColorMax, ColorMax*0.8f / ColorMax, ColorMax*0.8f / ColorMax);
+	rEnemyStar.SetEmissive(&DamageColor);
 
-	m_pGameManager->Render(pModel, &MatWorld);*/
+	m_rGameLib.Render(rEnemyStar, MatWorld);
 }
 
 VOID DamageStar::Init()

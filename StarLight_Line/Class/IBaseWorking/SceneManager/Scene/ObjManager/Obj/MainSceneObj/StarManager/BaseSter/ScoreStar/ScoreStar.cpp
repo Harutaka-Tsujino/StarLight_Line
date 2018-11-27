@@ -13,20 +13,18 @@ VOID ScoreStar::Update()
 
 VOID ScoreStar::Render()
 {
-	//m_pGameManager->SetTransForm();
-
 	DefaultLight();
 
 	D3DXMATRIX MatWorld;
 	
 	ConvertLocalToWorld(&MatWorld);
 
-	//FbxRelated* pModel = m_FBXStorage->GetFBX(_T("StarFBX"));
+	FbxRelated& rEnemyStar = m_rGameLib.GetFbx(_T("StarFBX"));
 
-	////F‚ÌÝ’è
-	//D3DXVECTOR4 ScoreColor(ColorMax / ColorMax, 0 / ColorMax, 0 / ColorMax, ColorMax / ColorMax);
+	//F‚ÌÝ’è
+	D3DXVECTOR4 ScoreColor(ColorMax / ColorMax, 0 / ColorMax, 0 / ColorMax, ColorMax / ColorMax);
 
-	//pModel->SetEmissive(&ScoreColor);
+	rEnemyStar.SetEmissive(&ScoreColor);
 
-	//m_pGameManager->Render(pModel, &MatWorld);
+	m_rGameLib.Render(rEnemyStar, MatWorld);
 }
