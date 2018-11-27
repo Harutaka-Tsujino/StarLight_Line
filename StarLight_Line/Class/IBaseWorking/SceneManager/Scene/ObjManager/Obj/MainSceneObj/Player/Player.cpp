@@ -2,15 +2,11 @@
 
 VOID Player::Init()
 {
-	//長いので省略
-	int* pPoX = &m_PlayerPoint.x;
-	int* pPoY = &m_PlayerPoint.y;
-
-	*pPoX = m_MAXXARRAYNUM / 2;
-	*pPoY = m_MAXYARRAYNUM / 2;
+	m_PlayerPoint.x = m_MAXXARRAYNUM / 2;
+	m_PlayerPoint.y = m_MAXYARRAYNUM / 2;
 	m_Speed.x = m_Speed.y = 0.0f;
-	m_PlayerPos.x = m_BasePos[*pPoY][*pPoX].x;	//真ん中に自機を置く
-	m_PlayerPos.y = m_BasePos[*pPoY][*pPoX].y;
+	m_PlayerPos.x = m_BasePos[m_PlayerPoint.y][m_PlayerPoint.x].x;	//真ん中に自機を置く
+	m_PlayerPos.y = m_BasePos[m_PlayerPoint.y][m_PlayerPoint.x].y;
 }
 
 VOID Player::Update()
@@ -28,14 +24,14 @@ VOID Player::Update()
 		*pPoY > 0)
 	{
 		HitKey = UP;
-		CanMovePoint(&PlayerPointBuffer, HitKey);
+		DecideSpeed(&PlayerPointBuffer, HitKey);
 	}
 
 	if (m_rGameLib.KeyboardIsPressed(DIK_S) &&
 		*pPoY < (m_MAXYARRAYNUM - 1))
 	{
 		HitKey = DOWN;
-		CanMovePoint(&PlayerPointBuffer, HitKey);
+		DecideSpeed(&PlayerPointBuffer, HitKey);
 	}
 
 	//x座標の移動
@@ -43,17 +39,17 @@ VOID Player::Update()
 		*pPoX > 0)
 	{
 		HitKey = LEFT;
-		CanMovePoint(&PlayerPointBuffer, HitKey);
+		DecideSpeed(&PlayerPointBuffer, HitKey);
 	}
 
 	if (m_rGameLib.KeyboardIsPressed(DIK_D) &&
 		*pPoX < (m_MAXXARRAYNUM - 1))
 	{
 		HitKey = RIGHT;
-		CanMovePoint(&PlayerPointBuffer, HitKey);
+		DecideSpeed(&PlayerPointBuffer, HitKey);
 	}
 	
-	CanMovePos(PlayerPointBuffer);
+	RestrictedMoving(PlayerPointBuffer);
 }
 
 VOID Player::Render()
@@ -87,7 +83,9 @@ VOID Player::Render()
 	m_rGameLib.Render(rEiwi, MatWorld, m_rGameLib.GetTex(_T("PlayerTex")));
 }
 
-VOID Player::CanMovePos(const CoordinatePoint& PrevPoint)
+//名前不安なので募集中
+//プレイヤーの動きを制限する関数
+VOID Player::RestrictedMoving(const CoordinatePoint& PrevPoint)
 {
 	SurfaceCoordinate PrevPos, NextPos;
 	int* pPoX = &m_PlayerPoint.x;
@@ -99,9 +97,11 @@ VOID Player::CanMovePos(const CoordinatePoint& PrevPoint)
 	NextPos.y = m_BasePos[*pPoY][*pPoX].y;
 	NextPos.x = m_BasePos[*pPoY][*pPoX].x;
 
+	//動かす
 	m_PlayerPos.x += m_Speed.x;
 	m_PlayerPos.y += m_Speed.y;
 
+	//制限をかける
 	if (m_Speed.x > 0)
 	{
 		m_PlayerPos.x = max(min(NextPos.x, m_PlayerPos.x), PrevPos.x);
@@ -121,7 +121,7 @@ VOID Player::CanMovePos(const CoordinatePoint& PrevPoint)
 	m_PlayerPos.y = max(min(PrevPos.y, m_PlayerPos.y), NextPos.y);
 }
 
-VOID Player::CanMovePoint(CoordinatePoint* PrevPoint, const HIT_KEY& HitKey)
+VOID Player::DecideSpeed(CoordinatePoint* PrevPoint, const HIT_KEY& HitKey)
 {
 	const float FRAMENUM = 5.f;	//何フレームで割るか(自機のスピードの)
 
