@@ -50,12 +50,18 @@ VOID DX3D::ToggleWndMode()
 	D3DPRESENT_PARAMETERS D3DPP = m_D3DPP->ToggleD3DPPWndMode();
 
 	HRESULT hr = m_pDX3DDev->Reset(&D3DPP);	//スワップチェーンのタイプ、サイズ、およびフォーマットをリセット
+
+	InvalidateRect(m_HWND, NULL, FALSE);
+	UpdateWindow(nullptr);
+
 	if (FAILED(hr))
 	{
 		OnFailedChangeWndMode(hr);
 
 		return;
 	}
+
+	RedrawWindow(m_HWND, nullptr, nullptr, RDW_INVALIDATE | RDW_UPDATENOW | RDW_ERASE);
 
 	LONG overlapWindowStyle	= (D3DPP.Windowed) ? WS_OVERLAPPEDWINDOW : WS_POPUP;
 	LONG windowStyle		= overlapWindowStyle | WS_VISIBLE;
@@ -68,6 +74,7 @@ VOID DX3D::ToggleWndMode()
 	m_pColorBlender->DefaultColorBlending();
 
 	InitViewPort();
+
 }
 
 VOID DX3D::Create(LPDIRECT3D9 pD3D)
