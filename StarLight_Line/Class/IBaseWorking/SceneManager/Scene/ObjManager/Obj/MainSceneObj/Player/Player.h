@@ -47,12 +47,12 @@ private:
 	};
 
 	/**
-	*@brief 自機の動きを決める関数
+	*@brief 自機の動きを決め,動く範囲を制限する関数
 	*@param PrevPoint 自機が動く前の座標を保存した値
 	*/
-	VOID CanMovePos(const CoordinatePoint& PrevPoint);
+	VOID RestrictedMoving(const CoordinatePoint& PrevPoint);
 
-	VOID CanMovePoint(CoordinatePoint* PrevPoint, const HIT_KEY& HitKey);
+	VOID DecideSpeed(CoordinatePoint* PrevPoint, const HIT_KEY& HitKey);
 
 	SurfaceCoordinate m_Speed;
 
