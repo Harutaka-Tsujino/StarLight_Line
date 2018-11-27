@@ -128,7 +128,15 @@
   <ItemGroup>
     <ClCompile Include="Class\IBaseWorking\IBaseWorking.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\SceneManager.cpp" />
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\MainScene\MainScene.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\ObjManager.cpp" />
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\MainSceneObject.cpp" />
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\Player.cpp" />
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager\BaseSter\BaseStar.cpp" />
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager\BaseSter\ClearStar\ClearStar.cpp" />
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager\BaseSter\DamageStar\DamageStar.cpp" />
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager\BaseSter\ScoreStar\ScoreStar.cpp" />
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager\StarManager.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\Obj.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\SaveDataSceneObj\SaveDataSceneObj.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\StageSelectSceneObj\StageSelectSceneObj.cpp" />
@@ -155,6 +163,7 @@
     <ClCompile Include="GameLib\DX\DXInput\InputDev\Keyboard\Keyboard.cpp" />
     <ClCompile Include="GameLib\DX\DXInput\InputDev\Mouse\Mouse.cpp" />
     <ClCompile Include="GameLib\GameLib.cpp" />
+    <ClCompile Include="GameLib\Timer\Timer.cpp" />
     <ClCompile Include="GameLib\Wnd\Wnd.cpp" />
     <ClCompile Include="Main\Main.cpp" />
   </ItemGroup>
@@ -162,8 +171,16 @@
     <ClInclude Include="Class\IBaseWorking\IBaseWorking.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\SceneManager.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\Enum\SCENE_KIND.h" />
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\MainScene\MainScene.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\ObjManager.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\Enum\OBJ_TYPE.h" />
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\MainSceneObject.h" />
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\Player.h" />
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager\BaseSter\BaseStar.h" />
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager\BaseSter\ClearStar\ClearStar.h" />
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager\BaseSter\DamageStar\DamageStar.h" />
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager\BaseSter\ScoreStar\ScoreStar.h" />
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager\StarManager.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\Obj.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\SaveDataSceneObj\SaveDataSceneObj.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\StageSelectSceneObj\StageSelectSceneObj.h" />
@@ -195,6 +212,7 @@
     <ClInclude Include="GameLib\DX\DXInput\InputDev\Mouse\Enum\DIM.h" />
     <ClInclude Include="GameLib\DX\DXInput\InputDev\Mouse\Mouse.h" />
     <ClInclude Include="GameLib\GameLib.h" />
+    <ClInclude Include="GameLib\Timer\Timer.h" />
     <ClInclude Include="GameLib\Wnd\Data\RectSize.h" />
     <ClInclude Include="GameLib\Wnd\Wnd.h" />
     <ClInclude Include="Main\Main.h" />

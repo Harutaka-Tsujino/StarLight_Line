@@ -119,6 +119,33 @@
     <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\SaveDataSceneObj">
       <UniqueIdentifier>{da3b01f8-7068-4de0-9d3e-73dde20f81d3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\MainScene">
+      <UniqueIdentifier>{f66406c0-2392-47e5-999f-77445e855644}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj">
+      <UniqueIdentifier>{cc9db974-4b17-4946-83a4-8c52eff24017}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player">
+      <UniqueIdentifier>{3173ce33-4862-41ad-ab7c-cf2c14f6a78c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager">
+      <UniqueIdentifier>{a599a02f-ca45-425e-856b-ceb7b9e0b4d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager\BaseStar">
+      <UniqueIdentifier>{0930ac28-f29e-4263-b675-d4e10ed08a4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager\BaseStar\ScoreStar">
+      <UniqueIdentifier>{2a78edbb-59f1-4df5-91c9-db5192760cb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager\BaseStar\DamageStar">
+      <UniqueIdentifier>{dee73261-b40b-47ef-a47a-aa4eccbc4585}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager\BaseStar\ClearStar">
+      <UniqueIdentifier>{20b75caf-9488-45ca-819c-a3903d56154c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLib\Timer">
+      <UniqueIdentifier>{229f2d61-5145-4ad5-9199-cf7b5c92eebb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Class\Singleton\Singleton.cpp">
@@ -213,6 +240,33 @@
     </ClCompile>
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\SaveDataSceneObj\SaveDataSceneObj.cpp">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\SaveDataSceneObj</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\MainScene\MainScene.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\MainScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\Player.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager\StarManager.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager\BaseSter\BaseStar.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager\BaseStar</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager\BaseSter\DamageStar\DamageStar.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager\BaseStar\DamageStar</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager\BaseSter\ScoreStar\ScoreStar.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager\BaseStar\ScoreStar</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLib\Timer\Timer.cpp">
+      <Filter>GameLib\Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager\BaseSter\ClearStar\ClearStar.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager\BaseStar\ClearStar</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\MainSceneObject.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -332,6 +386,33 @@
     </ClInclude>
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\SaveDataSceneObj\SaveDataSceneObj.h">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\SaveDataSceneObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\MainScene\MainScene.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\MainScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\Player.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager\StarManager.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager\BaseSter\BaseStar.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager\BaseStar</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager\BaseSter\DamageStar\DamageStar.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager\BaseStar\DamageStar</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager\BaseSter\ScoreStar\ScoreStar.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager\BaseStar\ScoreStar</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLib\Timer\Timer.h">
+      <Filter>GameLib\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager\BaseSter\ClearStar\ClearStar.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager\BaseStar\ClearStar</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\MainSceneObject.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
