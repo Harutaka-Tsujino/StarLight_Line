@@ -15,6 +15,7 @@ public:
 	StarManager() :Obj(OT_TRANSPARENCY, 0.5f)
 	{
 		LoadStarData("StageData/otamesi.csv");
+		m_rGameLib.CreateFbx(_T("StarFBX"), "3DModels/EnemyStar/EnemyStar.fbx");
 		Init();
 	}
 

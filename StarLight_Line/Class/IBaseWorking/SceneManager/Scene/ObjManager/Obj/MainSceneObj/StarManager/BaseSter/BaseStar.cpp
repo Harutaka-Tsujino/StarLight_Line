@@ -44,37 +44,36 @@ VOID BaseStar::DefaultLight()
 	light.Diffuse.g = 1.f;
 	light.Diffuse.b = 1.f;
 
-	light.Specular.r = 1.f;
-	light.Specular.b = 1.f;
-	light.Specular.g = 1.f;
+	light.Specular.r = 0.5f;
+	light.Specular.b = 0.5f;
+	light.Specular.g = 0.5f;
 
 	D3DXVec3Normalize((D3DXVECTOR3*)&light.Direction, &vecDirection);
 
-	light.Range = 200.f;
 	m_rGameLib.SetLight(light, 0);
 }
 
 VOID BaseStar::ConvertLocalToWorld(D3DXMATRIX* pMatWorld)
 {
-	D3DXMATRIX matTrans, matScale;
+	D3DXMATRIX MatTrans, MatScale;
 	D3DXMatrixIdentity(pMatWorld);
-	D3DXMatrixIdentity(&matTrans);
-	D3DXMatrixIdentity(&matScale);
+	D3DXMatrixIdentity(&MatTrans);
+	D3DXMatrixIdentity(&MatScale);
 
 	const float ModelScale = 0.0005f;
 
 	// ägëÂ
-	D3DXMatrixScaling(&matScale, ModelScale, ModelScale, ModelScale);
+	D3DXMatrixScaling(&MatScale, ModelScale, ModelScale, ModelScale);
 
 	// ä|ÇØçáÇÌÇπ
-	D3DXMatrixMultiply(pMatWorld, pMatWorld, &matScale);
+	D3DXMatrixMultiply(pMatWorld, pMatWorld, &MatScale);
 
 	m_Info.m_Pos.x = m_Info.m_Pos.x / 300.f;
 	m_Info.m_Pos.y = m_Info.m_Pos.y / 100.f;
 
 	// à⁄ìÆ
-	D3DXMatrixTranslation(&matTrans, m_Info.m_Pos.x, m_Info.m_Pos.y, 0.01f);
+	D3DXMatrixTranslation(&MatTrans, m_Info.m_Pos.x, m_Info.m_Pos.y, 0.01f);
 
 	// ä|ÇØçáÇÌÇπ
-	D3DXMatrixMultiply(pMatWorld, pMatWorld, &matTrans);
+	D3DXMatrixMultiply(pMatWorld, pMatWorld, &MatTrans);
 }

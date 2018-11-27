@@ -71,12 +71,6 @@
     <Filter Include="Class\IBaseWorking\SceneManager\Scene\TitleScene">
       <UniqueIdentifier>{fc00e2fe-f459-4188-8e67-3c43070df8e7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager">
-      <UniqueIdentifier>{e2dde8e6-d454-4802-92ea-e98069f0e0c5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj">
-      <UniqueIdentifier>{f2d24b02-e207-4914-a065-299a27100f92}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameLib\DX\DX3D\CustomVertexEditor\Data">
       <UniqueIdentifier>{74969a96-e2c9-41d8-b01d-6522f00981ad}</UniqueIdentifier>
     </Filter>
@@ -88,6 +82,27 @@
     </Filter>
     <Filter Include="Class\IBaseWorking\SceneManager\Scene\Enum">
       <UniqueIdentifier>{5d74bf23-2d6d-4649-b50c-af6fcac03cdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\MainScene">
+      <UniqueIdentifier>{f66406c0-2392-47e5-999f-77445e855644}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLib\Timer">
+      <UniqueIdentifier>{229f2d61-5145-4ad5-9199-cf7b5c92eebb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLib\DX\DX3D\FbxStorage">
+      <UniqueIdentifier>{66b79674-a694-430f-abd2-cd25e2325329}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLib\DX\DX3D\FbxStorage\FbxRelated">
+      <UniqueIdentifier>{146674e0-72ca-4767-bf22-522594dd8a64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxModel">
+      <UniqueIdentifier>{d20a9105-0bbf-4a1c-b6ca-b45545d5618a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager">
+      <UniqueIdentifier>{e2dde8e6-d454-4802-92ea-e98069f0e0c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj">
+      <UniqueIdentifier>{f2d24b02-e207-4914-a065-299a27100f92}</UniqueIdentifier>
     </Filter>
     <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\Enum">
       <UniqueIdentifier>{e8c736f1-3d5c-48f8-86e7-9eb744f294ec}</UniqueIdentifier>
@@ -142,18 +157,6 @@
     </Filter>
     <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager\BaseStar\ClearStar">
       <UniqueIdentifier>{20b75caf-9488-45ca-819c-a3903d56154c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameLib\Timer">
-      <UniqueIdentifier>{229f2d61-5145-4ad5-9199-cf7b5c92eebb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameLib\DX\DX3D\FbxStorage">
-      <UniqueIdentifier>{66b79674-a694-430f-abd2-cd25e2325329}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameLib\DX\DX3D\FbxStorage\FbxRelated">
-      <UniqueIdentifier>{146674e0-72ca-4767-bf22-522594dd8a64}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxModel">
-      <UniqueIdentifier>{d20a9105-0bbf-4a1c-b6ca-b45545d5618a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -5,8 +5,8 @@
 #include "../ObjManager/Obj/Obj.h"
 #include "../ObjManager/Obj/MainSceneObj/MainSceneObject.h"
 #include "../ObjManager/Obj/MainSceneObj/StarManager/StarManager.h"
+#include "../ObjManager/Obj/MainSceneObj/Player/Player.h"
 
-//オブジェクトの登録だけ
 class MainScene :public Scene
 {
 public:
@@ -14,6 +14,7 @@ public:
 	{
 		m_pObjManager->Resister(static_cast<Obj*>(new MainBack()));
 		m_pObjManager->Resister(static_cast<Obj*>(new StarManager()));
+		m_pObjManager->Resister(static_cast<Obj*>(new Player()));
 	}
 
 	~MainScene() {};

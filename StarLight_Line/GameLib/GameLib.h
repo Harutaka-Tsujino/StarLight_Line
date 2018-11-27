@@ -17,7 +17,7 @@
 #include "DX\DX.h"
 #include "DX\DX3D\CustomVertexEditor\Data\CustomVertex.h"
 #include "DX\DX3D\CustomVertexEditor\Data\ObjData.h"
-#include "Timer\Timer.h"
+#include "Timer/Timer.h"
 
 /**
 * @brief 汎用クラスのFacade,ウィンドウ生成やDX関係の初期化も行う
@@ -297,17 +297,17 @@ public:
 
 	inline LONGLONG GetSecond()
 	{
-		m_pTimer->GetSecond();
+		return m_pTimer->GetSecond();
 	}
 
 	inline LONGLONG GetMilliSecond()
 	{
-		m_pTimer->GetMilliSecond();
+		return m_pTimer->GetMilliSecond();
 	}
 
 	inline LONGLONG GetMicroSecond()
 	{
-		m_pTimer->GetMicroSecond();
+		return m_pTimer->GetMicroSecond();
 	}
 	
 	inline BOOL MouseIsPressed(INT key) const
