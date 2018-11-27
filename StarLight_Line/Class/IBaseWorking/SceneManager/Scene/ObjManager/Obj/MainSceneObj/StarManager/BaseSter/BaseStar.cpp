@@ -22,13 +22,14 @@ VOID BaseStar::Update()
 */
 VOID BaseStar::FallStarPosYTime()
 {
-	//星の落ち始める時間 = 
+	//星の落ち始める時間 = (((小節数 * 拍数) + n分音符) * fps) / 1分間に落ちてくる星の個数
 	m_Info.m_Time = (((m_Info.m_Division * 4) + m_Info.m_StarsNumInDivision) * 60.f) / m_Info.m_DropPerMinute;
 }
 
 VOID BaseStar::PosOfStarYCoordinate(const LONGLONG& CurrentTime)
 {
-	m_Info.m_Pos.y = (m_Info.m_Time - CurrentTime / 1000.f);
+	//星のy座標 =　落ち始める時間(ms) - (今の時間(秒) / 1000)
+	m_Info.m_Pos.y = m_Info.m_Time - (CurrentTime / 1000.f);
 }
 
 VOID BaseStar::SetStarInfo(const struct StarPlace& StarPlace)
