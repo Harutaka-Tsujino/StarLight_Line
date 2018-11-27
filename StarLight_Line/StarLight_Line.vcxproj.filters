@@ -146,6 +146,15 @@
     <Filter Include="GameLib\Timer">
       <UniqueIdentifier>{229f2d61-5145-4ad5-9199-cf7b5c92eebb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameLib\DX\DX3D\FbxStorage">
+      <UniqueIdentifier>{66b79674-a694-430f-abd2-cd25e2325329}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLib\DX\DX3D\FbxStorage\FbxRelated">
+      <UniqueIdentifier>{146674e0-72ca-4767-bf22-522594dd8a64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxModel">
+      <UniqueIdentifier>{d20a9105-0bbf-4a1c-b6ca-b45545d5618a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Class\Singleton\Singleton.cpp">
@@ -267,6 +276,15 @@
     </ClCompile>
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\MainSceneObject.cpp">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxRelated.cpp">
+      <Filter>GameLib\DX\DX3D\FbxStorage\FbxRelated</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxModel\FbxModel.cpp">
+      <Filter>GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxModel</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLib\DX\DX3D\FbxStorage\FbxStorage.cpp">
+      <Filter>GameLib\DX\DX3D\FbxStorage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -413,6 +431,15 @@
     </ClInclude>
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\MainSceneObject.h">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxRelated.h">
+      <Filter>GameLib\DX\DX3D\FbxStorage\FbxRelated</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxModel\FbxModel.h">
+      <Filter>GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxModel</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLib\DX\DX3D\FbxStorage\FbxStorage.h">
+      <Filter>GameLib\DX\DX3D\FbxStorage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
