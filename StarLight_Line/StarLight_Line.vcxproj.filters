@@ -158,6 +158,9 @@
     <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager\BaseStar\ClearStar">
       <UniqueIdentifier>{20b75caf-9488-45ca-819c-a3903d56154c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameLib\Collision">
+      <UniqueIdentifier>{d9e635c0-b102-49e7-a9ea-bd5497361bcb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Class\Singleton\Singleton.cpp">
@@ -288,6 +291,9 @@
     </ClCompile>
     <ClCompile Include="GameLib\DX\DX3D\FbxStorage\FbxStorage.cpp">
       <Filter>GameLib\DX\DX3D\FbxStorage</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLib\Collision\Collision.cpp">
+      <Filter>GameLib\Collision</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -443,6 +449,9 @@
     </ClInclude>
     <ClInclude Include="GameLib\DX\DX3D\FbxStorage\FbxStorage.h">
       <Filter>GameLib\DX\DX3D\FbxStorage</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLib\Collision\Collision.h">
+      <Filter>GameLib\Collision</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
