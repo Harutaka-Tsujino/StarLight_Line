@@ -240,7 +240,7 @@ public:
 		m_pDX3D->CreateRect(pCustomVertices, rCenter, rHalfScale, aRGB, startTU, startTV, endTU, endTV);
 	}
 
-	inline VOID CreateRect(CustomVertex *pCustomVertices,const ObjData& rObjData) const
+	inline VOID CreateRect(CustomVertex *pCustomVertices, const ObjData& rObjData) const
 	{
 		m_pDX3D->CreateRect(pCustomVertices, rObjData);
 	}

@@ -26,8 +26,8 @@ public:
 	{
 		Create();
 
-		m_pMouse	= new Mouse(m_HWND,m_pDXInput);
-		m_pKeyboard	= new Keyboard(m_HWND, m_pDXInput);
+		m_pMouse	= new Mouse(m_HWND, m_pDXInput);
+		m_pKeyboard = new Keyboard(m_HWND, m_pDXInput);
 	}
 
 	~DXInput()
@@ -112,7 +112,7 @@ public:
 	}
 
 private:
-	VOID Create() 
+	VOID Create()
 	{
 		DirectInput8Create(
 			GetModuleHandle(NULL),
