@@ -340,6 +340,11 @@ public:
 		m_pDX->CursorPos(pPos);
 	}
 
+	inline LONG MouseWheelScrollingFromPrev() const
+	{
+		return m_pDX->MouseWheelScrollingFromPrev;
+	}
+
 	inline BOOL KeyboardIsPressed(INT key) const
 	{
 		return m_pDX->KeyboardIsPressed(key);
