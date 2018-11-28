@@ -290,6 +290,11 @@ public:
 		return m_pDXInput->MouseAnyKeyIsPressed();
 	}
 
+	inline VOID CursorPos(POINT* pPos) const
+	{
+		m_pDXInput->CursorPos(pPos);
+	}
+
 	inline BOOL KeyboardIsPressed(INT key) const
 	{
 		return m_pDXInput->KeyboardIsPressed(key);

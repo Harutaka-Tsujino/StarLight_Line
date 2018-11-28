@@ -81,6 +81,11 @@ public:
 		return m_pMouse->AnyKeyIsPressed();
 	}
 
+	inline VOID CursorPos(POINT* pPos) const
+	{
+		m_pMouse->CursorPos(pPos);
+	}
+
 	inline BOOL KeyboardIsPressed(INT key) const
 	{
 		return m_pKeyboard->IsPressed(key);
