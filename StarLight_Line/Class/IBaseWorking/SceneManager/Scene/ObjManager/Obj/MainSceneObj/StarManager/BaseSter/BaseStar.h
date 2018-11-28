@@ -8,10 +8,10 @@
 struct StarPlace
 {
 	D3DXVECTOR3	m_Pos;				//x,y,z座標
+	int m_Division;					//区分け数
+	float m_StarsNumInDivision;		//区分けの中の星の数
 	float m_DropPerMinute;			//1分間にどれだけ落ちてくるか
 	float m_Time;					//落ちTてくる時間
-	int m_Division;					//区分け数
-	int m_StarsNumInDivision;		//区分けの中の星の数
 };
 
 #include "../../../Obj.h"
@@ -40,7 +40,7 @@ protected:
 
 	StarPlace m_Info;				//スターの基本情報
 
-	const float ColorMax = 255.f;
+	const float ColorMax = 1.f;
 };
 
 #endif // !BASE_STAR_H_

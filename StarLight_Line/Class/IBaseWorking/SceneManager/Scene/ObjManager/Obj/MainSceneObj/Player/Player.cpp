@@ -24,14 +24,12 @@ VOID Player::Update()
 		*pPoY > 0)
 	{
 		HitKey = UP;
-		DecideSpeed(&PlayerPointBuffer, HitKey);
 	}
 
 	if (m_rGameLib.KeyboardIsPressed(DIK_S) &&
 		*pPoY < (m_MAXYARRAYNUM - 1))
 	{
 		HitKey = DOWN;
-		DecideSpeed(&PlayerPointBuffer, HitKey);
 	}
 
 	//xÀ•W‚ÌˆÚ“®
@@ -39,16 +37,15 @@ VOID Player::Update()
 		*pPoX > 0)
 	{
 		HitKey = LEFT;
-		DecideSpeed(&PlayerPointBuffer, HitKey);
 	}
 
 	if (m_rGameLib.KeyboardIsPressed(DIK_D) &&
 		*pPoX < (m_MAXXARRAYNUM - 1))
 	{
 		HitKey = RIGHT;
-		DecideSpeed(&PlayerPointBuffer, HitKey);
 	}
 	
+	DecideSpeed(&PlayerPointBuffer, HitKey);
 	RestrictedMoving(PlayerPointBuffer);
 }
 
