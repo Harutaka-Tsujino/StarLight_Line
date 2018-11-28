@@ -22,7 +22,7 @@ VOID ScoreStar::Render()
 	FbxRelated& rEnemyStar = m_rGameLib.GetFbx(_T("StarFBX"));
 
 	//êFÇÃê›íË
-	D3DXVECTOR4 ScoreColor(ColorMax, 0.f, 0.f, ColorMax);
+	D3DXVECTOR4 ScoreColor(ColorMax, 0x87 / ColorMax, 0xCE / ColorMax, 0xFA / ColorMax);
 
 	rEnemyStar.SetEmissive(&ScoreColor);
 
