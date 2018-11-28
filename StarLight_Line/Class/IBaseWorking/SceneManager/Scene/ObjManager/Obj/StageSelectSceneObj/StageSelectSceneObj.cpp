@@ -213,6 +213,8 @@ VOID StageSelectSceneLevelSelecter::Update()
 	{
 		//ステージの決定
 		m_sceneTranlationAlpha = 1;
+		SceneManager& rSceneManager = SceneManager::GetInstance();
+		rSceneManager.SetNextScene(SK_GAME);
 	}
 }
 
