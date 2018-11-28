@@ -68,6 +68,11 @@ public:
 		return FALSE;
 	}
 
+	inline VOID CursorPos(POINT* pPos) const
+	{
+		*pPos = m_cursorRelativePos;
+	}
+
 private:
 	VOID Create(LPDIRECTINPUT8 pDXInput);
 
