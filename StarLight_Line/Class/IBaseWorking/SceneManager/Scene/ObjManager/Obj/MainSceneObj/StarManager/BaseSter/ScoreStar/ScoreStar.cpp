@@ -1,4 +1,4 @@
-#include "ScoreStar.h"
+﻿#include "ScoreStar.h"
 
 VOID ScoreStar::Init()
 {
@@ -21,7 +21,7 @@ VOID ScoreStar::Render()
 
 	FbxRelated& rEnemyStar = m_rGameLib.GetFbx(_T("StarFBX"));
 
-	//�F�̐ݒ�
+	//色の設定
 	D3DXVECTOR4 ScoreColor(ColorMax, 0x87 / ColorMax, 0xCE / ColorMax, 0xFA / ColorMax);
 
 	rEnemyStar.SetEmissive(&ScoreColor);

@@ -1,4 +1,4 @@
-#ifndef STAR_MANAGER_H_
+﻿#ifndef STAR_MANAGER_H_
 #define STAR_MANAGER_H_
 
 #include <vector>

@@ -1,4 +1,4 @@
-#ifndef SCORE_STAR_H_
+﻿#ifndef SCORE_STAR_H_
 #define SCORE_STAR_H_
 
 #include "../BaseStar.h"

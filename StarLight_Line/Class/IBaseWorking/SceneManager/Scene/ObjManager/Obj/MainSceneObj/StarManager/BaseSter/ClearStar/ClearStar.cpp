@@ -1,4 +1,4 @@
-#include "ClearStar.h"
+﻿#include "ClearStar.h"
 
 VOID ClearStar::Init()
 {
@@ -21,7 +21,7 @@ VOID ClearStar::Render()
 
 	FbxRelated& rEnemyStar = m_rGameLib.GetFbx(_T("StarFBX"));
 
-	//�F�̐ݒ�
+	//色の設定
 	D3DXVECTOR4 ClearColor(ColorMax, 0x98 / ColorMax, 0xFB / ColorMax, 0x98 / ColorMax);
 
 	rEnemyStar.SetEmissive(&ClearColor);

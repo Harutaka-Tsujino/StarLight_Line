@@ -1,4 +1,4 @@
-#ifndef MAIN_SCENE_OBJECT_H_
+﻿#ifndef MAIN_SCENE_OBJECT_H_
 #define MAIN_SCENE_OBJECT_H_
 
 #include <Windows.h>

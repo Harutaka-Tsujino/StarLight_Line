@@ -1,4 +1,4 @@
-#include "BaseStar.h"
+ï»¿#include "BaseStar.h"
 
 VOID BaseStar::InitBaseStar()
 {
@@ -18,17 +18,17 @@ VOID BaseStar::Update()
 }
 
 /**
-*@brief “G‚Ì¯‚Ì—‚¿‚Ä‚­‚éŠÔ‚ğİ’è‚·‚éŠÖ”
+*@brief æ•µã®æ˜Ÿã®è½ã¡ã¦ãã‚‹æ™‚é–“ã‚’è¨­å®šã™ã‚‹é–¢æ•°
 */
 VOID BaseStar::FallStarPosYTime()
 {
-	//¯‚Ì—‚¿n‚ß‚éŠÔ = (((n¬ß–Ú * ””) + n•ª‰¹•„) * fps) / 1•ªŠÔ‚É—‚¿‚Ä‚­‚é¯‚ÌŒÂ”
+	//æ˜Ÿã®è½ã¡å§‹ã‚ã‚‹æ™‚é–“ = (((nå°ç¯€ç›® * æ‹æ•°) + nåˆ†éŸ³ç¬¦) * fps) / 1åˆ†é–“ã«è½ã¡ã¦ãã‚‹æ˜Ÿã®å€‹æ•°
 	m_Info.m_Time = (((m_Info.m_Division * 4) + m_Info.m_StarsNumInDivision) * 60.f) / m_Info.m_DropPerMinute;
 }
 
 VOID BaseStar::PosOfStarYCoordinate(const LONGLONG& CurrentTime)
 {
-	//¯‚ÌyÀ•W =@—‚¿n‚ß‚éŠÔ(ms) - (¡‚ÌŠÔ(•b) / 1000)
+	//æ˜Ÿã®yåº§æ¨™ =ã€€è½ã¡å§‹ã‚ã‚‹æ™‚é–“(ms) - (ä»Šã®æ™‚é–“(ç§’) / 1000)
 	m_Info.m_Pos.y = m_Info.m_Time - (CurrentTime / 1000.f);
 }
 
@@ -67,18 +67,18 @@ VOID BaseStar::ConvertLocalToWorld(D3DXMATRIX* pMatWorld)
 
 	const float MODELSCALE = 0.0005f;
 
-	// Šg‘å
+	// æ‹¡å¤§
 	D3DXMatrixScaling(&MatScale, MODELSCALE, MODELSCALE, MODELSCALE);
 
-	// Š|‚¯‡‚í‚¹
+	// æ›ã‘åˆã‚ã›
 	D3DXMatrixMultiply(pMatWorld, pMatWorld, &MatScale);
 
 	m_Info.m_Pos.x = m_Info.m_Pos.x / 300.f;
 	m_Info.m_Pos.y = m_Info.m_Pos.y / 100.f;
 
-	// ˆÚ“®
+	// ç§»å‹•
 	D3DXMatrixTranslation(&MatTrans, m_Info.m_Pos.x, m_Info.m_Pos.y, 0.01f);
 
-	// Š|‚¯‡‚í‚¹
+	// æ›ã‘åˆã‚ã›
 	D3DXMatrixMultiply(pMatWorld, pMatWorld, &MatTrans);
 }

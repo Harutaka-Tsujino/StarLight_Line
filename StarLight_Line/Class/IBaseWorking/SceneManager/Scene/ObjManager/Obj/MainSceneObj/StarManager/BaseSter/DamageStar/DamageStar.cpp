@@ -1,4 +1,4 @@
-#include"DamageStar.h"
+﻿#include"DamageStar.h"
 
 VOID DamageStar::Update()
 {
@@ -16,7 +16,7 @@ VOID DamageStar::Render()
 
 	FbxRelated& rEnemyStar = m_rGameLib.GetFbx(_T("StarFBX"));
 
-	//�F�̐ݒ�
+	//色の設定
 	D3DXVECTOR4 DamageColor(ColorMax, ColorMax, ColorMax, ColorMax);
 	rEnemyStar.SetEmissive(&DamageColor);
 
