@@ -73,6 +73,11 @@ public:
 		*pPos = m_cursorRelativePos;
 	}
 
+	inline LONG WheelScrollingFromPrev() const
+	{
+		return m_state.lZ;
+	}
+
 private:
 	VOID Create(LPDIRECTINPUT8 pDXInput);
 

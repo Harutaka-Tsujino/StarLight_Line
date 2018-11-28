@@ -86,6 +86,11 @@ public:
 		m_pMouse->CursorPos(pPos);
 	}
 
+	inline LONG MouseWheelScrollingFromPrev() const
+	{
+		return m_pMouse->WheelScrollingFromPrev;
+	}
+
 	inline BOOL KeyboardIsPressed(INT key) const
 	{
 		return m_pKeyboard->IsPressed(key);
