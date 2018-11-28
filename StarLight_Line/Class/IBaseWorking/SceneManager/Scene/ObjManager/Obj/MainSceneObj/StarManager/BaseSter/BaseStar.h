@@ -40,7 +40,7 @@ protected:
 
 	StarPlace m_Info;				//スターの基本情報
 
-	const float ColorMax = 1.f;
+	const float ColorMax = 0xFF;
 };
 
 #endif // !BASE_STAR_H_
