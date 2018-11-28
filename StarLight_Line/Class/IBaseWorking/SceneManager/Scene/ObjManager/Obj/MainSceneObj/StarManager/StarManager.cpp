@@ -6,6 +6,7 @@
 
 #include "BaseSter/DamageStar/DamageStar.h"
 #include "BaseSter/ScoreStar/ScoreStar.h"
+#include "BaseSter/ClearStar/ClearStar.h"
 
 VOID StarManager::Init()
 {
@@ -77,6 +78,12 @@ VOID StarManager::Create(const int& rKind)
 
 	case 2:
 		pBase = static_cast<BaseStar*>(new ScoreStar());
+		m_StarNotes.push_back(pBase);
+
+		break;
+
+	case 3:
+		pBase = static_cast<BaseStar*>(new ClearStar());
 		m_StarNotes.push_back(pBase);
 
 		break;
