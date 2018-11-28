@@ -14,14 +14,10 @@ VOID DamageStar::Render()
 
 	ConvertLocalToWorld(&MatWorld);
 
-	/*D3DXMatrixMultiply(&MatWorld, &MatWorld, m_pGameManager->GetCameraViewMatrix());
-
-	D3DXMatrixMultiply(&MatWorld, &MatWorld, m_pGameManager->GetCameraProjectionMatrix());*/
-
 	FbxRelated& rEnemyStar = m_rGameLib.GetFbx(_T("StarFBX"));
 
 	//êFÇÃê›íË
-	D3DXVECTOR4 DamageColor(ColorMax / ColorMax, ColorMax*0.8f / ColorMax, ColorMax*0.8f / ColorMax, ColorMax*0.8f / ColorMax);
+	D3DXVECTOR4 DamageColor(ColorMax, ColorMax, ColorMax, ColorMax);
 	rEnemyStar.SetEmissive(&DamageColor);
 
 	m_rGameLib.Render(rEnemyStar, MatWorld);

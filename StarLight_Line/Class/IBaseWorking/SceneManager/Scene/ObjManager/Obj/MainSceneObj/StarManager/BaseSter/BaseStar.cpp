@@ -22,7 +22,7 @@ VOID BaseStar::Update()
 */
 VOID BaseStar::FallStarPosYTime()
 {
-	//¯‚Ì—Ž‚¿Žn‚ß‚éŽžŠÔ = (((¬ß” * ””) + n•ª‰¹•„) * fps) / 1•ªŠÔ‚É—Ž‚¿‚Ä‚­‚é¯‚ÌŒÂ”
+	//¯‚Ì—Ž‚¿Žn‚ß‚éŽžŠÔ = (((n¬ß–Ú * ””) + n•ª‰¹•„) * fps) / 1•ªŠÔ‚É—Ž‚¿‚Ä‚­‚é¯‚ÌŒÂ”
 	m_Info.m_Time = (((m_Info.m_Division * 4) + m_Info.m_StarsNumInDivision) * 60.f) / m_Info.m_DropPerMinute;
 }
 
