@@ -1,4 +1,4 @@
-#ifndef CLEAR_STAR_H_
+﻿#ifndef CLEAR_STAR_H_
 #define CLEAR_STAT_H_
 
 #include "../BaseStar.h"

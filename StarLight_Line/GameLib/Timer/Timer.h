@@ -1,4 +1,4 @@
-#ifndef TIMER_H_
+ï»¿#ifndef TIMER_H_
 #define TIMER_H_
 
 #include <Windows.h>
@@ -6,7 +6,7 @@
 
 /**
  *@file Timer.h
- *@brief ŠÔ‚ğŒv‚éƒNƒ‰ƒX‚Ìƒwƒbƒ_
+ *@brief æ™‚é–“ã‚’è¨ˆã‚‹ã‚¯ãƒ©ã‚¹ã®ãƒ˜ãƒƒãƒ€
  *@author tatsuya-kinoshita
  */
 
@@ -19,20 +19,20 @@ public:
 	Timer() {};
 	~Timer() {};
 
-	VOID Start();					//ƒ^ƒCƒ}[ŠJn
-	VOID End();						//ƒ^ƒCƒ€ƒJƒEƒ“ƒg‚ğI—¹
-	VOID Reset();					//ƒ^ƒCƒ}[ƒŠƒZƒbƒg
-	LONGLONG GetSecond();			//•b‚ğæ“¾
-	LONGLONG GetMilliSecond();		//ƒ~ƒŠ•bæ“¾
-	LONGLONG GetMicroSecond();		//ƒ}ƒCƒNƒ•bæ“¾
+	VOID Start();					//ã‚¿ã‚¤ãƒãƒ¼é–‹å§‹
+	VOID End();						//ã‚¿ã‚¤ãƒ ã‚«ã‚¦ãƒ³ãƒˆã‚’çµ‚äº†
+	VOID Reset();					//ã‚¿ã‚¤ãƒãƒ¼ãƒªã‚»ãƒƒãƒˆ
+	LONGLONG GetSecond();			//ç§’ã‚’å–å¾—
+	LONGLONG GetMilliSecond();		//ãƒŸãƒªç§’å–å¾—
+	LONGLONG GetMicroSecond();		//ãƒã‚¤ã‚¯ãƒ­ç§’å–å¾—
 
 private:
 	typedef std::chrono::duration<
 		std::chrono::system_clock::rep,
 		std::chrono::system_clock::period> DebugDiffTime;
 
-	std::chrono::system_clock::time_point	m_StartTime;	//!< Œv‘ªŠJnŠÔ.
-	DebugDiffTime m_DiffTime;								//!< Œv‘ªŠÔ.
+	std::chrono::system_clock::time_point	m_StartTime;	//!< è¨ˆæ¸¬é–‹å§‹æ™‚é–“.
+	DebugDiffTime m_DiffTime;								//!< è¨ˆæ¸¬æ™‚é–“.
 };
 
 #endif // !TIMER_H_

@@ -1,4 +1,4 @@
-#include "StarManager.h"
+﻿#include "StarManager.h"
 
 #include<fstream>
 #include<sstream>

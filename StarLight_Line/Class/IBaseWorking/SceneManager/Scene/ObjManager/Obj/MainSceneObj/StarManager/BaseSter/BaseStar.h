@@ -1,4 +1,4 @@
-#ifndef BASE_STAR_H_
+ï»¿#ifndef BASE_STAR_H_
 #define BASE_STAR_H_
 
 #include <Windows.h>
@@ -7,16 +7,16 @@
 
 struct StarPlace
 {
-	D3DXVECTOR3	m_Pos;				//x,y,zÀ•W
-	int m_Division;					//‹æ•ª‚¯”
-	float m_StarsNumInDivision;		//‹æ•ª‚¯‚Ì’†‚Ì¯‚Ì”
-	float m_DropPerMinute;			//1•ªŠÔ‚É‚Ç‚ê‚¾‚¯—‚¿‚Ä‚­‚é‚©
-	float m_Time;					//—‚¿T‚Ä‚­‚éŠÔ
+	D3DXVECTOR3	m_Pos;				//x,y,zåº§æ¨™
+	int m_Division;					//åŒºåˆ†ã‘æ•°
+	float m_StarsNumInDivision;		//åŒºåˆ†ã‘ã®ä¸­ã®æ˜Ÿã®æ•°
+	float m_DropPerMinute;			//1åˆ†é–“ã«ã©ã‚Œã ã‘è½ã¡ã¦ãã‚‹ã‹
+	float m_Time;					//è½ã¡Tã¦ãã‚‹æ™‚é–“
 };
 
 #include "../../../Obj.h"
 /*
-*ƒx[ƒXƒXƒ^[ƒNƒ‰ƒX
+*ãƒ™ãƒ¼ã‚¹ã‚¹ã‚¿ãƒ¼ã‚¯ãƒ©ã‚¹
 */
 class BaseStar :public Obj
 {
@@ -30,15 +30,15 @@ public:
 	virtual VOID Render();
 
 	VOID SetStarInfo(const StarPlace& StarInfo);
-	VOID FallStarPosYTime();									//—‚¿‚Ä‚­‚éŠÔİ’èŠÖ”
+	VOID FallStarPosYTime();									//è½ã¡ã¦ãã‚‹æ™‚é–“è¨­å®šé–¢æ•°
 
 protected:
-	VOID InitBaseStar();										//“G‚É•K—v‚Èî•ñ‚Ì‰Šú‰»ŠÖ”
-	VOID PosOfStarYCoordinate(const LONGLONG& CurrentTime);		//yÀ•W‚ğˆÚ“®‚³‚¹‚éŠÖ”
-	VOID DefaultLight();										//ƒ‰ƒCƒg‚ÌƒfƒtƒHƒ‹ƒg’lİ’èŠÖ”
-	VOID ConvertLocalToWorld(D3DXMATRIX* matWorld);				//ƒ[ƒJƒ‹À•W‚©‚çƒ[ƒ‹ƒhÀ•W‚Ö‚Ì•ÏŠ·
+	VOID InitBaseStar();										//æ•µã«å¿…è¦ãªæƒ…å ±ã®åˆæœŸåŒ–é–¢æ•°
+	VOID PosOfStarYCoordinate(const LONGLONG& CurrentTime);		//yåº§æ¨™ã‚’ç§»å‹•ã•ã›ã‚‹é–¢æ•°
+	VOID DefaultLight();										//ãƒ©ã‚¤ãƒˆã®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆå€¤è¨­å®šé–¢æ•°
+	VOID ConvertLocalToWorld(D3DXMATRIX* matWorld);				//ãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™ã‹ã‚‰ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã¸ã®å¤‰æ›
 
-	StarPlace m_Info;				//ƒXƒ^[‚ÌŠî–{î•ñ
+	StarPlace m_Info;				//ã‚¹ã‚¿ãƒ¼ã®åŸºæœ¬æƒ…å ±
 
 	const float ColorMax = 0xFF;
 };
