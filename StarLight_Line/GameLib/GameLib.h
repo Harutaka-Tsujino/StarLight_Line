@@ -17,7 +17,8 @@
 #include "DX\DX.h"
 #include "DX\DX3D\CustomVertexEditor\Data\CustomVertex.h"
 #include "DX\DX3D\CustomVertexEditor\Data\ObjData.h"
-#include "Timer/Timer.h"
+#include "Timer\Timer.h"
+#include "Collision\Collision.h"
 
 /**
 * @brief 汎用クラスのFacade,ウィンドウ生成やDX関係の初期化も行う
@@ -32,6 +33,7 @@ public:
 		delete m_pDX;
 		delete m_pWnd;
 		delete m_pTimer;
+		delete m_pCollision;
 	};
 
 	/**
@@ -44,12 +46,15 @@ public:
 		if (m_pWnd) return;
 		if (m_pDX) return;
 		if (m_pTimer) return;
+		if (m_pCollision)return;
 
 		m_pWnd = new Wnd(hInst, pAppName);
 
 		m_pDX = new DX(m_pWnd->GetHWND(), m_pWnd->GetWndSize());
 
 		m_pTimer = new Timer();
+
+		m_pCollision = new Collision();
 
 		GetInstance();
 	}
@@ -370,6 +375,16 @@ public:
 		return m_pDX->KeyboardAnyKeyIsPressed();
 	}
 
+	inline BOOL CollidesCircles(const CustomVertex* pA, const CustomVertex* pB) const
+	{
+		return m_pCollision->CollidesCircles(pA, pB);
+	}
+
+	inline BOOL CollidesRects(const CustomVertex* pObjA, const CustomVertex* pObjB) const
+	{
+		return m_pCollision->CollidesRects(pObjA, pObjB);
+	}
+
 private:
 	GameLib() {};
 
@@ -378,6 +393,8 @@ private:
 	static DX* m_pDX;
 
 	static Timer* m_pTimer;
+
+	static Collision* m_pCollision;
 };
 
 #endif //! GAME_LIB_H

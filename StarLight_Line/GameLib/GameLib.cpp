@@ -7,12 +7,15 @@
 #include "DX\DX.h"
 #include "Wnd\Wnd.h"
 #include "Timer\Timer.h"
+#include "Collision\Collision.h"
 
 Wnd* GameLib::m_pWnd = nullptr;
 
 DX* GameLib::m_pDX = nullptr;
 
 Timer* GameLib::m_pTimer = nullptr;
+
+Collision* GameLib::m_pCollision = nullptr;
 
 VOID GameLib::RunFunc(VOID(*pMainFunc)())
 {
