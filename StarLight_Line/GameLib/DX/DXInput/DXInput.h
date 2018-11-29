@@ -88,7 +88,7 @@ public:
 
 	inline LONG MouseWheelScrollingFromPrev() const
 	{
-		return m_pMouse->WheelScrollingFromPrev;
+		return m_pMouse->WheelScrollingFromPrev();
 	}
 
 	inline BOOL KeyboardIsPressed(INT key) const
