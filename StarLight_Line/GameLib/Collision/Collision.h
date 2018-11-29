@@ -1,4 +1,4 @@
-#ifndef COLLISION_H_
+ï»¿#ifndef COLLISION_H_
 #define COLLISION_H_
 
 #include <Windows.h>
@@ -7,27 +7,27 @@
 
 #include "../GameLib.h"
 
-//Õ“Ë”»’èƒNƒ‰ƒX
+//è¡çªåˆ¤å®šã‚¯ãƒ©ã‚¹
 class Collision
 {
 public:
 	Collision() {}
 	~Collision() {}
 
-	//‹…“¯m‚ÌÕ“Ë”»’è
+	//çƒåŒå£«ã®è¡çªåˆ¤å®š
 	inline BOOL CollidesCircles(const CustomVertex* pA, const CustomVertex* pB) const
 	{
-		//pA‚É‚Â‚¢‚Ä‚ÌŒvZ
+		//pAã«ã¤ã„ã¦ã®è¨ˆç®—
 		D3DXVECTOR3 aSide = pA[1].m_pos - pA[0].m_pos;
 		FLOAT aRadius = D3DXVec3Length(&aSide) / 2;
 		D3DXVECTOR3 aCenter = pA[0].m_pos + (pA[2].m_pos - pA[0].m_pos) / 2;
 
-		//pB‚É‚Â‚¢‚Ä‚ÌŒvZ
+		//pBã«ã¤ã„ã¦ã®è¨ˆç®—
 		D3DXVECTOR3 bSide = pB[1].m_pos - pB[0].m_pos;
 		FLOAT bRadius = D3DXVec3Length(&bSide) / 2;
 		D3DXVECTOR3 bCenter = pB[0].m_pos + (pB[2].m_pos - pB[0].m_pos) / 2;
 
-		//a‚Æb‚Ì‹——£‚ÌZo
+		//aã¨bã®è·é›¢ã®ç®—å‡º
 		D3DXVECTOR3 distanceVec = aCenter - bCenter;
 		FLOAT distance = D3DXVec3Length(&distanceVec);
 
@@ -36,7 +36,7 @@ public:
 		return FALSE;
 	}
 
-	//‹éŒ`“¯m‚ÌÕ“Ë”»’è
+	//çŸ©å½¢åŒå£«ã®è¡çªåˆ¤å®š
 	inline BOOL CollidesRects(const CustomVertex* pObjA, const CustomVertex* pObjB) const
 	{
 		BOOL collidesX =
