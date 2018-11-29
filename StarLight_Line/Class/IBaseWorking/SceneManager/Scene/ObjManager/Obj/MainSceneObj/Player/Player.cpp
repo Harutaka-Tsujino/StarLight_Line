@@ -46,7 +46,7 @@ VOID Player::Update()
 	}
 	
 	DecideSpeed(&PlayerPointBuffer, HitKey);
-	RestrictedMoving(PlayerPointBuffer);
+	RestrictedMoving();
 }
 
 VOID Player::Render()
@@ -82,14 +82,11 @@ VOID Player::Render()
 
 //名前不安なので募集中
 //プレイヤーの動きを制限する関数
-VOID Player::RestrictedMoving(const CoordinatePoint& PrevPoint)
+VOID Player::RestrictedMoving()
 {
-	SurfaceCoordinate PrevPos, NextPos;
+	SurfaceCoordinate NextPos;
 	int* pPoX = &m_PlayerPoint.x;
 	int* pPoY = &m_PlayerPoint.y;
-
-	PrevPos.x = m_BasePos[PrevPoint.y][PrevPoint.x].x;
-	PrevPos.y = m_BasePos[PrevPoint.y][PrevPoint.x].y;
 
 	NextPos.y = m_BasePos[*pPoY][*pPoX].y;
 	NextPos.x = m_BasePos[*pPoY][*pPoX].x;
@@ -101,26 +98,26 @@ VOID Player::RestrictedMoving(const CoordinatePoint& PrevPoint)
 	//制限をかける
 	if (m_Speed.x > 0)
 	{
-		m_PlayerPos.x = max(min(NextPos.x, m_PlayerPos.x), PrevPos.x);
+		m_PlayerPos.x = min(NextPos.x, m_PlayerPos.x);
 
 		return;
 	}
 
-	m_PlayerPos.x = max(min(PrevPos.x, m_PlayerPos.x), NextPos.x);
+	m_PlayerPos.x = max(NextPos.x, m_PlayerPos.x);
 
 	if (m_Speed.y > 0)
 	{
-		m_PlayerPos.y = max(min(NextPos.y, m_PlayerPos.y), PrevPos.y);
+		m_PlayerPos.y = min(NextPos.y, m_PlayerPos.y);
 
 		return;
 	}
 
-	m_PlayerPos.y = max(min(PrevPos.y, m_PlayerPos.y), NextPos.y);
+	m_PlayerPos.y = max(NextPos.y, m_PlayerPos.y);
 }
 
 VOID Player::DecideSpeed(CoordinatePoint* PrevPoint, const HIT_KEY& HitKey)
 {
-	const float FRAMENUM = 5.f;	//何フレームで割るか(自機のスピードの)
+	const float FRAMENUM = 15.f;	//何フレームで割るか(自機のスピードの)
 
 	memcpy(PrevPoint, &m_PlayerPoint, sizeof(CoordinatePoint));
 

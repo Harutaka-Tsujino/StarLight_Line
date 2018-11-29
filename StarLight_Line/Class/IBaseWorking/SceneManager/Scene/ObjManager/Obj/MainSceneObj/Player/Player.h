@@ -48,9 +48,8 @@ private:
 
 	/**
 	*@brief 自機の動きを決め,動く範囲を制限する関数
-	*@param PrevPoint 自機が動く前の座標を保存した値
 	*/
-	VOID RestrictedMoving(const CoordinatePoint& PrevPoint);
+	VOID RestrictedMoving();
 
 	VOID DecideSpeed(CoordinatePoint* PrevPoint, const HIT_KEY& HitKey);
 
@@ -61,9 +60,9 @@ private:
 
 	const SurfaceCoordinate m_BasePos[m_MAXYARRAYNUM][m_MAXXARRAYNUM] =
 	{
-		{ {0.005f,-0.005f},		{0.005f,-0.0025f} ,	{0.005f,0.f},	{0.005f,0.0025f}	},
-		{ {0.0025f,-0.005f},	{0.0025f,-0.0025f},	{0.0025f,0.f},	{0.0025f,0.0025f}	},
-		{ {0.f,-0.005f},		{0.f,-0.0025f},		{0.f,0.f},		{0.f,0.0025f}		}
+		{ {0.1f,-0.1f},		{0.1f,-0.05f} ,	{0.1f,0.f},	{0.1f,0.05f}	},
+		{ {0.05f,-0.1f},		{0.05f,-0.05f},	{0.05f,0.f},	{0.05f,0.05f}	},
+		{ {0.f,-0.1f},			{0.f,-0.05f},		{0.f,0.f},		{0.f,0.05f}	}
 	};
 
 	CoordinatePoint m_PlayerPoint;
