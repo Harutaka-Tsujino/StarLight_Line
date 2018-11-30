@@ -63,7 +63,7 @@ public:
 						pCustomVertices, sizeof(CustomVertex));
 	}
 
-public:
+private:
 	const LPDIRECT3DDEVICE9& m_rpDX3D_DEV = nullptr;
 };
 

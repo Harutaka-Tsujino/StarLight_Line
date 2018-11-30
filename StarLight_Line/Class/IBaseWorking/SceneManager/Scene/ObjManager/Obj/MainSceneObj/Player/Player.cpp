@@ -11,8 +11,7 @@ VOID Player::Init()
 
 VOID Player::Update()
 {
-	static CoordinatePoint PlayerPointBuffer = m_PlayerPoint;
-
+	CoordinatePoint PlayerPointBuffer = m_PlayerPoint;
 	HIT_KEY HitKey;
 
 	int* pPoX = &m_PlayerPoint.x;

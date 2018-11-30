@@ -28,7 +28,6 @@ public:
 	Player() :Obj(OT_TRANSPARENCY,1.0f)
 	{
 		m_rGameLib.CreateFbx(_T("Eiwi"), "3DModels/Eiwi/Eiwi.fbx");
-		m_rGameLib.CreateTex(_T("PlayerTex"), _T("2DTextures/YellowAlpha58.png"));
 		Init();
 	}
 
@@ -60,9 +59,9 @@ private:
 
 	const SurfaceCoordinate m_BasePos[m_MAXYARRAYNUM][m_MAXXARRAYNUM] =
 	{
-		{ {0.1f,-0.1f},		{0.1f,-0.05f} ,	{0.1f,0.f},	{0.1f,0.05f}	},
-		{ {0.05f,-0.1f},		{0.05f,-0.05f},	{0.05f,0.f},	{0.05f,0.05f}	},
-		{ {0.f,-0.1f},			{0.f,-0.05f},		{0.f,0.f},		{0.f,0.05f}	}
+		{ {0.1f,-0.1f},	{0.1f,-0.05f} ,	{0.1f,0.f},	{0.1f,0.05f}},
+		{ {0.05f,-0.1f},{0.05f,-0.05f},	{0.05f,0.f},{0.05f,0.05f}},
+		{ {0.f,-0.1f},	{0.f,-0.05f},	{0.f,0.f},	{0.f,0.05f}	}
 	};
 
 	CoordinatePoint m_PlayerPoint;
