@@ -88,6 +88,7 @@ public:
 	VOID SetDiffuse(const D3DXVECTOR4* pARGB);
 	VOID SetEmissive(const D3DXVECTOR4* pARGB);
 	VOID SetSpecular(const D3DXVECTOR4* pARGB);
+	VOID SetColor(const D3DXVECTOR4* pARGB);
 	VOID SetPower(float power);
 
 };

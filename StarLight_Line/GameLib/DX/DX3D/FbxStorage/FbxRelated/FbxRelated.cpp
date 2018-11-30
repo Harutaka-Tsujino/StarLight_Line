@@ -829,6 +829,14 @@ VOID FbxRelated::SetSpecular(const D3DXVECTOR4* pARGB)
 	}
 }
 
+VOID FbxRelated::SetColor(const D3DXVECTOR4* pARGB)
+{
+	for (FbxModel* pI : m_pModel)
+	{
+		pI->SetColor(pARGB);
+	}
+}
+
 VOID FbxRelated::SetPower(float power)
 {
 	for (FbxModel* pI : m_pModel)
