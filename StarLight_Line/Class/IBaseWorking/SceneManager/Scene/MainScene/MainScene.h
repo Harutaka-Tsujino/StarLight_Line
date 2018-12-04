@@ -13,8 +13,10 @@ public:
 	MainScene()
 	{
 		m_pObjManager->Resister(static_cast<Obj*>(new MainBack()));
-		m_pObjManager->Resister(static_cast<Obj*>(new StarManager()));
 		m_pObjManager->Resister(static_cast<Obj*>(new Player()));
+		m_pObjManager->Resister(static_cast<Obj*>(new PlayerLife()));
+		m_pObjManager->Resister(static_cast<Obj*>(new PlayerScoreFrame()));
+		m_pObjManager->Resister(static_cast<Obj*>(new StarManager()));
 	}
 
 	~MainScene() {};

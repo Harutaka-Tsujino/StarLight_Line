@@ -1,9 +1,10 @@
-#ifndef PLAYER_H_
+﻿#ifndef PLAYER_H_
 #define PLAYER_H_
 
 #include <Windows.h>
 
 #include "../../Obj.h"
+#include "../MainSceneObject.h"
 
 struct SurfaceCoordinate
 {
@@ -20,7 +21,7 @@ public:
 };
 
 /**
-*@brief ���@�N���X
+*@brief 自機クラス
 */
 class Player :public Obj
 {
@@ -46,11 +47,17 @@ private:
 	};
 
 	/**
-	*@brief ���@�̓���������,�����͈͂𐧌�����֐�
+	*@brief 自機の動きを決め,動く範囲を制限する関数
 	*/
 	VOID RestrictedMoving();
 
 	VOID DecideSpeed(CoordinatePoint* PrevPoint, const HIT_KEY& HitKey);
+
+	/**
+	*@brief 生存している場合に、スコアを獲得する関数
+	*@param LevelScore 難易度によってスコアを獲得できる
+	*/
+	VOID ObtainScoreToExist(const INT& LevelScore);
 
 	SurfaceCoordinate m_Speed;
 
@@ -66,6 +73,11 @@ private:
 
 	CoordinatePoint m_PlayerPoint;
 	SurfaceCoordinate m_PlayerPos;
+
+	static INT count;
+
+	PlayerScore m_Score;
+	INT m_Hp = 5;
 };
 
 #endif // !PLAYER_H_

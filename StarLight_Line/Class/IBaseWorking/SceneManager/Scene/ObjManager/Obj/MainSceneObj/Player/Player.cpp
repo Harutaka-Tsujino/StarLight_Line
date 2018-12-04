@@ -1,11 +1,14 @@
-#include "Player.h"
+ï»¿#include "Player.h"
+
+INT Player::count = 0;
 
 VOID Player::Init()
 {
+	count = 0;
 	m_PlayerPoint.x = m_MAXXARRAYNUM / 2;
 	m_PlayerPoint.y = m_MAXYARRAYNUM / 2;
 	m_Speed.x = m_Speed.y = 0.0f;
-	m_PlayerPos.x = m_BasePos[m_PlayerPoint.y][m_PlayerPoint.x].x;	//^‚ñ’†‚É©‹@‚ğ’u‚­
+	m_PlayerPos.x = m_BasePos[m_PlayerPoint.y][m_PlayerPoint.x].x;	//çœŸã‚“ä¸­ã«è‡ªæ©Ÿã‚’ç½®ã
 	m_PlayerPos.y = m_BasePos[m_PlayerPoint.y][m_PlayerPoint.x].y;
 }
 
@@ -17,28 +20,30 @@ VOID Player::Update()
 	int* pPoX = &m_PlayerPoint.x;
 	int* pPoY = &m_PlayerPoint.y;
 
-	//ƒL[“ü—Í‚É‚æ‚Á‚ÄƒvƒŒƒCƒ„[‚Ì“®‚«‚ğŒˆ‚ß‚é
-	//yÀ•W‚ÌˆÚ“®
-	if (m_rGameLib.KeyboardIsPressed(DIK_W) &&
+	m_Score.Update();
+
+	//ã‚­ãƒ¼å…¥åŠ›ã«ã‚ˆã£ã¦ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å‹•ãã‚’æ±ºã‚ã‚‹
+	//yåº§æ¨™ã®ç§»å‹•
+	if (UpKeyIsPressed() &&
 		*pPoY > 0)
 	{
 		HitKey = UP;
 	}
 
-	if (m_rGameLib.KeyboardIsPressed(DIK_S) &&
+	if (DownKeyIsPressed() &&
 		*pPoY < (m_MAXYARRAYNUM - 1))
 	{
 		HitKey = DOWN;
 	}
 
-	//xÀ•W‚ÌˆÚ“®
-	if (m_rGameLib.KeyboardIsPressed(DIK_A) &&
+	//xåº§æ¨™ã®ç§»å‹•
+	if (LeftKeyIsPressed() &&
 		*pPoX > 0)
 	{
 		HitKey = LEFT;
 	}
 
-	if (m_rGameLib.KeyboardIsPressed(DIK_D) &&
+	if (RightKeyIsPressed() &&
 		*pPoX < (m_MAXXARRAYNUM - 1))
 	{
 		HitKey = RIGHT;
@@ -46,12 +51,18 @@ VOID Player::Update()
 	
 	DecideSpeed(&PlayerPointBuffer, HitKey);
 	RestrictedMoving();
+
+	//é›£æ˜“åº¦ã§è¨­å®šã™ã‚‹ã‚¹ã‚³ã‚¢ã‚’å¤‰ãˆã‚‹
+	//ã„ã¾é›£æ˜“åº¦ã‚’ã‚‚ã‚‰ã†å‡¦ç†ãŒå‡ºæ¥ã¦ãªã„ã‹ã‚‰ã¨ã‚Šã‚ãˆãš10ã«è¨­å®š
+	ObtainScoreToExist(10);
 }
 
 VOID Player::Render()
 {
 	m_rGameLib.SetCameraTransform();
 	
+	m_Score.Render();
+
 	D3DXMATRIX MatWorld, MatTrans, MatScale;
 	D3DXMatrixIdentity(&MatWorld);
 	D3DXMatrixIdentity(&MatTrans);
@@ -61,16 +72,14 @@ VOID Player::Render()
 
 	FbxRelated& rEiwi = m_rGameLib.GetFbx(_T("Eiwi"));
 
-	// Šg‘å
+	// æ‹¡å¤§
 	D3DXMatrixScaling(&MatScale, MODELSCALE, MODELSCALE, MODELSCALE);
 
-	// Š|‚¯‡‚í‚¹
 	D3DXMatrixMultiply(&MatWorld, &MatWorld, &MatScale);
 
-	// ˆÚ“®
+	// ç§»å‹•
 	D3DXMatrixTranslation(&MatTrans, m_PlayerPos.x, m_PlayerPos.y, 0.2f);
 
-	// Š|‚¯‡‚í‚¹
 	D3DXMatrixMultiply(&MatWorld, &MatWorld, &MatTrans);
 
 	D3DXVECTOR4 EiwiEmissive(1.0f, 1.0f, 1.0f, 0.0f);
@@ -79,8 +88,8 @@ VOID Player::Render()
 	m_rGameLib.Render(rEiwi, MatWorld, m_rGameLib.GetTex(_T("PlayerTex")));
 }
 
-//–¼‘O•sˆÀ‚È‚Ì‚Å•åW’†
-//ƒvƒŒƒCƒ„[‚Ì“®‚«‚ğ§ŒÀ‚·‚éŠÖ”
+//åå‰ä¸å®‰ãªã®ã§å‹Ÿé›†ä¸­
+//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å‹•ãã‚’åˆ¶é™ã™ã‚‹é–¢æ•°
 VOID Player::RestrictedMoving()
 {
 	SurfaceCoordinate NextPos;
@@ -90,11 +99,11 @@ VOID Player::RestrictedMoving()
 	NextPos.y = m_BasePos[*pPoY][*pPoX].y;
 	NextPos.x = m_BasePos[*pPoY][*pPoX].x;
 
-	//“®‚©‚·
+	//å‹•ã‹ã™
 	m_PlayerPos.x += m_Speed.x;
 	m_PlayerPos.y += m_Speed.y;
 
-	//§ŒÀ‚ğ‚©‚¯‚é
+	//åˆ¶é™ã‚’ã‹ã‘ã‚‹
 	if (m_Speed.x > 0)
 	{
 		m_PlayerPos.x = min(NextPos.x, m_PlayerPos.x);
@@ -116,7 +125,7 @@ VOID Player::RestrictedMoving()
 
 VOID Player::DecideSpeed(CoordinatePoint* PrevPoint, const HIT_KEY& HitKey)
 {
-	const float FRAMENUM = 15.f;	//‰½ƒtƒŒ[ƒ€‚ÅŠ„‚é‚©(©‹@‚ÌƒXƒs[ƒh‚Ì)
+	const float FRAMENUM = 15.f;	//ä½•ãƒ•ãƒ¬ãƒ¼ãƒ ã§å‰²ã‚‹ã‹(è‡ªæ©Ÿã®ã‚¹ãƒ”ãƒ¼ãƒ‰ã®)
 
 	memcpy(PrevPoint, &m_PlayerPoint, sizeof(CoordinatePoint));
 
@@ -151,4 +160,20 @@ VOID Player::DecideSpeed(CoordinatePoint* PrevPoint, const HIT_KEY& HitKey)
 		m_Speed.y = 0.0f;
 	}
 
+}
+
+VOID Player::ObtainScoreToExist(const INT& LevelScore)
+{
+	if (m_Hp <= 0) return;
+
+	if (count <= 60)
+	{
+		count++;
+	}
+
+	if (count==60)
+	{
+		m_Score.SetScore(LevelScore);
+		count = 0;
+	}
 }
