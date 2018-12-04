@@ -222,7 +222,7 @@ public:
 		RotateXYZ(pCustomVertices, rObj.m_deg);
 	}
 
-public:
+private:
 	const LPDIRECT3DDEVICE9& m_rpDX3D_DEV = nullptr;
 
 	static const INT m_RECT_VERTICES_NUM = 4;	//! 矩形を構成する頂点の数

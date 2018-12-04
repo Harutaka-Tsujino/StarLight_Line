@@ -17,6 +17,8 @@ Timer* GameLib::m_pTimer = nullptr;
 
 Collision* GameLib::m_pCollision = nullptr;
 
+Board3D* GameLib::m_pBoard3D = nullptr;
+
 VOID GameLib::RunFunc(VOID(*pMainFunc)())
 {
 	timeBeginPeriod(1);	//時間の有効数字の設定
