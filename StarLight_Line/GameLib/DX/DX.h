@@ -255,6 +255,11 @@ public:
 		m_pDX3D->Render(pCustomVertices, pTexture);
 	}
 
+	inline VOID Render(const Vertex3D* pVertex3D, const D3DXMATRIX& rWorld, const LPDIRECT3DTEXTURE9 pTexture = nullptr)
+	{
+		m_pDX3D->Render(pVertex3D, rWorld, pTexture);
+	}
+
 	inline VOID CreateFbx(const TCHAR* pKey, const CHAR* pFilePath)
 	{
 		m_pDX3D->CreateFbx(pKey, pFilePath);

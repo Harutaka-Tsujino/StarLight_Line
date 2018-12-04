@@ -19,6 +19,7 @@
 #include "DX\DX3D\CustomVertexEditor\Data\ObjData.h"
 #include "Timer\Timer.h"
 #include "Collision\Collision.h"
+#include "3DBoard\3DBoard.h"
 
 /**
 * @brief 汎用クラスのFacade,ウィンドウ生成やDX関係の初期化も行う
@@ -34,6 +35,7 @@ public:
 		delete m_pWnd;
 		delete m_pTimer;
 		delete m_pCollision;
+		delete m_pBoard3D;
 	};
 
 	/**
@@ -46,7 +48,8 @@ public:
 		if (m_pWnd) return;
 		if (m_pDX) return;
 		if (m_pTimer) return;
-		if (m_pCollision)return;
+		if (m_pCollision) return;
+		if (m_pBoard3D) return;
 
 		m_pWnd = new Wnd(hInst, pAppName);
 
@@ -55,6 +58,8 @@ public:
 		m_pTimer = new Timer();
 
 		m_pCollision = new Collision();
+
+		m_pBoard3D = new Board3D();
 
 		GetInstance();
 	}
@@ -172,97 +177,108 @@ public:
 	{
 		m_pDX->SetCameraPos(rCameraPos);
 	}
-
+	
 	inline VOID GetCameraEyePt(D3DXVECTOR3* pEyePoint) const
 	{
 		m_pDX->GetCameraPos(pEyePoint);
 	}
-
+	
 	inline VOID SetCameraEyePt(FLOAT x, FLOAT y, FLOAT z)
 	{
 		m_pDX->SetCameraEyePt(x, y, z);
 	}
-
+	
 	inline VOID SetCameraEyePt(const D3DXVECTOR3& rEyePt)
 	{
 		m_pDX->SetCameraEyePt(rEyePt);
 	}
-
+	
 	inline VOID GetView(D3DXMATRIX* pView) const
 	{
 		m_pDX->GetView(pView);
 	}
-
+	
 	inline VOID GetProj(D3DXMATRIX* pProj) const
 	{
 		m_pDX->GetProj(pProj);
 	}
-
+	
 	VOID SetCameraTransform()
 	{
 		m_pDX->SetCameraTransform();
 	}
-
+	
 	inline VOID TransBillBoard(D3DXMATRIX* pWorld) const
 	{
 		m_pDX->TransBillBoard(pWorld);
 	}
-
+	
 	inline VOID RotateRectXYZ(CustomVertex* pCustomVertices, const D3DXVECTOR3& rDeg, const D3DXVECTOR3& rRelativeRotateCenter) const
 	{
 		m_pDX->RotateRectXYZ(pCustomVertices, rDeg, rRelativeRotateCenter);
 	}
-
+	
 	inline VOID RotateRectX(CustomVertex* pCustomVertices, FLOAT deg, const D3DXVECTOR3& rRelativeRotateCenter) const
 	{
 		m_pDX->RotateRectX(pCustomVertices, deg, rRelativeRotateCenter);
 	}
-
+	
 	inline VOID RotateRectY(CustomVertex* pCustomVertices, FLOAT deg, const D3DXVECTOR3& rRelativeRotateCenter) const
 	{
 		m_pDX->RotateRectY(pCustomVertices, deg, rRelativeRotateCenter);
 	}
-
+	
 	inline VOID RotateRectZ(CustomVertex* pCustomVertices, FLOAT deg, const D3DXVECTOR3& rRelativeRotateCenter) const
 	{
 		m_pDX->RotateRectZ(pCustomVertices, deg, rRelativeRotateCenter);
 	}
-
+	
 	inline VOID RescaleRect(CustomVertex* pCustomVertices, const D3DXVECTOR2& rScaleRate) const
 	{
 		m_pDX->RescaleRect(pCustomVertices, rScaleRate);
 	}
-
+	
 	inline VOID MoveRect(CustomVertex* pCustomVertices, const D3DXVECTOR3& rMovement) const
 	{
 		m_pDX->MoveRect(pCustomVertices, rMovement);
 	}
-
+	
 	inline VOID LocaleRect(CustomVertex* pCustomVertices, const D3DXVECTOR3& rPos) const
 	{
 		m_pDX->LocaleRect(pCustomVertices, rPos);
 	}
-
+	
 	inline VOID SetRectTexUV(CustomVertex* pCustomVertices,
 		FLOAT startTU = 0.0f, FLOAT startTV = 0.0f, FLOAT endTU = 1.0f, FLOAT endTV = 1.0f) const
 	{
 		m_pDX->SetRectTexUV(pCustomVertices, startTU, startTV, endTU, endTV);
 	}
-
+	
 	inline VOID SetRectARGB(CustomVertex *pCustomVertices, DWORD aRGB) const
 	{
 		m_pDX->SetRectARGB(pCustomVertices, aRGB);
 	}
-
+	
 	inline VOID CreateRect(CustomVertex *pCustomVertices, const D3DXVECTOR3& rCenter, const D3DXVECTOR3& rHalfScale,
 		DWORD aRGB = 0xFFFFFFFF, FLOAT startTU = 0.0f, FLOAT startTV = 0.0f, FLOAT endTU = 1.0f, FLOAT endTV = 1.0f) const
 	{
 		m_pDX->CreateRect(pCustomVertices, rCenter, rHalfScale, aRGB, startTU, startTV, endTU, endTV);
 	}
-
+	
 	inline VOID CreateRect(CustomVertex *pCustomVertices, const ObjData& rObjData) const
 	{
 		m_pDX->CreateRect(pCustomVertices, rObjData);
+	}
+	
+	inline VOID CreateRect(Vertex3D* p3DVertices, const D3DXVECTOR3& rHalfScale, const D3DXVECTOR3& rCenter,
+		DWORD aRGB = 0xFFFFFFFF, FLOAT startTU = 0.0f, FLOAT startTV = 0.0f, FLOAT endTU = 1.0f, FLOAT endTV = 1.0f)
+	{
+		m_pBoard3D->CreateRect(p3DVertices, rHalfScale, rCenter, aRGB, startTU, startTV, endTU, endTV);
+	}
+
+	inline VOID CreateRect(Vertex3D* p3DVertices, const ObjData& rObjData)
+	{
+		m_pBoard3D->CreateRect(p3DVertices, rObjData);
 	}
 
 	inline VOID Render(const FbxRelated& rFBXModel, const D3DXMATRIX& rWorld, const LPDIRECT3DTEXTURE9 pTexture = nullptr) const
@@ -273,6 +289,11 @@ public:
 	inline VOID Render(const CustomVertex* pCustomVertices, const LPDIRECT3DTEXTURE9 pTexture = nullptr) const
 	{
 		m_pDX->Render(pCustomVertices, pTexture);
+	}
+
+	inline VOID Render(const Vertex3D* pVertex3D, const D3DXMATRIX& rWorld, const LPDIRECT3DTEXTURE9 pTexture = nullptr)
+	{
+		m_pDX->Render(pVertex3D, rWorld, pTexture);
 	}
 
 	inline VOID CreateFbx(const TCHAR* pKey, const CHAR* pFilePath)
@@ -395,6 +416,8 @@ private:
 	static Timer* m_pTimer;
 
 	static Collision* m_pCollision;
+
+	static Board3D* m_pBoard3D;
 };
 
 #endif //! GAME_LIB_H
