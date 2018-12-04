@@ -39,7 +39,7 @@ VOID BaseStar::SetStarInfo(const struct StarPlace& StarPlace)
 
 VOID BaseStar::DefaultLight()
 {
-	D3DXVECTOR3 vecDirection(0.01f, 0.05f, 0.3f);
+	D3DXVECTOR3 vecDirection(0.f, 0.5f, 1.0f);
 	D3DLIGHT9 light;
 
 	ZeroMemory(&light, sizeof(D3DLIGHT9));
