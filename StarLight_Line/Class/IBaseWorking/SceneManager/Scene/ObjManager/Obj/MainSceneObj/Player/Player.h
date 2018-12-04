@@ -4,7 +4,7 @@
 #include <Windows.h>
 
 #include "../../Obj.h"
-#include "../MainSceneObject.h"
+#include "PlayerScore/PlayerScore.h"
 
 struct SurfaceCoordinate
 {
