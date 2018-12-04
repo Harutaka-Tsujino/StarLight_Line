@@ -74,7 +74,7 @@ private:
 	CoordinatePoint m_PlayerPoint;
 	SurfaceCoordinate m_PlayerPos;
 
-	static INT count;
+	static INT count;		//生存スコアを手に入れるところで使う
 
 	PlayerScore m_Score;
 	INT m_Hp = 5;

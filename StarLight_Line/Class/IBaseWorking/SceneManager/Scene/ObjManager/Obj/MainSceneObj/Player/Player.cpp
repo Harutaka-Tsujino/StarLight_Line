@@ -171,7 +171,7 @@ VOID Player::ObtainScoreToExist(const INT& LevelScore)
 		count++;
 	}
 
-	if (count==60)
+	if (count == 60)
 	{
 		m_Score.SetScore(LevelScore);
 		count = 0;

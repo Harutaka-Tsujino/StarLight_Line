@@ -67,8 +67,10 @@ VOID PlayerScore::Init()
 {
 	m_rGameLib.CreateTex(_T("Num"), _T("2DTextures/Main/Nums.png"));
 	m_Score = 0;
-	m_ScoreFont.push_back(new CustomVertex[4]);
-	m_Digit.push_back(1);
+
+	//描画矩形と一桁目の生成
+	m_ScoreFont.push_back(new CustomVertex[4]);		
+	m_Digit.push_back(1);							
 }
 
 VOID PlayerScore::Update()
@@ -81,7 +83,7 @@ VOID PlayerScore::Render()
 	for (int i = 0;i != m_Digit.size();++i)
 	{
 		ObjData Data;
-		int Buff = (m_Score / m_Digit[i]) % 10;
+		int Buff = (m_Score / m_Digit[i]) % 10;		//桁ごとに数字を分ける
 
 		Data.m_center = { m_WND_SIZE.m_x * (0.75f - 0.015f * i) , m_WND_SIZE.m_y * 0.9f , 0.0f };
 		Data.m_halfScale = { m_WND_SIZE.m_x * 0.01f , m_WND_SIZE.m_y * 0.04f , 0.f };
@@ -111,13 +113,14 @@ VOID PlayerScore::SearchDigitIncreasedAndCreateNewDigit()
 {
 	const INT INCREASE_BY_DIGIT = 10;
 
-	if (m_Score < m_Digit[m_Digit.size() - 1] * INCREASE_BY_DIGIT) return;
-
-	m_ScoreFont.push_back(new CustomVertex[4]);
-	
 	INT Num = m_Digit[m_Digit.size() - 1];
 
 	INT NextDigit = Num * INCREASE_BY_DIGIT;
+
+	if (m_Score < NextDigit) return;
+
+	m_ScoreFont.push_back(new CustomVertex[4]);
+	
 	m_Digit.push_back(NextDigit);
 }
 
