@@ -79,7 +79,7 @@ VOID StageSelectSceneStageList::Render()
 	}
 
 	D3DXMATRIX rotate;
-	const FLOAT DEG_GAP = 360.0f / m_STAGE_ICONS_MAX;										//! アイコンとアイコンの角度
+	const FLOAT DEG_GAP = -360.0f / m_STAGE_ICONS_MAX;										//! アイコンとアイコンの角度
 	FLOAT* pDeg = nullptr;
 
 	D3DXVECTOR3* pCenter = nullptr;
