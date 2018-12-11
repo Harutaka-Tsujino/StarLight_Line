@@ -15,6 +15,45 @@
 #include "../../../../../../../GameLib/Wnd/Data/RectSize.h"
 #include "../../../Enum/SCENE_KIND.h"
 
+VOID TitleLogo::Render()
+{
+	m_rGameLib.AddtionBlendMode();
+
+	static INT frameCount = 0;
+	const INT FRAME_COUNT_MAX = 40;
+	FLOAT frameProgressRate = static_cast<FLOAT>(frameCount) / FRAME_COUNT_MAX;
+
+	FLOAT halfScaleYWndMulti = 0.29f;
+	FLOAT centerYWndMultiply = 0.5f - halfScaleYWndMulti;
+
+	ObjData data;
+	data.m_halfScale	= { m_WND_SIZE.m_x * halfScaleYWndMulti * frameProgressRate, m_WND_SIZE.m_y * 0.2f, 0.0f };	//! 現物合わせ
+	data.m_center		= { m_WND_SIZE.m_x * centerYWndMultiply + data.m_halfScale.x, m_WND_SIZE.m_y * 0.3f, m_Z };	//! 現物合わせ
+
+	const INT DEFAULT_ALPHA_MAX = 90;
+	data.m_aRGB = D3DCOLOR_ARGB(static_cast<INT>(DEFAULT_ALPHA_MAX * frameProgressRate), 255, 255, 255);
+
+	if (frameCount >= FRAME_COUNT_MAX)
+	{
+		static INT additionalAlphaCount = 0;
+		data.m_aRGB = D3DCOLOR_ARGB(DEFAULT_ALPHA_MAX + additionalAlphaCount, 255, 255, 255);
+
+		INT additionalAlphaCountMax = 230 - DEFAULT_ALPHA_MAX;
+		additionalAlphaCount = (additionalAlphaCount >= additionalAlphaCountMax) ? additionalAlphaCountMax : additionalAlphaCount += 2;
+	}
+
+	data.m_texUV.m_endTU = frameProgressRate;
+
+	CustomVertex logo[4];
+	m_rGameLib.CreateRect(logo, data);	
+
+	m_rGameLib.Render(logo, m_rGameLib.GetTex(_T("Logo")));
+
+	frameCount = (frameCount >= FRAME_COUNT_MAX) ? FRAME_COUNT_MAX : ++frameCount;
+
+	m_rGameLib.DefaultBlendMode();
+}
+
 VOID TitleMenu::Render()
 {
 	if (!m_isActive) return;
@@ -25,8 +64,8 @@ VOID TitleMenu::Render()
 
 	for (INT i = 0; i < MK_MAX; ++i)
 	{
-		data.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * (0.65f + 0.07f * i), m_Z };	//! 現物合わせ
-		data.m_halfScale	= { m_WND_SIZE.m_x * 0.055f, m_WND_SIZE.m_y * 0.029f ,0.0f };			//! 現物合わせ
+		data.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * (0.68f + 0.07f * i), m_Z };	//! 現物合わせ
+		data.m_halfScale	= { m_WND_SIZE.m_x * 0.06f, m_WND_SIZE.m_y * 0.033f ,0.0f };			//! 現物合わせ
 		if (i == m_CENTER_MENU) data.m_halfScale *= CENTER_MENU_SCALE_MULTI;
 
 		data.m_aRGB = D3DCOLOR_ARGB(200, 255, 255, 255);											//! 現物合わせ
@@ -82,17 +121,17 @@ VOID TitleMenu::SelectMenu()
 	switch (m_menuReel[m_CENTER_MENU])
 	{
 	case MK_NEW_GAME:
-		rSceneManager.SetNextScene(SK_STAGE_SELECT);
+		rSceneManager.SetNextScene(SK_RESULT);
 
 		break;
 
 	case MK_LOAD_GAME:
-		rSceneManager.SetNextScene(SK_STAGE_SELECT);
+		rSceneManager.SetNextScene(SK_SAVE_DATA);
 
 		break;
 
 	case MK_END_GAME:
-		rSceneManager.SetNextScene(SK_SAVE_DATA);
+		rSceneManager.SetNextScene(SK_END);
 
 		break;
 
@@ -107,7 +146,7 @@ VOID TitleCometEffect::Render()
 
 	m_rGameLib.AddtionBlendMode();
 
-	const INT EFFECT_DATAS_MAX = 20;
+	const INT EFFECT_DATAS_MAX = 4;
 	static EffectData effectDatas[EFFECT_DATAS_MAX];
 
 	const D3DXVECTOR3 ROTATE_RELATIVE_POS(0.0f, 0.0f, 0.0f);
@@ -173,7 +212,7 @@ VOID TitleCometEffect::InitEffect(EffectData* pEffectDatas)
 		static_cast<float>(rand() % m_WND_SIZE.m_x + m_WND_SIZE.m_x * 1.5f),
 		-static_cast<float>(rand() % (m_WND_SIZE.m_y * 2) + m_WND_SIZE.m_y * 1.0f),
 		m_Z };
-	pEffectDatas->m_data.m_halfScale = { m_WND_SIZE.m_x * 0.0035f, m_WND_SIZE.m_y * 0.6f, 0.0f };	//! 現物合わせ
+	pEffectDatas->m_data.m_halfScale = { m_WND_SIZE.m_x * 0.003f, m_WND_SIZE.m_y * 1.8f, 0.0f };	//! 現物合わせ
 
 	pEffectDatas->m_data.m_aRGB = EFFECT_COLORS[rand() % EFFECT_COLORS_MAX];
 

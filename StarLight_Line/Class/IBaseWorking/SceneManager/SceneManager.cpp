@@ -8,6 +8,8 @@
 #include "Scene\StageSelectScene\StageSelectScene.h"
 #include "Scene\SaveDataScene\SaveDataScene.h"
 #include "Scene\MainScene\MainScene.h"
+#include "Scene\ResultScene\ResultScene.h"
+#include "Scene\EndScene\EndScene.h"
 
 VOID SceneManager::Factory()
 {
@@ -44,7 +46,22 @@ VOID SceneManager::Factory()
 		m_pScene = new SaveDataScene();
 
 		break;
+
+	case SK_RESULT:
+
+		delete m_pScene;
+
+		m_pScene = new ResultScene();
+
+		break;
 		
+	case SK_END:
+		delete m_pScene;
+
+		m_pScene = new EndScene();
+
+		break;
+
 	default:
 		break;
 	}

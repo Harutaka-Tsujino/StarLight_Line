@@ -161,6 +161,18 @@
     <Filter Include="GameLib\Collision">
       <UniqueIdentifier>{d9e635c0-b102-49e7-a9ea-bd5497361bcb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\EndScene">
+      <UniqueIdentifier>{b86a678d-24df-4c75-aca6-ea613907ca74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\EndSceneObj">
+      <UniqueIdentifier>{d8222aa9-6478-4d29-be26-59defd4a3c53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ResultScene">
+      <UniqueIdentifier>{65930a7c-c3bf-46d4-94de-50d1be79f118}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\ResultSceneObj">
+      <UniqueIdentifier>{ca40102a-d063-468a-a6c7-13d7636aace6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Class\Singleton\Singleton.cpp">
@@ -294,6 +306,18 @@
     </ClCompile>
     <ClCompile Include="GameLib\Collision\Collision.cpp">
       <Filter>GameLib\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\EndScene\EndScene.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\EndScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\EndSceneObj\EndSceneObj.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\EndSceneObj</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ResultScene\ResultScene.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ResultScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\ResultSceneObj\ResultSceneObj.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\ResultSceneObj</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -452,6 +476,18 @@
     </ClInclude>
     <ClInclude Include="GameLib\Collision\Collision.h">
       <Filter>GameLib\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\EndScene\EndScene.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\EndScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\EndSceneObj\EndSceneObj.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\EndSceneObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ResultScene\ResultScene.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ResultScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\ResultSceneObj\ResultSceneObj.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\ResultSceneObj</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
