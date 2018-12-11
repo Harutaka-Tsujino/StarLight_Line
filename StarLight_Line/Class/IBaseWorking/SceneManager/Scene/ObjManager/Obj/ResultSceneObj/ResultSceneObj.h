@@ -76,6 +76,11 @@ public:
 		return m_stagingIsEnd;
 	}
 
+	inline VOID SkipStage()
+	{
+		m_increaseStageCount = m_INCREASE_STAGE_MAX;
+	}
+
 private:
 	struct DigitScore
 	{
@@ -91,6 +96,7 @@ private:
 	INT m_digitsNum = NULL;
 	std::vector<DigitScore> m_digitScoresVec;
 
+	const INT m_INCREASE_STAGE_MAX = 150;
 	INT m_increaseStageCount = -70;	//! 現物合わせ
 
 	BOOL m_stagingIsEnd = FALSE;
@@ -118,6 +124,17 @@ public:
 
 	inline VOID Render()
 	{
+		ObjData backData;
+		backData.m_center		= { m_WND_SIZE.m_x * 0.31f, m_WND_SIZE.m_y * 0.69f, m_Z };
+		backData.m_halfScale	= { m_WND_SIZE.m_x * 0.2f, m_WND_SIZE.m_y * 0.2f, 0.0f };
+
+		backData.m_aRGB = 0x66808080;
+
+		CustomVertex back[4];
+		m_rGameLib.CreateRect(back, backData);
+
+		m_rGameLib.Render(back, nullptr);
+
 		/*ObjData stageData;
 		stageData.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, m_Z };
 		stageData.m_halfScale	= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, 0.0f };
@@ -172,6 +189,11 @@ public:
 		++m_stagingCount;
 	}
 	
+	inline VOID SkipStage()
+	{
+		m_stagingCount = m_StageCountMax;
+	}
+
 private:
 	struct Stars
 	{
@@ -193,6 +215,7 @@ private:
 
 	std::vector<Stars> m_starsVec;
 
+	INT m_StageCountMax = NULL;
 	INT m_stagingCount = 0;
 
 	BOOL m_stagingIsEnd = FALSE;
@@ -226,14 +249,31 @@ public:
 		m_pResultDataClearStar = new ResultDataClearStar(7, 8);
 	}
 
-	inline VOID Update() {};
+	inline VOID Update() 
+	{
+		if (!m_rGameLib.KeyboardAnyKeyIsPressed()) return;
+
+		if (!m_pResultDataScore->StagingIsEnd())
+		{
+			m_pResultDataScore->SkipStage();
+
+			return;
+		}
+
+		if (!m_pResultDataClearStar->StagingIsEnd())
+		{
+			m_pResultDataClearStar->SkipStage();
+
+			return;
+		}
+	}
 
 	inline VOID Render()
 	{
 		m_pResultDataScore->Render();
 		m_pResultDataStage->Render();
 
-		const INT STAGING_GAP_FRAME = 90;
+		const INT STAGING_GAP_FRAME = 30;
 		if (m_pResultDataScore->StagingIsEnd())
 		{
 			m_stagingGapFrameCount = (m_stagingGapFrameCount >= STAGING_GAP_FRAME) ? STAGING_GAP_FRAME : ++m_stagingGapFrameCount;
@@ -262,7 +302,7 @@ private:
 class ResultSceneResultFont :public Obj
 {
 public:
-	ResultSceneResultFont() :Obj(OT_TRANSPARENCY, 0.8f)
+	ResultSceneResultFont(BOOL isFailed) :Obj(OT_TRANSPARENCY, 0.8f), m_IS_FAILED(isFailed)
 	{
 		Init();
 	}
@@ -282,7 +322,9 @@ public:
 	VOID Render();
 
 private:
-	BOOL m_isFailed = FALSE;
+	const BOOL m_IS_FAILED;
+
+	INT m_alphaCount = 0;
 };
 
 class ResultSceneContinue :public Obj
@@ -344,20 +386,14 @@ public:
 	{
 		m_pResultSceneResultData = new ResultSceneResultData();
 
-		m_pResultSceneResultFont = new ResultSceneResultFont();
+		m_pResultSceneResultFont = new ResultSceneResultFont(m_isFailed);
 
 		m_pResultSceneContinue = new ResultSceneContinue();
 
 		m_rGameLib.CreateTex(_T("ResultFont"), _T("2DTextures/Result/ResultFont.png"));
 	}
 
-	inline VOID Update() 
-	{
-		m_pResultSceneResultData->Update();
-		m_pResultSceneResultFont->Update();
-
-		if (m_countUntilShowContinue >= m_CONTINUE_FLAME_LATENT_FRAME) m_pResultSceneContinue->Update();
-	}
+	VOID Update();
 
 	inline VOID Render()
 	{
@@ -365,17 +401,21 @@ public:
 
 		if (!m_pResultSceneResultData->StagingIsEnd()) return;
 
-		const INT STAGING_GAP_FRAME = 90;
-		m_stagingGapFrameCount = (m_stagingGapFrameCount >= STAGING_GAP_FRAME) ? STAGING_GAP_FRAME : ++m_stagingGapFrameCount;
-		if (!(m_stagingGapFrameCount >= STAGING_GAP_FRAME)) return;
+		m_stagingGapFrameCount = (m_stagingGapFrameCount >= m_STAGING_GAP_FRAME) ? m_STAGING_GAP_FRAME : ++m_stagingGapFrameCount;
+		if (!(m_stagingGapFrameCount >= m_STAGING_GAP_FRAME)) return;
 			
 		m_pResultSceneResultFont->Render();
 
-		m_countUntilShowContinue = (m_countUntilShowContinue >= m_CONTINUE_FLAME_LATENT_FRAME) ? m_CONTINUE_FLAME_LATENT_FRAME : ++m_countUntilShowContinue;
-		if (m_countUntilShowContinue >= m_CONTINUE_FLAME_LATENT_FRAME) m_pResultSceneContinue->Render();
+		if(m_countUntilShowContinue) m_pResultSceneContinue->Render();
+
+		//m_countUntilShowContinue = (m_countUntilShowContinue >= m_CONTINUE_FLAME_LATENT_FRAME) ? m_CONTINUE_FLAME_LATENT_FRAME : ++m_countUntilShowContinue;
+		//if (m_countUntilShowContinue >= m_CONTINUE_FLAME_LATENT_FRAME) m_pResultSceneContinue->Render();
 	}
 
 private:
+	BOOL m_isFailed = FALSE;
+
+	const INT m_STAGING_GAP_FRAME = 60;
 	INT m_stagingGapFrameCount = 0;
 
 	const INT m_CONTINUE_FLAME_LATENT_FRAME = 150;
