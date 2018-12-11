@@ -70,17 +70,7 @@ public:
 
 	inline VOID Update() {};
 
-	inline VOID Render()
-	{
-		ObjData data;
-		data.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.35f, m_Z };	//! 現物合わせ
-		data.m_halfScale	= { m_WND_SIZE.m_x * 0.29f, m_WND_SIZE.m_y * 0.2f, 0.0f };	//! 現物合わせ
-
-		CustomVertex logo[4];
-		m_rGameLib.CreateRect(logo, data);
-
-		m_rGameLib.Render(logo, m_rGameLib.GetTex(_T("Logo")));
-	}
+	VOID Render();
 };
 
 class TitleInputPrompt :public Obj
@@ -111,12 +101,14 @@ public:
 		if (!m_isActive) return;
 
 		ObjData data;
-		data.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.78f, m_Z };		//! 現物合わせ
-		data.m_halfScale	= { m_WND_SIZE.m_x * 0.07f, m_WND_SIZE.m_y * 0.035f, 0.0f };	//! 現物合わせ
-		CustomVertex inputPrompt[4];
+		data.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.75f, m_Z };		//! 現物合わせ
+		data.m_halfScale	= { m_WND_SIZE.m_x * 0.077f, m_WND_SIZE.m_y * 0.04f, 0.0f };	//! 現物合わせ
+
 		data.m_aRGB = D3DCOLOR_ARGB(
 						Flash(),
 						255, 255, 255);
+
+		CustomVertex inputPrompt[4];
 		m_rGameLib.CreateRect(inputPrompt, data);
 
 		m_rGameLib.Render(inputPrompt, m_rGameLib.GetTex(_T("InputPrompt")));
@@ -173,7 +165,7 @@ public:
 		SelectMenu();
 	}
 
-	inline VOID Render();
+	VOID Render();
 
 private:
 	enum MENU_KIND
@@ -204,7 +196,7 @@ private:
 
 	VOID SelectMenu();
 
-	MENU_KIND m_menuReel[MK_MAX] = { MK_END_GAME, MK_NEW_GAME, MK_LOAD_GAME };
+	MENU_KIND m_menuReel[MK_MAX] = { MK_NEW_GAME, MK_LOAD_GAME, MK_END_GAME };
 	const INT m_CENTER_MENU = 1;
 	
 	BOOL m_isActive = FALSE;
