@@ -85,8 +85,10 @@ VOID StageSelectSceneStageList::Render()
 	D3DXVECTOR3* pCenter = nullptr;
 	FLOAT halfScale = 0.0f;
 
+	BYTE alpha = NULL;
+
 	const RectSize ILLUST_SIZE = { 2048, 1024 };
-	const FLOAT ICON_ILLUST_SIZE = 303.0f;
+	const FLOAT ICON_ILLUST_SIZE = 300.0f;
 	const INT ICONS_ILLUST_ROWS_MAX = 6;
 
 	FLOAT ICON_SCALE_MULTI = 0.0f;
@@ -106,12 +108,24 @@ VOID StageSelectSceneStageList::Render()
 		pCenter->y = iconsCircleRadius;
 		D3DXVec3TransformCoord(pCenter, pCenter, &rotate);
 		*pCenter += ICONS_CENTER;
-		if (i == m_selectingStage) pCenter->z -= 0.1f;
 
 		ICON_SCALE_MULTI = cos(D3DXToRadian(*pDeg)) + 2.0f;													//! 1～3までの拡大率を角度によって決める
 
 		halfScale = (((ICONS_CIRCLE_RADIUS_MAX - iconsCircleRadius) * 0.01f) + 17.5f) * ICON_SCALE_MULTI;	//! (最大値との半径の差 * 半径の差が大きくなりすぎるので縮小倍率 + 半径の最小の値) * 角度によるアイコンの拡大率
+		
+		if (i == m_selectingStage)
+		{
+			halfScale += m_WND_SIZE.m_y * 0.06f * (1.0f - (iconsCircleRadius / ICONS_CIRCLE_RADIUS_MAX));	//! 現物合わせ
+		}
+
 		stageIconDatas[i].m_objData.m_halfScale = { halfScale, halfScale, 0.0f };
+
+		if (i != m_selectingStage)
+		{
+			alpha = static_cast<BYTE>(255 * (iconsCircleRadius / ICONS_CIRCLE_RADIUS_MAX));
+
+			stageIconDatas[i].m_objData.m_aRGB = D3DCOLOR_ARGB(alpha, 255, 255, 255);
+		}
 
 		stageIconDatas[i].m_objData.m_texUV =
 		{
