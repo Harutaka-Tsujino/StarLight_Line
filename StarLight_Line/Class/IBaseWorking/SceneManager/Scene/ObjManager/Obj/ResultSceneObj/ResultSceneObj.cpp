@@ -11,6 +11,19 @@
 
 VOID ResultDataScore::Render()
 {
+	m_rGameLib.SetCameraTransform();
+
+	ObjData backData;
+	backData.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.26f, m_Z };
+	backData.m_halfScale	= { m_WND_SIZE.m_x * 0.39f, m_WND_SIZE.m_y * 0.11f, 0.0f };
+
+	backData.m_aRGB = 0x66808080;
+
+	CustomVertex back[4];
+	m_rGameLib.CreateRect(back, backData);
+
+	m_rGameLib.Render(back, nullptr);
+
 	if (m_increaseStageCount < 0)
 	{
 		++m_increaseStageCount;
@@ -18,9 +31,7 @@ VOID ResultDataScore::Render()
 		return;
 	}
 
-	const INT INCREASE_STAGE_MAX = 150;
-
-	INT stageScore = static_cast<INT>(m_SCORE * (static_cast<FLOAT>(m_increaseStageCount) / INCREASE_STAGE_MAX));
+	INT stageScore = static_cast<INT>(m_SCORE * (static_cast<FLOAT>(m_increaseStageCount) / m_INCREASE_STAGE_MAX));
 
 	INT stageScoreDigitsNum = static_cast<INT>(log10(stageScore) + 1);
 
@@ -49,7 +60,7 @@ VOID ResultDataScore::Render()
 		*pDigitNum = (stageScore / static_cast<INT>(pow(DIGIT_OVER, i))) % DIGIT_OVER;
 
 		pDigitScoreData = &m_digitScoresVec[i].m_objData;
-		pDigitScoreData->m_center		= { m_WND_SIZE.m_x * 0.8f - DIGIT_POS_Y_GAP * i, m_WND_SIZE.m_y * 0.3f, m_Z };	//現物合わせ
+		pDigitScoreData->m_center		= { m_WND_SIZE.m_x * 0.8f - DIGIT_POS_Y_GAP * i, m_WND_SIZE.m_y * 0.26f, m_Z };	//現物合わせ
 		pDigitScoreData->m_halfScale	= { DIGIT_HALF_SCALE, DIGIT_HALF_SCALE, 0.0f };
 
 		pDigitScoreData->m_texUV =															//! 統合ファイルのテクスチャの座標
@@ -66,13 +77,24 @@ VOID ResultDataScore::Render()
 		m_rGameLib.Render(pDigitScore, m_rGameLib.GetTex(_T("Nums")));
 	}
 
-	m_increaseStageCount = (m_increaseStageCount >= INCREASE_STAGE_MAX) ? INCREASE_STAGE_MAX : ++m_increaseStageCount;
+	m_increaseStageCount = (m_increaseStageCount >= m_INCREASE_STAGE_MAX) ? m_INCREASE_STAGE_MAX : ++m_increaseStageCount;
 
-	if (m_increaseStageCount >= INCREASE_STAGE_MAX) m_stagingIsEnd = TRUE;
+	if (m_increaseStageCount >= m_INCREASE_STAGE_MAX) m_stagingIsEnd = TRUE;
 }
 
 VOID ResultDataClearStar::Render()
 {
+	ObjData backData;
+	backData.m_center		= { m_WND_SIZE.m_x * 0.74f, m_WND_SIZE.m_y * 0.69f, m_Z };
+	backData.m_halfScale	= { m_WND_SIZE.m_x * 0.15f, m_WND_SIZE.m_y * 0.2f, 0.0f };
+
+	backData.m_aRGB = 0x66808080;
+
+	CustomVertex back[4];
+	m_rGameLib.CreateRect(back, backData);
+
+	m_rGameLib.Render(back, nullptr);
+
 	const INT COUNT_STAR_TAKES = 15;
 
 	ObjData* pStarData = nullptr;
@@ -91,8 +113,8 @@ VOID ResultDataClearStar::Render()
 		pStarData = &m_starsVec[i].m_objData;
 		pStarData->m_center =
 		{
-			m_WND_SIZE.m_x * 0.5f + 2 * STAR_HALF_SCALE * (i % (DEFAULT_STARS_ROW_MAX / 2)),
-			m_WND_SIZE.m_y * 0.5f + 2 * STAR_HALF_SCALE * (i / (DEFAULT_STARS_ROW_MAX / 2)),
+			m_WND_SIZE.m_x * 0.65f + 2 * STAR_HALF_SCALE * (i % (DEFAULT_STARS_ROW_MAX / 2)),
+			m_WND_SIZE.m_y * 0.7f + 2 * STAR_HALF_SCALE * (i / (DEFAULT_STARS_ROW_MAX / 2)),
 			m_Z
 		};
 
@@ -114,22 +136,34 @@ VOID ResultDataClearStar::Render()
 		m_rGameLib.Render(pStar, m_rGameLib.GetTex(_T("Star")));
 	}
 
-	const INT STAGE_COUNT_MAX = COUNT_STAR_TAKES * m_CLEAR_STARS_NUM;
+	m_StageCountMax = COUNT_STAR_TAKES * m_CLEAR_STARS_NUM;
 
 	if (!m_stagingCount) return;
 
-	m_stagingCount = (m_stagingCount >= STAGE_COUNT_MAX) ? STAGE_COUNT_MAX : ++m_stagingCount;
+	m_stagingCount = (m_stagingCount >= m_StageCountMax) ? m_StageCountMax : ++m_stagingCount;
 
-	if (m_stagingCount >= STAGE_COUNT_MAX) m_stagingIsEnd = TRUE;
+	if (m_stagingCount >= m_StageCountMax)
+	{
+		for (INT i = 0; i < m_CLEAR_STARS_NUM; ++i)
+		{
+			m_starsVec[i].m_objData.m_aRGB = 0xFFFFFFFF;
+		}
+
+		m_stagingIsEnd = TRUE;
+	}
 }
 
 VOID ResultSceneResultFont::Render()
 {
+	const INT ADDITIONAL_ALPHA_FRAME = 60;
+	m_alphaCount = (m_alphaCount >= ADDITIONAL_ALPHA_FRAME) ? ADDITIONAL_ALPHA_FRAME : ++m_alphaCount;
+
 	ObjData blackMaskData;
 	blackMaskData.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, m_Z };
 	blackMaskData.m_halfScale	= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, 0.0f };
 
-	blackMaskData.m_aRGB = 0x55000000;
+	BYTE alpha = static_cast<BYTE>(70 * static_cast<FLOAT>(m_alphaCount) / ADDITIONAL_ALPHA_FRAME);
+	blackMaskData.m_aRGB = D3DCOLOR_ARGB(alpha, 0, 0, 0);
 
 	CustomVertex blackMask[4];
 	m_rGameLib.CreateRect(blackMask, blackMaskData);
@@ -140,15 +174,18 @@ VOID ResultSceneResultFont::Render()
 	resultFontData.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, m_Z };
 	resultFontData.m_halfScale	= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.14f, 0.0f };
 
+	alpha = static_cast<BYTE>(255 * static_cast<FLOAT>(m_alphaCount) / ADDITIONAL_ALPHA_FRAME);
+	resultFontData.m_aRGB = D3DCOLOR_ARGB(alpha, 255, 255, 255);
+
 	const FLOAT ILLUST_Y_SCALE = 512.0f;
 	const FLOAT RESULT_Y_SCALE = 200.0f;
 
 	resultFontData.m_texUV =
 	{
 		0.0f,
-		RESULT_Y_SCALE * m_isFailed / ILLUST_Y_SCALE,
+		RESULT_Y_SCALE * m_IS_FAILED / ILLUST_Y_SCALE,
 		1.0f,
-		RESULT_Y_SCALE * (m_isFailed + 1) / ILLUST_Y_SCALE
+		RESULT_Y_SCALE * (m_IS_FAILED + 1) / ILLUST_Y_SCALE
 	};
 
 	CustomVertex resultFont[4];
@@ -178,4 +215,30 @@ VOID ResultSceneContinue::Render()
 	m_rGameLib.CreateRect(YesNo, YesNoData);
 
 	m_rGameLib.Render(YesNo, m_rGameLib.GetTex(_T("YesNo")));
+}
+
+VOID ResultSceneResult::Update()
+{
+	m_pResultSceneResultData->Update();
+	m_pResultSceneResultFont->Update();
+
+	if (m_rGameLib.KeyboardAnyKeyIsPressed() &&
+		m_pResultSceneResultData->StagingIsEnd() &&
+		m_stagingGapFrameCount != m_STAGING_GAP_FRAME)
+	{
+		m_stagingGapFrameCount = m_STAGING_GAP_FRAME;
+
+		return;
+	}
+
+	if (m_rGameLib.KeyboardAnyKeyIsPressed() &&
+		!m_countUntilShowContinue &&
+		m_stagingGapFrameCount == m_STAGING_GAP_FRAME)
+	{
+		++m_countUntilShowContinue;
+
+		return;
+	}
+
+	if (m_countUntilShowContinue) m_pResultSceneContinue->Update();
 }
