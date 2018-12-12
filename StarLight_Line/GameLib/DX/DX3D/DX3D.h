@@ -204,6 +204,11 @@ public:
 		m_pCamera->TransBillBoard(pWorld);
 	}
 
+	inline D3DXVECTOR3 TransScreen(const D3DXVECTOR3& Pos)
+	{
+		return m_pCamera->TransScreen(Pos);
+	}
+
 	inline VOID RotateRectXYZ(CustomVertex* pCustomVertices, const D3DXVECTOR3& rDeg, const D3DXVECTOR3& rRelativeRotateCenter) const
 	{
 		m_pCustomVertex->RotateXYZ(pCustomVertices, rDeg, rRelativeRotateCenter);

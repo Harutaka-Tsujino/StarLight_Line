@@ -213,6 +213,11 @@ public:
 		m_pDX->TransBillBoard(pWorld);
 	}
 	
+	inline D3DXVECTOR3 TransScreen(const D3DXVECTOR3& Pos) const
+	{
+		return m_pDX->TransScreen(Pos);
+	}
+
 	inline VOID RotateRectXYZ(CustomVertex* pCustomVertices, const D3DXVECTOR3& rDeg, const D3DXVECTOR3& rRelativeRotateCenter) const
 	{
 		m_pDX->RotateRectXYZ(pCustomVertices, rDeg, rRelativeRotateCenter);
@@ -404,6 +409,12 @@ public:
 	inline BOOL CollidesRects(const CustomVertex* pObjA, const CustomVertex* pObjB) const
 	{
 		return m_pCollision->CollidesRects(pObjA, pObjB);
+	}
+
+	inline BOOL CollidesCircles(const D3DXVECTOR3* pA, const D3DXVECTOR3* pB,
+		const FLOAT& aRadius, const FLOAT& bRadius) const
+	{
+		return m_pCollision->CollidesCircles(pA, pB, aRadius, bRadius);
 	}
 
 private:
