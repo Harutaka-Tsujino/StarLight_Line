@@ -3,6 +3,9 @@
 
 #include <Windows.h>
 
+#include <map>
+#include <vector>
+
 #include <d3dx9.h>
 
 #include "../GameLib.h"
@@ -13,6 +16,17 @@ class Collision
 public:
 	Collision() {}
 	~Collision() {}
+
+	inline BOOL CollidesCircles(const D3DXVECTOR3* pA, const D3DXVECTOR3* pB,
+								const FLOAT& aRadius, const FLOAT& bRadius) const
+	{
+		D3DXVECTOR2 DistanceVec = *pA - *pB;
+		FLOAT Distance = D3DXVec2Length(&DistanceVec);
+
+		if (Distance <= aRadius + bRadius) return TRUE;
+
+		return FALSE;
+	}
 
 	//球同士の衝突判定
 	inline BOOL CollidesCircles(const CustomVertex* pA, const CustomVertex* pB) const
@@ -53,6 +67,7 @@ public:
 
 		return FALSE;
 	}
+
 };
 
 #endif // !COLLISION_H_
