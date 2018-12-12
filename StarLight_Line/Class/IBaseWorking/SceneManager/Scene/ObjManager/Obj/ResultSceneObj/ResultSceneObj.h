@@ -344,14 +344,12 @@ public:
 	{
 		m_rGameLib.CreateTex(_T("ContinueFrame"), _T("2DTextures/Result/Result_ContinueFrame.png"));
 		m_rGameLib.CreateTex(_T("YesNo"), _T("2DTextures/Result/YesNo.png"));
+		m_rGameLib.CreateTex(_T("Target"), _T("2DTextures/Result/Target.png"));
 	}
 
 	inline VOID Update() 
 	{
-		if (UpKeyIsPressed())
-		{
-			m_isSelectedYes = !m_isSelectedYes;
-		}
+		if (UpKeyIsPressed() || DownKeyIsPressed()) m_isSelectedYes = !m_isSelectedYes;
 
 		if (!m_rGameLib.KeyboardIsPressed(DIK_RETURN)) return;
 

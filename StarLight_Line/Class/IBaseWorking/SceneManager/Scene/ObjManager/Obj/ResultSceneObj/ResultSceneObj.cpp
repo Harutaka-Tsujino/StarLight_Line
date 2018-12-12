@@ -208,13 +208,27 @@ VOID ResultSceneContinue::Render()
 	ObjData YesNoData;
 	YesNoData.m_center = { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, m_Z };
 
-	const FLOAT HALF_SCALE = m_WND_SIZE.m_y * 0.22f;
-	YesNoData.m_halfScale = { HALF_SCALE, HALF_SCALE, 0.0f };
+	const FLOAT HALF_SCALE	= m_WND_SIZE.m_y * 0.22f;
+	YesNoData.m_halfScale	= { HALF_SCALE, HALF_SCALE, 0.0f };
 
 	CustomVertex YesNo[4];
 	m_rGameLib.CreateRect(YesNo, YesNoData);
 
 	m_rGameLib.Render(YesNo, m_rGameLib.GetTex(_T("YesNo")));
+
+	ObjData targetData;
+
+	FLOAT centerYGap = 0.158f;
+	if (m_isSelectedYes) centerYGap = 0.0f;
+	targetData.m_center	= { m_WND_SIZE.m_x * 0.4f, m_WND_SIZE.m_y * (0.423f + centerYGap), m_Z }; //! 現物合わせ
+
+	const FLOAT TARGET_HALF_SCALE = m_WND_SIZE.m_x * 0.02f;
+	targetData.m_halfScale = { TARGET_HALF_SCALE, TARGET_HALF_SCALE, 0.0f };
+
+	CustomVertex target[4];
+	m_rGameLib.CreateRect(target, targetData);
+
+	m_rGameLib.Render(target, m_rGameLib.GetTex(_T("Target")));
 }
 
 VOID ResultSceneResult::Update()
