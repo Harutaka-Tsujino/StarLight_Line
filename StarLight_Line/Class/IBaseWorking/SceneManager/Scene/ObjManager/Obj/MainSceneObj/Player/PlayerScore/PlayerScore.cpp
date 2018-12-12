@@ -12,7 +12,23 @@ VOID PlayerScore::Init()
 
 VOID PlayerScore::Update()
 {
-	SearchDigitIncreasedAndCreateNewDigit();
+	const FLOAT RADIUS = 100.0f;
+
+	if (m_rGameCollision.HitSomething(_T("Player"), SCORE, RADIUS, RADIUS))
+	{
+		const INT BASIC_POINT = 100;
+
+		m_Score += BASIC_POINT;
+	}
+
+	if (m_rGameCollision.HitSomething(_T("Player"), CLEAR, RADIUS, RADIUS))
+	{
+		const INT BONUS_POINT = 500;
+
+		m_Score += BONUS_POINT;
+	}
+
+	IncreaseDigit();
 }
 
 VOID PlayerScore::Render()
@@ -20,12 +36,12 @@ VOID PlayerScore::Render()
 	for (int i = 0;i != m_Digit.size();++i)
 	{
 		ObjData Data;
-		int Buff = (m_Score / m_Digit[i]) % 10;		//桁ごとに数字を分ける
+		int DigitNum = (m_Score / m_Digit[i]) % 10;		//桁ごとに数字を分ける
 
 		Data.m_center = { m_WND_SIZE.m_x * (0.75f - 0.015f * i) , m_WND_SIZE.m_y * 0.9f , 0.0f };
 		Data.m_halfScale = { m_WND_SIZE.m_x * 0.01f , m_WND_SIZE.m_y * 0.04f , 0.f };
 
-		DisplayNum(&Data.m_texUV, Buff);
+		DisplayNum(&Data.m_texUV, DigitNum);
 
 		m_rGameLib.CreateRect(m_ScoreFont[i], Data);
 
@@ -38,15 +54,14 @@ VOID PlayerScore::DisplayNum(TexUV* UV, const INT& Num)
 	const FLOAT NUMS_ILLUST_SCALE = 32.0f;
 	const INT NUMS_NUM_IN_ROW = 8;
 	const INT NUMS_NUM_IN_COLUMN = 2;
-	const INT NUM_MAX = 10;
 
 	UV->m_startTU = NUMS_ILLUST_SCALE * (Num % NUMS_NUM_IN_ROW) / (NUMS_ILLUST_SCALE * NUMS_NUM_IN_ROW);
 	UV->m_startTV = NUMS_ILLUST_SCALE * (Num / NUMS_NUM_IN_ROW) / (NUMS_ILLUST_SCALE * NUMS_NUM_IN_COLUMN);
-	UV->m_endTU = NUMS_ILLUST_SCALE * ((Num % NUMS_NUM_IN_ROW) + 1) / (NUMS_ILLUST_SCALE * NUMS_NUM_IN_ROW);
-	UV->m_endTV = NUMS_ILLUST_SCALE * ((Num / NUMS_NUM_IN_ROW) + 1) / (NUMS_ILLUST_SCALE * NUMS_NUM_IN_COLUMN);
+	UV->m_endTU   = NUMS_ILLUST_SCALE * ((Num % NUMS_NUM_IN_ROW) + 1) / (NUMS_ILLUST_SCALE * NUMS_NUM_IN_ROW);
+	UV->m_endTV   = NUMS_ILLUST_SCALE * ((Num / NUMS_NUM_IN_ROW) + 1) / (NUMS_ILLUST_SCALE * NUMS_NUM_IN_COLUMN);
 }
 
-VOID PlayerScore::SearchDigitIncreasedAndCreateNewDigit()
+VOID PlayerScore::IncreaseDigit()
 {
 	const INT INCREASE_BY_DIGIT = 10;
 
@@ -65,7 +80,8 @@ VOID PlayerScore::Release()
 {
 	for (int i = 0;i != m_ScoreFont.size();++i)
 	{
-		delete m_ScoreFont[i];
+		delete[] m_ScoreFont[i];
+		m_ScoreFont[i] = nullptr;
 	}
 
 	m_Digit.clear();
