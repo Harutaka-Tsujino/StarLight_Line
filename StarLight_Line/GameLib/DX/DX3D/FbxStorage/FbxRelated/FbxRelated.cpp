@@ -5,13 +5,7 @@
 */
 
 #include <fbxsdk.h>
-#include <cstdio>
-#include <cstdlib>
-#include <crtdbg.h>
 #include "FbxRelated.h"
-
-#define _CRTDBG_MAP_ALLOC
-#define new ::new(_NORMAL_BLOCK, __FILE__, __LINE__)
 
 #pragma comment(lib,"libfbxsdk-md.lib")
 
@@ -42,32 +36,18 @@ VOID FbxRelated::Release()
 		m_pFbxManager = NULL;
 	}
 
-	/*
-	if (!m_pModel->m_pFbxModelData->pVertexColor)
+	for (INT j = 0; j < m_modelDataCount && m_pModel.size(); ++j)
 	{
-	delete m_pModel->m_pFbxModelData->pVertexColor;
-	}
-	*/
+		delete m_pModel[j]->m_pFbxModelData->pVertexColor;
 
-	for (INT j = 0; j < m_modelDataCount; ++j)
-	{
 		for (INT i = 0; i < m_pModel[j]->m_pFbxModelData->UvLayerCount; i++)
 		{
-			if (!m_pModel[m_modelDataCount - 1]->m_pFbxModelData->uvSet.uvBuffer.capacity())
-			{
-				continue;
-			}
+			if (!m_pModel[m_modelDataCount - 1]->m_pFbxModelData->uvSet.uvBuffer.size()) continue;
 
 			delete m_pModel[j]->m_pFbxModelData->uvSet.uvBuffer[i];
 		}
 
-		if (m_pModel[j]->m_pFbxModelData->fileTextureCount)
-		{
-			if (!m_pModel[j]->m_pFbxModelData->pTmpTexture)
-			{
-				delete m_pModel[j]->m_pFbxModelData->pTmpTexture;
-			}
-		}
+		if (m_pModel[j]->m_pFbxModelData->fileTextureCount) delete m_pModel[j]->m_pFbxModelData->pTmpTexture;
 
 		delete m_pModel[j]->m_pFbxModelData->pIndexBuffer;
 		delete m_pModel[j]->m_pFbxModelData->pVertex;

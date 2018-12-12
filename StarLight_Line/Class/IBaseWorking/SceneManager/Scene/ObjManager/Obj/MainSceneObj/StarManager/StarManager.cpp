@@ -98,5 +98,8 @@ VOID StarManager::StarDataToAssign(const int& rArrayNum,const StarPlace& rStarPl
 
 StarManager::~StarManager()
 {
-
+	for (auto i : m_StarNotes)
+	{
+		delete i;
+	}
 }

@@ -16,6 +16,13 @@ public:
 	FbxStorage(LPDIRECT3DDEVICE9& rpDX3DDev) :m_rpDX3DDev(rpDX3DDev) {};
 	~FbxStorage() 
 	{
+		for (auto pI : m_pFbxRelatedMap)
+		{
+			pI.second->Release();
+
+			delete pI.second;
+		}
+
 		m_pFbxRelatedMap.clear();
 	}
 
