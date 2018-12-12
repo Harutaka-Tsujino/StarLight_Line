@@ -5,11 +5,12 @@
 
 #include "../../../Obj.h"
 #include "../../../../../../../.././../GameLib/GameLib.h"
+#include "../../GameCollision/GameCollision.h"
 
 class PlayerScore :public Obj
 {
 public:
-	PlayerScore() :Obj(OT_UI, 1.0f)
+	PlayerScore() :Obj(OT_UI, 0.0f), m_rGameCollision(GameCollision::GetInstance())
 	{
 		Init();
 	}
@@ -33,7 +34,7 @@ public:
 private:
 	//スコアの桁が繰り上がったら
 	//矩形を作り、桁数を上げる処理をする関数
-	VOID SearchDigitIncreasedAndCreateNewDigit();
+	VOID IncreaseDigit();
 
 	//数字フォントのTuTv切り取り関数
 	VOID DisplayNum(TexUV* UV, const INT& Num);
@@ -41,10 +42,12 @@ private:
 	//vectorの解放関数
 	VOID Release();
 
-	INT m_Score = 0;
-
 	std::vector<CustomVertex*> m_ScoreFont;
 	std::vector<INT> m_Digit;
+
+	INT m_Score;
+
+	GameCollision& m_rGameCollision;
 };
 
 #endif // !PLAYER_SCORE_H_
