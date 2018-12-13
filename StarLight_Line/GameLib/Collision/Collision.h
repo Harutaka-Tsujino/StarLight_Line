@@ -20,7 +20,10 @@ public:
 	inline BOOL CollidesCircles(const D3DXVECTOR3* pA, const D3DXVECTOR3* pB,
 								const FLOAT& aRadius, const FLOAT& bRadius) const
 	{
-		D3DXVECTOR2 DistanceVec = *pA - *pB;
+		D3DXVECTOR2 AVec2(pA->x,pA->y);
+		D3DXVECTOR2 BVec2(pB->x,pB->y);
+
+		D3DXVECTOR2 DistanceVec = AVec2 - BVec2;
 		FLOAT Distance = D3DXVec2Length(&DistanceVec);
 
 		if (Distance <= aRadius + bRadius) return TRUE;
