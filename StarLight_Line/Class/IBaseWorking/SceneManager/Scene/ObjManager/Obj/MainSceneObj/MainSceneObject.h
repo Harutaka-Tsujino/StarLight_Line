@@ -60,4 +60,26 @@ public:
 	VOID Render();
 };
 
+class PlayerClearStarObj :public Obj
+{
+public:
+	PlayerClearStarObj() :Obj(OT_UI, 1.0f)
+	{
+		Init();
+	}
+
+	~PlayerClearStarObj()
+	{
+		m_rGameLib.ReleaseTex();
+	}
+
+	VOID Init();
+	VOID Update() {};
+	VOID Render();
+
+private:
+	VOID RenderFrame();
+	VOID RenderStarObtained();
+};
+
 #endif // !MAIN_SCENE_OBJECT_H_
