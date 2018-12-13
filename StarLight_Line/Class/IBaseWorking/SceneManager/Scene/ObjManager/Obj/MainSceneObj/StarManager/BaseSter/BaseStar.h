@@ -12,10 +12,15 @@ struct StarPlace
 {
 	D3DXVECTOR3	m_Pos;				//x,y,z座標
 	STAR_TYPE m_Type;				//スターの種類
-	int m_Division;					//区分け数
-	float m_StarsNumInDivision;		//区分けの中の星の数
+	int m_Measure;					//節数
+	float m_Beat;					//拍数
+	float m_StarsNumInNote;			//n分音符
+	float m_Line;					//n分音符の中の数字
 	float m_DropPerMinute;			//1分間にどれだけ落ちてくるか
 	float m_Time;					//落ちてくる時間
+	float m_XMovement;				//x座標の移動量
+
+	D3DXVECTOR3 m_CollisionPos;		//当たり判定用の座標
 };
 
 /*
@@ -37,7 +42,7 @@ public:
 
 	VOID SetType(const STAR_TYPE& Type) { m_Info.m_Type = Type; }
 	STAR_TYPE& GetType() { return m_Info.m_Type; }
-	D3DXVECTOR3* GetStarPos() { return &m_Info.m_Pos; }
+	D3DXVECTOR3* GetCollisionPos() { return &m_Info.m_CollisionPos; }
 	
 protected:
 	VOID PosOfStarYCoordinate(const LONGLONG& CurrentTime);		//y座標を移動させる関数

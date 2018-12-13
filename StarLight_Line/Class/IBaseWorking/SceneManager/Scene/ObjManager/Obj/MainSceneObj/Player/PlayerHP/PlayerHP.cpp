@@ -8,7 +8,7 @@ VOID PlayerHP::Init()
 
 VOID PlayerHP::Update()
 {
-	if (m_rGameCollision.HitSomething(_T("Player"), DAMAGE, 100.0f, 100.f))
+	if (m_rGameCollision.HitSomething(_T("Player"), DAMAGE, 30.f, 20.f))
 	{
 		if (m_HP <= 0) return;
 

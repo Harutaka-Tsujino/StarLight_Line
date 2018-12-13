@@ -85,8 +85,8 @@ public:
 	inline BOOL CollidesStar(const TCHAR* pKey, const INT& StarNum,
 		const FLOAT& aRadius, const FLOAT& bRadius)
 	{
-		D3DXVECTOR3 PlayerScreenPos = m_rGameLib.TransScreen(*m_PlayerPoint[pKey]);
-		D3DXVECTOR3 EnemyScreenPos  = m_rGameLib.TransScreen(*m_Enemy[StarNum]->m_Point);
+		D3DXVECTOR3 PlayerScreenPos(m_rGameLib.TransScreen(*m_PlayerPoint[pKey]));
+		D3DXVECTOR3 EnemyScreenPos(*m_Enemy[StarNum]->m_Point);
 
 		if ((-bRadius > EnemyScreenPos.y) || EnemyScreenPos.y > m_rGameLib.GetWndSize().m_y + bRadius) return FALSE;
 
@@ -108,7 +108,6 @@ private:
 	std::map<const TCHAR*, const CustomVertex*> m_Vertex;
 	std::map<const TCHAR*, const D3DXVECTOR3*> m_PlayerPoint;
 	std::vector<StarCollisionData*> m_Enemy;
-	
 };
 
 #endif // !GAME_COLLISION_H_

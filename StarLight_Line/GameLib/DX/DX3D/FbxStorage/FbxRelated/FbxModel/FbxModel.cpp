@@ -95,6 +95,8 @@ VOID FbxModel::SetSpecular(const D3DXVECTOR4* pARGB)
 
 VOID FbxModel::SetColor(const D3DXVECTOR4* pARGB)
 {
+	if (!m_pFbxModelData->pVertexColor)m_pFbxModelData->pVertexColor = new COLOR_RGBAF;
+
 	m_pFbxModelData->pVertexColor->a = pARGB->x;
 	m_pFbxModelData->pVertexColor->r = pARGB->y;
 	m_pFbxModelData->pVertexColor->g = pARGB->z;

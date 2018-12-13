@@ -74,16 +74,16 @@ private:
 
 	const SurfaceCoordinate m_BasePos[m_MAXYARRAYNUM][m_MAXXARRAYNUM] =
 	{
-		{ {0.1f,-0.1f},	{0.1f,-0.05f} ,	{0.1f,0.f},	{0.1f,0.05f}},
-		{ {0.05f,-0.1f},{0.05f,-0.05f},	{0.05f,0.f},{0.05f,0.05f}},
-		{ {0.f,-0.1f},	{0.f,-0.05f},	{0.f,0.f},	{0.f,0.05f}	}
+		{ { 0.05f,-0.1f},	{ 0.05f,-0.05f} ,	{ 0.05f,0.f},	{ 0.05f,0.05f}},
+		{ { 0.f,-0.1f},		{ 0.f,-0.05f},		{ 0.f,0.f},		{ 0.f,0.05f}},
+		{ { -0.05f,-0.1f},	{ -0.05f,-0.05f},	{ -0.05f,0.f},	{ -0.05f,0.05f}	}
 	};
 
 	CoordinatePoint m_PlayerPoint;
 	D3DXVECTOR3 m_PlayerPos;
 	D3DXMATRIX m_World;
 
-	static INT count;		//生存スコアを手に入れるところで使う
+	INT count;		//生存スコアを手に入れるところで使う
 
 	PlayerScore m_Score;
 	PlayerHP m_Hp;
