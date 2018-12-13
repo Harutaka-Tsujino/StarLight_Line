@@ -34,15 +34,19 @@ VOID BaseStar::SetStarInfo(const struct StarPlace& StarPlace)
 
 VOID BaseStar::DefaultLight()
 {
-	D3DXVECTOR3 vecDirection(0.f, 0.5f, 1.0f);
+	D3DXVECTOR3 vecDirection(-1.0f, -0.5f, 1.0f);
 	D3DLIGHT9 light;
 
 	ZeroMemory(&light, sizeof(D3DLIGHT9));
 
 	light.Type = D3DLIGHT_DIRECTIONAL;
-	light.Diffuse.r = 1.f;
-	light.Diffuse.g = 1.f;
-	light.Diffuse.b = 1.f;
+	light.Diffuse.r = 0.8f;
+	light.Diffuse.g = 0.8f;
+	light.Diffuse.b = 0.8f;
+
+	light.Ambient.r = 0.5f;
+	light.Ambient.b = 0.5f;
+	light.Ambient.g = 0.5f;
 
 	light.Specular.r = 0.5f;
 	light.Specular.b = 0.5f;

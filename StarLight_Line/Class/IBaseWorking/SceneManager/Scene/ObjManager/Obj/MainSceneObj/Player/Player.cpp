@@ -68,7 +68,7 @@ VOID Player::Render()
 	m_Score.Render();
 	m_Hp.Render();
 
-	D3DXMATRIX MatTrans, MatScale;
+	D3DXMATRIX MatTrans, MatScale,MatRotate;
 	D3DXMatrixIdentity(&m_World);
 	D3DXMatrixIdentity(&MatTrans);
 	D3DXMatrixIdentity(&MatScale);
@@ -82,13 +82,27 @@ VOID Player::Render()
 
 	D3DXMatrixMultiply(&m_World, &m_World, &MatScale);
 
+	static ULONGLONG deg = 0;
+	deg += 2;
+	D3DXMatrixRotationZ(&MatRotate, D3DXToRadian(deg));
+	D3DXMatrixMultiply(&m_World, &m_World, &MatRotate);
+
+	++deg;
+	D3DXMatrixRotationX(&MatRotate, D3DXToRadian(deg));
+	D3DXMatrixMultiply(&m_World, &m_World, &MatRotate);
+
 	// 移動
 	D3DXMatrixTranslation(&MatTrans, m_PlayerPos.x, m_PlayerPos.y, m_PlayerPos.z);
 
 	D3DXMatrixMultiply(&m_World, &m_World, &MatTrans);
 
-	D3DXVECTOR4 EiwiEmissive(1.0f, 1.0f, 1.0f, 0.0f);
-	rEiwi.SetEmissive(&EiwiEmissive);
+	D3DXVECTOR4 EiwiEmissive(0.0f, 170.0f / 255.0f, 160.0f / 255.0f, 0.0f);
+	rEiwi.SetAmbient(&EiwiEmissive);
+
+	rEiwi.SetPower(0.5f);
+	
+	D3DXVECTOR4 VertexColor(160.0f, 255.0f, 255.0f, 255.0f);
+	rEiwi.SetColor(&VertexColor);
 
 	m_rGameLib.Render(rEiwi, m_World, m_rGameLib.GetTex(_T("PlayerTex")));
 }
