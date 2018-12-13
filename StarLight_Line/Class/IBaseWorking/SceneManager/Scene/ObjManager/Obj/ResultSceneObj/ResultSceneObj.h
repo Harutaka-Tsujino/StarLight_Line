@@ -48,7 +48,7 @@ public:
 class ResultDataScore :public Obj
 {
 public:
-	ResultDataScore(INT score) :Obj(OT_TRANSPARENCY, 0.9f), m_SCORE(score)
+	ResultDataScore(INT score, DWORD caseColor) :Obj(OT_TRANSPARENCY, 0.9f), m_SCORE(score), m_CASE_COLOR(caseColor)
 	{
 		Init();
 	}
@@ -78,7 +78,7 @@ public:
 
 	inline VOID SkipStage()
 	{
-		m_increaseStageCount = m_INCREASE_STAGE_MAX;
+		m_increaseStagingCount = m_INCREASE_STAGE_MAX;
 	}
 
 private:
@@ -92,20 +92,35 @@ private:
 		CustomVertex m_customVertices[4];
 	};
 
+	inline VOID RenderCase() const
+	{
+		ObjData scoreCaseData;
+		scoreCaseData.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.26f, m_Z };		//! 現物合わせ
+		scoreCaseData.m_halfScale	= { m_WND_SIZE.m_x * 0.39f, m_WND_SIZE.m_y * 0.11f, 0.0f };		//! 現物合わせ
+
+		scoreCaseData.m_aRGB = m_CASE_COLOR;
+
+		CustomVertex scoreCase[4];
+		m_rGameLib.CreateRect(scoreCase, scoreCaseData);
+		m_rGameLib.Render(scoreCase, nullptr);
+	}
+
 	const INT m_SCORE;
 	INT m_digitsNum = NULL;
 	std::vector<DigitScore> m_digitScoresVec;
 
 	const INT m_INCREASE_STAGE_MAX = 150;
-	INT m_increaseStageCount = -70;	//! 現物合わせ
+	INT m_increaseStagingCount = 0;	//! 現物合わせ
 
 	BOOL m_stagingIsEnd = FALSE;
+
+	const DWORD m_CASE_COLOR;
 };
 
 class ResultDataStage :public Obj
 {
 public:
-	ResultDataStage(INT stage, INT difficulty) :Obj(OT_TRANSPARENCY, 0.9f)
+	ResultDataStage(INT stage, INT difficulty, DWORD caseColor) :Obj(OT_TRANSPARENCY, 0.9f), m_CASE_COLOR(caseColor)
 	{
 		Init();
 	}
@@ -124,16 +139,7 @@ public:
 
 	inline VOID Render()
 	{
-		ObjData backData;
-		backData.m_center		= { m_WND_SIZE.m_x * 0.31f, m_WND_SIZE.m_y * 0.69f, m_Z };	//! 現物合わせ
-		backData.m_halfScale	= { m_WND_SIZE.m_x * 0.2f, m_WND_SIZE.m_y * 0.2f, 0.0f };	//! 現物合わせ
-
-		backData.m_aRGB = 0x66808080;														//! 現物合わせ
-
-		CustomVertex back[4];
-		m_rGameLib.CreateRect(back, backData);
-
-		m_rGameLib.Render(back, nullptr);
+		RenderCase();
 
 		/*ObjData stageData;
 		stageData.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, m_Z };
@@ -151,13 +157,29 @@ public:
 		m_rGameLib.CreateRect(difficulty, difficultyData);
 		m_rGameLib.Render(difficulty, m_rGameLib.GetTex(_T("Back")));*/
 	}
+
+private:
+	inline VOID RenderCase() const
+	{
+		ObjData stageCaseData;
+		stageCaseData.m_center		= { m_WND_SIZE.m_x * 0.31f, m_WND_SIZE.m_y * 0.69f, m_Z };		//! 現物合わせ
+		stageCaseData.m_halfScale	= { m_WND_SIZE.m_x * 0.2f, m_WND_SIZE.m_y * 0.2f, 0.0f };		//! 現物合わせ
+
+		stageCaseData.m_aRGB = m_CASE_COLOR;
+
+		CustomVertex stageCase[4];
+		m_rGameLib.CreateRect(stageCase, stageCaseData);
+		m_rGameLib.Render(stageCase, nullptr);
+	}
+
+	const DWORD m_CASE_COLOR;
 };
 
 class ResultDataClearStar :public Obj
 {
 public:
-	ResultDataClearStar(INT clearStarsNum, INT clearStarsMax) :Obj(OT_TRANSPARENCY, 0.9f),
-		m_CLEAR_STARS_NUM(clearStarsNum), m_CLEAR_STARS_MAX(clearStarsMax)
+	ResultDataClearStar(INT clearStarsNum, INT clearStarsMax, DWORD caseColor) :Obj(OT_TRANSPARENCY, 0.9f),
+		m_CLEAR_STARS_NUM(clearStarsNum), m_CLEAR_STARS_MAX(clearStarsMax), m_CASE_COLOR(caseColor)
 	{
 		Init();
 	}
@@ -191,7 +213,7 @@ public:
 	
 	inline VOID SkipStage()
 	{
-		m_stagingCount = m_StageCountMax;
+		m_stagingCount = m_stageCountMax;
 	}
 
 private:
@@ -210,12 +232,26 @@ private:
 		CustomVertex m_customVertices[4];
 	};
 
+	inline VOID RenderCase() const
+	{
+		ObjData starCaseData;
+		starCaseData.m_center		= { m_WND_SIZE.m_x * 0.74f, m_WND_SIZE.m_y * 0.69f, m_Z };	//! 現物合わせ
+		starCaseData.m_halfScale	= { m_WND_SIZE.m_x * 0.15f, m_WND_SIZE.m_y * 0.2f, 0.0f };	//! 現物合わせ
+
+		starCaseData.m_aRGB = m_CASE_COLOR;
+
+		CustomVertex starCase[4];
+		m_rGameLib.CreateRect(starCase, starCaseData);
+		m_rGameLib.Render(starCase, nullptr);
+	}
+
 	const INT m_CLEAR_STARS_MAX = NULL;
 	const INT m_CLEAR_STARS_NUM = NULL;
-
 	std::vector<Stars> m_starsVec;
 
-	INT m_StageCountMax = NULL;
+	const DWORD m_CASE_COLOR;
+
+	INT m_stageCountMax = NULL;
 	INT m_stagingCount = 0;
 
 	BOOL m_stagingIsEnd = FALSE;
@@ -242,11 +278,11 @@ public:
 
 	inline VOID Init()
 	{
-		m_pResultDataScore = new ResultDataScore(123571113);	//テスト用
+		m_pResultDataScore = new ResultDataScore(123571113, m_CASE_COLOR);	//テスト用
 
-		m_pResultDataStage = new ResultDataStage(NULL, NULL);	//未対応
+		m_pResultDataStage = new ResultDataStage(NULL, NULL, m_CASE_COLOR);	//未対応
 
-		m_pResultDataClearStar = new ResultDataClearStar(7, 8);	//テスト用
+		m_pResultDataClearStar = new ResultDataClearStar(7, 8, m_CASE_COLOR);	//テスト用
 	}
 
 	inline VOID Update() 
@@ -292,6 +328,8 @@ public:
 private:
 	INT m_stagingGapFrameCount = 0;
 
+	const DWORD m_CASE_COLOR = 0x66808080;
+
 	ResultDataScore* m_pResultDataScore = nullptr;
 
 	ResultDataStage* m_pResultDataStage = nullptr;
@@ -322,8 +360,24 @@ public:
 	VOID Render();
 
 private:
+	inline VOID DarkenFontAround()
+	{	
+		ObjData blackMaskData;
+		blackMaskData.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, m_Z };
+		blackMaskData.m_halfScale	= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, 0.0f };
+
+		BYTE alpha = static_cast<BYTE>(140 * static_cast<FLOAT>(m_alphaCount) / m_ADDITIONAL_ALPHA_FRAME);
+		blackMaskData.m_aRGB = D3DCOLOR_ARGB(alpha, 0, 0, 0);
+
+		CustomVertex blackMask[4];
+		m_rGameLib.CreateRect(blackMask, blackMaskData);
+
+		m_rGameLib.Render(blackMask, nullptr);
+	}
+
 	const BOOL m_IS_FAILED;
 
+	const INT m_ADDITIONAL_ALPHA_FRAME = 120;
 	INT m_alphaCount = 0;
 };
 
@@ -362,6 +416,49 @@ public:
 
 private:
 	BOOL m_isSelectedYes = TRUE;
+
+	inline VOID RenderFrame() const
+	{
+		ObjData ContinueFrameData;
+		ContinueFrameData.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, m_Z };
+		ContinueFrameData.m_halfScale	= { m_WND_SIZE.m_x * 0.28f, m_WND_SIZE.m_y * 0.28f, 0.0f };	//! 現物合わせ
+
+		CustomVertex ContinueFrame[4];
+		m_rGameLib.CreateRect(ContinueFrame, ContinueFrameData);
+
+		m_rGameLib.Render(ContinueFrame, m_rGameLib.GetTex(_T("ContinueFrame")));
+	}
+
+	inline VOID RenderTexts() const
+	{
+		ObjData YesNoData;
+		YesNoData.m_center = { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, m_Z };
+
+		const FLOAT HALF_SCALE = m_WND_SIZE.m_y * 0.22f;
+		YesNoData.m_halfScale = { HALF_SCALE, HALF_SCALE, 0.0f };
+
+		CustomVertex YesNo[4];
+		m_rGameLib.CreateRect(YesNo, YesNoData);
+
+		m_rGameLib.Render(YesNo, m_rGameLib.GetTex(_T("YesNo")));
+	}
+
+	inline VOID RenderTarget()
+	{
+		ObjData targetData;
+
+		const FLOAT CENTER_Y_WND_MULTI_BASE = 0.423f;
+		FLOAT centerYWndMulti = (m_isSelectedYes) ? CENTER_Y_WND_MULTI_BASE : CENTER_Y_WND_MULTI_BASE + 0.158f;
+		targetData.m_center = { m_WND_SIZE.m_x * 0.4f, m_WND_SIZE.m_y * centerYWndMulti, m_Z }; //! 現物合わせ
+
+		const FLOAT TARGET_HALF_SCALE = m_WND_SIZE.m_x * 0.02f;
+		targetData.m_halfScale = { TARGET_HALF_SCALE, TARGET_HALF_SCALE, 0.0f };
+
+		CustomVertex target[4];
+		m_rGameLib.CreateRect(target, targetData);
+
+		m_rGameLib.Render(target, m_rGameLib.GetTex(_T("Target")));
+	}
 };
 
 class ResultSceneResult :public Obj
@@ -399,25 +496,24 @@ public:
 
 		if (!m_pResultSceneResultData->StagingIsEnd()) return;
 
-		m_stagingGapFrameCount = (m_stagingGapFrameCount >= m_STAGING_GAP_FRAME) ? m_STAGING_GAP_FRAME : ++m_stagingGapFrameCount;
-		if (!(m_stagingGapFrameCount >= m_STAGING_GAP_FRAME)) return;
+		++m_stagingGapFrameCount;
+
+		if (m_stagingGapFrameCount < m_STAGING_GAP_FRAME) return;
 			
+		m_stagingGapFrameCount = m_STAGING_GAP_FRAME;
+
 		m_pResultSceneResultFont->Render();
 
-		if(m_countUntilShowContinue) m_pResultSceneContinue->Render();
-
-		//m_countUntilShowContinue = (m_countUntilShowContinue >= m_CONTINUE_FLAME_LATENT_FRAME) ? m_CONTINUE_FLAME_LATENT_FRAME : ++m_countUntilShowContinue;
-		//if (m_countUntilShowContinue >= m_CONTINUE_FLAME_LATENT_FRAME) m_pResultSceneContinue->Render();
+		if(m_shouldShowContinue) m_pResultSceneContinue->Render();
 	}
 
 private:
 	BOOL m_isFailed = FALSE;
 
-	const INT m_STAGING_GAP_FRAME = 60;
+	const INT m_STAGING_GAP_FRAME = 150;
 	INT m_stagingGapFrameCount = 0;
 
-	const INT m_CONTINUE_FLAME_LATENT_FRAME = 150;
-	INT m_countUntilShowContinue = 0;
+	BOOL m_shouldShowContinue = FALSE;
 
 	ResultSceneResultData* m_pResultSceneResultData = nullptr;
 
