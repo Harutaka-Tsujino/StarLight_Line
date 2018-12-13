@@ -16,6 +16,7 @@ public:
 		m_pObjManager->Resister(static_cast<Obj*>(new Player()));
 		m_pObjManager->Resister(static_cast<Obj*>(new PlayerLifeFrame()));
 		m_pObjManager->Resister(static_cast<Obj*>(new PlayerScoreFrame()));
+		m_pObjManager->Resister(static_cast<Obj*>(new PlayerClearStarObj()));
 		m_pObjManager->Resister(static_cast<Obj*>(new StarManager()));
 	}
 
