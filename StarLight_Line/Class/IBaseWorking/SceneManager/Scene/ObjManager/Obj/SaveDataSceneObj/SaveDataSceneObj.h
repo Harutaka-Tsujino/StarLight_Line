@@ -1,6 +1,12 @@
-﻿/// <summary>
-/// セーブデーターシーンで扱うObj継承クラスのヘッダ
+﻿/// <filename>
+/// 
+/// </filename>
+/// <summary>
+/// WIP
 /// </summary>
+/// <author>
+/// 
+/// </author>
 
 #ifndef SAVE_DATA_SCENE_OBJ_H
 #define SAVE_DATA_SCENE_OBJ_H

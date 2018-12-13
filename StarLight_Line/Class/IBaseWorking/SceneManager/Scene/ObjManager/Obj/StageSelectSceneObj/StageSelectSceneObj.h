@@ -1,4 +1,14 @@
-﻿#ifndef STAGE_SELECT_SCENE_OBJ_H
+﻿/// <filename>
+/// 
+/// </filename>
+/// <summary>
+/// 
+/// </summary>
+/// <author>
+/// 
+/// </author>
+
+#ifndef STAGE_SELECT_SCENE_OBJ_H
 #define STAGE_SELECT_SCENE_OBJ_H
 
 #include <windows.h>
@@ -87,6 +97,39 @@ private:
 		FLOAT m_deg;
 	};
 
+	inline VOID RotateIconsCenter(StageIconData* pStageIconDatas, INT iconElementNum, FLOAT degGap, FLOAT iconsCircleRadius)
+	{
+		const D3DXVECTOR3 ICONS_CENTER = { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.4f, m_Z };	//! 現物合わせ
+
+		D3DXMATRIX rotate;
+		
+		FLOAT* pDeg = nullptr;
+		pDeg = &pStageIconDatas[iconElementNum].m_deg;
+		*pDeg = degGap * (iconElementNum - m_selectingStage) + m_deg;
+		D3DXMatrixRotationZ(&rotate, D3DXToRadian(*pDeg));
+
+		D3DXVECTOR3* pCenter = nullptr;
+		pCenter = &pStageIconDatas[iconElementNum].m_objData.m_center;
+		pCenter->y = iconsCircleRadius;
+		D3DXVec3TransformCoord(pCenter, pCenter, &rotate);
+		*pCenter += ICONS_CENTER;
+	}
+
+	inline VOID SetHalfScaleByRadius(StageIconData* pStageIconDatas, INT iconElementNum, FLOAT iconsCircleRadius, FLOAT iconsCircleRadiusMax)
+	{
+		FLOAT iconScaleMulti = cos(D3DXToRadian(pStageIconDatas[iconElementNum].m_deg)) + 2.0f;				//! 1～3までの拡大率を角度によって決める
+		FLOAT halfScale = (((iconsCircleRadiusMax - iconsCircleRadius) * 0.01f) + 17.5f) * iconScaleMulti;	//! (最大値との半径の差 * 半径の差が大きくなりすぎるので縮小倍率 + 半径の最小の値) * 角度によるアイコンの拡大率
+
+		if (iconElementNum == m_selectingStage)
+		{
+			halfScale += m_WND_SIZE.m_y * 0.06f * (1.0f - (iconsCircleRadius / iconsCircleRadiusMax));		//! 現物合わせ
+		}
+
+		pStageIconDatas[iconElementNum].m_objData.m_halfScale = { halfScale, halfScale, 0.0f };
+	}
+
+	VOID RenderBackButton(FLOAT iconsCircleRadius) const;
+
 	static const INT m_STAGE_ICONS_MAX = 12;
 	FLOAT m_deg = 0.0f;			//! 複数のアイコンがなす円の回転角度 大きさが60を超えるとm_selectingStageを変化させ0に戻る
 
@@ -102,7 +145,7 @@ private:
 class StageSelectSceneLevelSelecter :public Obj
 {
 public:
-	StageSelectSceneLevelSelecter(const BOOL& m_isDecided) :Obj(OT_TRANSPARENCY, 9.0f), m_rIsDecided(m_isDecided)
+	StageSelectSceneLevelSelecter(const BOOL& m_stageIsDecided) :Obj(OT_TRANSPARENCY, 9.0f), m_rStageIsDecided(m_stageIsDecided)
 	{
 		Init();
 	}
@@ -129,12 +172,17 @@ public:
 	}
 
 private:
-	const BOOL& m_rIsDecided;
+	VOID RenderBack() const;
+
+	VOID RenderTarget() const;
+
+	VOID RenderBackButton() const;
+
+	const BOOL& m_rStageIsDecided;
 
 	INT m_level = SLK_EASY;
 	
 	INT m_alpha = 0;
-	INT m_sceneTranlationAlpha = 0;
 
 	BOOL m_backIsSelected = FALSE;
 	BOOL m_shouldActivateStageSelect = FALSE;
