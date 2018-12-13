@@ -125,10 +125,10 @@ public:
 	inline VOID Render()
 	{
 		ObjData backData;
-		backData.m_center		= { m_WND_SIZE.m_x * 0.31f, m_WND_SIZE.m_y * 0.69f, m_Z };
-		backData.m_halfScale	= { m_WND_SIZE.m_x * 0.2f, m_WND_SIZE.m_y * 0.2f, 0.0f };
+		backData.m_center		= { m_WND_SIZE.m_x * 0.31f, m_WND_SIZE.m_y * 0.69f, m_Z };	//! 現物合わせ
+		backData.m_halfScale	= { m_WND_SIZE.m_x * 0.2f, m_WND_SIZE.m_y * 0.2f, 0.0f };	//! 現物合わせ
 
-		backData.m_aRGB = 0x66808080;
+		backData.m_aRGB = 0x66808080;														//! 現物合わせ
 
 		CustomVertex back[4];
 		m_rGameLib.CreateRect(back, backData);
@@ -200,7 +200,7 @@ private:
 	public:
 		Stars()
 		{
-			m_objData.m_aRGB = 0x88555555;
+			m_objData.m_aRGB = 0x88555555;	//! 現物合わせ
 		}
 		
 		INT m_alphaCount = 0;
@@ -242,11 +242,11 @@ public:
 
 	inline VOID Init()
 	{
-		m_pResultDataScore = new ResultDataScore(123571113);
+		m_pResultDataScore = new ResultDataScore(123571113);	//テスト用
 
-		m_pResultDataStage = new ResultDataStage(NULL, NULL);
+		m_pResultDataStage = new ResultDataStage(NULL, NULL);	//未対応
 
-		m_pResultDataClearStar = new ResultDataClearStar(7, 8);
+		m_pResultDataClearStar = new ResultDataClearStar(7, 8);	//テスト用
 	}
 
 	inline VOID Update() 
