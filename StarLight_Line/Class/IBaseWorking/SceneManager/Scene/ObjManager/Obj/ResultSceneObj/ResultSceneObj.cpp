@@ -1,4 +1,14 @@
-﻿#include "ResultSceneObj.h"
+﻿/// <filename>
+/// 
+/// </filename>
+/// <summary>
+/// 
+/// </summary>
+/// <author>
+/// 
+/// </author>
+
+#include "ResultSceneObj.h"
 
 #include <windows.h>
 #include <tchar.h>
@@ -16,7 +26,7 @@ VOID ResultDataScore::Render()
 	SceneManager& rSceneManager = SceneManager::GetInstance();
 	if (!rSceneManager.LatterTransitionStagingIsEnded()) return;
 
-	INT stagingScore = static_cast<INT>(m_SCORE * (static_cast<FLOAT>(m_increaseStagingCount) / m_INCREASE_STAGE_MAX));
+	INT stagingScore = static_cast<INT>(m_SCORE * (static_cast<FLOAT>(m_increaseStagingCount) / m_INCREASE_STAGING_MAX));
 
 	INT stagingScoreDigitsNum = static_cast<INT>(log10(stagingScore) + 1);
 
@@ -62,9 +72,9 @@ VOID ResultDataScore::Render()
 
 	++m_increaseStagingCount;
 
-	if (m_increaseStagingCount < m_INCREASE_STAGE_MAX) return;
+	if (m_increaseStagingCount < m_INCREASE_STAGING_MAX) return;
 		
-	m_increaseStagingCount = m_INCREASE_STAGE_MAX;
+	m_increaseStagingCount = m_INCREASE_STAGING_MAX;
 
 	m_stagingIsEnd = TRUE;
 }
@@ -73,7 +83,7 @@ VOID ResultDataClearStar::Render()
 {
 	RenderCase();
 
-	const INT COUNT_STAR_TAKES = 15;
+	const INT FRAME_ONE_STAR_TAKES = 15;
 
 	ObjData* pStarData = nullptr;
 
@@ -100,10 +110,10 @@ VOID ResultDataClearStar::Render()
 
 		pAlphaCount = &m_starsVec[i].m_alphaCount;
 
-		if (i < (m_stagingCount / COUNT_STAR_TAKES))
+		if (i < (m_stagingCount / FRAME_ONE_STAR_TAKES))
 		{
-			*pAlphaCount = (*pAlphaCount >= COUNT_STAR_TAKES) ? COUNT_STAR_TAKES : *pAlphaCount + 1;
-			alpha = static_cast<INT>(255 * (static_cast<FLOAT>(*pAlphaCount) / COUNT_STAR_TAKES));
+			*pAlphaCount = (*pAlphaCount >= FRAME_ONE_STAR_TAKES) ? FRAME_ONE_STAR_TAKES : *pAlphaCount + 1;
+			alpha = static_cast<INT>(255 * (static_cast<FLOAT>(*pAlphaCount) / FRAME_ONE_STAR_TAKES));
 
 			pStarData->m_aRGB = D3DCOLOR_ARGB(alpha, 0xFF, 0xFF, 0xFF);
 		}
@@ -114,7 +124,7 @@ VOID ResultDataClearStar::Render()
 		m_rGameLib.Render(pStar, m_rGameLib.GetTex(_T("Star")));
 	}
 
-	m_stageCountMax = COUNT_STAR_TAKES * m_CLEAR_STARS_NUM;
+	m_stageCountMax = FRAME_ONE_STAR_TAKES * m_CLEAR_STARS_NUM;
 
 	if (m_stagingCount) ++m_stagingCount;																//!演出の起動は他クラスで行う
 

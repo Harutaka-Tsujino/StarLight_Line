@@ -1,4 +1,14 @@
-﻿#include "EndSceneObj.h"
+﻿/// <filename>
+/// 
+/// </filename>
+/// <summary>
+/// 
+/// </summary>
+/// <author>
+/// 
+/// </author>
+
+#include "EndSceneObj.h"
 
 #include <windows.h>
 #include <tchar.h>

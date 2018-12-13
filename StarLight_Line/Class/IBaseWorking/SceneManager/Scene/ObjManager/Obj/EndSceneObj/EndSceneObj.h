@@ -1,4 +1,14 @@
-﻿#ifndef END_SCENE_OBJ_H
+﻿/// <filename>
+/// 
+/// </filename>
+/// <summary>
+/// 
+/// </summary>
+/// <author>
+/// 
+/// </author>
+
+#ifndef END_SCENE_OBJ_H
 #define END_SCENE_OBJ_H
 
 #include <windows.h>

@@ -272,22 +272,6 @@ VOID TitleSmallStarEffect::InitEffect(EffectData* pEffectDatas) const
 {
 	if (pEffectDatas->m_flashCnt != pEffectDatas->m_INIT_CNT) return;
 
-	const INT EFFECT_COLORS_MAX = 11;
-	const D3DXVECTOR4 EFFECT_COLORS[EFFECT_COLORS_MAX] =										//! ビビッドカラー
-	{
-		{ 255, 63, 255, 20 },
-		{ 255, 20, 255, 95 },
-		{ 255, 20, 255, 212 },
-		{ 255, 20, 181, 255 },
-		{ 255, 20, 63, 255 },
-		{ 255, 95, 20, 255 },
-		{ 255, 212,20, 255 },
-		{ 255, 255, 20, 181 },
-		{ 255, 255, 20, 63 },
-		{ 255, 255, 95, 20 },
-		{ 255, 255, 212, 20 },
-	};
-
 	pEffectDatas->m_flashCnt = rand() % (m_FLASH_CNT_MAX - m_FLASH_CNT_MIN) + m_FLASH_CNT_MIN;	//! 乱数の最低値をm_FLASH_CNT_MINにするため
 	pEffectDatas->m_isIncrease = rand() % TRUE;
 
@@ -299,6 +283,21 @@ VOID TitleSmallStarEffect::InitEffect(EffectData* pEffectDatas) const
 	if (rand() % 2) halfScale = 1.0f;															//! 1/2の確率で大きさが変わる
 	pEffectDatas->m_data.m_halfScale = { halfScale, halfScale, 0.0f };
 
+	const INT EFFECT_COLORS_MAX = 11;
+	const D3DXVECTOR4 EFFECT_COLORS[EFFECT_COLORS_MAX] =										//! ビビッドカラー
+	{
+		{ 255, 63,	255,	20 },
+		{ 255, 20,	255,	95 },
+		{ 255, 20,	255,	212 },
+		{ 255, 20,	181,	255 },
+		{ 255, 20,	63,		255 },
+		{ 255, 95,	20,		255 },
+		{ 255, 212, 20,		255 },
+		{ 255, 255, 20,		181 },
+		{ 255, 255, 20,		63 },
+		{ 255, 255, 95,		20 },
+		{ 255, 255, 212,	20 },
+	};
 	INT selectedARGB = rand() % EFFECT_COLORS_MAX;
 	pEffectDatas->m_aRGB.x = EFFECT_COLORS[selectedARGB].x;
 	pEffectDatas->m_aRGB.y = EFFECT_COLORS[selectedARGB].y;

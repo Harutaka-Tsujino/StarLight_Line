@@ -1,4 +1,14 @@
-﻿#ifndef RESULT_SCENE_OBJ_H
+﻿/// <filename>
+/// 
+/// </filename>
+/// <summary>
+/// 
+/// </summary>
+/// <author>
+/// 
+/// </author>
+
+#ifndef RESULT_SCENE_OBJ_H
 #define RESULT_SCENE_OBJ_H
 
 #include <windows.h>
@@ -78,7 +88,7 @@ public:
 
 	inline VOID SkipStage()
 	{
-		m_increaseStagingCount = m_INCREASE_STAGE_MAX;
+		m_increaseStagingCount = m_INCREASE_STAGING_MAX;
 	}
 
 private:
@@ -109,7 +119,7 @@ private:
 	INT m_digitsNum = NULL;
 	std::vector<DigitScore> m_digitScoresVec;
 
-	const INT m_INCREASE_STAGE_MAX = 150;
+	const INT m_INCREASE_STAGING_MAX = 150;
 	INT m_increaseStagingCount = 0;	//! 現物合わせ
 
 	BOOL m_stagingIsEnd = FALSE;
@@ -310,12 +320,14 @@ public:
 		m_pResultDataStage->Render();
 
 		const INT STAGING_GAP_FRAME = 30;
-		if (m_pResultDataScore->StagingIsEnd())
-		{
-			m_stagingGapFrameCount = (m_stagingGapFrameCount >= STAGING_GAP_FRAME) ? STAGING_GAP_FRAME : ++m_stagingGapFrameCount;
-		}
 
-		if(m_stagingGapFrameCount >= STAGING_GAP_FRAME)	m_pResultDataClearStar->StartStaging();
+		++m_stagingGapFrameCount;
+
+		if (m_stagingGapFrameCount < STAGING_GAP_FRAME) return;
+
+		m_stagingGapFrameCount = STAGING_GAP_FRAME;
+
+		m_pResultDataClearStar->StartStaging();
 
 		m_pResultDataClearStar->Render();
 	}
@@ -366,7 +378,7 @@ private:
 		blackMaskData.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, m_Z };
 		blackMaskData.m_halfScale	= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, 0.0f };
 
-		BYTE alpha = static_cast<BYTE>(140 * static_cast<FLOAT>(m_alphaCount) / m_ADDITIONAL_ALPHA_FRAME);
+		INT alpha = static_cast<INT>(140 * static_cast<FLOAT>(m_alphaCount) / m_ADDITIONAL_ALPHA_FRAME);
 		blackMaskData.m_aRGB = D3DCOLOR_ARGB(alpha, 0, 0, 0);
 
 		CustomVertex blackMask[4];

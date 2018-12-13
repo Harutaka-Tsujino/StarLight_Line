@@ -1,4 +1,14 @@
-﻿#include "StageSelectSceneObj.h"
+﻿/// <filename>
+/// 
+/// </filename>
+/// <summary>
+/// 
+/// </summary>
+/// <author>
+/// 
+/// </author>
+
+#include "StageSelectSceneObj.h"
 
 #include <windows.h>
 #include <tchar.h>
@@ -11,13 +21,15 @@
 
 VOID StageSelectSceneStageList::Update()
 {
-	SceneManager& rSceneManager = SceneManager::GetInstance();
+	if (m_isDecided) return;
 
 	if (UpKeyIsPressed() &&
 		m_backIsSelected)
 	{
 		m_backIsSelected = FALSE;
 	}
+
+	SceneManager& rSceneManager = SceneManager::GetInstance();
 
 	if (ReturnKeyIsPressed() &&
 		m_backIsSelected)
@@ -29,8 +41,8 @@ VOID StageSelectSceneStageList::Update()
 
 	if (m_backIsSelected) return;
 
-	if (ReturnKeyIsPressed() &&
-		m_deg == 0.0f &&
+	if (ReturnKeyIsPressed()	&&
+		m_deg == 0.0f			&&
 		m_lengthMulti == 0.0f)
 	{
 		m_lengthMulti = -1.0f;
@@ -38,7 +50,7 @@ VOID StageSelectSceneStageList::Update()
 		return;
 	}
 
-	if (m_lengthMulti != 0.0f || m_isDecided) return;
+	if (m_lengthMulti != 0.0f) return;
 
 	if (DownKeyIsPressed())
 	{
@@ -62,9 +74,10 @@ VOID StageSelectSceneStageList::Render()
 {
 	if (m_isDecided) m_rGameLib.AddtionBlendMode();
 
-	const D3DXVECTOR3 ICONS_CENTER = { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.4f, m_Z };	//! 現物合わせ
 	const FLOAT ICONS_CIRCLE_RADIUS_MAX = 230.0f;											//! 複数のアイコンがなす円の半径の最大値
 	static FLOAT iconsCircleRadius = ICONS_CIRCLE_RADIUS_MAX;								//! 複数のアイコンがなす円の半径
+
+	const FLOAT DEG_GAP = -360.0f / m_STAGE_ICONS_MAX;										//! アイコンとアイコンの角度
 
 	const INT DECIDE_STAGE_FRAMES = 60;
 	iconsCircleRadius += m_lengthMulti * ICONS_CIRCLE_RADIUS_MAX / DECIDE_STAGE_FRAMES;		//! DECIDE_STAGE_FRAMESで半径が最大値に達する
@@ -78,20 +91,11 @@ VOID StageSelectSceneStageList::Render()
 		m_isDecided = !iconsCircleRadius;
 	}
 
-	D3DXMATRIX rotate;
-	const FLOAT DEG_GAP = -360.0f / m_STAGE_ICONS_MAX;										//! アイコンとアイコンの角度
-	FLOAT* pDeg = nullptr;
-
-	D3DXVECTOR3* pCenter = nullptr;
-	FLOAT halfScale = 0.0f;
-
 	BYTE alpha = NULL;
 
 	const RectSize ILLUST_SIZE = { 2048, 1024 };
 	const FLOAT ICON_ILLUST_SIZE = 300.0f;
 	const INT ICONS_ILLUST_ROWS_MAX = 6;
-
-	FLOAT ICON_SCALE_MULTI = 0.0f;
 
 	StageIconData stageIconDatas[m_STAGE_ICONS_MAX];
 	CustomVertex stageIcon[4];
@@ -100,25 +104,9 @@ VOID StageSelectSceneStageList::Render()
 	{
 		if (i != m_selectingStage && m_isDecided) continue;
 
-		pDeg = &stageIconDatas[i].m_deg;
-		*pDeg = DEG_GAP * (i - m_selectingStage) + m_deg;
-		D3DXMatrixRotationZ(&rotate, D3DXToRadian(*pDeg));
-
-		pCenter = &stageIconDatas[i].m_objData.m_center;
-		pCenter->y = iconsCircleRadius;
-		D3DXVec3TransformCoord(pCenter, pCenter, &rotate);
-		*pCenter += ICONS_CENTER;
-
-		ICON_SCALE_MULTI = cos(D3DXToRadian(*pDeg)) + 2.0f;													//! 1～3までの拡大率を角度によって決める
-
-		halfScale = (((ICONS_CIRCLE_RADIUS_MAX - iconsCircleRadius) * 0.01f) + 17.5f) * ICON_SCALE_MULTI;	//! (最大値との半径の差 * 半径の差が大きくなりすぎるので縮小倍率 + 半径の最小の値) * 角度によるアイコンの拡大率
+		RotateIconsCenter(stageIconDatas, i, DEG_GAP, iconsCircleRadius);
 		
-		if (i == m_selectingStage)
-		{
-			halfScale += m_WND_SIZE.m_y * 0.06f * (1.0f - (iconsCircleRadius / ICONS_CIRCLE_RADIUS_MAX));	//! 現物合わせ
-		}
-
-		stageIconDatas[i].m_objData.m_halfScale = { halfScale, halfScale, 0.0f };
+		SetHalfScaleByRadius(stageIconDatas, i, iconsCircleRadius, ICONS_CIRCLE_RADIUS_MAX);
 
 		if (i != m_selectingStage)
 		{
@@ -149,19 +137,22 @@ VOID StageSelectSceneStageList::Render()
 
 	m_rGameLib.DefaultBlendMode();
 
-	if (iconsCircleRadius == 0.0f) return;
+	if (iconsCircleRadius != 0.0f) RenderBackButton(iconsCircleRadius);
+}
 
+VOID StageSelectSceneStageList::RenderBackButton(FLOAT iconsCircleRadius) const
+{
 	ObjData backButtonData;
-	backButtonData.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.96f, m_Z };					//! 現物合わせ
-	backButtonData.m_halfScale	= { m_WND_SIZE.m_x * 0.05f, m_WND_SIZE.m_y * 0.04f, 0.0f };					//! 現物合わせ
+	backButtonData.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.96f, m_Z };	//! 現物合わせ
+	backButtonData.m_halfScale	= { m_WND_SIZE.m_x * 0.05f, m_WND_SIZE.m_y * 0.04f, 0.0f };	//! 現物合わせ
 
 	backButtonData.m_aRGB = D3DCOLOR_ARGB(
-							static_cast<UCHAR>(iconsCircleRadius),
-							255, 255, 255);
+		static_cast<UCHAR>(iconsCircleRadius),
+		255, 255, 255);
 
 	backButtonData.m_texUV =
 	{
-		-(m_backIsSelected -1) / 2.0f,
+		-(m_backIsSelected - 1) / 2.0f,
 		0.0f,
 		(!m_backIsSelected + 1.0f) / 2.0f,
 		1.0f
@@ -177,14 +168,7 @@ VOID StageSelectSceneLevelSelecter::Update()
 {
 	m_shouldActivateStageSelect = FALSE;
 
-	if (!m_rIsDecided)
-	{
-		m_sceneTranlationAlpha = 0;
-
-		return;
-	}
-
-	//if (m_sceneTranlationAlpha) return;
+	if (m_alpha < 255) return;
 
 	if (UpKeyIsPressed())
 	{
@@ -225,8 +209,6 @@ VOID StageSelectSceneLevelSelecter::Update()
 
 	if (ReturnKeyIsPressed())
 	{
-		//ステージの決定
-		m_sceneTranlationAlpha = 1;
 		SceneManager& rSceneManager = SceneManager::GetInstance();
 		rSceneManager.SetNextScene(SK_GAME);
 	}
@@ -234,72 +216,70 @@ VOID StageSelectSceneLevelSelecter::Update()
 
 VOID StageSelectSceneLevelSelecter::Render()
 {
-	ObjData backData;
-	backData.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, m_Z };
-	backData.m_halfScale	= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, 0.0f };
+	m_alpha += 10 * ((m_rStageIsDecided) ? 1 : -1);
+	m_alpha = min(max(m_alpha, 0), 255);
 
-	static INT alpha = 0;
-	alpha += 10 * ((m_rIsDecided) ? 1 : -1);
-	alpha = min(max(alpha, 0), 255);
-
-	if (!alpha)
+	if (!m_alpha)
 	{
-		m_backIsSelected = FALSE;	//! 0か1しか入れてはいけない
+		m_backIsSelected = FALSE;
 
 		return;
 	}
 
-	backData.m_aRGB = D3DCOLOR_ARGB(alpha, 255, 255, 255);
+	RenderBack();
+
+	RenderTarget();
+
+	RenderBackButton();
+}
+
+VOID StageSelectSceneLevelSelecter::RenderBack() const
+{
+	ObjData backData;
+	backData.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, m_Z };
+	backData.m_halfScale	= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, 0.0f };
+
+	backData.m_aRGB = D3DCOLOR_ARGB(m_alpha, 255, 255, 255);
 
 	CustomVertex back[4];
 	m_rGameLib.CreateRect(back, backData);
 
 	m_rGameLib.Render(back, m_rGameLib.GetTex(_T("LevelBack")));
+}
 
-	ObjData selectData;
-	selectData.m_center		= { m_WND_SIZE.m_x * 0.262f + m_WND_SIZE.m_x * 0.238f * m_level, m_WND_SIZE.m_y * 0.657f, m_Z };	//! 現物合わせ
-	selectData.m_halfScale	= { m_WND_SIZE.m_y * 0.017f, m_WND_SIZE.m_y * 0.017f, 0.0f };										//! 現物合わせ
+VOID StageSelectSceneLevelSelecter::RenderTarget() const
+{
 
-	selectData.m_aRGB = D3DCOLOR_ARGB(alpha, 255, 255, 255);
+	ObjData targetData;
+	targetData.m_center		= { m_WND_SIZE.m_x * 0.262f + m_WND_SIZE.m_x * 0.238f * m_level, m_WND_SIZE.m_y * 0.657f, m_Z };	//! 現物合わせ
+	targetData.m_halfScale	= { m_WND_SIZE.m_y * 0.017f, m_WND_SIZE.m_y * 0.017f, 0.0f };										//! 現物合わせ
 
-	selectData.m_deg.z = 90.0f;
+	targetData.m_aRGB = D3DCOLOR_ARGB(m_alpha, 255, 255, 255);
+
+	targetData.m_deg.z = 90.0f;
 
 	if (m_backIsSelected)
 	{
-		selectData.m_center = { m_WND_SIZE.m_x * 0.1865f, m_WND_SIZE.m_y * 0.17f, m_Z };										//! 現物合わせ
-		selectData.m_deg.z = 180.0f;
+		targetData.m_center = { m_WND_SIZE.m_x * 0.1865f, m_WND_SIZE.m_y * 0.17f, m_Z };										//! 現物合わせ
+		targetData.m_deg.z = 180.0f;
 	}
 
-	CustomVertex select[4];
-	m_rGameLib.CreateRect(select, selectData);
+	CustomVertex target[4];
+	m_rGameLib.CreateRect(target, targetData);
 
-	m_rGameLib.Render(select, m_rGameLib.GetTex(_T("LevelTarget")));
+	m_rGameLib.Render(target, m_rGameLib.GetTex(_T("LevelTarget")));
+}
 
+VOID StageSelectSceneLevelSelecter::RenderBackButton() const
+{
 	ObjData backButtonData;
 	backButtonData.m_center		= { m_WND_SIZE.m_x * 0.14f, m_WND_SIZE.m_y * 0.17f, m_Z };										//! 現物合わせ
 	backButtonData.m_halfScale	= { m_WND_SIZE.m_y * 0.05f, m_WND_SIZE.m_y * 0.05f, 0.0f };										//! 現物合わせ
 
-	backButtonData.m_aRGB = D3DCOLOR_ARGB(alpha, 255, 255, 255);
-	//if (m_backIsSelected) backButtonData.m_aRGB = D3DCOLOR_ARGB(alpha, 255, 255, 255);
+	backButtonData.m_aRGB = D3DCOLOR_ARGB(m_alpha, 255, 255, 255);
 
 	CustomVertex backButton[4];
 	m_rGameLib.CreateRect(backButton, backButtonData);
 
 	m_rGameLib.Render(backButton, m_rGameLib.GetTex(_T("LevelBackButton")));
-
-	if (!m_sceneTranlationAlpha) return;
-
-	ObjData sceneTransitionData;
-	sceneTransitionData.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, m_Z };
-	sceneTransitionData.m_halfScale	= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, 0.0f };
-
-	sceneTransitionData.m_aRGB = D3DCOLOR_ARGB(m_sceneTranlationAlpha, 255, 255, 255);
-
-	CustomVertex sceneTransition[4];
-	m_rGameLib.CreateRect(sceneTransition, sceneTransitionData);
-
-	m_rGameLib.Render(sceneTransition, nullptr);
-
-	m_sceneTranlationAlpha += 2 * ((m_sceneTranlationAlpha) ? 1 : -1);
-	m_sceneTranlationAlpha = min(max(m_sceneTranlationAlpha, 0), 255);
 }
