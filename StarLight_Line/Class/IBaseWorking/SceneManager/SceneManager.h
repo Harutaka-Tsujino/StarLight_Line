@@ -52,6 +52,13 @@ public:
 
 	VOID Factory();
 
+	inline BOOL LatterTransitionStagingIsEnded()
+	{
+		if(!m_transitionStagingAlpha || m_isRequestedChangeResent) return TRUE;
+
+		return FALSE;
+	}
+
 private:
 	SceneManager() 
 	{
