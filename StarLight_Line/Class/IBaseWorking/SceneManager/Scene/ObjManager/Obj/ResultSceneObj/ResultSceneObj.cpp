@@ -14,10 +14,10 @@ VOID ResultDataScore::Render()
 	m_rGameLib.SetCameraTransform();
 
 	ObjData backData;
-	backData.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.26f, m_Z };
-	backData.m_halfScale	= { m_WND_SIZE.m_x * 0.39f, m_WND_SIZE.m_y * 0.11f, 0.0f };
+	backData.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.26f, m_Z };	//! 現物合わせ
+	backData.m_halfScale	= { m_WND_SIZE.m_x * 0.39f, m_WND_SIZE.m_y * 0.11f, 0.0f };	//! 現物合わせ
 
-	backData.m_aRGB = 0x66808080;
+	backData.m_aRGB = 0x66808080;														//! 現物合わせ
 
 	CustomVertex back[4];
 	m_rGameLib.CreateRect(back, backData);
@@ -60,10 +60,10 @@ VOID ResultDataScore::Render()
 		*pDigitNum = (stageScore / static_cast<INT>(pow(DIGIT_OVER, i))) % DIGIT_OVER;
 
 		pDigitScoreData = &m_digitScoresVec[i].m_objData;
-		pDigitScoreData->m_center		= { m_WND_SIZE.m_x * 0.8f - DIGIT_POS_Y_GAP * i, m_WND_SIZE.m_y * 0.26f, m_Z };	//現物合わせ
+		pDigitScoreData->m_center		= { m_WND_SIZE.m_x * 0.8f - DIGIT_POS_Y_GAP * i, m_WND_SIZE.m_y * 0.26f, m_Z };	//! 現物合わせ
 		pDigitScoreData->m_halfScale	= { DIGIT_HALF_SCALE, DIGIT_HALF_SCALE, 0.0f };
 
-		pDigitScoreData->m_texUV =															//! 統合ファイルのテクスチャの座標
+		pDigitScoreData->m_texUV =																						//! 統合ファイルのテクスチャの座標
 		{
 			NUMS_ILLUST_SCALE * ((*pDigitNum) % NUMS_NUM_IN_ROW)		/ (NUMS_ILLUST_SCALE * NUMS_NUM_IN_ROW),
 			NUMS_ILLUST_SCALE * ((*pDigitNum) / NUMS_NUM_IN_ROW)		/ (NUMS_ILLUST_SCALE * NUMS_NUM_IN_COLUMN),
@@ -85,10 +85,10 @@ VOID ResultDataScore::Render()
 VOID ResultDataClearStar::Render()
 {
 	ObjData backData;
-	backData.m_center		= { m_WND_SIZE.m_x * 0.74f, m_WND_SIZE.m_y * 0.69f, m_Z };
-	backData.m_halfScale	= { m_WND_SIZE.m_x * 0.15f, m_WND_SIZE.m_y * 0.2f, 0.0f };
+	backData.m_center		= { m_WND_SIZE.m_x * 0.74f, m_WND_SIZE.m_y * 0.69f, m_Z };		//! 現物合わせ
+	backData.m_halfScale	= { m_WND_SIZE.m_x * 0.15f, m_WND_SIZE.m_y * 0.2f, 0.0f };		//! 現物合わせ
 
-	backData.m_aRGB = 0x66808080;
+	backData.m_aRGB = 0x66808080;															//! 現物合わせ
 
 	CustomVertex back[4];
 	m_rGameLib.CreateRect(back, backData);
@@ -113,8 +113,8 @@ VOID ResultDataClearStar::Render()
 		pStarData = &m_starsVec[i].m_objData;
 		pStarData->m_center =
 		{
-			m_WND_SIZE.m_x * 0.65f + 2 * STAR_HALF_SCALE * (i % (DEFAULT_STARS_ROW_MAX / 2)),
-			m_WND_SIZE.m_y * 0.7f + 2 * STAR_HALF_SCALE * (i / (DEFAULT_STARS_ROW_MAX / 2)),
+			m_WND_SIZE.m_x * 0.65f + 2 * STAR_HALF_SCALE * (i % (DEFAULT_STARS_ROW_MAX / 2)),	//! 現物合わせ
+			m_WND_SIZE.m_y * 0.7f + 2 * STAR_HALF_SCALE * (i / (DEFAULT_STARS_ROW_MAX / 2)),	//! 現物合わせ
 			m_Z
 		};
 
@@ -142,15 +142,14 @@ VOID ResultDataClearStar::Render()
 
 	m_stagingCount = (m_stagingCount >= m_StageCountMax) ? m_StageCountMax : ++m_stagingCount;
 
-	if (m_stagingCount >= m_StageCountMax)
-	{
-		for (INT i = 0; i < m_CLEAR_STARS_NUM; ++i)
-		{
-			m_starsVec[i].m_objData.m_aRGB = 0xFFFFFFFF;
-		}
+	if (m_stagingCount < m_StageCountMax) return;
 
-		m_stagingIsEnd = TRUE;
+	for (INT i = 0; i < m_CLEAR_STARS_NUM; ++i)
+	{
+		m_starsVec[i].m_objData.m_aRGB = 0xFFFFFFFF;
 	}
+
+	m_stagingIsEnd = TRUE;
 }
 
 VOID ResultSceneResultFont::Render()
@@ -172,7 +171,7 @@ VOID ResultSceneResultFont::Render()
 
 	ObjData resultFontData;
 	resultFontData.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, m_Z };
-	resultFontData.m_halfScale	= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.14f, 0.0f };
+	resultFontData.m_halfScale	= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.14f, 0.0f };	//! 現物合わせ
 
 	alpha = static_cast<BYTE>(255 * static_cast<FLOAT>(m_alphaCount) / ADDITIONAL_ALPHA_FRAME);
 	resultFontData.m_aRGB = D3DCOLOR_ARGB(alpha, 255, 255, 255);
@@ -198,7 +197,7 @@ VOID ResultSceneContinue::Render()
 {
 	ObjData ContinueFrameData;
 	ContinueFrameData.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, m_Z };
-	ContinueFrameData.m_halfScale	= { m_WND_SIZE.m_x * 0.28f, m_WND_SIZE.m_y * 0.28f, 0.0f };
+	ContinueFrameData.m_halfScale	= { m_WND_SIZE.m_x * 0.28f, m_WND_SIZE.m_y * 0.28f, 0.0f };		//! 現物合わせ
 
 	CustomVertex ContinueFrame[4];
 	m_rGameLib.CreateRect(ContinueFrame, ContinueFrameData);
