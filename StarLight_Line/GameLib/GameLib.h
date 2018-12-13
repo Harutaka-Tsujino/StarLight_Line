@@ -218,6 +218,11 @@ public:
 		return m_pDX->TransScreen(Pos);
 	}
 
+	inline D3DXVECTOR3 TransWorld(const D3DXVECTOR3& Pos) const
+	{
+		return m_pDX->TransWorld(Pos);
+	}
+
 	inline VOID RotateRectXYZ(CustomVertex* pCustomVertices, const D3DXVECTOR3& rDeg, const D3DXVECTOR3& rRelativeRotateCenter) const
 	{
 		m_pDX->RotateRectXYZ(pCustomVertices, rDeg, rRelativeRotateCenter);

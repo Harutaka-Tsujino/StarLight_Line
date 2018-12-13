@@ -125,6 +125,8 @@ public:
 
 	D3DXVECTOR3 TransScreen(const D3DXVECTOR3& Pos);
 
+	D3DXVECTOR3 TransWorld(const D3DXVECTOR3& Pos);
+
 private:
 	const LPDIRECT3DDEVICE9& m_rpDX3D_DEV = nullptr;
 

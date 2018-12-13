@@ -53,11 +53,40 @@ D3DXVECTOR3 Camera::TransScreen(const D3DXVECTOR3& Pos)
 	D3DXVec3TransformCoord(&Tmp, &Pos, &m_view);
 	D3DXVec3TransformCoord(&Tmp, &Tmp, &m_proj);
 
-	Tmp.x /= Tmp.z;
+	/*Tmp.x /= Tmp.z;
 	Tmp.y /= Tmp.z;
-	Tmp.z /= Tmp.z;
+	Tmp.z /= Tmp.z;*/
 
 	D3DXVec3TransformCoord(&ScreenPos, &Tmp, &ViewPortMat);
 
 	return ScreenPos;
+}
+
+D3DXVECTOR3 Camera::TransWorld(const D3DXVECTOR3& Pos)
+{
+	D3DVIEWPORT9 ViewPort;
+	m_rpDX3D_DEV->GetViewport(&ViewPort);
+
+	D3DXVECTOR2 Screen(static_cast<FLOAT>(ViewPort.Width * 0.5f),
+		static_cast<FLOAT>(ViewPort.Height * 0.5f));
+
+	// 各行列の逆行列を算出
+	D3DXMATRIX InvView, InvPrj, InvViewport;
+	D3DXMatrixInverse(&InvView, NULL, &m_view);
+	D3DXMatrixInverse(&InvPrj, NULL, &m_proj);
+	D3DXMATRIX ViewPortMat =
+	{
+		Screen.x, 0 ,		 0, 0,
+		0,		  -Screen.y, 0, 0,
+		0,		  0  ,		 1, 0,
+		Screen.x, Screen.y,  0, 1
+	};
+	D3DXMatrixInverse(&InvViewport, NULL, &ViewPortMat);
+
+	// 逆変換
+	D3DXMATRIX tmp = InvViewport * InvPrj * InvView;
+	D3DXVECTOR3 WorldPos;
+	D3DXVec3TransformCoord(&WorldPos, &Pos, &tmp);
+
+	return WorldPos;
 }
