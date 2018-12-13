@@ -97,7 +97,6 @@ public:
 		m_rpDX3D_DEV->DrawPrimitive(D3DPT_TRIANGLEFAN, 0, 2);
 
 		pBuffer->Release();
-		pBuffer = nullptr;
 	}
 
 private:

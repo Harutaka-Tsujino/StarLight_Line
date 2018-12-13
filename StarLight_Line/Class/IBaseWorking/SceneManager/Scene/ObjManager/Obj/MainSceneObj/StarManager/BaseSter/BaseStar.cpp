@@ -18,13 +18,13 @@ VOID BaseStar::Update()
 VOID BaseStar::FallStarPosYTime()
 {
 	//星の落ち始める時間 = (((n小節目 * 拍数) + n分音符) * fps) / 1分間に落ちてくる星の個数
-	m_Info.m_Time = ((((m_Info.m_Division - 1) * 4) + m_Info.m_StarsNumInDivision) * 60.f) / m_Info.m_DropPerMinute;
+	m_Info.m_Time = ((((m_Info.m_Measure - 1) *  (m_Info.m_Beat / 4)) + (m_Info.m_Line / m_Info.m_StarsNumInNote)) * 60.f) / m_Info.m_DropPerMinute;
 }
 
 VOID BaseStar::PosOfStarYCoordinate(const LONGLONG& CurrentTime)
 {
-	//星のy座標 =　落ち始める時間(ms) - (今の時間(秒) / 1000)
-	m_Info.m_Pos.y = m_Info.m_Time - (CurrentTime / 1000.f);
+	//星のy座標 =　落ち始める時間(ms) - (今の時間(秒) / 1200)
+	m_Info.m_Pos.y = m_Info.m_Time - (CurrentTime / 1200.f);
 }
 
 VOID BaseStar::SetStarInfo(const struct StarPlace& StarPlace)
@@ -71,12 +71,18 @@ VOID BaseStar::ConvertLocalToWorld(D3DXMATRIX* pMatWorld)
 
 	D3DXMatrixMultiply(pMatWorld, pMatWorld, &MatScale);
 
-	m_Info.m_Pos.x /= 100.f;
-	m_Info.m_Pos.y -= (m_Info.m_DropPerMinute / 3600.f);
+	m_Info.m_Pos.y /= 10.f;
 	m_Info.m_Pos.z = 0.2f;
 
+	D3DXVECTOR3 WorldBuff(0.f, m_Info.m_Pos.y, m_Info.m_Pos.z);	//スクリーン変換用バッファ
+	D3DXVECTOR3 ScreenBuff;										//ワールド変換用
+	ScreenBuff = m_rGameLib.TransScreen(WorldBuff);
+	ScreenBuff.x = m_Info.m_Pos.x;	
+	m_Info.m_CollisionPos = ScreenBuff;
+	WorldBuff = m_rGameLib.TransWorld(ScreenBuff);
+
 	// 移動
-	D3DXMatrixTranslation(&MatTrans, m_Info.m_Pos.x, m_Info.m_Pos.y, m_Info.m_Pos.z);
+	D3DXMatrixTranslation(&MatTrans, WorldBuff.x, WorldBuff.y, m_Info.m_Pos.z);
 
 	D3DXMatrixMultiply(pMatWorld, pMatWorld, &MatTrans);
 }

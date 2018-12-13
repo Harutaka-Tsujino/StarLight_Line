@@ -44,7 +44,7 @@ VOID StarManager::Render()
 		for (int i = 0;i != m_StarNotes.size();++i)
 		{
 			m_rGameCollision.ResiterEnemyPoint(
-				static_cast<BaseStar*>(m_StarNotes[i])->GetStarPos(),
+				static_cast<BaseStar*>(m_StarNotes[i])->GetCollisionPos(),
 				static_cast<BaseStar*>(m_StarNotes[i])->GetType());
 		}
 	}
@@ -57,6 +57,20 @@ VOID StarManager::LoadStarData(const char* pFileName)
 
 	static int cnt;
 	cnt = 0;
+
+	getline(ifs, str);
+
+	int Measures = atoi(str.data());
+	std::vector<float> DropPerMinute;
+
+	for (int i = 0;i < Measures;++i)
+	{
+		getline(ifs, str);
+		DropPerMinute.push_back(static_cast<float>(atof(str.data())));
+	}
+
+	//ファイルにあるゲームに必要のない情報のから読みをする
+	getline(ifs, str);
 
 	while (getline(ifs, str))
 	{
@@ -71,11 +85,15 @@ VOID StarManager::LoadStarData(const char* pFileName)
 		StarPlace StarInfo;
 		StarInfo.m_Type = static_cast<STAR_TYPE>(Kind);
 
-		stream >> 
-			StarInfo.m_DropPerMinute >>
-			StarInfo.m_Division >> 
-			StarInfo.m_StarsNumInDivision >> 
-			StarInfo.m_Pos.x;
+		stream >>
+			StarInfo.m_Measure >>
+			StarInfo.m_Beat >>
+			StarInfo.m_StarsNumInNote >>
+			StarInfo.m_Line >>
+			StarInfo.m_Pos.x >>
+			StarInfo.m_XMovement;
+
+		StarInfo.m_DropPerMinute = DropPerMinute[StarInfo.m_Measure - 1];
 
 		StarDataToAssign(cnt, StarInfo);
 

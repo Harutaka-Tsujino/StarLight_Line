@@ -16,7 +16,7 @@ class StarManager:public Obj
 public:
 	StarManager() :Obj(OT_TRANSPARENCY, 0.5f), m_rGameCollision(GameCollision::GetInstance())
 	{
-		LoadStarData("StageData/otamesi.csv");
+		LoadStarData("StageData/Stage.csv");
 		m_rGameLib.CreateFbx(_T("StarFBX"), "3DModels/EnemyStar/EnemyStar.fbx");
 		Init();
 	}

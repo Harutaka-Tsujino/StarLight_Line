@@ -12,16 +12,16 @@ VOID PlayerScore::Init()
 
 VOID PlayerScore::Update()
 {
-	const FLOAT RADIUS = 100.0f;
+	const FLOAT RADIUS = 30.0f;
 
-	if (m_rGameCollision.HitSomething(_T("Player"), SCORE, RADIUS, RADIUS))
+	if (m_rGameCollision.HitSomething(_T("Player"), SCORE, 20.f, RADIUS))
 	{
 		const INT BASIC_POINT = 100;
 
 		m_Score += BASIC_POINT;
 	}
 
-	if (m_rGameCollision.HitSomething(_T("Player"), CLEAR, RADIUS, RADIUS))
+	if (m_rGameCollision.HitSomething(_T("Player"), CLEAR, 20.f, RADIUS))
 	{
 		const INT BONUS_POINT = 500;
 
@@ -38,7 +38,7 @@ VOID PlayerScore::Render()
 		ObjData Data;
 		int DigitNum = (m_Score / m_Digit[i]) % 10;		//桁ごとに数字を分ける
 
-		Data.m_center = { m_WND_SIZE.m_x * (0.75f - 0.015f * i) , m_WND_SIZE.m_y * 0.9f , 0.0f };
+		Data.m_center = { m_WND_SIZE.m_x * (0.83f - 0.015f * i) , m_WND_SIZE.m_y * 0.9f , 0.0f };
 		Data.m_halfScale = { m_WND_SIZE.m_x * 0.01f , m_WND_SIZE.m_y * 0.04f , 0.f };
 
 		DisplayNum(&Data.m_texUV, DigitNum);

@@ -45,22 +45,12 @@ public:
 	*/
 	inline static VOID Create(const HINSTANCE hInst, const TCHAR* pAppName)
 	{
-		if (m_pWnd) return;
-		if (m_pDX) return;
-		if (m_pTimer) return;
-		if (m_pCollision) return;
-		if (m_pBoard3D) return;
-
-		m_pWnd = new Wnd(hInst, pAppName);
-
-		m_pDX = new DX(m_pWnd->GetHWND(), m_pWnd->GetWndSize());
-
-		m_pTimer = new Timer();
-
-		m_pCollision = new Collision();
-
-		m_pBoard3D = new Board3D();
-
+		if (!m_pWnd)		m_pWnd = new Wnd(hInst, pAppName);
+		if (!m_pDX)			m_pDX = new DX(m_pWnd->GetHWND(), m_pWnd->GetWndSize());
+		if (!m_pTimer)		m_pTimer = new Timer();
+		if (!m_pCollision)	m_pCollision = new Collision();
+		if (!m_pBoard3D)	m_pBoard3D = new Board3D();
+		
 		GetInstance();
 	}
 

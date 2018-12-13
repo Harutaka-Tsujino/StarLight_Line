@@ -3,7 +3,6 @@
 
 enum STAR_TYPE
 {
-	NONE,
 	DAMAGE,
 	SCORE,
 	CLEAR,

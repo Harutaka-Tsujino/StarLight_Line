@@ -1,7 +1,5 @@
 ﻿#include "Player.h"
 
-INT Player::count = 0;
-
 VOID Player::Init()
 {
 	count = 0;
@@ -144,8 +142,6 @@ VOID Player::RestrictedMoving()
 
 VOID Player::DecideSpeed(CoordinatePoint* PrevPoint, const HIT_KEY& HitKey)
 {
-	const float FRAMENUM = 15.f;	//何フレームで割るか(自機のスピードの)
-
 	memcpy(PrevPoint, &m_PlayerPoint, sizeof(CoordinatePoint));
 
 	switch (HitKey)
@@ -166,6 +162,8 @@ VOID Player::DecideSpeed(CoordinatePoint* PrevPoint, const HIT_KEY& HitKey)
 		++m_PlayerPoint.x;
 		break;
 	}
+
+	const float FRAMENUM = 15.f;	//何フレームで割るか(自機のスピードの)
 
 	if (HitKey == UP || HitKey == DOWN)
 	{
