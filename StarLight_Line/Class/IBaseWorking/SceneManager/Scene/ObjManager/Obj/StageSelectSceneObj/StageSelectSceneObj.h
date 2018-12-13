@@ -115,7 +115,7 @@ public:
 	inline VOID Init()
 	{
 		m_rGameLib.CreateTex(_T("LevelBack"), _T("2DTextures/StageSelect/StageSelect_difficultyBack.png"));
-		m_rGameLib.CreateTex(_T("LevelSelectFrame"), _T("2DTextures/StageSelect/StageSelect_difficultySelectFrame.png"));
+		m_rGameLib.CreateTex(_T("LevelTarget"), _T("2DTextures/Result/Target.png"));
 		m_rGameLib.CreateTex(_T("LevelBackButton"), _T("2DTextures/StageSelect/difficultyselect_backicon.png"));
 	}
 

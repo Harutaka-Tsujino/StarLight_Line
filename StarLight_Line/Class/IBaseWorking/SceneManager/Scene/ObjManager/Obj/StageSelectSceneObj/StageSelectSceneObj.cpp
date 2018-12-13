@@ -257,23 +257,30 @@ VOID StageSelectSceneLevelSelecter::Render()
 	m_rGameLib.Render(back, m_rGameLib.GetTex(_T("LevelBack")));
 
 	ObjData selectData;
-	selectData.m_center		= { m_WND_SIZE.m_x * 0.22f + m_WND_SIZE.m_x * 0.28f * m_level, m_WND_SIZE.m_y * 0.7f, m_Z };	//! 現物合わせ
-	selectData.m_halfScale	= { m_WND_SIZE.m_x * 0.1f, m_WND_SIZE.m_y * 0.05f, 0.0f };										//! 現物合わせ
+	selectData.m_center		= { m_WND_SIZE.m_x * 0.262f + m_WND_SIZE.m_x * 0.238f * m_level, m_WND_SIZE.m_y * 0.657f, m_Z };	//! 現物合わせ
+	selectData.m_halfScale	= { m_WND_SIZE.m_y * 0.017f, m_WND_SIZE.m_y * 0.017f, 0.0f };										//! 現物合わせ
 
 	selectData.m_aRGB = D3DCOLOR_ARGB(alpha, 255, 255, 255);
-	if(m_backIsSelected) selectData.m_aRGB = D3DCOLOR_ARGB(0, 255, 255, 255);
+
+	selectData.m_deg.z = 90.0f;
+
+	if (m_backIsSelected)
+	{
+		selectData.m_center = { m_WND_SIZE.m_x * 0.1865f, m_WND_SIZE.m_y * 0.17f, m_Z };											//! 現物合わせ
+		selectData.m_deg.z = 180.0f;
+	}
 
 	CustomVertex select[4];
 	m_rGameLib.CreateRect(select, selectData);
 
-	m_rGameLib.Render(select, m_rGameLib.GetTex(_T("LevelSelectFrame")));
+	m_rGameLib.Render(select, m_rGameLib.GetTex(_T("LevelTarget")));
 
 	ObjData backButtonData;
-	backButtonData.m_center		= { m_WND_SIZE.m_x * 0.14f, m_WND_SIZE.m_y * 0.17f, m_Z };									//! 現物合わせ
-	backButtonData.m_halfScale	= { m_WND_SIZE.m_y * 0.05f, m_WND_SIZE.m_y * 0.05f, 0.0f };									//! 現物合わせ
+	backButtonData.m_center		= { m_WND_SIZE.m_x * 0.14f, m_WND_SIZE.m_y * 0.17f, m_Z };										//! 現物合わせ
+	backButtonData.m_halfScale	= { m_WND_SIZE.m_y * 0.05f, m_WND_SIZE.m_y * 0.05f, 0.0f };										//! 現物合わせ
 
-	backButtonData.m_aRGB = D3DCOLOR_ARGB(alpha, 0, 0, 0);
-	if (m_backIsSelected) backButtonData.m_aRGB = D3DCOLOR_ARGB(alpha, 255, 255, 255);
+	backButtonData.m_aRGB = D3DCOLOR_ARGB(alpha, 255, 255, 255);
+	//if (m_backIsSelected) backButtonData.m_aRGB = D3DCOLOR_ARGB(alpha, 255, 255, 255);
 
 	CustomVertex backButton[4];
 	m_rGameLib.CreateRect(backButton, backButtonData);
