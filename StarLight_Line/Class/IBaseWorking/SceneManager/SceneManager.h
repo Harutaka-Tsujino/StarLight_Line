@@ -35,7 +35,7 @@ public:
 	{
 		m_pScene->Render();
 
-		StageSceneTransration();
+		StageTransition();
 	}
 
 	inline VOID SetCurrentScene(SCENE_KIND currentScene)
@@ -58,7 +58,7 @@ private:
 		m_pScene = new TitleScene();
 	}
 	
-	VOID StageSceneTransration();
+	VOID StageTransition();
 
 	Scene* m_pScene = nullptr;
 
@@ -66,6 +66,8 @@ private:
 	SCENE_KIND m_nextScene		= SK_TITLE;
 
 	BOOL m_isRequestedChangeResent = FALSE;
+
+	INT m_transitionStagingAlpha = 0;
 };
 
 #endif // !SCENE_MANAGER_H

@@ -289,16 +289,16 @@ VOID StageSelectSceneLevelSelecter::Render()
 
 	if (!m_sceneTranlationAlpha) return;
 
-	ObjData sceneTranslationData;
-	sceneTranslationData.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, m_Z };
-	sceneTranslationData.m_halfScale	= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, 0.0f };
+	ObjData sceneTransitionData;
+	sceneTransitionData.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, m_Z };
+	sceneTransitionData.m_halfScale	= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, 0.0f };
 
-	sceneTranslationData.m_aRGB = D3DCOLOR_ARGB(m_sceneTranlationAlpha, 255, 255, 255);
+	sceneTransitionData.m_aRGB = D3DCOLOR_ARGB(m_sceneTranlationAlpha, 255, 255, 255);
 
-	CustomVertex sceneTranslation[4];
-	m_rGameLib.CreateRect(sceneTranslation, sceneTranslationData);
+	CustomVertex sceneTransition[4];
+	m_rGameLib.CreateRect(sceneTransition, sceneTransitionData);
 
-	m_rGameLib.Render(sceneTranslation, nullptr);
+	m_rGameLib.Render(sceneTransition, nullptr);
 
 	m_sceneTranlationAlpha += 2 * ((m_sceneTranlationAlpha) ? 1 : -1);
 	m_sceneTranlationAlpha = min(max(m_sceneTranlationAlpha, 0), 255);
