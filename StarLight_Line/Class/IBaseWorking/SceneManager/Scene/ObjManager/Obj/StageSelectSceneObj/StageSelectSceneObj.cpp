@@ -266,7 +266,7 @@ VOID StageSelectSceneLevelSelecter::Render()
 
 	if (m_backIsSelected)
 	{
-		selectData.m_center = { m_WND_SIZE.m_x * 0.1865f, m_WND_SIZE.m_y * 0.17f, m_Z };											//! 現物合わせ
+		selectData.m_center = { m_WND_SIZE.m_x * 0.1865f, m_WND_SIZE.m_y * 0.17f, m_Z };										//! 現物合わせ
 		selectData.m_deg.z = 180.0f;
 	}
 
