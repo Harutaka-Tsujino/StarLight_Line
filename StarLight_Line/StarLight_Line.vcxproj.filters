@@ -68,9 +68,6 @@
     <Filter Include="Class\IBaseWorking\SceneManager\Scene">
       <UniqueIdentifier>{f7d25a0d-8fb8-4c2c-a9db-64cdc2d48b43}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Class\IBaseWorking\SceneManager\Scene\TitleScene">
-      <UniqueIdentifier>{fc00e2fe-f459-4188-8e67-3c43070df8e7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameLib\DX\DX3D\CustomVertexEditor\Data">
       <UniqueIdentifier>{74969a96-e2c9-41d8-b01d-6522f00981ad}</UniqueIdentifier>
     </Filter>
@@ -181,6 +178,18 @@
     </Filter>
     <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerHP">
       <UniqueIdentifier>{028a85e4-7a9b-48b8-98ea-1c879dafd3eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\TitleScene">
+      <UniqueIdentifier>{fc00e2fe-f459-4188-8e67-3c43070df8e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\GameCollision">
+      <UniqueIdentifier>{9e7f2a5c-c4fa-4ee1-9d11-b010eed1d623}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Enum">
+      <UniqueIdentifier>{7e9e38a2-91d8-4047-828d-d26fff926d4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerEffect">
+      <UniqueIdentifier>{683fa386-a7d4-457b-98f3-f8f1febbc584}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -336,6 +345,12 @@
     </ClCompile>
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerHP\PlayerHP.cpp">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerHP</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\GameCollision\GameCollision.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\GameCollision</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerEffect\PlayerEffect.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerEffect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -515,6 +530,15 @@
     </ClInclude>
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerHP\PlayerHP.h">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerHP</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\GameCollision\GameCollision.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\GameCollision</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Enum\STAR_TYPE.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Enum</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerEffect\PlayerEffect.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerEffect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
