@@ -155,6 +155,7 @@
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\StageSelectScene\StageSelectScene.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\TitleScene\TitleScene.cpp" />
     <ClCompile Include="Class\Singleton\Singleton.cpp" />
+    <ClCompile Include="GameLib\3DBoard\3DBoard.cpp" />
     <ClCompile Include="GameLib\Collision\Collision.cpp" />
     <ClCompile Include="GameLib\DX\DX.cpp" />
     <ClCompile Include="GameLib\DX\DX3D\Camera\Camera.cpp" />
@@ -206,6 +207,7 @@
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\StageSelectScene\StageSelectScene.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\TitleScene\TitleScene.h" />
     <ClInclude Include="Class\Singleton\Singleton.h" />
+    <ClInclude Include="GameLib\3DBoard\3DBoard.h" />
     <ClInclude Include="GameLib\Collision\Collision.h" />
     <ClInclude Include="GameLib\DX\DX.h" />
     <ClInclude Include="GameLib\DX\DX3D\Camera\Camera.h" />
