@@ -59,7 +59,7 @@ VOID BaseStar::DefaultLight()
 
 VOID BaseStar::ConvertLocalToWorld(D3DXMATRIX* pMatWorld)
 {
-	D3DXMATRIX MatTrans, MatScale;
+	D3DXMATRIX MatTrans, MatScale, MatRotate;
 	D3DXMatrixIdentity(pMatWorld);
 	D3DXMatrixIdentity(&MatTrans);
 	D3DXMatrixIdentity(&MatScale);
@@ -70,6 +70,13 @@ VOID BaseStar::ConvertLocalToWorld(D3DXMATRIX* pMatWorld)
 	D3DXMatrixScaling(&MatScale, MODELSCALE, MODELSCALE, MODELSCALE);
 
 	D3DXMatrixMultiply(pMatWorld, pMatWorld, &MatScale);
+
+	// 演出用の回転
+	D3DXMatrixRotationZ(&MatRotate, D3DXToRadian(m_DegZ));
+
+	D3DXMatrixMultiply(pMatWorld, pMatWorld, &MatRotate);
+
+	++m_DegZ;
 
 	m_Info.m_Pos.y /= 10.f;
 	m_Info.m_Pos.z = 0.2f;

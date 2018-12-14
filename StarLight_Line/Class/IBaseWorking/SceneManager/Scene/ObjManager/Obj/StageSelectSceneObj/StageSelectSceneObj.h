@@ -19,6 +19,8 @@
 
 #include "../Obj.h"
 #include "../../../StageSelectScene/Enum/STAGE_LEVEL_KIND.h"
+#include "../../../../SceneManager.h"
+#include "../../../../Struct/StageData.h"
 
 class StageSelectBack :public Obj
 {
@@ -88,6 +90,11 @@ public:
 		m_lengthMulti = 1.0f;
 
 		m_isDecided = FALSE;
+	}
+
+	inline INT GetStage() const
+	{
+		return m_selectingStage;
 	}
 
 private:
@@ -171,6 +178,11 @@ public:
 		return m_shouldActivateStageSelect;
 	}
 
+	inline INT Level() const
+	{
+		return m_level;
+	}
+
 private:
 	VOID RenderBack() const;
 
@@ -198,6 +210,8 @@ public:
 
 	~StageSelectSceneStages()
 	{
+		SendStageDataToSceneManager();
+
 		delete m_pLevelSelecter;
 		delete m_pStageList;
 		m_rGameLib.ReleaseTex();
@@ -224,6 +238,18 @@ public:
 		m_pStageList->Render();
 	}
 
+	inline VOID SendStageDataToSceneManager()
+	{
+		m_pStageList->GetStage();
+		m_pLevelSelecter->Level();
+
+		StageData StageData = { m_pStageList->GetStage(), m_pLevelSelecter->Level() };
+
+		SceneManager& rSceneManager = SceneManager::GetInstance();
+		rSceneManager.SetStageData(StageData);
+	}
+
+private:
 	StageSelectSceneStageList* m_pStageList = nullptr;
 	StageSelectSceneLevelSelecter* m_pLevelSelecter = nullptr;
 };

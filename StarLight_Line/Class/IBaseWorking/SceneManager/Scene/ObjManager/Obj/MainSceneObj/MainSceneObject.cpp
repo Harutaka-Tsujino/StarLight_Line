@@ -12,8 +12,8 @@ VOID MainBack::Render()
 	m_rGameLib.SetCameraTransform();
 
 	ObjData data;
-	data.m_center = { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, m_Z };
-	data.m_halfScale = { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, 0.0f };
+	data.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, m_Z };
+	data.m_halfScale	= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, 0.0f };
 
 	CustomVertex back[4];
 	m_rGameLib.CreateRect(back, data);
@@ -31,8 +31,8 @@ VOID PlayerLifeFrame::Render()
 	m_rGameLib.SetCameraTransform();
 
 	D3DXVECTOR3 Center, HalfScale;
-	Center = { m_WND_SIZE.m_x * 0.25f, m_WND_SIZE.m_y * 0.9f, m_Z };
-	HalfScale = { m_WND_SIZE.m_x * 0.25f, m_WND_SIZE.m_y * 0.05f, 0.0f };
+	Center		= { m_WND_SIZE.m_x * 0.25f, m_WND_SIZE.m_y * 0.9f, m_Z };
+	HalfScale	= { m_WND_SIZE.m_x * 0.25f, m_WND_SIZE.m_y * 0.05f, 0.0f };
 
 	TexUV UV;
 	UV.m_endTV = 74.f / 512.f;

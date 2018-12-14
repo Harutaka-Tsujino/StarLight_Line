@@ -19,6 +19,7 @@
 
 #include "../Obj.h"
 #include "../../../../SceneManager.h"
+#include "../../../../Struct/ResultData.h"
 
 class ResultSceneBack :public Obj
 {
@@ -288,11 +289,16 @@ public:
 
 	inline VOID Init()
 	{
-		m_pResultDataScore = new ResultDataScore(123571113, m_CASE_COLOR);	//テスト用
+		SceneManager& rSceneManager = SceneManager::GetInstance();
 
-		m_pResultDataStage = new ResultDataStage(NULL, NULL, m_CASE_COLOR);	//未対応
+		ResultData resultData;
+		rSceneManager.GetResultData(&resultData);
 
-		m_pResultDataClearStar = new ResultDataClearStar(7, 8, m_CASE_COLOR);	//テスト用
+		m_pResultDataScore = new ResultDataScore(resultData.m_score, m_CASE_COLOR);												//テスト用
+
+		m_pResultDataStage = new ResultDataStage(NULL, NULL, m_CASE_COLOR);														//未対応
+
+		m_pResultDataClearStar = new ResultDataClearStar(resultData.m_clearStarsNum, resultData.m_clearStarMax, m_CASE_COLOR);	//テスト用
 	}
 
 	inline VOID Update() 
@@ -489,6 +495,13 @@ public:
 
 	inline VOID Init()
 	{
+		SceneManager& rSceneManager = SceneManager::GetInstance();
+
+		ResultData resultData;
+		rSceneManager.GetResultData(&resultData);
+
+		m_isFailed = resultData.m_isFailed;
+
 		m_pResultSceneResultData = new ResultSceneResultData();
 
 		m_pResultSceneResultFont = new ResultSceneResultFont(m_isFailed);

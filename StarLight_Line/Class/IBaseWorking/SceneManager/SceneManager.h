@@ -13,6 +13,8 @@
 #include "../../../GameLib/GameLib.h"
 #include "../../../GameLib/DX/DX3D/CustomVertexEditor/Data/ObjData.h"
 #include "../../../GameLib/DX/DX3D/CustomVertexEditor/Data/CustomVertex.h"
+#include "Struct\StageData.h"
+#include "Struct\ResultData.h"
 
 class SceneManager :public IBaseWorking, public Singleton<SceneManager>
 {
@@ -59,12 +61,32 @@ public:
 		return FALSE;
 	}
 
+	inline VOID SetStageData(StageData stageData)
+	{
+		m_stageData = stageData;
+	}
+
+	inline VOID SetResultData(ResultData resultData)
+	{
+		m_resultData = resultData;
+	}
+
+	inline VOID GetStageData(StageData* pStageData) const
+	{
+		*pStageData = m_stageData;
+	}
+
+	inline VOID GetResultData(ResultData* pResultData) const
+	{
+		*pResultData = m_resultData;
+	}
+
 private:
 	SceneManager() 
 	{
 		m_pScene = new TitleScene();
 	}
-	
+
 	VOID StageTransition();
 
 	Scene* m_pScene = nullptr;
@@ -75,6 +97,9 @@ private:
 	BOOL m_isRequestedChangeResent = FALSE;
 
 	INT m_transitionStagingAlpha = 0;
+
+	StageData m_stageData;
+	ResultData m_resultData;
 };
 
 #endif // !SCENE_MANAGER_H
