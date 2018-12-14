@@ -26,13 +26,12 @@ VOID BaseStar::PosOfStarYCoordinate(const LONGLONG& CurrentTime)
 	const FLOAT SEC_TO_MMSEC_MULTI = 1000.0f;
 	const FLOAT MINUTE_TO_MMSEC = 60.0f * SEC_TO_MMSEC_MULTI;
 
-	FLOAT gapMMSec = CurrentTime - m_Info.m_Time;
+	LONGLONG gapMMSec = CurrentTime - m_Info.m_Time;
 	if (gapMMSec < 0) return;
 
 	FLOAT oneNoteTakesMMSec = (1.0f / m_Info.m_DropPerMinute) * MINUTE_TO_MMSEC;
 
-	//星のy座標 =　落ち始める時間(ms) - (今の時間(秒) / 1200)
-	m_Info.m_Pos.y = m_WND_SIZE.m_y * (gapMMSec / oneNoteTakesMMSec);
+	m_Info.m_Pos.y = m_WND_SIZE.m_y * 0.5f * (gapMMSec / oneNoteTakesMMSec);
 }
 
 VOID BaseStar::SetStarInfo(const struct StarPlace& StarPlace)

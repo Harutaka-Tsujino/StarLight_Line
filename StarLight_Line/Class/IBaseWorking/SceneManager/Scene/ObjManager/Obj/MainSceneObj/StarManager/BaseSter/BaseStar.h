@@ -17,7 +17,7 @@ struct StarPlace
 	float m_StarsNumInNote;			//n分音符
 	float m_Line;					//n分音符の中の数字
 	float m_DropPerMinute;			//1分間にどれだけ落ちてくるか
-	float m_Time;					//落ちてくる時間
+	LONGLONG m_Time;					//落ちてくる時間
 	float m_XMovement;				//x座標の移動量
 
 	D3DXVECTOR3 m_CollisionPos;		//当たり判定用の座標

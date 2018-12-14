@@ -106,15 +106,15 @@ VOID StarManager::LoadStarData(const char* pFileName)
 		for (INT i = 0; i < StarInfo.m_Measure - 1; ++i)
 		{
 			formarBPM = DropPerMinute[i];
-			StarInfo.m_Time += (BEATS_NUM_IN_MEASURE / formarBPM) * MINUTE_TO_MMSEC;
+			StarInfo.m_Time += static_cast<LONGLONG>((BEATS_NUM_IN_MEASURE / formarBPM) * BEATS_NUM_IN_MEASURE * MINUTE_TO_MMSEC);
 		}
 
 		const FLOAT ONE_BEATS_TAKES_MMSEC = (BEATS_NUM_IN_MEASURE / StarInfo.m_DropPerMinute) * MINUTE_TO_MMSEC;
 
-		StarInfo.m_Time += ONE_BEATS_TAKES_MMSEC * (StarInfo.m_Beat - 1);
+		StarInfo.m_Time += static_cast<LONGLONG>(ONE_BEATS_TAKES_MMSEC * (StarInfo.m_Beat - 1));
 
-		StarInfo.m_Time += ONE_BEATS_TAKES_MMSEC * ((0.5f / StarInfo.m_StarsNumInNote));
-		StarInfo.m_Time += ONE_BEATS_TAKES_MMSEC * ((StarInfo.m_Line / StarInfo.m_StarsNumInNote) - 1);
+		StarInfo.m_Time += static_cast<LONGLONG>(ONE_BEATS_TAKES_MMSEC * ((0.5f / StarInfo.m_StarsNumInNote)));
+		StarInfo.m_Time += static_cast<LONGLONG>(ONE_BEATS_TAKES_MMSEC * ((StarInfo.m_Line / StarInfo.m_StarsNumInNote) - 1));
 
 		StarDataToAssign(cnt, StarInfo);
 
