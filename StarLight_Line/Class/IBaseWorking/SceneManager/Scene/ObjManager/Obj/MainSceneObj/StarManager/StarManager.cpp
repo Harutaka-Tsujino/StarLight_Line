@@ -95,6 +95,27 @@ VOID StarManager::LoadStarData(const char* pFileName)
 
 		StarInfo.m_DropPerMinute = DropPerMinute[StarInfo.m_Measure - 1];
 
+		const INT BEATS_NUM_IN_MEASURE = 4;
+
+		const FLOAT SEC_TO_MMSEC_MULTI = 1000.0f;
+		const FLOAT MINUTE_TO_MMSEC = 60.0f * SEC_TO_MMSEC_MULTI;
+
+		FLOAT formarBPM = 0;
+		StarInfo.m_Time = 0;
+
+		for (INT i = 0; i < StarInfo.m_Measure - 1; ++i)
+		{
+			formarBPM = DropPerMinute[i];
+			StarInfo.m_Time += (BEATS_NUM_IN_MEASURE / formarBPM) * MINUTE_TO_MMSEC;
+		}
+
+		const FLOAT ONE_BEATS_TAKES_MMSEC = (BEATS_NUM_IN_MEASURE / StarInfo.m_DropPerMinute) * MINUTE_TO_MMSEC;
+
+		StarInfo.m_Time += ONE_BEATS_TAKES_MMSEC * (StarInfo.m_Beat - 1);
+
+		StarInfo.m_Time += ONE_BEATS_TAKES_MMSEC * ((0.5f / StarInfo.m_StarsNumInNote));
+		StarInfo.m_Time += ONE_BEATS_TAKES_MMSEC * ((StarInfo.m_Line / StarInfo.m_StarsNumInNote) - 1);
+
 		StarDataToAssign(cnt, StarInfo);
 
 		cnt++;
@@ -129,7 +150,6 @@ VOID StarManager::Create(const STAR_TYPE& Kind)
 VOID StarManager::StarDataToAssign(const int& rArrayNum,const StarPlace& rStarPlace)
 {
 	(static_cast<BaseStar*>(m_StarNotes[rArrayNum]))->SetStarInfo(rStarPlace);
-	(static_cast<BaseStar*>(m_StarNotes[rArrayNum]))->FallStarPosYTime();
 	(static_cast<BaseStar*>(m_StarNotes[rArrayNum]))->SetType(rStarPlace.m_Type);
 }
 

@@ -24,7 +24,7 @@ DX3D::DX3D(HWND hWnd, RectSize wndSize, LPDIRECT3D9 pD3D)
 	Create(pD3D);
 
 	m_pDX3DDev->SetRenderState(D3DRS_ZENABLE, TRUE);
-	m_pDX3DDev->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+	//m_pDX3DDev->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 
 	m_pColorBlender = new ColorBlender(m_pDX3DDev);
 	m_pColorBlender->DefaultColorBlending();

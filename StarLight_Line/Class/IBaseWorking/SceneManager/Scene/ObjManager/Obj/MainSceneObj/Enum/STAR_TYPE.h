@@ -4,8 +4,8 @@
 enum STAR_TYPE
 {
 	DAMAGE,
-	SCORE,
 	CLEAR,
+	SCORE,
 };
 
 #endif // !STAR_TYPE_H_
