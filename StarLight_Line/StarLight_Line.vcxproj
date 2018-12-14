@@ -215,6 +215,8 @@
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\StageSelectScene\Enum\STAGE_LEVEL_KIND.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\StageSelectScene\StageSelectScene.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\TitleScene\TitleScene.h" />
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Struct\ResultData.h" />
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Struct\StageData.h" />
     <ClInclude Include="Class\Singleton\Singleton.h" />
     <ClInclude Include="GameLib\3DBoard\3DBoard.h" />
     <ClInclude Include="GameLib\Collision\Collision.h" />

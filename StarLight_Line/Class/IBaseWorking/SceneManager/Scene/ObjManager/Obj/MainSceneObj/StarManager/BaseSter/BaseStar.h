@@ -53,6 +53,8 @@ protected:
 	D3DXMATRIX m_MatWorld;			//ワールド座標
 
 	const float ColorMax = 0xFF;
+
+	ULONGLONG m_DegZ = 0;	//演出用の回転角度
 };
 
 #endif // !BASE_STAR_H_

@@ -24,6 +24,7 @@ public:
 
 	~GameCollision()
 	{
+		ReleaseEnemyPoint();
 	}
 
 	inline VOID ResiterVertices(TCHAR* pKey, CustomVertex* pVertex)

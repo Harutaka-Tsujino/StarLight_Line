@@ -191,6 +191,9 @@
     <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerEffect">
       <UniqueIdentifier>{683fa386-a7d4-457b-98f3-f8f1febbc584}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Struct">
+      <UniqueIdentifier>{b9721e28-3a28-413d-868c-9300a3a802ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Class\Singleton\Singleton.cpp">
@@ -539,6 +542,12 @@
     </ClInclude>
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerEffect\PlayerEffect.h">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Struct\StageData.h">
+      <Filter>Class\IBaseWorking\SceneManager\Struct</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Struct\ResultData.h">
+      <Filter>Class\IBaseWorking\SceneManager\Struct</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
