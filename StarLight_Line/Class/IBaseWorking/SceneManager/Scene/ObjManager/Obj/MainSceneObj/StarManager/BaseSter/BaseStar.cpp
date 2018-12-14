@@ -12,13 +12,6 @@ VOID BaseStar::Update()
 {
 }
 
-/**
-*@brief 敵の星の落ちてくる時間を設定する関数
-*/
-VOID BaseStar::FallStarPosYTime()
-{
-}
-
 VOID BaseStar::PosOfStarYCoordinate(const LONGLONG& CurrentTime)
 {
 	const INT BEATS_NUM_IN_MEASURE = 4;
@@ -67,7 +60,7 @@ VOID BaseStar::DefaultLight()
 
 VOID BaseStar::ConvertLocalToWorld(D3DXMATRIX* pMatWorld)
 {
-	if (m_Info.m_Pos.y < -100) return;
+	if (m_Info.m_Pos.y < -m_STAR_HALF_SCALE || m_Info.m_Pos.y > m_WND_SIZE.m_y + m_STAR_HALF_SCALE) return;
 
 	D3DXMATRIX MatTrans, MatScale, MatRotate;
 	D3DXMatrixIdentity(pMatWorld);

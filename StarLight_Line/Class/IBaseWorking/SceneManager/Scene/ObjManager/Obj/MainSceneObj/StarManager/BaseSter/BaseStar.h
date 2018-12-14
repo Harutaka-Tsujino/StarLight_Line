@@ -38,7 +38,6 @@ public:
 	virtual VOID Render();
 
 	VOID SetStarInfo(const StarPlace& StarInfo);
-	VOID FallStarPosYTime();									//落ちてくる時間設定関数
 
 	VOID SetType(const STAR_TYPE& Type) { m_Info.m_Type = Type; }
 	STAR_TYPE& GetType() { return m_Info.m_Type; }
@@ -55,6 +54,8 @@ protected:
 	const float ColorMax = 0xFF;
 
 	ULONGLONG m_DegZ = 0;	//演出用の回転角度
+
+	const FLOAT m_STAR_HALF_SCALE = 50.0f;
 };
 
 #endif // !BASE_STAR_H_

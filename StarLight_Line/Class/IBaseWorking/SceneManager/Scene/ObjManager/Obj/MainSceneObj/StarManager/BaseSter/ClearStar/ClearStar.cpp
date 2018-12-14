@@ -13,6 +13,8 @@ VOID ClearStar::Update()
 
 VOID ClearStar::Render()
 {
+	if (m_Info.m_Pos.y < -m_STAR_HALF_SCALE || m_Info.m_Pos.y > m_WND_SIZE.m_y + m_STAR_HALF_SCALE) return;
+
 	DefaultLight();
 
 	ConvertLocalToWorld(&m_MatWorld);
