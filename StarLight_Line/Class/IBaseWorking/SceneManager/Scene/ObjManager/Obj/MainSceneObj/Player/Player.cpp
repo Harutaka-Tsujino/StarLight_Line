@@ -94,12 +94,15 @@ VOID Player::Render()
 
 	D3DXMatrixMultiply(&m_World, &m_World, &MatTrans);
 
-	D3DXVECTOR4 EiwiEmissive(0.0f, 170.0f / 255.0f, 160.0f / 255.0f, 0.0f);
-	rEiwi.SetAmbient(&EiwiEmissive);
+	D3DXVECTOR4 EiwiAmbient(0.6f, 190.0f / 255.0f, 190.0f / 255.0f, 0.0f);
+	rEiwi.SetAmbient(&EiwiAmbient);
 
-	rEiwi.SetPower(0.5f);
+	D3DXVECTOR4 EiwiEmissive(0.8f, 170.0f / 255.0f, 160.0f / 255.0f, 0.0f);
+	rEiwi.SetEmissive(&EiwiEmissive);
+
+	rEiwi.SetPower(0.8f);
 	
-	D3DXVECTOR4 VertexColor(160.0f, 255.0f, 255.0f, 255.0f);
+	D3DXVECTOR4 VertexColor(150.0f, 255.0f, 255.0f, 255.0f);
 	rEiwi.SetColor(&VertexColor);
 
 	m_rGameLib.Render(rEiwi, m_World, m_rGameLib.GetTex(_T("PlayerTex")));

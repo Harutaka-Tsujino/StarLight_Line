@@ -81,11 +81,13 @@ D3DXVECTOR3 Camera::TransWorld(const D3DXVECTOR3& Pos)
 		0,		  0  ,		 1, 0,
 		Screen.x, Screen.y,  0, 1
 	};
+
 	D3DXMatrixInverse(&InvViewport, NULL, &ViewPortMat);
 
 	// 逆変換
 	D3DXMATRIX tmp = InvViewport * InvPrj * InvView;
 	D3DXVECTOR3 WorldPos;
+
 	D3DXVec3TransformCoord(&WorldPos, &Pos, &tmp);
 
 	return WorldPos;
