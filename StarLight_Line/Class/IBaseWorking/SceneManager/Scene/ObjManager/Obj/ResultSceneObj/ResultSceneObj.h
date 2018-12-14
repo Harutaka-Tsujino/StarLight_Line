@@ -319,17 +319,15 @@ public:
 		m_pResultDataScore->Render();
 		m_pResultDataStage->Render();
 
+		m_pResultDataClearStar->Render();
+
 		const INT STAGING_GAP_FRAME = 30;
-
-		++m_stagingGapFrameCount;
-
+		if (m_pResultDataScore->StagingIsEnd()) ++m_stagingGapFrameCount;
 		if (m_stagingGapFrameCount < STAGING_GAP_FRAME) return;
 
 		m_stagingGapFrameCount = STAGING_GAP_FRAME;
 
 		m_pResultDataClearStar->StartStaging();
-
-		m_pResultDataClearStar->Render();
 	}
 
 	inline BOOL StagingIsEnd() const
