@@ -3,8 +3,12 @@
 
 #include <Windows.h>
 
+#include <d3dx9.h>
+
 #include "../../Obj.h"
+#include "../GameCollision/GameCollision.h"
 #include "PlayerScore/PlayerScore.h"
+#include "PlayerHP/PlayerHP.h"
 
 struct SurfaceCoordinate
 {
@@ -26,13 +30,17 @@ public:
 class Player :public Obj
 {
 public:
-	Player() :Obj(OT_TRANSPARENCY,1.0f)
+	Player() :Obj(OT_TRANSPARENCY, 1.0f), m_rGameCollision(GameCollision::GetInstance())
 	{
 		m_rGameLib.CreateFbx(_T("Eiwi"), "3DModels/Eiwi/Eiwi.fbx");
 		Init();
 	}
 
-	~Player() {};
+	~Player() 
+	{
+		m_rGameLib.GetFbx(_T("Eiwi")).Release();
+	};
+
 	VOID Init();
 	VOID Update();
 	VOID Render();
@@ -72,12 +80,15 @@ private:
 	};
 
 	CoordinatePoint m_PlayerPoint;
-	SurfaceCoordinate m_PlayerPos;
+	D3DXVECTOR3 m_PlayerPos;
+	D3DXMATRIX m_World;
 
 	static INT count;		//生存スコアを手に入れるところで使う
 
 	PlayerScore m_Score;
-	INT m_Hp = 5;
+	PlayerHP m_Hp;
+
+	GameCollision& m_rGameCollision;
 };
 
 #endif // !PLAYER_H_

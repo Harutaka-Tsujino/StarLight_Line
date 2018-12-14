@@ -2,7 +2,7 @@
 
 VOID ClearStar::Init()
 {
-	InitBaseStar();
+	
 }
 
 VOID ClearStar::Update()
@@ -15,9 +15,7 @@ VOID ClearStar::Render()
 {
 	DefaultLight();
 
-	D3DXMATRIX MatWorld;
-
-	ConvertLocalToWorld(&MatWorld);
+	ConvertLocalToWorld(&m_MatWorld);
 
 	FbxRelated& rEnemyStar = m_rGameLib.GetFbx(_T("StarFBX"));
 
@@ -26,5 +24,5 @@ VOID ClearStar::Render()
 
 	rEnemyStar.SetEmissive(&ClearColor);
 
-	m_rGameLib.Render(rEnemyStar, MatWorld);
+	m_rGameLib.Render(rEnemyStar, m_MatWorld);
 }

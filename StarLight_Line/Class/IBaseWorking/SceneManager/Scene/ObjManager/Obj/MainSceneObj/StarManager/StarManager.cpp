@@ -10,6 +10,10 @@
 
 VOID StarManager::Init()
 {
+	m_rGameLib.SetStartTime();
+
+	m_Init = TRUE;
+
 	for (BaseStar* pI : m_StarNotes)
 	{
 		pI->Init();
@@ -32,6 +36,18 @@ VOID StarManager::Render()
 	{
 		pI->Render();
 	}
+
+	if (m_Init)
+	{
+		m_Init = FALSE;
+
+		for (int i = 0;i != m_StarNotes.size();++i)
+		{
+			m_rGameCollision.ResiterEnemyPoint(
+				static_cast<BaseStar*>(m_StarNotes[i])->GetStarPos(),
+				static_cast<BaseStar*>(m_StarNotes[i])->GetType());
+		}
+	}
 }
 
 VOID StarManager::LoadStarData(const char* pFileName)
@@ -48,52 +64,55 @@ VOID StarManager::LoadStarData(const char* pFileName)
 		std::stringstream stream(str);
 
 		int Kind;
-
 		stream >> Kind;
 
-		Create(Kind);
+		Create(static_cast<STAR_TYPE>(Kind));
 
 		StarPlace StarInfo;
+		StarInfo.m_Type = static_cast<STAR_TYPE>(Kind);
 
-		stream >> StarInfo.m_DropPerMinute >> StarInfo.m_Division >> StarInfo.m_StarsNumInDivision >> StarInfo.m_Pos.x;
+		stream >> 
+			StarInfo.m_DropPerMinute >>
+			StarInfo.m_Division >> 
+			StarInfo.m_StarsNumInDivision >> 
+			StarInfo.m_Pos.x;
 
 		StarDataToAssign(cnt, StarInfo);
 
 		cnt++;
 	}
-
 }
 
-VOID StarManager::Create(const int& rKind)
+VOID StarManager::Create(const STAR_TYPE& Kind)
 {
 	BaseStar* pBase = nullptr;
 
-	switch (rKind)
+	switch (Kind)
 	{
-	case 1:
+	case DAMAGE:
 		pBase = static_cast<BaseStar*>(new DamageStar());
-		m_StarNotes.push_back(pBase);
 
 		break;
 
-	case 2:
+	case SCORE:
 		pBase = static_cast<BaseStar*>(new ScoreStar());
-		m_StarNotes.push_back(pBase);
 
 		break;
 
-	case 3:
+	case CLEAR:
 		pBase = static_cast<BaseStar*>(new ClearStar());
-		m_StarNotes.push_back(pBase);
 
 		break;
 	}
+
+	m_StarNotes.push_back(pBase);
 }
 
 VOID StarManager::StarDataToAssign(const int& rArrayNum,const StarPlace& rStarPlace)
 {
 	(static_cast<BaseStar*>(m_StarNotes[rArrayNum]))->SetStarInfo(rStarPlace);
 	(static_cast<BaseStar*>(m_StarNotes[rArrayNum]))->FallStarPosYTime();
+	(static_cast<BaseStar*>(m_StarNotes[rArrayNum]))->SetType(rStarPlace.m_Type);
 }
 
 StarManager::~StarManager()
@@ -102,4 +121,7 @@ StarManager::~StarManager()
 	{
 		delete i;
 	}
+	m_StarNotes.clear();
+
+	m_rGameLib.ReleaseTex();
 }

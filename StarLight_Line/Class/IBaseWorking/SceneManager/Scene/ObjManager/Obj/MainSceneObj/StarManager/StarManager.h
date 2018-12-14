@@ -3,8 +3,10 @@
 
 #include <vector>
 
-#include "BaseSter/BaseStar.h"
 #include "../../Obj.h"
+#include "../GameCollision/GameCollision.h"
+#include "../Enum/STAR_TYPE.h"
+#include "BaseSter/BaseStar.h"
 
 class BaseStar;
 struct StarPlace;
@@ -12,7 +14,7 @@ struct StarPlace;
 class StarManager:public Obj
 {
 public:
-	StarManager() :Obj(OT_TRANSPARENCY, 0.5f)
+	StarManager() :Obj(OT_TRANSPARENCY, 0.5f), m_rGameCollision(GameCollision::GetInstance())
 	{
 		LoadStarData("StageData/otamesi.csv");
 		m_rGameLib.CreateFbx(_T("StarFBX"), "3DModels/EnemyStar/EnemyStar.fbx");
@@ -27,10 +29,13 @@ public:
 
 private:
 	VOID LoadStarData(const char* pFileName);
-	VOID Create(const int &rKind);
+	VOID Create(const STAR_TYPE& Kind);
 	VOID StarDataToAssign(const int& rArrayNum, const StarPlace& rStarInfo);
 
 	std::vector<BaseStar*> m_StarNotes;
+	GameCollision& m_rGameCollision;
+
+	BOOL m_Init;		//敵座標のPosを登録するために使う
 };
 
 #endif // !STAR_MANAGER_H_
