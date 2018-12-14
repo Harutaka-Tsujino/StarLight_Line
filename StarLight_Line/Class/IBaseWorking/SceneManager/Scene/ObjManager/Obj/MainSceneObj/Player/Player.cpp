@@ -209,6 +209,7 @@ VOID Player::SetIsClearedJudged()
 {
 	if (m_Hp.GetHP() <= 0)
 	{
-		
+		m_Data.SetResultData(TRUE);
 	}
+
 }
