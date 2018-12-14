@@ -32,6 +32,12 @@ public:
 		m_Data.m_score += Score;
 	}
 
+	//失敗したかを受け取る
+	VOID SetResultData(const BOOL& IsFailed)
+	{
+		m_Data.m_isFailed = IsFailed;
+	}
+
 	ResultData GetResultData() { return m_Data; }
 
 private:
