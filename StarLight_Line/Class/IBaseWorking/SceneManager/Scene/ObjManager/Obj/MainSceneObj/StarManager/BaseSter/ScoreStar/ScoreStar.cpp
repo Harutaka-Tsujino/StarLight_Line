@@ -2,7 +2,7 @@
 
 VOID ScoreStar::Init()
 {
-	InitBaseStar();
+	
 }
 
 VOID ScoreStar::Update()
@@ -14,10 +14,8 @@ VOID ScoreStar::Update()
 VOID ScoreStar::Render()
 {
 	DefaultLight();
-
-	D3DXMATRIX MatWorld;
 	
-	ConvertLocalToWorld(&MatWorld);
+	ConvertLocalToWorld(&m_MatWorld);
 
 	FbxRelated& rEnemyStar = m_rGameLib.GetFbx(_T("StarFBX"));
 
@@ -26,5 +24,5 @@ VOID ScoreStar::Render()
 
 	rEnemyStar.SetEmissive(&ScoreColor);
 
-	m_rGameLib.Render(rEnemyStar, MatWorld);
+	m_rGameLib.Render(rEnemyStar, m_MatWorld);
 }

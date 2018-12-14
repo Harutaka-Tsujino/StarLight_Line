@@ -10,6 +10,9 @@ VOID Player::Init()
 	m_Speed.x = m_Speed.y = 0.0f;
 	m_PlayerPos.x = m_BasePos[m_PlayerPoint.y][m_PlayerPoint.x].x;	//真ん中に自機を置く
 	m_PlayerPos.y = m_BasePos[m_PlayerPoint.y][m_PlayerPoint.x].y;
+	m_PlayerPos.z = 0.2f;
+
+	m_rGameCollision.ResiterPlayerPoint(_T("Player"), &m_PlayerPos);
 }
 
 VOID Player::Update()
@@ -21,6 +24,7 @@ VOID Player::Update()
 	int* pPoY = &m_PlayerPoint.y;
 
 	m_Score.Update();
+	m_Hp.Update();
 
 	//キー入力によってプレイヤーの動きを決める
 	//y座標の移動
@@ -53,7 +57,7 @@ VOID Player::Update()
 	RestrictedMoving();
 
 	//難易度で設定するスコアを変える
-	//いま難易度をもらう処理が出来てないからとりあえず10に設定
+	//いま難易度のスコアをもらう処理が出来てないからとりあえず10に設定
 	ObtainScoreToExist(10);
 }
 
@@ -62,9 +66,10 @@ VOID Player::Render()
 	m_rGameLib.SetCameraTransform();
 	
 	m_Score.Render();
+	m_Hp.Render();
 
-	D3DXMATRIX MatWorld, MatTrans, MatScale;
-	D3DXMatrixIdentity(&MatWorld);
+	D3DXMATRIX MatTrans, MatScale;
+	D3DXMatrixIdentity(&m_World);
 	D3DXMatrixIdentity(&MatTrans);
 	D3DXMatrixIdentity(&MatScale);
 
@@ -75,17 +80,17 @@ VOID Player::Render()
 	// 拡大
 	D3DXMatrixScaling(&MatScale, MODELSCALE, MODELSCALE, MODELSCALE);
 
-	D3DXMatrixMultiply(&MatWorld, &MatWorld, &MatScale);
+	D3DXMatrixMultiply(&m_World, &m_World, &MatScale);
 
 	// 移動
-	D3DXMatrixTranslation(&MatTrans, m_PlayerPos.x, m_PlayerPos.y, 0.2f);
+	D3DXMatrixTranslation(&MatTrans, m_PlayerPos.x, m_PlayerPos.y, m_PlayerPos.z);
 
-	D3DXMatrixMultiply(&MatWorld, &MatWorld, &MatTrans);
+	D3DXMatrixMultiply(&m_World, &m_World, &MatTrans);
 
 	D3DXVECTOR4 EiwiEmissive(1.0f, 1.0f, 1.0f, 0.0f);
 	rEiwi.SetEmissive(&EiwiEmissive);
 
-	m_rGameLib.Render(rEiwi, MatWorld, m_rGameLib.GetTex(_T("PlayerTex")));
+	m_rGameLib.Render(rEiwi, m_World, m_rGameLib.GetTex(_T("PlayerTex")));
 }
 
 //名前不安なので募集中
@@ -164,7 +169,7 @@ VOID Player::DecideSpeed(CoordinatePoint* PrevPoint, const HIT_KEY& HitKey)
 
 VOID Player::ObtainScoreToExist(const INT& LevelScore)
 {
-	if (m_Hp <= 0) return;
+	if (m_Hp.GetHP() <= 0) return;
 
 	if (count <= 60)
 	{

@@ -10,9 +10,7 @@ VOID DamageStar::Render()
 {
 	DefaultLight();
 
-	D3DXMATRIX MatWorld;
-
-	ConvertLocalToWorld(&MatWorld);
+	ConvertLocalToWorld(&m_MatWorld);
 
 	FbxRelated& rEnemyStar = m_rGameLib.GetFbx(_T("StarFBX"));
 
@@ -20,12 +18,12 @@ VOID DamageStar::Render()
 	D3DXVECTOR4 DamageColor(ColorMax, ColorMax, ColorMax, ColorMax);
 	rEnemyStar.SetEmissive(&DamageColor);
 
-	m_rGameLib.Render(rEnemyStar, MatWorld);
+	m_rGameLib.Render(rEnemyStar, m_MatWorld);
 }
 
 VOID DamageStar::Init()
 {
-	InitBaseStar();
+
 }
 
 DamageStar::~DamageStar()

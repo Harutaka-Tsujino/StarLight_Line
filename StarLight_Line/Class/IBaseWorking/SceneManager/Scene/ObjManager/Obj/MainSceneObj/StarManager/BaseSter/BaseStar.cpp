@@ -1,10 +1,5 @@
 ﻿#include "BaseStar.h"
 
-VOID BaseStar::InitBaseStar()
-{
-	m_rGameLib.SetStartTime();
-}
-
 VOID BaseStar::Init()
 {
 }
@@ -23,7 +18,7 @@ VOID BaseStar::Update()
 VOID BaseStar::FallStarPosYTime()
 {
 	//星の落ち始める時間 = (((n小節目 * 拍数) + n分音符) * fps) / 1分間に落ちてくる星の個数
-	m_Info.m_Time = (((m_Info.m_Division * 4) + m_Info.m_StarsNumInDivision) * 60.f) / m_Info.m_DropPerMinute;
+	m_Info.m_Time = ((((m_Info.m_Division - 1) * 4) + m_Info.m_StarsNumInDivision) * 60.f) / m_Info.m_DropPerMinute;
 }
 
 VOID BaseStar::PosOfStarYCoordinate(const LONGLONG& CurrentTime)
@@ -65,20 +60,19 @@ VOID BaseStar::ConvertLocalToWorld(D3DXMATRIX* pMatWorld)
 	D3DXMatrixIdentity(&MatTrans);
 	D3DXMatrixIdentity(&MatScale);
 
-	const float MODELSCALE = 0.0005f;
+	const float MODELSCALE = 0.005f;
 
 	// 拡大
 	D3DXMatrixScaling(&MatScale, MODELSCALE, MODELSCALE, MODELSCALE);
 
-	// 掛け合わせ
 	D3DXMatrixMultiply(pMatWorld, pMatWorld, &MatScale);
 
-	m_Info.m_Pos.x = m_Info.m_Pos.x / 300.f;
-	m_Info.m_Pos.y = m_Info.m_Pos.y / 100.f;
+	m_Info.m_Pos.x /= 100.f;
+	m_Info.m_Pos.y -= (m_Info.m_DropPerMinute / 3600.f);
+	m_Info.m_Pos.z = 0.2f;
 
 	// 移動
-	D3DXMatrixTranslation(&MatTrans, m_Info.m_Pos.x, m_Info.m_Pos.y, 0.01f);
+	D3DXMatrixTranslation(&MatTrans, m_Info.m_Pos.x, m_Info.m_Pos.y, m_Info.m_Pos.z);
 
-	// 掛け合わせ
 	D3DXMatrixMultiply(pMatWorld, pMatWorld, &MatTrans);
 }
