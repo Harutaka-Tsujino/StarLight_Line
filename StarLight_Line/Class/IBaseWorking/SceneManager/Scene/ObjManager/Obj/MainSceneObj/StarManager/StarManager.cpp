@@ -107,9 +107,9 @@ VOID StarManager::LoadStarData(const char* pFileName)
 	const FLOAT SEC_TO__ms_MULTI = 1000.0f;
 	const FLOAT MINUTE_TO__ms = 60.0f * SEC_TO__ms_MULTI;
 
-	for (auto& i : DropPerMinute)
+	for (auto i : DropPerMinute)
 	{
-		m_End_ms += static_cast<LONGLONG>(pow(BEATS_NUM_IN_MEASURE, 2) / i);
+		m_End_ms += static_cast<LONGLONG>(BEATS_NUM_IN_MEASURE / i * MINUTE_TO__ms);
 	}
 }
 
