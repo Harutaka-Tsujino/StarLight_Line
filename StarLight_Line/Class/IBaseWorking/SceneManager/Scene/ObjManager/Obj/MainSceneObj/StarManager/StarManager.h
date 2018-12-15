@@ -31,12 +31,14 @@ private:
 	VOID LoadStarData(const char* pFileName);
 	VOID Create(const STAR_TYPE& Kind);
 	VOID StarDataToAssign(const int& rArrayNum, const StarPlace& rStarInfo);
-	VOID SetStarMMsec(const std::vector<float>& rDropPerMinuteVec, StarPlace* pStarInfo);
+	VOID SetStar_ms(const std::vector<float>& rDropPerMinuteVec, StarPlace* pStarInfo);
 
 	std::vector<BaseStar*> m_StarNotes;
 	GameCollision& m_rGameCollision;
 
-	BOOL m_Init;		//敵座標のPosを登録するために使う
+	BOOL m_Init;			//敵座標のPosを登録するために使う
+
+	LONGLONG m_End_ms = 0;	//総再生時間(ms)
 };
 
 #endif // !STAR_MANAGER_H_

@@ -19,7 +19,7 @@ struct StarPlace
 	float m_DropPerMinute;			//1分間にどれだけ落ちてくるか
 	LONGLONG m_Time;				//落ちてくる時間
 	float m_XMovementDeg;			//x座標の移動量
-	float m_screenXBasePos;			//xの動く前のスクリーン座標
+	float m_ScreenXBasePos;			//xの動く前のスクリーン座標
 
 	D3DXVECTOR3 m_CollisionPos;		//当たり判定用の座標
 };
