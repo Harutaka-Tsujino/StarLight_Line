@@ -31,6 +31,7 @@ private:
 	VOID LoadStarData(const char* pFileName);
 	VOID Create(const STAR_TYPE& Kind);
 	VOID StarDataToAssign(const int& rArrayNum, const StarPlace& rStarInfo);
+	VOID SetStarMMsec(const std::vector<float>& rDropPerMinuteVec, StarPlace* pStarInfo);
 
 	std::vector<BaseStar*> m_StarNotes;
 	GameCollision& m_rGameCollision;

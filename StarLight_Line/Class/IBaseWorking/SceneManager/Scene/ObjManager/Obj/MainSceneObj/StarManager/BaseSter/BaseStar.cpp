@@ -12,7 +12,7 @@ VOID BaseStar::Update()
 {
 }
 
-VOID BaseStar::PosOfStarYCoordinate(const LONGLONG& CurrentTime)
+VOID BaseStar::TransScreenPosByTime(const LONGLONG& CurrentTime)
 {
 	const INT BEATS_NUM_IN_MEASURE = 4;
 
@@ -24,7 +24,9 @@ VOID BaseStar::PosOfStarYCoordinate(const LONGLONG& CurrentTime)
 
 	FLOAT oneNoteTakesMMSec = (1.0f / m_Info.m_DropPerMinute) * MINUTE_TO_MMSEC;
 
-	m_Info.m_Pos.y = m_WND_SIZE.m_y * 0.5f * (gapMMSec / oneNoteTakesMMSec);
+	m_Info.m_Pos.y = m_WND_SIZE.m_y * (gapMMSec / oneNoteTakesMMSec);
+
+	m_Info.m_Pos.x = m_Info.m_Pos.y * tan(D3DXToRadian(-m_Info.m_XMovementDeg)) + m_Info.m_screenXBasePos;
 }
 
 VOID BaseStar::SetStarInfo(const struct StarPlace& StarPlace)
@@ -71,12 +73,10 @@ VOID BaseStar::ConvertLocalToWorld(D3DXMATRIX* pMatWorld)
 
 	// 拡大
 	D3DXMatrixScaling(&MatScale, MODELSCALE, MODELSCALE, MODELSCALE);
-
 	D3DXMatrixMultiply(pMatWorld, pMatWorld, &MatScale);
 
 	// 演出用の回転
 	D3DXMatrixRotationZ(&MatRotate, D3DXToRadian(m_DegZ));
-
 	D3DXMatrixMultiply(pMatWorld, pMatWorld, &MatRotate);
 
 	++m_DegZ;
@@ -91,7 +91,6 @@ VOID BaseStar::ConvertLocalToWorld(D3DXMATRIX* pMatWorld)
 
 	// 移動
 	D3DXMatrixTranslation(&MatTrans, WorldBuff.x, WorldBuff.y, WorldBuff.z);
-
 	D3DXMatrixMultiply(pMatWorld, pMatWorld, &MatTrans);
 
 	m_rGameLib.SetCameraTransform();

@@ -1,5 +1,5 @@
-﻿#ifndef STAGE_LEVEL_KIND
-#define STAGE_LEVEL_KIND
+﻿#ifndef STAGE_LEVEL_KIND_H
+#define STAGE_LEVEL_KIND_H
 
 enum STAGE_LEVEL_KIND
 {
@@ -9,4 +9,4 @@ enum STAGE_LEVEL_KIND
 	SLK_MAX
 };
 
-#endif // !STAGE_LEVEL_KIND
+#endif //! STAGE_LEVEL_KIND_H

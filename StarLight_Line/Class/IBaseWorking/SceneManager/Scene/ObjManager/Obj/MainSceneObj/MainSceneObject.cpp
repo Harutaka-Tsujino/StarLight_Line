@@ -80,8 +80,8 @@ VOID PlayerClearStarObj::RenderFrame()
 	m_rGameLib.SetCameraTransform();
 
 	ObjData data;
-	data.m_center = { m_WND_SIZE.m_x * 0.53f, m_WND_SIZE.m_y * 0.9f, 0.005f };
-	data.m_halfScale = { m_WND_SIZE.m_x * 0.07f, m_WND_SIZE.m_y * 0.05f, 0.0f };
+	data.m_center		= { m_WND_SIZE.m_x * 0.53f, m_WND_SIZE.m_y * 0.9f, 0.005f };
+	data.m_halfScale	= { m_WND_SIZE.m_x * 0.07f, m_WND_SIZE.m_y * 0.05f, 0.0f };
 
 	CustomVertex back[4];
 	m_rGameLib.CreateRect(back, data);
