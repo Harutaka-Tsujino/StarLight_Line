@@ -17,8 +17,9 @@ struct StarPlace
 	float m_StarsNumInNote;			//n分音符
 	float m_Line;					//n分音符の中の数字
 	float m_DropPerMinute;			//1分間にどれだけ落ちてくるか
-	LONGLONG m_Time;					//落ちてくる時間
-	float m_XMovement;				//x座標の移動量
+	LONGLONG m_Time;				//落ちてくる時間
+	float m_XMovementDeg;			//x座標の移動量
+	float m_screenXBasePos;			//xの動く前のスクリーン座標
 
 	D3DXVECTOR3 m_CollisionPos;		//当たり判定用の座標
 };
@@ -44,7 +45,7 @@ public:
 	D3DXVECTOR3* GetCollisionPos() { return &m_Info.m_CollisionPos; }
 	
 protected:
-	VOID PosOfStarYCoordinate(const LONGLONG& CurrentTime);		//y座標を移動させる関数
+	VOID TransScreenPosByTime(const LONGLONG& CurrentTime);		//y座標を移動させる関数
 	VOID DefaultLight();										//ライトのデフォルト値設定関数
 	VOID ConvertLocalToWorld(D3DXMATRIX* matWorld);				//ローカル座標からワールド座標への変換
 

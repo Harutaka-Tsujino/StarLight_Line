@@ -8,14 +8,14 @@ VOID ScoreStar::Init()
 VOID ScoreStar::Update()
 {
 	m_rGameLib.SetEndTime();
-	PosOfStarYCoordinate(m_rGameLib.GetMilliSecond());
+	TransScreenPosByTime(m_rGameLib.GetMilliSecond());
 }
 
 VOID ScoreStar::Render()
 {
-	if (m_Info.m_Pos.y < -m_STAR_HALF_SCALE || m_Info.m_Pos.y > m_WND_SIZE.m_y + m_STAR_HALF_SCALE) return;
-
 	DefaultLight();
+
+	if (m_Info.m_Pos.y < -m_STAR_HALF_SCALE || m_Info.m_Pos.y > m_WND_SIZE.m_y + m_STAR_HALF_SCALE) return;
 	
 	ConvertLocalToWorld(&m_MatWorld);
 
