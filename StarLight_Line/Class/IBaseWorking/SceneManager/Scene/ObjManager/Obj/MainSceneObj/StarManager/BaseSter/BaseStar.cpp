@@ -26,7 +26,7 @@ VOID BaseStar::TransScreenPosByTime(const LONGLONG& CurrentTime)
 
 	m_Info.m_Pos.y = m_WND_SIZE.m_y * (gap_ms / oneNoteTakes_ms);
 
-	m_Info.m_Pos.x = m_Info.m_Pos.y * tan(D3DXToRadian(-m_Info.m_XMovementDeg)) + m_Info.m_ScreenXBasePos;
+	m_Info.m_Pos.x = m_Info.m_Pos.y * tan(D3DXToRadian(-m_Info.m_XMovementDeg)) + m_Info.m_screenXBasePos;
 }
 
 VOID BaseStar::SetStarInfo(const struct StarPlace& StarPlace)
