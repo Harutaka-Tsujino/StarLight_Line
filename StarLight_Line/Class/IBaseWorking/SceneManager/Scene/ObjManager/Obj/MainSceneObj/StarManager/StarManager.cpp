@@ -90,16 +90,26 @@ VOID StarManager::LoadStarData(const char* pFileName)
 			StarInfo.m_Beat >>
 			StarInfo.m_StarsNumInNote >>
 			StarInfo.m_Line >>
-			StarInfo.m_screenXBasePos >>
+			StarInfo.m_ScreenXBasePos >>
 			StarInfo.m_XMovementDeg;
 
 		StarInfo.m_DropPerMinute = DropPerMinute[StarInfo.m_Measure - 1];
 		
-		SetStarMMsec(DropPerMinute, &StarInfo);
+		SetStar_ms(DropPerMinute, &StarInfo);
 
 		StarDataToAssign(cnt, StarInfo);
 
 		cnt++;
+	}
+
+	const INT BEATS_NUM_IN_MEASURE = 4;
+
+	const FLOAT SEC_TO__ms_MULTI = 1000.0f;
+	const FLOAT MINUTE_TO__ms = 60.0f * SEC_TO__ms_MULTI;
+
+	for (auto i : DropPerMinute)
+	{
+		m_End_ms += static_cast<LONGLONG>(pow(BEATS_NUM_IN_MEASURE, 2) / i);
 	}
 }
 
@@ -145,28 +155,28 @@ StarManager::~StarManager()
 	m_rGameLib.ReleaseTex();
 }
 
-VOID StarManager::SetStarMMsec(const std::vector<float>& rDropPerMinuteVec, StarPlace* pStarInfo)
+VOID StarManager::SetStar_ms(const std::vector<float>& rDropPerMinuteVec, StarPlace* pStarInfo)
 {
 	const INT BEATS_NUM_IN_MEASURE = 4;
 
-	const FLOAT SEC_TO_MMSEC_MULTI = 1000.0f;
-	const FLOAT MINUTE_TO_MMSEC = 60.0f * SEC_TO_MMSEC_MULTI;
+	const FLOAT SEC_TO__ms_MULTI = 1000.0f;
+	const FLOAT MINUTE_TO__ms = 60.0f * SEC_TO__ms_MULTI;
 
 	FLOAT formarBPM = 0;
 
-	LONGLONG* pStartMMSec = &pStarInfo->m_Time;
-	*pStartMMSec = 0;
+	LONGLONG* pStart_ms = &pStarInfo->m_Time;
+	*pStart_ms = 0;
 
 	for (INT i = 0; i < pStarInfo->m_Measure - 1; ++i)
 	{
 		formarBPM = rDropPerMinuteVec[i];
-		*pStartMMSec += static_cast<LONGLONG>((BEATS_NUM_IN_MEASURE / formarBPM) * BEATS_NUM_IN_MEASURE * MINUTE_TO_MMSEC);
+		*pStart_ms += static_cast<LONGLONG>((BEATS_NUM_IN_MEASURE / formarBPM) * BEATS_NUM_IN_MEASURE * MINUTE_TO__ms);
 	}
 
-	const FLOAT ONE_BEATS_TAKES_MMSEC = (BEATS_NUM_IN_MEASURE / pStarInfo->m_DropPerMinute) * MINUTE_TO_MMSEC;
+	const FLOAT ONE_BEATS_TAKES__ms = (BEATS_NUM_IN_MEASURE / pStarInfo->m_DropPerMinute) * MINUTE_TO__ms;
 
-	*pStartMMSec += static_cast<LONGLONG>(ONE_BEATS_TAKES_MMSEC * (pStarInfo->m_Beat - 1));
+	*pStart_ms += static_cast<LONGLONG>(ONE_BEATS_TAKES__ms * (pStarInfo->m_Beat - 1));
 
-	*pStartMMSec += static_cast<LONGLONG>(ONE_BEATS_TAKES_MMSEC * (0.5f / pStarInfo->m_StarsNumInNote));				//! 第一ラインは半ラインずれた位置にある
-	*pStartMMSec += static_cast<LONGLONG>(ONE_BEATS_TAKES_MMSEC * (pStarInfo->m_Line / pStarInfo->m_StarsNumInNote));	//! ゲームが始まった瞬間に星が流れるのでずらす
+	*pStart_ms += static_cast<LONGLONG>(ONE_BEATS_TAKES__ms * (0.5f / pStarInfo->m_StarsNumInNote));				//! 第一ラインは半ラインずれた位置にある
+	*pStart_ms += static_cast<LONGLONG>(ONE_BEATS_TAKES__ms * (pStarInfo->m_Line / pStarInfo->m_StarsNumInNote));	//! ゲームが始まった瞬間に星が流れるのでずらす
 }

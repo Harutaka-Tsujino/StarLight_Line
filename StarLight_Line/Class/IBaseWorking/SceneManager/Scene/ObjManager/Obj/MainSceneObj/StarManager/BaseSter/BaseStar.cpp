@@ -16,17 +16,17 @@ VOID BaseStar::TransScreenPosByTime(const LONGLONG& CurrentTime)
 {
 	const INT BEATS_NUM_IN_MEASURE = 4;
 
-	const FLOAT SEC_TO_MMSEC_MULTI = 1000.0f;
-	const FLOAT MINUTE_TO_MMSEC = 60.0f * SEC_TO_MMSEC_MULTI;
+	const FLOAT SEC_TO__ms_MULTI = 1000.0f;
+	const FLOAT MINUTE_TO__ms = 60.0f * SEC_TO__ms_MULTI;
 
-	LONGLONG gapMMSec = CurrentTime - m_Info.m_Time;
-	if (gapMMSec < 0) return;
+	LONGLONG gap_ms = CurrentTime - m_Info.m_Time;
+	if (gap_ms < 0) return;
 
-	FLOAT oneNoteTakesMMSec = (1.0f / m_Info.m_DropPerMinute) * MINUTE_TO_MMSEC;
+	FLOAT oneNoteTakes_ms = (1.0f / m_Info.m_DropPerMinute) * MINUTE_TO__ms;
 
-	m_Info.m_Pos.y = m_WND_SIZE.m_y * (gapMMSec / oneNoteTakesMMSec);
+	m_Info.m_Pos.y = m_WND_SIZE.m_y * (gap_ms / oneNoteTakes_ms);
 
-	m_Info.m_Pos.x = m_Info.m_Pos.y * tan(D3DXToRadian(-m_Info.m_XMovementDeg)) + m_Info.m_screenXBasePos;
+	m_Info.m_Pos.x = m_Info.m_Pos.y * tan(D3DXToRadian(-m_Info.m_XMovementDeg)) + m_Info.m_ScreenXBasePos;
 }
 
 VOID BaseStar::SetStarInfo(const struct StarPlace& StarPlace)
