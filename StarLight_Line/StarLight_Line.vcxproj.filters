@@ -194,6 +194,21 @@
     <Filter Include="Class\IBaseWorking\SceneManager\Struct">
       <UniqueIdentifier>{b9721e28-3a28-413d-868c-9300a3a802ae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV">
+      <UniqueIdentifier>{8b32c244-29a2-49bd-95af-52420d124f5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter">
+      <UniqueIdentifier>{097506cd-bf20-49f8-9f67-ae071d9be3b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section">
+      <UniqueIdentifier>{fb672eec-f4e7-40b4-a3aa-21c127b8b02c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text">
+      <UniqueIdentifier>{2424770d-0ffa-4edb-89f5-99bb74ed8f62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\ConversationText">
+      <UniqueIdentifier>{756a198e-0738-48d2-ab5e-28947bafe05f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Class\Singleton\Singleton.cpp">
@@ -354,6 +369,21 @@
     </ClCompile>
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerEffect\PlayerEffect.cpp">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\ADV.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Chapter.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Section.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\Text.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\ConversationText\ConversationText.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\ConversationText</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -548,6 +578,21 @@
     </ClInclude>
     <ClInclude Include="Class\IBaseWorking\SceneManager\Struct\ResultData.h">
       <Filter>Class\IBaseWorking\SceneManager\Struct</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\ADV.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Chapter.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Section.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\Text.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\ConversationText\ConversationText.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\ConversationText</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
