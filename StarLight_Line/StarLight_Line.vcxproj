@@ -137,6 +137,11 @@
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\MainScene\MainScene.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\ObjManager.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\EndSceneObj\EndSceneObj.cpp" />
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\ADV.cpp" />
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Chapter.cpp" />
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Section.cpp" />
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\ConversationText\ConversationText.cpp" />
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\Text.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\GameCollision\GameCollision.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\MainSceneObject.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\Player.cpp" />
@@ -191,6 +196,11 @@
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\ObjManager.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\EndSceneObj\EndSceneObj.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\Enum\OBJ_TYPE.h" />
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\ADV.h" />
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Chapter.h" />
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Section.h" />
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\ConversationText\ConversationText.h" />
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\Text.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Enum\STAR_TYPE.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\GameCollision\GameCollision.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\MainSceneObject.h" />
