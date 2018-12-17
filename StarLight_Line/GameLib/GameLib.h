@@ -153,6 +153,11 @@ public:
 		return m_pDX->GetTex(pTexKey);
 	}
 
+	inline const BOOL TexExists(const TCHAR* pTexKey)
+	{
+		return m_pDX->TexExists(pTexKey);
+	}
+
 	inline VOID GetCameraPos(D3DXVECTOR3* pCameraPos) const
 	{
 		m_pDX->GetCameraPos(pCameraPos);

@@ -20,7 +20,7 @@
 #include "../Obj.h"
 #include "../../../StageSelectScene/Enum/STAGE_LEVEL_KIND.h"
 #include "../../../../SceneManager.h"
-#include "../../../../Struct/StageData.h"
+#include "../../../../Data/StageData.h"
 
 class StageSelectBack :public Obj
 {
