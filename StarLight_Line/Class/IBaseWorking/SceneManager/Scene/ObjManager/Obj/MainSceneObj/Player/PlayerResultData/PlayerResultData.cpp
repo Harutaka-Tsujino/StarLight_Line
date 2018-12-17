@@ -128,18 +128,19 @@ VOID PlayerResultData::IncreaseDigit(const INT& Type)
 
 VOID PlayerResultData::Release()
 {
-	for (int i = 0;i != m_ScoreFont.size();++i)
+	for (CustomVertex* pI : m_ScoreFont)
 	{
-		delete[] m_ScoreFont[i];
-		m_ScoreFont[i] = nullptr;
+		delete[] pI;
+		pI = nullptr;
 	}
 
 	m_ScoreDigit.clear();
 	m_ScoreFont.clear();
 
-	for (int i = 0;i != m_ClearStarNumsFont.size();++i)
+	for (CustomVertex* pI : m_ClearStarNumsFont)
 	{
-		delete[] m_ClearStarNumsFont[i];
+		delete[] pI;
+		pI=nullptr;
 	}
 
 	m_ClearStarNumsDigit.clear();
