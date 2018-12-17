@@ -1,11 +1,11 @@
 ﻿/// <filename>
-/// 
+/// TextFormat.h
 /// </filename>
 /// <summary>
-///
+/// Textクラスなどに用いる書式を指定する構造体のヘッダ
 /// </summary>
 /// <author>
-/// 
+/// Harutaka-Tsujino
 /// </author>
 
 #ifndef TEXT_FORMAT_H
@@ -18,7 +18,9 @@
 struct TextFormat
 {
 public:
-
+	D3DXVECTOR2 m_topLeft = { 0.0f, 0.0f };
+	RectSize m_charHalfScale = { 0, 0 };
+	D3DXVECTOR2 m_charGap = { 0.0f,0.0f };
 };
 
 #endif //! TEXT_FORMAT_H

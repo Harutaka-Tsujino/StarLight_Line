@@ -19,7 +19,7 @@
 
 #include "../Obj.h"
 #include "../../../../SceneManager.h"
-#include "../../../../Struct/ResultData.h"
+#include "../../../../Data/ResultData.h"
 
 class ResultSceneBack :public Obj
 {

@@ -57,6 +57,16 @@ public:
 		return m_pTexMap[pTexKey];
 	}
 
+	/**
+	* @brief テクスチャが生成されているか判断する
+	* @param pTexKey テクスチャを作るときに決めたキーのポインタ
+	* @return 存在していたらTRUE
+	*/
+	inline const BOOL Exists(const TCHAR* pTexKey)
+	{
+		return static_cast<BOOL>(m_pTexMap.count(pTexKey));
+	}
+
 private:
 	const LPDIRECT3DDEVICE9& m_rpDX3D_DEV = nullptr;
 

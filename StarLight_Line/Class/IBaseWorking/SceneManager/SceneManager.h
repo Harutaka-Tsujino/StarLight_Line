@@ -13,8 +13,8 @@
 #include "../../../GameLib/GameLib.h"
 #include "../../../GameLib/DX/DX3D/CustomVertexEditor/Data/ObjData.h"
 #include "../../../GameLib/DX/DX3D/CustomVertexEditor/Data/CustomVertex.h"
-#include "Struct\StageData.h"
-#include "Struct\ResultData.h"
+#include "Data\StageData.h"
+#include "Data\ResultData.h"
 
 class SceneManager :public IBaseWorking, public Singleton<SceneManager>
 {

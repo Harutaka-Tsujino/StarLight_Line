@@ -92,9 +92,6 @@
     <Filter Include="GameLib\DX\DX3D\FbxStorage\FbxRelated">
       <UniqueIdentifier>{146674e0-72ca-4767-bf22-522594dd8a64}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxModel">
-      <UniqueIdentifier>{d20a9105-0bbf-4a1c-b6ca-b45545d5618a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager">
       <UniqueIdentifier>{e2dde8e6-d454-4802-92ea-e98069f0e0c5}</UniqueIdentifier>
     </Filter>
@@ -212,6 +209,9 @@
     <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\Data">
       <UniqueIdentifier>{c206eda6-e6cc-49df-81c7-98a8a56e8da6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameLib\DX\DX3D\TexStorage\FbxModel">
+      <UniqueIdentifier>{d20a9105-0bbf-4a1c-b6ca-b45545d5618a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Class\Singleton\Singleton.cpp">
@@ -296,7 +296,7 @@
       <Filter>GameLib\DX\DX3D\FbxStorage\FbxRelated</Filter>
     </ClCompile>
     <ClCompile Include="GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxModel\FbxModel.cpp">
-      <Filter>GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxModel</Filter>
+      <Filter>GameLib\DX\DX3D\TexStorage\FbxModel</Filter>
     </ClCompile>
     <ClCompile Include="GameLib\DX\DX3D\FbxStorage\FbxStorage.cpp">
       <Filter>GameLib\DX\DX3D\FbxStorage</Filter>
@@ -379,14 +379,14 @@
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Chapter.cpp">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter</Filter>
     </ClCompile>
-    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Section.cpp">
-      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section</Filter>
-    </ClCompile>
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\Text.cpp">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text</Filter>
     </ClCompile>
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\ConversationText\ConversationText.cpp">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\ConversationText</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Section.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -490,7 +490,7 @@
       <Filter>GameLib\DX\DX3D\FbxStorage\FbxRelated</Filter>
     </ClInclude>
     <ClInclude Include="GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxModel\FbxModel.h">
-      <Filter>GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxModel</Filter>
+      <Filter>GameLib\DX\DX3D\TexStorage\FbxModel</Filter>
     </ClInclude>
     <ClInclude Include="GameLib\DX\DX3D\FbxStorage\FbxStorage.h">
       <Filter>GameLib\DX\DX3D\FbxStorage</Filter>
