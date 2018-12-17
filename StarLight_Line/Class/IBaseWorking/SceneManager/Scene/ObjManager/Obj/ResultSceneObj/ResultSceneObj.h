@@ -425,6 +425,7 @@ public:
 
 		SceneManager& rSceneManager = SceneManager::GetInstance();
 	
+		rSceneManager.SetTransitionMode(TRUE);
 		rSceneManager.SetNextScene(SK_STAGE_SELECT);
 	}
 
