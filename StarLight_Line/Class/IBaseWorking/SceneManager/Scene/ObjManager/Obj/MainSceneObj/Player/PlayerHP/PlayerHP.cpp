@@ -8,10 +8,13 @@ VOID PlayerHP::Init()
 
 VOID PlayerHP::Update()
 {
+	if (m_HP <= 0)
+	{
+		return;
+	}
+
 	if (m_rGameCollision.HitSomething(_T("Player"), DAMAGE, 30.f, 20.f))
 	{
-		if (m_HP <= 0) return;
-
 		CreateVertex();
 		--m_HP;
 	}

@@ -1,21 +1,22 @@
-﻿#ifndef PLAYER_SCORE_H_
-#define PLAYER_SCORE_H_
+﻿#ifndef PLAYER_RESULT_DATA_H_
+#define PLAYER_RESULT_DATA_H_
 
 #include <vector>
 
 #include "../../../Obj.h"
 #include "../../../../../../../.././../GameLib/GameLib.h"
 #include "../../GameCollision/GameCollision.h"
+#include "../../../../../../Struct/ResultData.h"
 
-class PlayerScore :public Obj
+class PlayerResultData :public Obj
 {
 public:
-	PlayerScore() :Obj(OT_UI, 0.0f), m_rGameCollision(GameCollision::GetInstance())
+	PlayerResultData() :Obj(OT_UI, 0.0f), m_rGameCollision(GameCollision::GetInstance())
 	{
 		Init();
 	}
 
-	~PlayerScore()
+	~PlayerResultData()
 	{
 		m_rGameLib.ReleaseTex();
 		Release();
@@ -28,13 +29,15 @@ public:
 	//セットしたときにスコアに足す
 	VOID SetScore(const INT& Score)
 	{
-		m_Score += Score;
+		m_Data.m_score += Score;
 	}
+
+	ResultData GetResultData() { return m_Data; }
 
 private:
 	//スコアの桁が繰り上がったら
 	//矩形を作り、桁数を上げる処理をする関数
-	VOID IncreaseDigit();
+	VOID IncreaseDigit(const INT& Type);
 
 	//数字フォントのTuTv切り取り関数
 	VOID DisplayNum(TexUV* UV, const INT& Num);
@@ -43,11 +46,14 @@ private:
 	VOID Release();
 
 	std::vector<CustomVertex*> m_ScoreFont;
-	std::vector<INT> m_Digit;
+	std::vector<INT> m_ScoreDigit;
 
-	INT m_Score;
+	std::vector<CustomVertex*> m_ClearStarNumsFont;
+	std::vector<INT> m_ClearStarNumsDigit;
+
+	ResultData m_Data;
 
 	GameCollision& m_rGameCollision;
 };
 
-#endif // !PLAYER_SCORE_H_
+#endif // !PLAYER_RESULT_DATA_H_
