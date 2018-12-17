@@ -6,7 +6,7 @@
 #include "../../../Obj.h"
 #include "../../../../../../../.././../GameLib/GameLib.h"
 #include "../../GameCollision/GameCollision.h"
-#include "../../../../../../Struct/ResultData.h"
+#include "../../../../../../Data/ResultData.h"
 
 class PlayerResultData :public Obj
 {
