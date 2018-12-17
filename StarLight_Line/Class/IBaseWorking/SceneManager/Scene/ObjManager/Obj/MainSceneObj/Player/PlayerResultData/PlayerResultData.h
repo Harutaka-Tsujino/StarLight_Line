@@ -27,18 +27,18 @@ public:
 	VOID Render();
 
 	//セットしたときにスコアに足す
-	VOID SetScore(const INT& Score)
+	inline VOID SetScore(const INT& Score)
 	{
 		m_Data.m_score += Score;
 	}
 
 	//失敗したかを受け取る
-	VOID SetResultData(const BOOL& IsFailed)
+	inline VOID SetResultData(const BOOL& IsFailed)
 	{
 		m_Data.m_isFailed = IsFailed;
 	}
 
-	ResultData GetResultData() { return m_Data; }
+	inline ResultData GetResultData() { return m_Data; }
 
 private:
 	//スコアの桁が繰り上がったら
