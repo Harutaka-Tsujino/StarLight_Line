@@ -8,6 +8,7 @@
 #include "../../../../../SceneManager.h"
 #include "../../Obj.h"
 #include "../GameCollision/GameCollision.h"
+#include "../../../../StageSelectScene/Enum/STAGE_LEVEL_KIND.h"
 #include "PlayerResultData/PlayerResultData.h"
 #include "PlayerHP/PlayerHP.h"
 
@@ -23,6 +24,7 @@ struct CoordinatePoint
 public:
 	int x;
 	int y;
+	int z;
 };
 
 /**
@@ -68,19 +70,19 @@ private:
 	*/
 	VOID ObtainScoreToExist(const INT& LevelScore);
 
-	VOID SetIsClearedJudged();
-
-	SurfaceCoordinate m_Speed;
+	D3DXVECTOR3 m_Speed;
 
 	static const int m_MAXXARRAYNUM = 4;
 	static const int m_MAXYARRAYNUM = 3;
 
 	const SurfaceCoordinate m_BasePos[m_MAXYARRAYNUM][m_MAXXARRAYNUM] =
 	{
-		{ { 0.05f,-0.1f},	{ 0.05f,-0.05f} ,	{ 0.05f,0.f},	{ 0.05f,0.05f}},
-		{ { 0.f,-0.1f},		{ 0.f,-0.05f},		{ 0.f,0.f},		{ 0.f,0.05f}},
-		{ { -0.05f,-0.1f},	{ -0.05f,-0.05f},	{ -0.05f,0.f},	{ -0.05f,0.05f}	}
+		{ { 0.05f,-0.09f},	{ 0.05f,-0.03f} ,	{ 0.05f,0.03f},	{ 0.05f,0.09f}	},
+		{ { 0.f,-0.09f},	{ 0.f,-0.03f},		{ 0.f,0.03f},	{ 0.f,0.09f}	},
+		{ { -0.05f,-0.09f},	{ -0.05f,-0.03f},	{ -0.05f,0.03f},{ -0.05f,0.09f}	}
 	};
+
+	const FLOAT m_CAN_MOVE_Z[3] = { 0.15f,0.2f,0.25f };
 
 	CoordinatePoint m_PlayerPoint;
 	D3DXVECTOR3 m_PlayerPos;
@@ -88,7 +90,8 @@ private:
 
 	INT count;		//生存スコアを手に入れるところで使う
 
-	PlayerResultData m_Data;
+	StageData m_StageData;
+	PlayerResultData m_ResultData;
 	PlayerHP m_Hp;
 
 	GameCollision& m_rGameCollision;
