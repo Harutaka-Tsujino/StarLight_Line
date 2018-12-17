@@ -81,7 +81,7 @@ public:
 		ReleaseCustomVerticesData(&pCharData, &pCustomVerticesVec);
 	}
 
-private:
+protected:
 	class TString
 	{
 	public:
@@ -133,7 +133,7 @@ private:
 
 		inline TCHAR GetTChar()
 		{
-			if (IsEndOfText()) return;
+			if (TextPtrPointToEndOfText()) return;
 
 			TCHAR buf = m_tChar[m_textPtr];
 			++m_textPtr;
@@ -148,7 +148,7 @@ private:
 
 		inline VOID GetLine(TString* pTString)
 		{
-			if (IsEndOfText()) return;
+			if (TextPtrPointToEndOfText()) return;
 
 			for (; isLineOrTextEnd(m_tChar[m_textPtr]); ++m_textPtr) pTString->WriteInChar(m_tChar[m_textPtr]);
 
@@ -157,7 +157,7 @@ private:
 			++m_textPtr;
 		}
 
-		inline BOOL IsEndOfText() const
+		inline BOOL TextPtrPointToEndOfText() const
 		{
 			return (m_textPtr >= Size() - 1);
 		}
@@ -203,7 +203,7 @@ private:
 	{
 		TString* pTString = nullptr;
 
-		while (m_text.IsEndOfText())
+		while (m_text.TextPtrPointToEndOfText())
 		{
 			pTString = new TString();
 
