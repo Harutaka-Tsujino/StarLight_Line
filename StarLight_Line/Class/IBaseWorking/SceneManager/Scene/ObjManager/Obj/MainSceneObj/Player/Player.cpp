@@ -15,13 +15,20 @@ VOID Player::Init()
 
 VOID Player::Update()
 {
+	if (m_Hp.GetHP() <= 0)
+	{
+		SceneManager& rSceneManager = SceneManager::GetInstance();
+		rSceneManager.SetResultData(m_Data.GetResultData());
+		rSceneManager.SetNextScene(SK_RESULT);
+	}
+
 	CoordinatePoint PlayerPointBuffer = m_PlayerPoint;
 	HIT_KEY HitKey;
 
 	int* pPoX = &m_PlayerPoint.x;
 	int* pPoY = &m_PlayerPoint.y;
 
-	m_Score.Update();
+	m_Data.Update();
 	m_Hp.Update();
 
 	//キー入力によってプレイヤーの動きを決める
@@ -63,7 +70,7 @@ VOID Player::Render()
 {
 	m_rGameLib.SetCameraTransform();
 	
-	m_Score.Render();
+	m_Data.Render();
 	m_Hp.Render();
 
 	D3DXMATRIX MatTrans, MatScale,MatRotate;
@@ -193,7 +200,15 @@ VOID Player::ObtainScoreToExist(const INT& LevelScore)
 
 	if (count == 60)
 	{
-		m_Score.SetScore(LevelScore);
+		m_Data.SetScore(LevelScore);
 		count = 0;
+	}
+}
+
+VOID Player::SetIsClearedJudged()
+{
+	if (m_Hp.GetHP() <= 0)
+	{
+		
 	}
 }

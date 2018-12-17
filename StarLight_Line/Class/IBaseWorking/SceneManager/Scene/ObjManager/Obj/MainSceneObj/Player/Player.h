@@ -5,9 +5,10 @@
 
 #include <d3dx9.h>
 
+#include "../../../../../SceneManager.h"
 #include "../../Obj.h"
 #include "../GameCollision/GameCollision.h"
-#include "PlayerScore/PlayerScore.h"
+#include "PlayerResultData/PlayerResultData.h"
 #include "PlayerHP/PlayerHP.h"
 
 struct SurfaceCoordinate
@@ -67,6 +68,8 @@ private:
 	*/
 	VOID ObtainScoreToExist(const INT& LevelScore);
 
+	VOID SetIsClearedJudged();
+
 	SurfaceCoordinate m_Speed;
 
 	static const int m_MAXXARRAYNUM = 4;
@@ -85,7 +88,7 @@ private:
 
 	INT count;		//生存スコアを手に入れるところで使う
 
-	PlayerScore m_Score;
+	PlayerResultData m_Data;
 	PlayerHP m_Hp;
 
 	GameCollision& m_rGameCollision;
