@@ -81,6 +81,11 @@ public:
 		*pResultData = m_resultData;
 	}
 
+	inline VOID SetTransitionMode(const BOOL& Mode)
+	{
+		m_SceneTransitionMode = Mode;
+	}
+
 private:
 	SceneManager() 
 	{
@@ -95,6 +100,7 @@ private:
 	SCENE_KIND m_nextScene		= SK_TITLE;
 
 	BOOL m_isRequestedChangeResent = FALSE;
+	BOOL m_SceneTransitionMode = TRUE;
 
 	INT m_transitionStagingAlpha = 0;
 
