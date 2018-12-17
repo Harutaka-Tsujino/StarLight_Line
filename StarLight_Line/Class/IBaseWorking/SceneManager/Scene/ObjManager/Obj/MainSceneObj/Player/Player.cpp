@@ -23,6 +23,7 @@ VOID Player::Update()
 
 	if (m_Hp.GetHP() <= 0)
 	{
+		rSceneManager.SetTransitionMode(FALSE);
 		m_ResultData.SetResultData(TRUE);
 		rSceneManager.SetResultData(m_ResultData.GetResultData());
 		rSceneManager.SetNextScene(SK_RESULT);
