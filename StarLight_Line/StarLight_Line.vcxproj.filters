@@ -191,9 +191,6 @@
     <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerEffect">
       <UniqueIdentifier>{683fa386-a7d4-457b-98f3-f8f1febbc584}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Class\IBaseWorking\SceneManager\Struct">
-      <UniqueIdentifier>{b9721e28-3a28-413d-868c-9300a3a802ae}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV">
       <UniqueIdentifier>{8b32c244-29a2-49bd-95af-52420d124f5c}</UniqueIdentifier>
     </Filter>
@@ -208,6 +205,12 @@
     </Filter>
     <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\ConversationText">
       <UniqueIdentifier>{756a198e-0738-48d2-ab5e-28947bafe05f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Data">
+      <UniqueIdentifier>{b9721e28-3a28-413d-868c-9300a3a802ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\Data">
+      <UniqueIdentifier>{c206eda6-e6cc-49df-81c7-98a8a56e8da6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -573,12 +576,6 @@
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerEffect\PlayerEffect.h">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerEffect</Filter>
     </ClInclude>
-    <ClInclude Include="Class\IBaseWorking\SceneManager\Struct\StageData.h">
-      <Filter>Class\IBaseWorking\SceneManager\Struct</Filter>
-    </ClInclude>
-    <ClInclude Include="Class\IBaseWorking\SceneManager\Struct\ResultData.h">
-      <Filter>Class\IBaseWorking\SceneManager\Struct</Filter>
-    </ClInclude>
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\ADV.h">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV</Filter>
     </ClInclude>
@@ -593,6 +590,15 @@
     </ClInclude>
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\ConversationText\ConversationText.h">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\ConversationText</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Data\ResultData.h">
+      <Filter>Class\IBaseWorking\SceneManager\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Data\StageData.h">
+      <Filter>Class\IBaseWorking\SceneManager\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\Data\TextFormat.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\Data</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

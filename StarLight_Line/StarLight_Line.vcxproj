@@ -189,6 +189,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Class\IBaseWorking\IBaseWorking.h" />
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Data\ResultData.h" />
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Data\StageData.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\SceneManager.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\EndScene\EndScene.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\Enum\SCENE_KIND.h" />
@@ -200,6 +202,7 @@
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Chapter.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Section.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\ConversationText\ConversationText.h" />
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\Data\TextFormat.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\Text.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Enum\STAR_TYPE.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\GameCollision\GameCollision.h" />
@@ -225,8 +228,6 @@
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\StageSelectScene\Enum\STAGE_LEVEL_KIND.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\StageSelectScene\StageSelectScene.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\TitleScene\TitleScene.h" />
-    <ClInclude Include="Class\IBaseWorking\SceneManager\Struct\ResultData.h" />
-    <ClInclude Include="Class\IBaseWorking\SceneManager\Struct\StageData.h" />
     <ClInclude Include="Class\Singleton\Singleton.h" />
     <ClInclude Include="GameLib\3DBoard\3DBoard.h" />
     <ClInclude Include="GameLib\Collision\Collision.h" />
