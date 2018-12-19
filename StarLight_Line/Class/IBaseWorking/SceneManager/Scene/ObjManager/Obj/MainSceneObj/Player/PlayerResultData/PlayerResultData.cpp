@@ -18,16 +18,17 @@ VOID PlayerResultData::Init()
 
 VOID PlayerResultData::Update()
 {
-	const FLOAT RADIUS = 30.0f;
+	const FLOAT PLAYER_RADIUS = 20.f;
+	const FLOAT ENEMY_RADIUS  = 25.f;
 
-	if (m_rGameCollision.HitSomething(_T("Player"), SCORE, 20.f, RADIUS))
+	if (m_rGameCollision.HitSomething(_T("Player"), SCORE, PLAYER_RADIUS, ENEMY_RADIUS))
 	{
 		const INT BASIC_POINT = 100;
 
 		m_Data.m_score += BASIC_POINT;
 	}
 
-	if (m_rGameCollision.HitSomething(_T("Player"), CLEAR, 20.f, RADIUS))
+	if (m_rGameCollision.HitSomething(_T("Player"), CLEAR, PLAYER_RADIUS, ENEMY_RADIUS))
 	{
 		const INT BONUS_POINT = 500;
 
