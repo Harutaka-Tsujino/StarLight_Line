@@ -13,7 +13,10 @@ VOID PlayerHP::Update()
 		return;
 	}
 
-	if (m_rGameCollision.HitSomething(_T("Player"), DAMAGE, 30.f, 20.f))
+	const FLOAT PLAYER_RADIUS = 20.f;
+	const FLOAT ENEMY_RADIUS  = 20.f;
+
+	if (m_rGameCollision.HitSomething(_T("Player"), DAMAGE, PLAYER_RADIUS, ENEMY_RADIUS))
 	{
 		CreateVertex();
 		--m_HP;
