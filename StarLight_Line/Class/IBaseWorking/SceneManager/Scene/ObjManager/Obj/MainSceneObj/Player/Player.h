@@ -75,11 +75,14 @@ private:
 	static const int m_MAXXARRAYNUM = 4;
 	static const int m_MAXYARRAYNUM = 3;
 
+	const FLOAT PLAYER_MOVE_X[m_MAXXARRAYNUM] = { -0.135f ,-0.043f ,0.043f ,0.135f };
+	const FLOAT PLAYER_MOVE_Y[m_MAXYARRAYNUM] = { 0.05f ,0.f ,-0.053f };
+
 	const SurfaceCoordinate m_BasePos[m_MAXYARRAYNUM][m_MAXXARRAYNUM] =
 	{
-		{ { 0.05f,-0.09f},	{ 0.05f,-0.03f} ,	{ 0.05f,0.03f},	{ 0.05f,0.09f}	},
-		{ { 0.f,-0.09f},	{ 0.f,-0.03f},		{ 0.f,0.03f},	{ 0.f,0.09f}	},
-		{ { -0.05f,-0.09f},	{ -0.05f,-0.03f},	{ -0.05f,0.03f},{ -0.05f,0.09f}	}
+		{ { PLAYER_MOVE_Y[0],PLAYER_MOVE_X[0] },{ PLAYER_MOVE_Y[0],PLAYER_MOVE_X[1] },{ PLAYER_MOVE_Y[0],PLAYER_MOVE_X[2] },{ PLAYER_MOVE_Y[0],PLAYER_MOVE_X[3] }},
+		{ { PLAYER_MOVE_Y[1],PLAYER_MOVE_X[0] },{ PLAYER_MOVE_Y[1],PLAYER_MOVE_X[1] },{ PLAYER_MOVE_Y[1],PLAYER_MOVE_X[2] },{ PLAYER_MOVE_Y[1],PLAYER_MOVE_X[3] }},
+		{ { PLAYER_MOVE_Y[2],PLAYER_MOVE_X[0] },{ PLAYER_MOVE_Y[2],PLAYER_MOVE_X[1] },{ PLAYER_MOVE_Y[2],PLAYER_MOVE_X[2] },{ PLAYER_MOVE_Y[2],PLAYER_MOVE_X[3] }}
 	};
 
 	const FLOAT m_CAN_MOVE_Z[3] = { 0.15f,0.2f,0.25f };
