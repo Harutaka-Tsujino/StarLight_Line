@@ -13,6 +13,7 @@ public:
 	MainScene()
 	{
 		m_pObjManager->Resister(static_cast<Obj*>(new MainBack()));
+		m_pObjManager->Resister(static_cast<Obj*>(new MainLine()));
 		m_pObjManager->Resister(static_cast<Obj*>(new Player()));
 		m_pObjManager->Resister(static_cast<Obj*>(new PlayerLifeFrame()));
 		m_pObjManager->Resister(static_cast<Obj*>(new PlayerScoreFrame()));

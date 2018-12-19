@@ -24,6 +24,24 @@ public:
 	VOID Render();
 };
 
+class MainLine :public Obj
+{
+public:
+	MainLine() :Obj(OT_UI, 1.0f)
+	{
+		Init();
+	}
+
+	~MainLine()
+	{
+		m_rGameLib.ReleaseTex();
+	}
+
+	VOID Init();
+	VOID Update() {};
+	VOID Render();
+};
+
 class PlayerLifeFrame :public Obj
 {
 public:
