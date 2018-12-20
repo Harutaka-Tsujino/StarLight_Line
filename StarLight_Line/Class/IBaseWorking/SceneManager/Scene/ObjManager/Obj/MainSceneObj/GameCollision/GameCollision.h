@@ -99,6 +99,11 @@ public:
 		return m_rGameLib.CollidesRects(m_Vertex[KeyA], m_Vertex[KeyB]);
 	}
 
+	inline BOOL* GetCollided(const INT& Num, BOOL* IsInout)
+	{
+		return IsInout = &m_Enemy[Num]->m_IsCollided;
+	}
+
 private:
 	GameCollision() :m_rGameLib(GameLib::GetInstance())
 	{
