@@ -24,7 +24,7 @@ public:
 
 	D3DXVECTOR2 m_texUV;		//! テクスチャの座標
 
-	static const size_t m_RECT_VERTICES_NUM = 4;
+	static const INT m_RECT_VERTICES_NUM = 4;
 };
 
 #endif // !CUSTOM_VERTEX_H
