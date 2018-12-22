@@ -5,9 +5,11 @@
 
 #include <d3dx9.h>
 
+#include "../../../../../SceneManager.h"
 #include "../../Obj.h"
 #include "../GameCollision/GameCollision.h"
-#include "PlayerScore/PlayerScore.h"
+#include "../../../../StageSelectScene/Enum/STAGE_LEVEL_KIND.h"
+#include "PlayerResultData/PlayerResultData.h"
 #include "PlayerHP/PlayerHP.h"
 
 struct SurfaceCoordinate
@@ -22,6 +24,7 @@ struct CoordinatePoint
 public:
 	int x;
 	int y;
+	int z;
 };
 
 /**
@@ -67,17 +70,22 @@ private:
 	*/
 	VOID ObtainScoreToExist(const INT& LevelScore);
 
-	SurfaceCoordinate m_Speed;
+	D3DXVECTOR3 m_Speed;
 
 	static const int m_MAXXARRAYNUM = 4;
 	static const int m_MAXYARRAYNUM = 3;
 
+	const FLOAT PLAYER_MOVE_X[m_MAXXARRAYNUM] = { -0.135f ,-0.043f ,0.043f ,0.135f };
+	const FLOAT PLAYER_MOVE_Y[m_MAXYARRAYNUM] = { 0.05f ,0.f ,-0.053f };
+
 	const SurfaceCoordinate m_BasePos[m_MAXYARRAYNUM][m_MAXXARRAYNUM] =
 	{
-		{ { 0.05f,-0.1f},	{ 0.05f,-0.05f} ,	{ 0.05f,0.f},	{ 0.05f,0.05f}},
-		{ { 0.f,-0.1f},		{ 0.f,-0.05f},		{ 0.f,0.f},		{ 0.f,0.05f}},
-		{ { -0.05f,-0.1f},	{ -0.05f,-0.05f},	{ -0.05f,0.f},	{ -0.05f,0.05f}	}
+		{ { PLAYER_MOVE_Y[0],PLAYER_MOVE_X[0] },{ PLAYER_MOVE_Y[0],PLAYER_MOVE_X[1] },{ PLAYER_MOVE_Y[0],PLAYER_MOVE_X[2] },{ PLAYER_MOVE_Y[0],PLAYER_MOVE_X[3] }},
+		{ { PLAYER_MOVE_Y[1],PLAYER_MOVE_X[0] },{ PLAYER_MOVE_Y[1],PLAYER_MOVE_X[1] },{ PLAYER_MOVE_Y[1],PLAYER_MOVE_X[2] },{ PLAYER_MOVE_Y[1],PLAYER_MOVE_X[3] }},
+		{ { PLAYER_MOVE_Y[2],PLAYER_MOVE_X[0] },{ PLAYER_MOVE_Y[2],PLAYER_MOVE_X[1] },{ PLAYER_MOVE_Y[2],PLAYER_MOVE_X[2] },{ PLAYER_MOVE_Y[2],PLAYER_MOVE_X[3] }}
 	};
+
+	const FLOAT m_CAN_MOVE_Z[3] = { 0.15f,0.2f,0.25f };
 
 	CoordinatePoint m_PlayerPoint;
 	D3DXVECTOR3 m_PlayerPos;
@@ -85,7 +93,8 @@ private:
 
 	INT count;		//生存スコアを手に入れるところで使う
 
-	PlayerScore m_Score;
+	StageData m_StageData;
+	PlayerResultData m_ResultData;
 	PlayerHP m_Hp;
 
 	GameCollision& m_rGameCollision;

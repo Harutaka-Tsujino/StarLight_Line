@@ -5,23 +5,37 @@ VOID Player::Init()
 	count = 0;
 	m_PlayerPoint.x = m_MAXXARRAYNUM / 2;
 	m_PlayerPoint.y = m_MAXYARRAYNUM / 2;
-	m_Speed.x = m_Speed.y = 0.0f;
+	m_PlayerPoint.z = 1;
+	m_PlayerPos.z = m_CAN_MOVE_Z[1];
+	m_Speed.x = m_Speed.y = m_Speed.z = 0.0f;
 	m_PlayerPos.x = m_BasePos[m_PlayerPoint.y][m_PlayerPoint.x].x;	//真ん中に自機を置く
 	m_PlayerPos.y = m_BasePos[m_PlayerPoint.y][m_PlayerPoint.x].y;
-	m_PlayerPos.z = 0.2f;
+
+	SceneManager& rSceneManager = SceneManager::GetInstance();
+	rSceneManager.GetStageData(&m_StageData);
 
 	m_rGameCollision.ResiterPlayerPoint(_T("Player"), &m_PlayerPos);
 }
 
 VOID Player::Update()
 {
+	SceneManager& rSceneManager = SceneManager::GetInstance();
+
+	if (m_Hp.GetHP() <= 0)
+	{
+		rSceneManager.SetTransitionMode(FALSE);
+		m_ResultData.SetResultData(TRUE);
+		rSceneManager.SetResultData(m_ResultData.GetResultData());
+		rSceneManager.SetNextScene(SK_RESULT);
+	}
+
 	CoordinatePoint PlayerPointBuffer = m_PlayerPoint;
 	HIT_KEY HitKey;
 
 	int* pPoX = &m_PlayerPoint.x;
 	int* pPoY = &m_PlayerPoint.y;
 
-	m_Score.Update();
+	m_ResultData.Update();
 	m_Hp.Update();
 
 	//キー入力によってプレイヤーの動きを決める
@@ -55,15 +69,14 @@ VOID Player::Update()
 	RestrictedMoving();
 
 	//難易度で設定するスコアを変える
-	//いま難易度のスコアをもらう処理が出来てないからとりあえず10に設定
-	ObtainScoreToExist(10);
+	ObtainScoreToExist(m_StageData.m_level);
 }
 
 VOID Player::Render()
 {
 	m_rGameLib.SetCameraTransform();
 	
-	m_Score.Render();
+	m_ResultData.Render();
 	m_Hp.Render();
 
 	D3DXMATRIX MatTrans, MatScale,MatRotate;
@@ -118,29 +131,17 @@ VOID Player::RestrictedMoving()
 
 	NextPos.y = m_BasePos[*pPoY][*pPoX].y;
 	NextPos.x = m_BasePos[*pPoY][*pPoX].x;
+	FLOAT NextPosZ = m_CAN_MOVE_Z[m_PlayerPoint.z];
 
 	//動かす
 	m_PlayerPos.x += m_Speed.x;
 	m_PlayerPos.y += m_Speed.y;
+	m_PlayerPos.z += m_Speed.z;
 
 	//制限をかける
-	if (m_Speed.x > 0)
-	{
-		m_PlayerPos.x = min(NextPos.x, m_PlayerPos.x);
-
-		return;
-	}
-
-	m_PlayerPos.x = max(NextPos.x, m_PlayerPos.x);
-
-	if (m_Speed.y > 0)
-	{
-		m_PlayerPos.y = min(NextPos.y, m_PlayerPos.y);
-
-		return;
-	}
-
-	m_PlayerPos.y = max(NextPos.y, m_PlayerPos.y);
+	m_PlayerPos.x = (m_Speed.x > 0) ? min(NextPos.x, m_PlayerPos.x) : max(NextPos.x, m_PlayerPos.x);
+	m_PlayerPos.y = (m_Speed.y > 0) ? min(NextPos.y, m_PlayerPos.y) : max(NextPos.y, m_PlayerPos.y);
+	m_PlayerPos.z = (m_Speed.z > 0) ? min(NextPosZ, m_PlayerPos.z) : max(NextPosZ, m_PlayerPos.z);
 }
 
 VOID Player::DecideSpeed(CoordinatePoint* PrevPoint, const HIT_KEY& HitKey)
@@ -151,10 +152,12 @@ VOID Player::DecideSpeed(CoordinatePoint* PrevPoint, const HIT_KEY& HitKey)
 	{
 	case UP:
 		--m_PlayerPoint.y;
+		++m_PlayerPoint.z;
 		break;
 
 	case DOWN:
 		++m_PlayerPoint.y;
+		--m_PlayerPoint.z;
 		break;
 
 	case LEFT:
@@ -171,20 +174,38 @@ VOID Player::DecideSpeed(CoordinatePoint* PrevPoint, const HIT_KEY& HitKey)
 	if (HitKey == UP || HitKey == DOWN)
 	{
 		m_Speed.y = (m_BasePos[m_PlayerPoint.y][m_PlayerPoint.x].y - m_PlayerPos.y) / FRAMENUM;
-		m_Speed.x = 0.0f;
+		m_Speed.x = 0.f;
+		m_Speed.z = (m_CAN_MOVE_Z[m_PlayerPoint.z] - m_PlayerPos.z) / FRAMENUM;
 	}
 
 	if (HitKey == LEFT || HitKey == RIGHT)
 	{
 		m_Speed.x = (m_BasePos[m_PlayerPoint.y][m_PlayerPoint.x].x - m_PlayerPos.x) / FRAMENUM;
-		m_Speed.y = 0.0f;
+		m_Speed.y = 0.f;
 	}
 
 }
 
-VOID Player::ObtainScoreToExist(const INT& LevelScore)
+VOID Player::ObtainScoreToExist(const INT& Level)
 {
 	if (m_Hp.GetHP() <= 0) return;
+
+	int Score = 0;
+
+	switch (Level)
+	{
+	case SLK_EASY:
+		Score = 10;
+		break;
+
+	case SLK_NORMAL:
+		Score = 20;
+		break;
+
+	case SLK_HARD:
+		Score = 30;
+		break;
+	}
 
 	if (count <= 60)
 	{
@@ -193,7 +214,7 @@ VOID Player::ObtainScoreToExist(const INT& LevelScore)
 
 	if (count == 60)
 	{
-		m_Score.SetScore(LevelScore);
+		m_ResultData.SetScore(Score);
 		count = 0;
 	}
 }

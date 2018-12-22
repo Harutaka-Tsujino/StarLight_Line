@@ -67,11 +67,9 @@ VOID SceneManager::Factory()
 	}
 }
 
-VOID SceneManager:: StageTransition()
+VOID SceneManager::StageTransition()
 {
 	GameLib& rGameLib = GameLib::GetInstance();
-
-	rGameLib.AddtionBlendMode();
 
 	ObjData data;
 	const RectSize WND_SIZE = rGameLib.GetWndSize();
@@ -89,8 +87,15 @@ VOID SceneManager:: StageTransition()
 
 	if (m_transitionStagingAlpha <= 0) m_transitionStagingAlpha = 0;
 
-	data.m_aRGB = D3DCOLOR_ARGB(static_cast<UCHAR>(m_transitionStagingAlpha), 255, 255, 255);
+	data.m_aRGB = D3DCOLOR_ARGB(static_cast<UCHAR>(m_transitionStagingAlpha), 0, 0, 0);
 
+	if (m_SceneTransitionMode)
+	{
+		rGameLib.AddtionBlendMode();
+		data.m_aRGB = D3DCOLOR_ARGB(static_cast<UCHAR>(m_transitionStagingAlpha), 255, 255, 255);
+
+	}
+	
 	CustomVertex cover[4];
 	rGameLib.CreateRect(cover, data);
 

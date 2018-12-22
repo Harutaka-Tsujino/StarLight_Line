@@ -170,9 +170,6 @@
     <Filter Include="GameLib\3DBoard">
       <UniqueIdentifier>{4059ff69-b7c0-4909-bc16-4d61c70f8e81}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerScore">
-      <UniqueIdentifier>{6ea572d9-5427-4b6e-b9f0-dc89c4d97df5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerHP">
       <UniqueIdentifier>{028a85e4-7a9b-48b8-98ea-1c879dafd3eb}</UniqueIdentifier>
     </Filter>
@@ -214,6 +211,9 @@
     </Filter>
     <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\TString">
       <UniqueIdentifier>{073147c6-9221-4b92-a3c2-e5926f64c30e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerResultData">
+      <UniqueIdentifier>{6ea572d9-5427-4b6e-b9f0-dc89c4d97df5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -363,9 +363,6 @@
     </ClCompile>
     <ClCompile Include="GameLib\3DBoard\3DBoard.cpp">
       <Filter>GameLib\3DBoard</Filter>
-    </ClCompile>
-    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerScore\PlayerScore.cpp">
-      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerScore</Filter>
     </ClCompile>
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerHP\PlayerHP.cpp">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerHP</Filter>
@@ -566,9 +563,6 @@
     </ClInclude>
     <ClInclude Include="GameLib\3DBoard\3DBoard.h">
       <Filter>GameLib\3DBoard</Filter>
-    </ClInclude>
-    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerScore\PlayerScore.h">
-      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerScore</Filter>
     </ClInclude>
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerHP\PlayerHP.h">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerHP</Filter>
