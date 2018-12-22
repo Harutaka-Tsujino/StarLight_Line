@@ -26,9 +26,9 @@
 class Section :public Obj
 {
 public:
-	explicit Section(const TCHAR* pSectionText) :Obj(OT_TRANSPARENCY, 1.0f)
+	explicit Section(const TString& sectionText) :Obj(OT_TRANSPARENCY, 0.0f)
 	{
-		DevideTextsByConversationAndSet(pSectionText);
+		DevideTextsByConversationAndSet(sectionText);
 	}
 
 	~Section()
@@ -73,9 +73,7 @@ public:
 
 	inline BOOL Ends() const
 	{
-		INT lastElementNum = m_pConversationTexts.size() - 1;
-
-		return m_pConversationTexts[lastElementNum]->StagingEnds();
+		return m_ends;
 	}
 
 private:
@@ -86,42 +84,39 @@ private:
 		TString m_conversation;
 	};
 
+	Section& operator=(const Section&) = delete;
+	Section(const Section&) = delete;
+
 	inline VOID TransEndedTextNextText()
 	{
-		if (m_currentConversationTextElementNum == m_pConversationTexts.size() - 1) return;
+		if (m_currentConversationTextElementNum == m_pConversationTexts.size() - 1)
+		{
+			m_ends = TRUE;
+
+			return;
+		}
 
 		if (!m_pConversationTexts[m_currentConversationTextElementNum]->StagingEnds()) return;
 
 		++m_currentConversationTextElementNum;
 	}
 
-	inline VOID CopyTextForConversion(const TCHAR* pSectionText, TString* pTextForConversion) const
-	{
-		for (INT i = 0;; ++i)
-		{
-			pTextForConversion->WriteInChar(pSectionText[i]);
-
-			if (pTextForConversion->LastCharIsTextEnd()) break;
-		}
-	}
-
 	inline VOID DiscriminateSpeakerAndSet(TString* pTextForConversion, ConversationTString* pConversationBuf) const
 	{
 		TCHAR tCharBuf = NULL;
 
-		if (pTextForConversion->GetTChar() == m_NAME_TAG)
+		if (pTextForConversion->GetTChar() != m_NAME_TAG) return;
+
+		while (tCharBuf = pTextForConversion->GetTChar())
 		{
-			while (tCharBuf = pTextForConversion->GetTChar())
-			{
-				if (tCharBuf == m_NAME_TAG) break;
+			if (tCharBuf == m_NAME_TAG) break;
 
-				pConversationBuf->m_speaker.WriteInChar(tCharBuf);
-			}
-
-			pConversationBuf->m_speaker.WriteInChar(TString::m_TEXT_END);
-
-			pTextForConversion->Shift(TString::m_NEW_LINE_AND_RETURN_LENGTH);
+			pConversationBuf->m_speaker.WriteInChar(tCharBuf);
 		}
+
+		pConversationBuf->m_speaker.WriteInChar(TString::m_TEXT_END);
+
+		pTextForConversion->Shift(TString::m_NEW_LINE_AND_RETURN_LENGTH);
 	}
 
 	inline VOID DiscriminateConversationAndSet(TString* pTextForConversion, ConversationTString* pConversationBuf) const
@@ -143,11 +138,11 @@ private:
 		pConversationBuf->m_conversation.WriteInChar(TString::m_TEXT_END);
 	}
 
-	VOID DevideTextsByConversationAndSet(const TCHAR* pSectionText);
+	VOID DevideTextsByConversationAndSet(const TString& sectionText);
 
 	INT m_currentConversationTextElementNum = 0;
 
-	BOOL m_stagingEnds = FALSE;
+	BOOL m_ends = FALSE;
 
 	static const TCHAR m_NAME_TAG = '@';
 	

@@ -22,10 +22,11 @@
 #include "Text\Tstring\TString.h"
 #include "Text\ConversationText\ConversationText.h"
 
-VOID Section::DevideTextsByConversationAndSet(const TCHAR* pSectionText)
+VOID Section::DevideTextsByConversationAndSet(const TString& sectionText)
 {
 	TString textForConversion;
-	CopyTextForConversion(pSectionText, &textForConversion);
+
+	sectionText.WriteOutAll(&textForConversion);
 
 	ConversationTString* pConversationBuf = nullptr;
 
@@ -40,8 +41,8 @@ VOID Section::DevideTextsByConversationAndSet(const TCHAR* pSectionText)
 
 		m_pConversationTStrings.push_back(pConversationBuf);
 
-		pConversationText = new ConversationText(	&m_pConversationTStrings[i]->m_speaker,
-													&m_pConversationTStrings[i]->m_conversation,
+		pConversationText = new ConversationText(	m_pConversationTStrings[i]->m_speaker,
+													m_pConversationTStrings[i]->m_conversation,
 													m_pFONT_TEX_PATH);
 
 		m_pConversationTexts.push_back(pConversationText);

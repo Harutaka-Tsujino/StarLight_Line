@@ -71,7 +71,7 @@ VOID Text::CreateOneLineCharsRects(const TextFormat& textFormat, std::vector<Obj
 			{
 				textFormat.m_topLeft.x + halfX + li * (2 * halfX + textFormat.m_charGap.x),
 				textFormat.m_topLeft.y + halfY + si * (2 * halfY + textFormat.m_charGap.y),
-				1.0f
+				0.0f
 			};
 
 			textFormat.m_charHalfScale.TransD3DXVECTOR3(&(*ppCharDatas)[si][li].m_halfScale);

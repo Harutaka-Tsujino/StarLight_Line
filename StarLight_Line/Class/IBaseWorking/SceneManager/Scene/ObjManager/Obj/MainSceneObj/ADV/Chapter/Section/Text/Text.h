@@ -28,9 +28,9 @@
 class Text
 {
 public:
-	Text(const TString* pText, const TCHAR* pFontTexPath) :m_rGameLib(GameLib::GetInstance())
+	Text(const TString& text, const TCHAR* pFontTexPath) :m_rGameLib(GameLib::GetInstance())
 	{
-		pText->WriteOutAll(&m_text);
+		text.WriteOutAll(&m_text);
 
 		DivideTextByNewLine();
 
@@ -47,6 +47,9 @@ public:
 	virtual VOID Write(const TextFormat& textFormat);
 
 protected:
+	Text & operator=(const Text&) = delete;
+	Text(const Text&) = delete;
+
 	inline VOID DivideTextByNewLine()
 	{
 		TString* pTString = nullptr;
@@ -63,7 +66,7 @@ protected:
 
 	inline VOID NewCustomVerticesData(std::vector<ObjData*>* ppCharDatas, std::vector<CustomVertex*>* ppChars, std::vector<TString*>& pOneLineStrings) const
 	{
-		INT oneLineTextNum = pOneLineStrings.size();
+		size_t oneLineTextNum = pOneLineStrings.size();
 		INT oneLineLength = NULL;
 		for (INT i = 0; i < oneLineTextNum; ++i)
 		{
@@ -76,7 +79,7 @@ protected:
 
 	inline VOID ReleaseCustomVerticesData(std::vector<ObjData*>* ppCharDatas, std::vector<CustomVertex*>* ppChars, std::vector<TString*>& pOneLineStrings) const
 	{
-		INT oneLineTextNum = pOneLineStrings.size();
+		size_t oneLineTextNum = pOneLineStrings.size();
 		INT oneLineLength = NULL;
 		for (INT i = 0; i < oneLineTextNum; ++i)
 		{

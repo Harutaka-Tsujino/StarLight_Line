@@ -29,9 +29,9 @@
 class ConversationText :public Text
 {
 public:
-	ConversationText(const TString* pSpeaker, const TString* pText, const TCHAR* pFontTexPath) :Text(pText, pFontTexPath)
+	ConversationText(const TString& speaker, const TString& text, const TCHAR* pFontTexPath) :Text(text, pFontTexPath)
 	{
-		pSpeaker->WriteOutAll(&m_speaker);
+		speaker.WriteOutAll(&m_speaker);
 
 		for (auto i : m_pOneLineTstringVec)
 		{
@@ -68,7 +68,7 @@ private:
 		{
 			speakerNameFormat.m_topLeft.x + speakerNameFormat.m_charHalfScale.m_x,
 			speakerNameFormat.m_topLeft.y + speakerNameFormat.m_charHalfScale.m_y,
-			1.0f
+			0.0f
 		};
 
 		speakerNameFormat.m_charHalfScale.TransD3DXVECTOR3(&speakerData.m_halfScale);

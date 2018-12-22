@@ -81,7 +81,7 @@ public:
 
 	inline TCHAR GetTChar()
 	{
-		if (TextPtrPointsToEndOfText()) return;
+		if (TextPtrPointsToEndOfText()) return TString::m_TEXT_END;
 
 		TCHAR buf = m_tChar[m_textPtr];
 		++m_textPtr;
@@ -112,11 +112,11 @@ public:
 
 	inline BOOL LastCharIsTextEnd()
 	{
-		INT lastElement = m_tChar.size() - 1;
+		size_t lastElement = m_tChar.size() - 1;
 		return IsTextEnd(m_tChar[lastElement]);
 	}
 
-	inline INT Size() const
+	inline size_t Size() const
 	{
 		return m_tChar.size();
 	}
@@ -136,6 +136,9 @@ public:
 	static const TCHAR m_TEXT_END = _T('\0');
 
 private:
+	TString(const TString &other) = delete;
+	TString &operator=(const TString &other) = delete;
+
 	inline BOOL IsLineEnd(const TCHAR tChar) const
 	{
 		return (tChar == m_NEW_LINE);
