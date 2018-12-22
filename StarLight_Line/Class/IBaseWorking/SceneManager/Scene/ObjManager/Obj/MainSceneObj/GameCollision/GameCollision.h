@@ -25,6 +25,7 @@ public:
 	~GameCollision()
 	{
 		ReleaseEnemyPoint();
+		//ReleaseVertices(); //! 現在未使用
 	}
 
 	inline VOID ResiterVertices(TCHAR* pKey, CustomVertex* pVertex)
@@ -34,6 +35,11 @@ public:
 
 	inline VOID ReleaseVertices()
 	{
+		for (auto i : m_Vertex)
+		{
+			delete i.second;
+		}
+
 		m_Vertex.clear();
 	}
 	

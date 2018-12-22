@@ -255,7 +255,7 @@ public:
 
 	inline VOID Init()
 	{
-		m_rGameLib.CreateTex(_T("SmallStar"), _T("2DTextures/Title/EffectData.png"));
+		m_rGameLib.CreateTex(_T("SmallStar"), _T("2DTextures/Title/SmallStarEffect.png"));
 		m_rGameLib.CreateTex(_T("OverSmallStar"), _T("2DTextures/Title/OverSmallStarEffect.png"));
 	}
 
