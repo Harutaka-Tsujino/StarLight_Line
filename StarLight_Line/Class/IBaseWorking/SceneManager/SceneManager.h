@@ -23,6 +23,8 @@ public:
 
 	~SceneManager()
 	{
+		TurnOffBGM();
+
 		delete m_pScene;
 	}
 
