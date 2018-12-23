@@ -184,6 +184,7 @@
     <ClCompile Include="GameLib\DX\DXInput\InputDev\Keyboard\Keyboard.cpp" />
     <ClCompile Include="GameLib\DX\DXInput\InputDev\Mouse\Mouse.cpp" />
     <ClCompile Include="GameLib\GameLib.cpp" />
+    <ClCompile Include="GameLib\Sound\Sound.cpp" />
     <ClCompile Include="GameLib\Timer\Timer.cpp" />
     <ClCompile Include="GameLib\Wnd\Wnd.cpp" />
     <ClCompile Include="Main\Main.cpp" />
@@ -253,6 +254,7 @@
     <ClInclude Include="GameLib\DX\DXInput\InputDev\Mouse\Enum\DIM.h" />
     <ClInclude Include="GameLib\DX\DXInput\InputDev\Mouse\Mouse.h" />
     <ClInclude Include="GameLib\GameLib.h" />
+    <ClInclude Include="GameLib\Sound\Sound.h" />
     <ClInclude Include="GameLib\Timer\Timer.h" />
     <ClInclude Include="GameLib\Wnd\Data\RectSize.h" />
     <ClInclude Include="GameLib\Wnd\Wnd.h" />

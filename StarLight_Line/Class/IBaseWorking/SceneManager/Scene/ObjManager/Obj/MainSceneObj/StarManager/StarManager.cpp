@@ -152,6 +152,8 @@ StarManager::~StarManager()
 	}
 	m_StarNotes.clear();
 
+	m_rGameCollision.ReleaseEnemyPoint();
+
 	m_rGameLib.ReleaseTex();
 }
 

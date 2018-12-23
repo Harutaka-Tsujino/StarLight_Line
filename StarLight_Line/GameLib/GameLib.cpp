@@ -8,6 +8,15 @@
 #include "Wnd\Wnd.h"
 #include "Timer\Timer.h"
 #include "Collision\Collision.h"
+#include "Sound\Sound.h"
+
+#include <crtdbg.h>
+
+#include <cstdio>
+#include <cstdlib>
+
+#define _CRTDBG_MAP_ALLOC
+#define new ::new(_NORMAL_BLOCK, __FILE__, __LINE__)
 
 Wnd* GameLib::m_pWnd = nullptr;
 
@@ -18,6 +27,8 @@ Timer* GameLib::m_pTimer = nullptr;
 Collision* GameLib::m_pCollision = nullptr;
 
 Board3D* GameLib::m_pBoard3D = nullptr;
+
+Sound* GameLib::m_pSound = nullptr;
 
 VOID GameLib::RunFunc(VOID(*pMainFunc)())
 {

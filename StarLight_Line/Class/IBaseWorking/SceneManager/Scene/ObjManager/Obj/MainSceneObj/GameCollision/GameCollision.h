@@ -9,6 +9,14 @@
 
 #include "../Enum/STAR_TYPE.h"
 
+#include <crtdbg.h>
+
+#include <cstdio>
+#include <cstdlib>
+
+#define _CRTDBG_MAP_ALLOC
+#define new ::new(_NORMAL_BLOCK, __FILE__, __LINE__)
+
 struct StarCollisionData
 {
 public:
@@ -25,7 +33,7 @@ public:
 	~GameCollision()
 	{
 		ReleaseEnemyPoint();
-		//ReleaseVertices(); //! 現在未使用
+		ReleaseVertices(); //! 現在未使用
 	}
 
 	inline VOID ResiterVertices(TCHAR* pKey, CustomVertex* pVertex)
@@ -35,10 +43,10 @@ public:
 
 	inline VOID ReleaseVertices()
 	{
-		for (auto i : m_Vertex)
+		/*for (auto i : m_Vertex)
 		{
 			delete i.second;
-		}
+		}*/
 
 		m_Vertex.clear();
 	}
@@ -58,10 +66,9 @@ public:
 
 	inline VOID ReleaseEnemyPoint()
 	{
-		for (int i = 0;i != m_Enemy.size();++i)
+		for (auto i : m_Enemy)
 		{
-			delete m_Enemy[i];
-			m_Enemy[i] = nullptr;
+			delete i;
 		}
 
 		m_Enemy.clear();

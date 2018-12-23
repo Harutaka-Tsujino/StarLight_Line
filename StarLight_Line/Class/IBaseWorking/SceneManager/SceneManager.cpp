@@ -15,6 +15,10 @@ VOID SceneManager::Factory()
 {
 	if (m_currentScene == m_nextScene || m_isRequestedChangeResent) return;
 
+	TurnOffBGM();
+	InitBGM();
+	TurnOnBGM();
+
 	m_currentScene = m_nextScene;
 
 	switch (m_nextScene)
@@ -102,4 +106,35 @@ VOID SceneManager::StageTransition()
 	rGameLib.Render(cover);
 
 	rGameLib.DefaultBlendMode();
+}
+
+VOID SceneManager::InitBGM()
+{
+	const TCHAR* pBGM_PATH[SK_MAX] =
+	{
+		_T("Sounds/Title/titlesave.mp3")	,
+		_T("Sounds/StageSelect/Stage.mp3")	,
+		_T("Sounds/Stage/Leo/leo.mp3")		,
+		_T("Sounds/Title/titlesave.mp3")	,
+		_T("Sounds/Result/result.mp3")		,
+		_T("Sounds/Title/titlesave.mp3")	,
+	};
+
+	static BOOL bGMInits[SK_MAX] =
+	{
+		FALSE,
+		FALSE,
+		FALSE,
+		FALSE,
+		FALSE,
+		FALSE,
+	};
+
+	if (bGMInits[m_nextScene]) return;
+
+	bGMInits[m_nextScene] = TRUE;
+
+	GameLib& rGameLib = GameLib::GetInstance();
+
+	rGameLib.AddFile(pBGM_PATH[m_nextScene], m_pBGM_KEY[m_nextScene]);
 }

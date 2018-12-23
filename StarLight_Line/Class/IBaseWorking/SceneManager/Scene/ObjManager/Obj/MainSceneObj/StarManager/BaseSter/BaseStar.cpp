@@ -24,6 +24,8 @@ VOID BaseStar::TransScreenPosByTime(const LONGLONG& CurrentTime)
 
 	FLOAT oneNoteTakes_ms = (1.0f / m_Info.m_DropPerMinute) * MINUTE_TO__ms;
 
+	if (oneNoteTakes_ms == 0.0f) oneNoteTakes_ms == 0.0001f;
+
 	m_Info.m_Pos.y = m_WND_SIZE.m_y * (gap_ms / oneNoteTakes_ms);
 
 	m_Info.m_Pos.x = m_Info.m_Pos.y * tan(D3DXToRadian(-m_Info.m_XMovementDeg)) + m_Info.m_screenXBasePos;

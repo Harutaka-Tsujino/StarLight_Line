@@ -20,6 +20,7 @@
 #include "Timer\Timer.h"
 #include "Collision\Collision.h"
 #include "3DBoard\3DBoard.h"
+#include "Sound\Sound.h"
 
 /**
 * @brief 汎用クラスのFacade,ウィンドウ生成やDX関係の初期化も行う
@@ -31,12 +32,13 @@ public:
 
 	~GameLib()
 	{
+		delete m_pSound;
+		delete m_pBoard3D;
+		delete m_pCollision;
+		delete m_pTimer;
 		delete m_pDX;
 		delete m_pWnd;
-		delete m_pTimer;
-		delete m_pCollision;
-		delete m_pBoard3D;
-	};
+	}
 
 	/**
 	* @brief ウィンドウを生成しDX関係を初期化する,一番初めにこれを呼ぶ
@@ -50,6 +52,7 @@ public:
 		if (!m_pTimer)		m_pTimer = new Timer();
 		if (!m_pCollision)	m_pCollision = new Collision();
 		if (!m_pBoard3D)	m_pBoard3D = new Board3D();
+		if (!m_pSound)		m_pSound = new Sound();
 		
 		GetInstance();
 	}
@@ -417,6 +420,36 @@ public:
 		return m_pCollision->CollidesCircles(pA, pB, aRadius, bRadius);
 	}
 
+	inline VOID AddFile(const TCHAR* pFilePath, const TCHAR* pKey)
+	{
+		m_pSound->AddFile(pFilePath, pKey);
+	}
+
+	inline VOID LoopStart(const TCHAR* pKey)
+	{
+		m_pSound->LoopStart(pKey);
+	}
+
+	inline VOID OneShotStart(const TCHAR* pKey)
+	{
+		m_pSound->OneShotStart(pKey);
+	}
+
+	inline VOID Pause(const TCHAR* pKey)
+	{
+		m_pSound->Pause(pKey);
+	}
+
+	inline VOID Resume(const TCHAR* pKey)
+	{
+		m_pSound->Resume(pKey);
+	}
+
+	inline VOID Stop(const TCHAR* pKey)
+	{
+		m_pSound->Stop(pKey);
+	}
+
 private:
 	GameLib() {};
 
@@ -429,6 +462,8 @@ private:
 	static Collision* m_pCollision;
 
 	static Board3D* m_pBoard3D;
+
+	static Sound* m_pSound;
 };
 
 #endif //! GAME_LIB_H

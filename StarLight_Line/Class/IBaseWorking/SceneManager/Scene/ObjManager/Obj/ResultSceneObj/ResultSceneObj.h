@@ -89,7 +89,7 @@ public:
 
 	inline VOID SkipStage()
 	{
-		m_increaseStagingCount = m_INCREASE_STAGING_MAX;
+		m_increaseStagingFrameCount = m_INCREASE_STAGING_FRAME_COUNT_MAX;
 	}
 
 private:
@@ -120,8 +120,8 @@ private:
 	INT m_digitsNum = NULL;
 	std::vector<DigitScore> m_digitScoresVec;
 
-	const INT m_INCREASE_STAGING_MAX = 150;
-	INT m_increaseStagingCount = 0;	//! 現物合わせ
+	const INT m_INCREASE_STAGING_FRAME_COUNT_MAX = 150;
+	INT m_increaseStagingFrameCount = 0;	//! 現物合わせ
 
 	BOOL m_stagingIsEnd = FALSE;
 

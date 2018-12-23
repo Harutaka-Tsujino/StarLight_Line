@@ -31,8 +31,8 @@ VOID MainLine::Render()
 	m_rGameLib.SetCameraTransform();
 
 	ObjData data;
-	data.m_center = { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, m_Z };
-	data.m_halfScale = { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, 0.0f };
+	data.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, m_Z };
+	data.m_halfScale	= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, 0.0f };
 
 	CustomVertex back[4];
 	m_rGameLib.CreateRect(back, data);
@@ -73,8 +73,8 @@ VOID PlayerScoreFrame::Render()
 	m_rGameLib.SetCameraTransform();
 
 	ObjData data;
-	data.m_center = { m_WND_SIZE.m_x * 0.8f, m_WND_SIZE.m_y * 0.9f, 0.005f };
-	data.m_halfScale = { m_WND_SIZE.m_x * 0.18f, m_WND_SIZE.m_y * 0.05f, 0.0f };
+	data.m_center		= { m_WND_SIZE.m_x * 0.8f, m_WND_SIZE.m_y * 0.9f, 0.005f };
+	data.m_halfScale	= { m_WND_SIZE.m_x * 0.18f, m_WND_SIZE.m_y * 0.05f, 0.0f };
 
 	CustomVertex back[4];
 	m_rGameLib.CreateRect(back, data);
@@ -113,8 +113,9 @@ VOID PlayerClearStarObj::RenderStarObtained()
 	m_rGameLib.SetCameraTransform();
 
 	ObjData data;
-	data.m_center = { m_WND_SIZE.m_x * 0.487f, m_WND_SIZE.m_y * 0.9f, 0.004f };
-	data.m_halfScale = { m_WND_SIZE.m_x * 0.017f, m_WND_SIZE.m_y * 0.027f, 0.0f };
+	data.m_center		= { m_WND_SIZE.m_x * 0.487f, m_WND_SIZE.m_y * 0.9f, 0.004f };
+	data.m_halfScale	= { m_WND_SIZE.m_x * 0.017f, m_WND_SIZE.m_y * 0.027f, 0.0f };
+
 	data.m_aRGB = 0xFF98FB98;
 
 	CustomVertex StarImage[4];
