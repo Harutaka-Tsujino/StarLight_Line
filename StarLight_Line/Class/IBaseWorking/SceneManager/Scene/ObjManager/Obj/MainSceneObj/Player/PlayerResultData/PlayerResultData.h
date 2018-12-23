@@ -40,6 +40,13 @@ public:
 
 	inline ResultData GetResultData() { return m_Data; }
 
+	inline VOID JudgeGameFailure(INT necessaryNum)
+	{
+		m_Data.m_isFailed = !(m_Data.m_clearStarsNum >= necessaryNum);
+
+		return;
+	}
+
 private:
 	//スコアの桁が繰り上がったら
 	//矩形を作り、桁数を上げる処理をする関数

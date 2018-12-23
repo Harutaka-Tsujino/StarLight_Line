@@ -24,7 +24,8 @@ VOID Player::Update()
 	if (m_Hp.GetHP() <= 0)
 	{
 		rSceneManager.SetTransitionMode(FALSE);
-		m_ResultData.SetResultData(TRUE);
+
+		m_ResultData.JudgeGameFailure(7); //引数は適当
 		rSceneManager.SetResultData(m_ResultData.GetResultData());
 		rSceneManager.SetNextScene(SK_RESULT);
 	}
