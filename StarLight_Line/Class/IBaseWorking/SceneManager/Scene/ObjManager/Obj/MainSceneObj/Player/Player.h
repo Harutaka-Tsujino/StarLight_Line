@@ -82,7 +82,7 @@ private:
 	static const int m_MAXXARRAYNUM = 4;
 	static const int m_MAXYARRAYNUM = 3;
 
-	const FLOAT PLAYER_MOVE_X[m_MAXXARRAYNUM] = { -0.135f ,-0.043f ,0.043f ,0.135f };
+	const FLOAT PLAYER_MOVE_X[m_MAXXARRAYNUM] = { -0.1395f ,-0.0465f ,0.0465f ,0.1395f };
 	const FLOAT PLAYER_MOVE_Y[m_MAXYARRAYNUM] = { 0.05f ,0.f ,-0.053f };
 
 	const SurfaceCoordinate m_BasePos[m_MAXYARRAYNUM][m_MAXXARRAYNUM] =

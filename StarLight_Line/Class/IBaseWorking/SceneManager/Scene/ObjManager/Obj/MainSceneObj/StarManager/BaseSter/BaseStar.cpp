@@ -62,7 +62,7 @@ VOID BaseStar::DefaultLight()
 
 VOID BaseStar::ConvertLocalToWorld(D3DXMATRIX* pMatWorld)
 {
-	if (m_Info.m_Pos.y < -m_STAR_HALF_SCALE || m_Info.m_Pos.y > m_WND_SIZE.m_y + m_STAR_HALF_SCALE) return;
+	if (m_Info.m_Pos.y < - 2 * m_STAR_HALF_SCALE || m_Info.m_Pos.y > m_WND_SIZE.m_y +  2 * m_STAR_HALF_SCALE) return;
 
 	D3DXMATRIX MatTrans, MatScale, MatRotate;
 	D3DXMatrixIdentity(pMatWorld);
@@ -72,7 +72,7 @@ VOID BaseStar::ConvertLocalToWorld(D3DXMATRIX* pMatWorld)
 	const float MODELSCALE = 0.003f;
 
 	// 拡大
-	D3DXMatrixScaling(&MatScale, MODELSCALE, MODELSCALE, MODELSCALE);
+	D3DXMatrixScaling(&MatScale, MODELSCALE, MODELSCALE, 0.01f);
 	D3DXMatrixMultiply(pMatWorld, pMatWorld, &MatScale);
 
 	// 演出用の回転

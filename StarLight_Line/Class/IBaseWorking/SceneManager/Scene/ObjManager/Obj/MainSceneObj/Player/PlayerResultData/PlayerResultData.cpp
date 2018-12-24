@@ -19,7 +19,7 @@ VOID PlayerResultData::Init()
 VOID PlayerResultData::Update()
 {
 	const FLOAT PLAYER_RADIUS = 20.f;
-	const FLOAT ENEMY_RADIUS  = 25.f;
+	const FLOAT ENEMY_RADIUS  = 30.f;
 
 	if (m_rGameCollision.HitSomething(_T("Player"), SCORE, PLAYER_RADIUS, ENEMY_RADIUS))
 	{

@@ -21,7 +21,7 @@ struct StarPlace
 	float m_XMovementDeg;								//x座標の移動量
 	float m_screenXBasePos;								//xの動く前のスクリーン座標
 
-	D3DXVECTOR3 m_CollisionPos = { 0.0f,-100.0f,0.0f };	//当たり判定用の座標
+	D3DXVECTOR3 m_CollisionPos = { 0.0f,0.0f,0.0f };	//当たり判定用の座標
 };
 
 /*
@@ -42,7 +42,7 @@ public:
 
 	VOID SetType(const STAR_TYPE& Type) { m_Info.m_Type = Type; }
 	STAR_TYPE& GetType() { return m_Info.m_Type; }
-	D3DXVECTOR3* GetCollisionPos() { return &m_Info.m_CollisionPos; }
+	D3DXVECTOR3* GetCollisionPos() { return &m_Info.m_Pos; }
 	
 protected:
 	VOID TransScreenPosByTime(const LONGLONG& CurrentTime);		//y座標を移動させる関数

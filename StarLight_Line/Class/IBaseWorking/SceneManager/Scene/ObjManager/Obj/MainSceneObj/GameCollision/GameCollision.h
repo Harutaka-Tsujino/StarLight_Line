@@ -102,9 +102,15 @@ public:
 		D3DXVECTOR3 PlayerScreenPos(m_rGameLib.TransScreen(*m_PlayerPoint[pKey]));
 		D3DXVECTOR3 EnemyScreenPos(*m_Enemy[StarNum]->m_Point);
 
-		if ((-bRadius > EnemyScreenPos.y) || EnemyScreenPos.y > m_rGameLib.GetWndSize().m_y + bRadius) return FALSE;
+		const FLOAT WND_Y_SIZE = static_cast<FLOAT>(m_rGameLib.GetWndSize().m_y);
 
-		return m_rGameLib.CollidesCircles(&PlayerScreenPos, &EnemyScreenPos, aRadius, bRadius);
+		if ((2 * -bRadius > EnemyScreenPos.y) || EnemyScreenPos.y > WND_Y_SIZE + 2 * bRadius) return FALSE;
+
+		FLOAT playerRadius = 40.f - 25.0f * (1.0f - (PlayerScreenPos.y / WND_Y_SIZE));
+
+		PlayerScreenPos.x += 10.0f;
+
+		return m_rGameLib.CollidesCircles(&PlayerScreenPos, &EnemyScreenPos, playerRadius, bRadius);
 	}
 
 	inline BOOL CollidesRects(const TCHAR* KeyA, const TCHAR* KeyB)

@@ -14,7 +14,7 @@ VOID PlayerHP::Update()
 	}
 
 	const FLOAT PLAYER_RADIUS = 20.f;
-	const FLOAT ENEMY_RADIUS  = 20.f;
+	const FLOAT ENEMY_RADIUS  = 30.f;
 
 	if (m_rGameCollision.HitSomething(_T("Player"), DAMAGE, PLAYER_RADIUS, ENEMY_RADIUS))
 	{

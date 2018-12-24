@@ -108,7 +108,7 @@ VOID Player::Render()
 
 	D3DXMatrixMultiply(&m_World, &m_World, &MatTrans);
 
-	D3DXVECTOR4 EiwiAmbient(0.6f, 190.0f / 255.0f, 190.0f / 255.0f, 0.0f);
+	D3DXVECTOR4 EiwiAmbient(0.7f, 190.0f / 255.0f, 190.0f / 255.0f, 0.0f);
 	rEiwi.SetAmbient(&EiwiAmbient);
 
 	D3DXVECTOR4 EiwiEmissive(0.8f, 170.0f / 255.0f, 160.0f / 255.0f, 0.0f);
