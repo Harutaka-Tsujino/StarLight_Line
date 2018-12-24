@@ -13,9 +13,12 @@ class PlayerHP :public Obj
 public:
 	PlayerHP() :Obj(OT_UI, 0.0f), m_rGameCollision(GameCollision::GetInstance())
 	{
+		m_rGameLib.AddSimultaneousSoundFile(_T("Sounds/Stage/HitWhiteStar.mp3"), _T("HitWhite"));
+		m_rGameLib.AddSimultaneousSoundFile(_T("Sounds/Stage/HitLethal.mp3"), _T("HitLethal"));
+
 		Init();
 	}
-
+	
 	~PlayerHP()
 	{
 		ReleaseVertex();

@@ -19,7 +19,17 @@ VOID PlayerHP::Update()
 	if (m_rGameCollision.HitSomething(_T("Player"), DAMAGE, PLAYER_RADIUS, ENEMY_RADIUS))
 	{
 		CreateVertex();
+
 		--m_HP;
+
+		if (m_HP <= 0)
+		{
+			m_rGameLib.OneShotSimultaneousSound(_T("HitLethal"));
+
+			return;
+		}
+
+		m_rGameLib.OneShotSimultaneousSound(_T("HitWhite"));
 	}
 }
 

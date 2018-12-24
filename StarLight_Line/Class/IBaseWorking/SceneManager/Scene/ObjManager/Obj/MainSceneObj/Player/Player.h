@@ -39,10 +39,17 @@ public:
 		Init();
 	}
 
-	~Player() 
+	~Player()
 	{
+		SceneManager& rSceneManager = SceneManager::GetInstance();
+
+		rSceneManager.SetTransitionMode(FALSE);
+
+		m_ResultData.JudgeGameFailure(7); //引数は適当
+		rSceneManager.SetResultData(m_ResultData.GetResultData());
+
 		m_rGameLib.GetFbx(_T("Eiwi")).Release();
-	};
+	}
 
 	VOID Init();
 	VOID Update();

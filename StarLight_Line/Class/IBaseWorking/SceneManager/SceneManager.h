@@ -105,14 +105,14 @@ private:
 	{
 		GameLib& rGameLib = GameLib::GetInstance();
 
-		rGameLib.Stop(m_pBGM_KEY[m_currentScene]);
+		rGameLib.StopSound(m_pBGM_KEY[m_currentScene]);
 	}
 
 	VOID TurnOnBGM()
 	{
 		GameLib& rGameLib = GameLib::GetInstance();
 
-		rGameLib.LoopStart(m_pBGM_KEY[m_nextScene]);
+		rGameLib.LoopStartSound(m_pBGM_KEY[m_nextScene]);
 	}
 
 	Scene* m_pScene = nullptr;

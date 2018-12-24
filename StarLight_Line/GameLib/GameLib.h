@@ -420,32 +420,42 @@ public:
 		return m_pCollision->CollidesCircles(pA, pB, aRadius, bRadius);
 	}
 
-	inline VOID AddFile(const TCHAR* pFilePath, const TCHAR* pKey)
+	inline VOID AddSoundFile(const TCHAR* pFilePath, const TCHAR* pKey)
 	{
 		m_pSound->AddFile(pFilePath, pKey);
 	}
+	
+	inline VOID AddSimultaneousSoundFile(const TCHAR* pFilePath, const TCHAR* pKey)
+	{
+		m_pSound->AddSimultaneousFile(pFilePath, pKey);
+	}
 
-	inline VOID LoopStart(const TCHAR* pKey)
+	inline VOID OneShotSimultaneousSound(const TCHAR* pKey)
+	{
+		m_pSound->OneShotSimultaneous(pKey);
+	}
+
+	inline VOID LoopStartSound(const TCHAR* pKey)
 	{
 		m_pSound->LoopStart(pKey);
 	}
 
-	inline VOID OneShotStart(const TCHAR* pKey)
+	inline VOID OneShotStartSound(const TCHAR* pKey)
 	{
 		m_pSound->OneShotStart(pKey);
 	}
 
-	inline VOID Pause(const TCHAR* pKey)
+	inline VOID PauseSound(const TCHAR* pKey)
 	{
 		m_pSound->Pause(pKey);
 	}
 
-	inline VOID Resume(const TCHAR* pKey)
+	inline VOID ResumeSound(const TCHAR* pKey)
 	{
 		m_pSound->Resume(pKey);
 	}
 
-	inline VOID Stop(const TCHAR* pKey)
+	inline VOID StopSound(const TCHAR* pKey)
 	{
 		m_pSound->Stop(pKey);
 	}

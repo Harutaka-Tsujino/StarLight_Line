@@ -136,5 +136,5 @@ VOID SceneManager::InitBGM()
 
 	GameLib& rGameLib = GameLib::GetInstance();
 
-	rGameLib.AddFile(pBGM_PATH[m_nextScene], m_pBGM_KEY[m_nextScene]);
+	rGameLib.AddSoundFile(pBGM_PATH[m_nextScene], m_pBGM_KEY[m_nextScene]);
 }
