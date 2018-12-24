@@ -1,5 +1,7 @@
 ﻿#include "PlayerHP.h"
 
+#include "../../../../../../SceneManager.h"
+
 VOID PlayerHP::Init()
 {
 	m_HP = 5;
@@ -24,6 +26,11 @@ VOID PlayerHP::Update()
 
 		if (m_HP <= 0)
 		{
+			SceneManager& rSceneManager = SceneManager::GetInstance();
+
+			rSceneManager.TurnOffBGM();
+
+			m_rGameLib.SetVolume(_T("HitLethal"), 100);
 			m_rGameLib.OneShotSimultaneousSound(_T("HitLethal"));
 
 			return;

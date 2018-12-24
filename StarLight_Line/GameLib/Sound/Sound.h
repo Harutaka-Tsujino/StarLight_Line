@@ -57,6 +57,12 @@ public:
 	inline VOID OneShotSimultaneous(const TCHAR* pKey)
 	{
 		INT currentNum = m_simultaneousKeys[pKey].m_currentPlayNum;
+	
+		INT prevPrevNum = currentNum - 2;
+
+		if (prevPrevNum < 0) prevPrevNum = SimultaneousKeys::m_SIMULTANEOUS_NUM_MAX + prevPrevNum;
+
+		Stop(&m_simultaneousKeys[pKey].m_pKeys[prevPrevNum][0]);
 
 		OneShotStart(&m_simultaneousKeys[pKey].m_pKeys[currentNum][0]);
 
@@ -86,6 +92,11 @@ public:
 	inline VOID Stop(const TCHAR* pKey)
 	{
 		m_soundsManager.Stop(pKey);
+	}
+
+	inline VOID SetVolume(const TCHAR* pKey, INT vol)
+	{
+		m_soundsManager.SetVolume(pKey, vol);
 	}
 
 private:

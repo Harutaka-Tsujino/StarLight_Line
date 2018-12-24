@@ -88,6 +88,20 @@ public:
 		m_SceneTransitionMode = Mode;
 	}
 
+	inline VOID TurnOffBGM()
+	{
+		GameLib& rGameLib = GameLib::GetInstance();
+
+		rGameLib.StopSound(m_pBGM_KEY[m_currentScene]);
+	}
+
+	inline VOID TurnOnBGM()
+	{
+		GameLib& rGameLib = GameLib::GetInstance();
+
+		rGameLib.LoopStartSound(m_pBGM_KEY[m_nextScene]);
+	}
+
 private:
 	SceneManager() 
 	{
@@ -100,20 +114,6 @@ private:
 	VOID StageTransition();
 
 	VOID InitBGM();
-
-	VOID TurnOffBGM()
-	{
-		GameLib& rGameLib = GameLib::GetInstance();
-
-		rGameLib.StopSound(m_pBGM_KEY[m_currentScene]);
-	}
-
-	VOID TurnOnBGM()
-	{
-		GameLib& rGameLib = GameLib::GetInstance();
-
-		rGameLib.LoopStartSound(m_pBGM_KEY[m_nextScene]);
-	}
 
 	Scene* m_pScene = nullptr;
 

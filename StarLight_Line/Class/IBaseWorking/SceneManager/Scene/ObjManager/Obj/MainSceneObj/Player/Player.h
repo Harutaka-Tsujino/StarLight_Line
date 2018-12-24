@@ -43,8 +43,6 @@ public:
 	{
 		SceneManager& rSceneManager = SceneManager::GetInstance();
 
-		rSceneManager.SetTransitionMode(FALSE);
-
 		m_ResultData.JudgeGameFailure(7); //引数は適当
 		rSceneManager.SetResultData(m_ResultData.GetResultData());
 

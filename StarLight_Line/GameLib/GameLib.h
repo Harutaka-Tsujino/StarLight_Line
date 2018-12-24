@@ -460,6 +460,11 @@ public:
 		m_pSound->Stop(pKey);
 	}
 
+	inline VOID SetVolume(const TCHAR* pKey, INT vol)
+	{
+		m_pSound->SetVolume(pKey, vol);
+	}
+
 private:
 	GameLib() {};
 
