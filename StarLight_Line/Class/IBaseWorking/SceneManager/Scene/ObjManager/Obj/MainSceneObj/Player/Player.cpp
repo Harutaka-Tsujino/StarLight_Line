@@ -29,6 +29,12 @@ VOID Player::Update()
 		rSceneManager.SetNextScene(SK_RESULT);
 	}
 
+	if (m_rGameLib.KeyboardIsPressed(DIK_LSHIFT))
+	{
+		rSceneManager.SetCanTransferSubScene(TRUE);
+		rSceneManager.SetNextScene(SK_PAUSE);
+	}
+
 	CoordinatePoint PlayerPointBuffer = m_PlayerPoint;
 	HIT_KEY HitKey;
 
