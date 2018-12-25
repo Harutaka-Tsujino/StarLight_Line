@@ -6,6 +6,7 @@
 #include "../Scene.h"
 #include "../ObjManager/Obj/Obj.h"
 #include "../ObjManager/Obj/StageSelectSceneObj/StageSelectSceneObj.h"
+#include "../ObjManager/Obj/TitleSceneObj/TitleSceneObj.h"
 
 class StageSelectScene :public Scene
 {
@@ -13,6 +14,7 @@ public:
 	StageSelectScene()
 	{
 		m_pObjManager->Resister(static_cast<Obj*>(new StageSelectBack()));
+		m_pObjManager->Resister(static_cast<Obj*>(new TitleSmallStarEffect()));
 		m_pObjManager->Resister(static_cast<Obj*>(new StageSelectSceneStages()));
 	}
 

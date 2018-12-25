@@ -243,7 +243,7 @@ private:
 class TitleSmallStarEffect :public Obj
 {
 public:
-	TitleSmallStarEffect() :Obj(OT_TRANSPARENCY, 0.991f)
+	TitleSmallStarEffect() :Obj(OT_BACK, 1.0f)
 	{
 		Init();
 	}

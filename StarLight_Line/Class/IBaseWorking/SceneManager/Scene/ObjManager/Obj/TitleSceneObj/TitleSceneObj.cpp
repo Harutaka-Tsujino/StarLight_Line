@@ -279,8 +279,8 @@ VOID TitleSmallStarEffect::InitEffect(EffectData* pEffectDatas) const
 		static_cast<FLOAT>(rand() % m_WND_SIZE.m_x),
 		static_cast<FLOAT>(rand() % m_WND_SIZE.m_y),
 		m_Z };
-	FLOAT halfScale = 0.5f;
-	if (rand() % 2) halfScale = 1.0f;															//! 1/2の確率で大きさが変わる
+	FLOAT halfScale = 1.0f;
+	if (rand() % 2) halfScale = 1.5f;															//! 1/2の確率で大きさが変わる
 	pEffectDatas->m_data.m_halfScale = { halfScale, halfScale, 0.0f };
 
 	const INT EFFECT_COLORS_MAX = 11;
