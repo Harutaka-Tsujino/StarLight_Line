@@ -158,6 +158,7 @@
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\SaveDataSceneObj\SaveDataSceneObj.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\StageSelectSceneObj\StageSelectSceneObj.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\TitleSceneObj\TitleSceneObj.cpp" />
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\PauseScene\PauseScene.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ResultScene\ResultScene.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\SaveDataScene\SaveDataScene.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\Scene.cpp" />
@@ -221,6 +222,7 @@
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\SaveDataSceneObj\SaveDataSceneObj.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\StageSelectSceneObj\StageSelectSceneObj.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\TitleSceneObj\TitleSceneObj.h" />
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\PauseScene\PauseScene.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ResultScene\ResultScene.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\SaveDataScene\SaveDataScene.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\Scene.h" />
