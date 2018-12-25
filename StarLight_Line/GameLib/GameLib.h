@@ -21,6 +21,13 @@
 #include "Collision\Collision.h"
 #include "3DBoard\3DBoard.h"
 
+template<typename T>
+VOID SafeRelease(T** ppType)
+{
+	delete (*ppType);
+	*ppType = nullptr;
+}
+
 /**
 * @brief 汎用クラスのFacade,ウィンドウ生成やDX関係の初期化も行う
 */
@@ -146,6 +153,11 @@ public:
 	inline VOID ReleaseTex()
 	{
 		m_pDX->ReleaseTex();
+	}
+
+	inline VOID EraseTex(const TCHAR* pTexKey)
+	{
+		m_pDX->EraseTex(pTexKey);
 	}
 
 	inline const LPDIRECT3DTEXTURE9 GetTex(const TCHAR* pTexKey)
@@ -324,6 +336,16 @@ public:
 	inline VOID ResetTime()
 	{
 		m_pTimer->Reset();
+	}
+
+	inline VOID StopTime()
+	{
+		m_pTimer->Stop();
+	}
+
+	inline VOID RestartTime()
+	{
+		m_pTimer->Restart();
 	}
 
 	inline LONGLONG GetSecond()

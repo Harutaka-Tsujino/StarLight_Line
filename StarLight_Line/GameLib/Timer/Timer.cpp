@@ -12,7 +12,17 @@ VOID Timer::End()
 
 VOID Timer::Reset()
 {
-	m_DiffTime = (DebugDiffTime)0;
+	m_DiffTime = m_DiffTime.zero();
+}
+
+VOID Timer::Stop()
+{
+	m_StartTimeBuff = std::chrono::system_clock::now();
+}
+
+VOID Timer::Restart()
+{
+	m_StartTime += (std::chrono::system_clock::now() - m_StartTimeBuff);
 }
 
 LONGLONG Timer::GetSecond()
