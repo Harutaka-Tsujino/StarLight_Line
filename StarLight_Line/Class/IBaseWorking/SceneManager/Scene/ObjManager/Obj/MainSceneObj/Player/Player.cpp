@@ -31,6 +31,7 @@ VOID Player::Update()
 
 	if (m_rGameLib.KeyboardIsPressed(DIK_LSHIFT))
 	{
+		m_rGameLib.StopTime();
 		rSceneManager.SetCanTransferSubScene(TRUE);
 		rSceneManager.SetNextScene(SK_PAUSE);
 	}

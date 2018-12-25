@@ -52,13 +52,15 @@ public:
 
 	inline VOID ReleaseEnemyPoint()
 	{
-		for (int i = 0;i != m_Enemy.size();++i)
+		if (!m_Enemy.size()) return;
+
+		for (auto i : m_Enemy)
 		{
-			delete m_Enemy[i];
-			m_Enemy[i] = nullptr;
+			delete i;
 		}
 
 		m_Enemy.clear();
+		m_Enemy.shrink_to_fit();
 	}
 
 	inline VOID ReleasePlayerPoint()
