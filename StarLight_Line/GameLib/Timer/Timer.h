@@ -19,9 +19,11 @@ public:
 	Timer() {};
 	~Timer() {};
 
-	VOID Start();					//タイマー開始
-	VOID End();						//タイムカウントを終了
-	VOID Reset();					//タイマーリセット
+	VOID Start();					
+	VOID End();						
+	VOID Reset();					
+	VOID Stop();					
+	VOID Restart();					//経過時間分スタート時間をたしていく
 	LONGLONG GetSecond();			//秒を取得
 	LONGLONG GetMilliSecond();		//ミリ秒取得
 	LONGLONG GetMicroSecond();		//マイクロ秒取得
@@ -32,6 +34,7 @@ private:
 		std::chrono::system_clock::period> DebugDiffTime;
 
 	std::chrono::system_clock::time_point	m_StartTime;	//!< 計測開始時間.
+	std::chrono::system_clock::time_point	m_StartTimeBuff;
 	DebugDiffTime m_DiffTime;								//!< 計測時間.
 };
 
