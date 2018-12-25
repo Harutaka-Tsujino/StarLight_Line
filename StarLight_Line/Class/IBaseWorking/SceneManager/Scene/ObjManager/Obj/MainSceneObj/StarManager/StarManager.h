@@ -39,6 +39,9 @@ private:
 
 	BOOL m_Init;			//敵座標のPosを登録するために使う
 
+	BOOL m_isFirstFrame = TRUE;
+	BOOL m_ResumesGame = TRUE;
+
 	LONGLONG m_End_ms = 0;	//総再生時間(ms)
 };
 

@@ -19,12 +19,12 @@ public:
 		delete m_pObjManager;
 	}
 
-	inline VOID Update()
+	virtual inline VOID Update()
 	{
 		m_pObjManager->Update();
 	}
 
-	inline VOID Render()
+	virtual inline VOID Render()
 	{
 		m_pObjManager->Render();
 	}

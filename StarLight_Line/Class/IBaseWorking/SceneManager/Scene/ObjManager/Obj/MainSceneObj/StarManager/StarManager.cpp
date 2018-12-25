@@ -4,6 +4,7 @@
 #include<sstream>
 #include<algorithm>
 
+#include "../../../../../SceneManager.h"
 #include "BaseSter/DamageStar/DamageStar.h"
 #include "BaseSter/ScoreStar/ScoreStar.h"
 #include "BaseSter/ClearStar/ClearStar.h"
@@ -15,6 +16,8 @@ VOID StarManager::Init()
 	m_rGameLib.SetStartTime();
 
 	m_Init = TRUE;
+	m_isFirstFrame = TRUE;
+	m_ResumesGame = TRUE;
 
 	for (BaseStar* pI : m_StarNotes)
 	{
@@ -24,18 +27,36 @@ VOID StarManager::Init()
 
 VOID StarManager::Update()
 {
-	if (m_End_ms <= m_rGameLib.GetMilliSecond())
+	SceneManager& rSceneManager = SceneManager::GetInstance();
+	
+	if (rSceneManager.LatterTransitionStagingIsEnded())
 	{
-		SceneManager& rSceneManager = SceneManager::GetInstance();
-		rSceneManager.SetNextScene(SK_RESULT);
+		if (!m_ResumesGame)
+		{
+			m_rGameLib.RestartTime();
+
+			m_ResumesGame = TRUE;
+		}
+
+		if (m_End_ms <= m_rGameLib.GetMilliSecond())
+		{
+			SceneManager& rSceneManager = SceneManager::GetInstance();
+			rSceneManager.SetNextScene(SK_RESULT);
+
+			return;
+		}
+
+		for (BaseStar* pI : m_StarNotes)
+		{
+			pI->Update();
+		}
+
+		m_isFirstFrame = FALSE;
 
 		return;
 	}
 
-	for (BaseStar* pI : m_StarNotes)
-	{
-		pI->Update();
-	}
+	if(!m_isFirstFrame) m_ResumesGame = FALSE;
 }
 
 VOID StarManager::Render()

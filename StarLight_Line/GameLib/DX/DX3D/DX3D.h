@@ -149,6 +149,11 @@ public:
 		m_pTexStorage->ReleaseTex();
 	}
 
+	inline VOID EraseTex(const TCHAR* pTexKey)
+	{
+		m_pTexStorage->EraseTex(pTexKey);
+	}
+
 	inline const LPDIRECT3DTEXTURE9 GetTex(const TCHAR* pTexKey)
 	{
 		return m_pTexStorage->GetTex(pTexKey);

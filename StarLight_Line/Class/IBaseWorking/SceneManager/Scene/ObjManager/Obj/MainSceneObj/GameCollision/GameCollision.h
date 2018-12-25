@@ -72,6 +72,7 @@ public:
 		}
 
 		m_Enemy.clear();
+		m_Enemy.shrink_to_fit();
 	}
 
 	inline VOID ReleasePlayerPoint()

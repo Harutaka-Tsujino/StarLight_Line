@@ -10,6 +10,7 @@
 #include "Scene\MainScene\MainScene.h"
 #include "Scene\ResultScene\ResultScene.h"
 #include "Scene\EndScene\EndScene.h"
+#include "Scene\PauseScene\PauseScene.h"
 
 VOID SceneManager::Factory()
 {
@@ -20,6 +21,7 @@ VOID SceneManager::Factory()
 	TurnOnBGM();
 
 	m_currentScene = m_nextScene;
+	SafeRelease(&m_pSubScene);
 
 	switch (m_nextScene)
 	{
@@ -31,9 +33,18 @@ VOID SceneManager::Factory()
 		break;
 
 	case SK_GAME:
-		delete m_pScene;
+		if (!m_CanTransferSubScene)
+		{
+			delete m_pScene;
+		
+			m_pScene = new MainScene();
+			return;
+		}
 
-		m_pScene = new MainScene();
+		break;
+
+	case SK_PAUSE:
+		m_pSubScene = new PauseScene();
 
 		break;
 
@@ -52,7 +63,6 @@ VOID SceneManager::Factory()
 		break;
 
 	case SK_RESULT:
-
 		delete m_pScene;
 
 		m_pScene = new ResultScene();

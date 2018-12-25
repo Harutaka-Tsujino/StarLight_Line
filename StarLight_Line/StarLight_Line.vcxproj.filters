@@ -218,6 +218,9 @@
     <Filter Include="GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxModel\FbxModel">
       <UniqueIdentifier>{d20a9105-0bbf-4a1c-b6ca-b45545d5618a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\PauseScene">
+      <UniqueIdentifier>{32f32bce-01d8-4e36-ae8c-449a3396c6d5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Class\Singleton\Singleton.cpp">
@@ -302,7 +305,7 @@
       <Filter>GameLib\DX\DX3D\FbxStorage\FbxRelated</Filter>
     </ClCompile>
     <ClCompile Include="GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxModel\FbxModel.cpp">
-      <Filter>GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxModel\FbxModel</Filter>
+        <Filter>GameLib\DX\DX3D\TexStorage\FbxModel</Filter>
     </ClCompile>
     <ClCompile Include="GameLib\DX\DX3D\FbxStorage\FbxStorage.cpp">
       <Filter>GameLib\DX\DX3D\FbxStorage</Filter>
@@ -396,6 +399,9 @@
     </ClCompile>
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerResultData\PlayerResultData.cpp">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerResultData</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\PauseScene\PauseScene.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\PauseScene</Filter>
     </ClCompile>
     <ClCompile Include="GameLib\Sound\Sound.cpp">
       <Filter>GameLib\Sound</Filter>
@@ -614,6 +620,9 @@
     </ClInclude>
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerResultData\PlayerResultData.h">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerResultData</Filter>
+      </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\PauseScene\PauseScene.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\PauseScene</Filter>
     </ClInclude>
     <ClInclude Include="GameLib\Sound\Sound.h">
       <Filter>GameLib\Sound</Filter>

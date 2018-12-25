@@ -10,6 +10,7 @@
 #include "Scene\Scene.h"
 #include "Scene\Enum\SCENE_KIND.h"
 #include "Scene\TitleScene\TitleScene.h"
+
 #include "../../../GameLib/GameLib.h"
 #include "../../../GameLib/DX/DX3D/CustomVertexEditor/Data/ObjData.h"
 #include "../../../GameLib/DX/DX3D/CustomVertexEditor/Data/CustomVertex.h"
@@ -32,11 +33,26 @@ public:
 	{
 		if (m_isRequestedChangeResent) return;
 
+		if (m_pSubScene != nullptr)
+		{
+			m_pSubScene->Update();
+
+			return;
+		}
+
 		m_pScene->Update();
 	}
 
 	inline VOID Render()
 	{
+		if (m_pSubScene != nullptr)
+		{
+			m_pSubScene->Render();
+			StageTransition();
+
+			return;
+		}
+
 		m_pScene->Render();
 
 		StageTransition();
@@ -88,6 +104,11 @@ public:
 		m_SceneTransitionMode = Mode;
 	}
 
+	inline VOID SetCanTransferSubScene(const BOOL& CanTransferSubScene)
+	{
+		m_CanTransferSubScene = CanTransferSubScene;
+	}
+
 	inline VOID TurnOffBGM()
 	{
 		GameLib& rGameLib = GameLib::GetInstance();
@@ -116,6 +137,7 @@ private:
 	VOID InitBGM();
 
 	Scene* m_pScene = nullptr;
+	Scene* m_pSubScene = nullptr;
 
 	SCENE_KIND m_currentScene	= SK_TITLE;
 	SCENE_KIND m_nextScene		= SK_TITLE;
@@ -131,6 +153,7 @@ private:
 	};
 
 	BOOL m_isRequestedChangeResent = FALSE;
+	BOOL m_CanTransferSubScene = FALSE;
 	BOOL m_SceneTransitionMode = TRUE;
 
 	INT m_transitionStagingAlpha = 0;
