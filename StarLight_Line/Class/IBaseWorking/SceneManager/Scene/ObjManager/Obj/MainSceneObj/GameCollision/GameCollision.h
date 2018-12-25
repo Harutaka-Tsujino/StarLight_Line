@@ -109,7 +109,7 @@ public:
 
 		FLOAT playerRadius = 38.f - 30.0f * (1.0f - (PlayerScreenPos.y / WND_Y_SIZE));
 
-		ObjData obj;
+		/*ObjData obj;
 		obj.m_center = PlayerScreenPos;
 
 		const FLOAT halfScale = 20.0f;
@@ -119,7 +119,7 @@ public:
 
 		m_rGameLib.CreateRect(vertex, obj);
 
-		m_rGameLib.Render(vertex);
+		m_rGameLib.Render(vertex);*/
 
 		//PlayerScreenPos.x += 10.0f;
 
