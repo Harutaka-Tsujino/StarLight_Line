@@ -6,6 +6,7 @@
 #include "../ObjManager/Obj/MainSceneObj/MainSceneObject.h"
 #include "../ObjManager/Obj/MainSceneObj/StarManager/StarManager.h"
 #include "../ObjManager/Obj/MainSceneObj/Player/Player.h"
+#include "../ObjManager/Obj/TitleSceneObj/TitleSceneObj.h"
 
 class MainScene :public Scene
 {
@@ -13,6 +14,7 @@ public:
 	MainScene()
 	{
 		m_pObjManager->Resister(static_cast<Obj*>(new MainBack()));
+		m_pObjManager->Resister(static_cast<Obj*>(new TitleSmallStarEffect()));
 		m_pObjManager->Resister(static_cast<Obj*>(new MainLine()));
 		m_pObjManager->Resister(static_cast<Obj*>(new Player()));
 		m_pObjManager->Resister(static_cast<Obj*>(new PlayerLifeFrame()));

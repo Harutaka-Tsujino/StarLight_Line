@@ -78,7 +78,7 @@ public:
 		return m_pSections[m_currentSectionDetail]->Ends();
 	}
 
-	inline BOOL AllSctionEnds() const
+	inline BOOL AllSectionEnds() const
 	{
 		return m_pSections[SD_LAST]->Ends();
 	}
