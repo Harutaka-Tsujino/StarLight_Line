@@ -133,6 +133,11 @@ public:
 		m_pDX3D->ReleaseTex();
 	}
 
+	inline VOID EraseTex(const TCHAR* pTexKey)
+	{
+		m_pDX3D->EraseTex(pTexKey);
+	}
+
 	inline const LPDIRECT3DTEXTURE9 GetTex(const TCHAR* pTexKey)
 	{
 		return m_pDX3D->GetTex(pTexKey);

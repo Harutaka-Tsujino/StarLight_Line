@@ -44,6 +44,15 @@ public:
 	*/
 	inline VOID ReleaseTex()
 	{
+		if (!m_pTexMap.size()) return;
+
+		for (auto i : m_pTexMap)
+		{
+			if (!i.second) continue;
+
+			(i.second)->Release();
+		}
+
 		m_pTexMap.clear();
 	}
 
@@ -55,6 +64,11 @@ public:
 	inline const LPDIRECT3DTEXTURE9 GetTex(const TCHAR* pTexKey)
 	{
 		return m_pTexMap[pTexKey];
+	}
+
+	inline VOID EraseTex(const TCHAR* pTexKey)
+	{
+		m_pTexMap.erase(pTexKey);
 	}
 
 	/**
