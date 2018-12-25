@@ -11,13 +11,11 @@ class PauseScene :public Scene
 public:
 	PauseScene() :m_rGameLib(GameLib::GetInstance()), m_WND_SIZE(m_rGameLib.GetWndSize())
 	{
-		m_rGameLib.StopTime();
 		Init();
 	}
 
 	~PauseScene() 
 	{
-		m_rGameLib.RestartTime();
 		m_rGameLib.EraseTex(_T("PauseBack"));
 		m_rGameLib.EraseTex(_T("PauseFrame"));
 	}

@@ -4,6 +4,7 @@
 #include<sstream>
 #include<algorithm>
 
+#include "../../../../../SceneManager.h"
 #include "BaseSter/DamageStar/DamageStar.h"
 #include "BaseSter/ScoreStar/ScoreStar.h"
 #include "BaseSter/ClearStar/ClearStar.h"
@@ -13,6 +14,8 @@ VOID StarManager::Init()
 	m_rGameLib.SetStartTime();
 
 	m_Init = TRUE;
+	m_isFirstFrame = TRUE;
+	m_ResumesGame = TRUE;
 
 	for (BaseStar* pI : m_StarNotes)
 	{
@@ -22,10 +25,28 @@ VOID StarManager::Init()
 
 VOID StarManager::Update()
 {
-	for (BaseStar* pI : m_StarNotes)
+	SceneManager& rSceneManager = SceneManager::GetInstance();
+	
+	if (rSceneManager.LatterTransitionStagingIsEnded())
 	{
-		pI->Update();
+		if (!m_ResumesGame)
+		{
+			m_rGameLib.RestartTime();
+
+			m_ResumesGame = TRUE;
+		}
+
+		for (BaseStar* pI : m_StarNotes)
+		{
+			pI->Update();
+		}
+
+		m_isFirstFrame = FALSE;
+
+		return;
 	}
+
+	if(!m_isFirstFrame) m_ResumesGame = FALSE;
 }
 
 VOID StarManager::Render()
@@ -152,6 +173,7 @@ StarManager::~StarManager()
 	}
 	m_StarNotes.clear();
 
+	m_rGameCollision.ReleaseEnemyPoint();
 	m_rGameLib.ReleaseTex();
 }
 
