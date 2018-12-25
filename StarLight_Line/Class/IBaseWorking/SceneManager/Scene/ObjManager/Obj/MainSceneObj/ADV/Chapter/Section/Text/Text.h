@@ -47,7 +47,7 @@ public:
 	virtual VOID Write(const TextFormat& textFormat);
 
 protected:
-	Text & operator=(const Text&) = delete;
+	Text& operator=(const Text&) = delete;
 	Text(const Text&) = delete;
 
 	inline VOID DivideTextByNewLine()

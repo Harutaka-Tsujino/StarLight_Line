@@ -48,7 +48,7 @@ public:
 	}
 
 private:
-	ADV & operator=(const ADV&) = delete;
+	ADV& operator=(const ADV&) = delete;
 	ADV(const ADV&) = delete;
 
 	Chapter* m_pChapter = nullptr;
