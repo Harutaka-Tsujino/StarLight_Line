@@ -10,7 +10,7 @@
 
 struct StarPlace
 {
-	D3DXVECTOR3	m_Pos = { 0.0f,-100.0f,0.0f };			//x,y,z座標
+	D3DXVECTOR3	m_Pos = { 0.0f, -600.0f, 0.0f };		//x,y,z座標
 	STAR_TYPE m_Type;									//スターの種類
 	int m_Measure;										//節数
 	float m_Beat;										//拍数
@@ -21,7 +21,7 @@ struct StarPlace
 	float m_XMovementDeg;								//x座標の移動量
 	float m_screenXBasePos;								//xの動く前のスクリーン座標
 
-	D3DXVECTOR3 m_CollisionPos = { 0.0f,0.0f,0.0f };	//当たり判定用の座標
+	D3DXVECTOR3 m_CollisionPos = { 0.0f, -0.0f, 0.0f };	//当たり判定用の座標
 };
 
 /*
@@ -30,7 +30,10 @@ struct StarPlace
 class BaseStar :public Obj
 {
 public:
-	BaseStar() :Obj(OT_TRANSPARENCY, 0.5f) {};
+	BaseStar() :Obj(OT_TRANSPARENCY, 0.5f) 
+	{
+		D3DXMatrixIdentity(&m_MatWorld);
+	}
 
 	virtual ~BaseStar() {};
 
@@ -42,7 +45,7 @@ public:
 
 	VOID SetType(const STAR_TYPE& Type) { m_Info.m_Type = Type; }
 	STAR_TYPE& GetType() { return m_Info.m_Type; }
-	D3DXVECTOR3* GetCollisionPos() { return &m_Info.m_Pos; }
+	D3DXVECTOR3* GetCollisionPos() { return &m_Info.m_CollisionPos; }
 	
 protected:
 	VOID TransScreenPosByTime(const LONGLONG& CurrentTime);		//y座標を移動させる関数
