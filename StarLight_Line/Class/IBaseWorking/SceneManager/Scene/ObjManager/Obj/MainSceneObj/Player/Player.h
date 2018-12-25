@@ -39,10 +39,15 @@ public:
 		Init();
 	}
 
-	~Player() 
+	~Player()
 	{
+		SceneManager& rSceneManager = SceneManager::GetInstance();
+
+		m_ResultData.JudgeGameFailure(7); //引数は適当
+		rSceneManager.SetResultData(m_ResultData.GetResultData());
+
 		m_rGameLib.GetFbx(_T("Eiwi")).Release();
-	};
+	}
 
 	VOID Init();
 	VOID Update();
@@ -75,8 +80,26 @@ private:
 	static const int m_MAXXARRAYNUM = 4;
 	static const int m_MAXYARRAYNUM = 3;
 
-	const FLOAT PLAYER_MOVE_X[m_MAXXARRAYNUM] = { -0.135f ,-0.043f ,0.043f ,0.135f };
-	const FLOAT PLAYER_MOVE_Y[m_MAXYARRAYNUM] = { 0.05f ,0.f ,-0.053f };
+	const FLOAT MOVE_X_LENGTH = 1.21f;
+	const FLOAT MOVE_X_MIDDLE_MULTI = 0.33f;
+
+	const FLOAT PLAYER_MOVE_X[m_MAXXARRAYNUM] =
+	{ 
+		-MOVE_X_LENGTH ,
+		-MOVE_X_LENGTH * MOVE_X_MIDDLE_MULTI ,
+		 MOVE_X_LENGTH * MOVE_X_MIDDLE_MULTI ,
+		 MOVE_X_LENGTH 
+	};
+
+	const FLOAT MOVE_Y_LENGTH = 0.7f;
+	const FLOAT MOVE_Y_BASE_POS = -0.88f;
+
+	const FLOAT PLAYER_MOVE_Y[m_MAXYARRAYNUM] =
+	{
+		MOVE_Y_BASE_POS + MOVE_Y_LENGTH ,
+		MOVE_Y_BASE_POS ,
+		MOVE_Y_BASE_POS - MOVE_Y_LENGTH + 0.05f
+	};
 
 	const SurfaceCoordinate m_BasePos[m_MAXYARRAYNUM][m_MAXXARRAYNUM] =
 	{
@@ -84,8 +107,6 @@ private:
 		{ { PLAYER_MOVE_Y[1],PLAYER_MOVE_X[0] },{ PLAYER_MOVE_Y[1],PLAYER_MOVE_X[1] },{ PLAYER_MOVE_Y[1],PLAYER_MOVE_X[2] },{ PLAYER_MOVE_Y[1],PLAYER_MOVE_X[3] }},
 		{ { PLAYER_MOVE_Y[2],PLAYER_MOVE_X[0] },{ PLAYER_MOVE_Y[2],PLAYER_MOVE_X[1] },{ PLAYER_MOVE_Y[2],PLAYER_MOVE_X[2] },{ PLAYER_MOVE_Y[2],PLAYER_MOVE_X[3] }}
 	};
-
-	const FLOAT m_CAN_MOVE_Z[3] = { 0.15f,0.2f,0.25f };
 
 	CoordinatePoint m_PlayerPoint;
 	D3DXVECTOR3 m_PlayerPos;

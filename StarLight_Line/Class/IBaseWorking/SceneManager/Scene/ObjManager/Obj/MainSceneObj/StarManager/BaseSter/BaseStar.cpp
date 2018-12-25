@@ -27,6 +27,8 @@ VOID BaseStar::TransScreenPosByTime(const LONGLONG& CurrentTime)
 	m_Info.m_Pos.y = m_WND_SIZE.m_y * (gap_ms / oneNoteTakes_ms);
 
 	m_Info.m_Pos.x = m_Info.m_Pos.y * tan(D3DXToRadian(-m_Info.m_XMovementDeg)) + m_Info.m_screenXBasePos;
+
+	m_Info.m_Pos.y -= 100.0f;
 }
 
 VOID BaseStar::SetStarInfo(const struct StarPlace& StarPlace)
@@ -62,36 +64,56 @@ VOID BaseStar::DefaultLight()
 
 VOID BaseStar::ConvertLocalToWorld(D3DXMATRIX* pMatWorld)
 {
-	if (m_Info.m_Pos.y < -m_STAR_HALF_SCALE || m_Info.m_Pos.y > m_WND_SIZE.m_y + m_STAR_HALF_SCALE) return;
+	if (m_Info.m_CollisionPos.y < - 2 * m_STAR_HALF_SCALE || m_Info.m_CollisionPos.y > m_WND_SIZE.m_y +  2 * m_STAR_HALF_SCALE) return;
 
 	D3DXMATRIX MatTrans, MatScale, MatRotate;
 	D3DXMatrixIdentity(pMatWorld);
 	D3DXMatrixIdentity(&MatTrans);
 	D3DXMatrixIdentity(&MatScale);
 
-	const float MODELSCALE = 0.003f;
+	const float MODELSCALE = 0.6f;
 
 	// 拡大
-	D3DXMatrixScaling(&MatScale, MODELSCALE, MODELSCALE, MODELSCALE);
+	D3DXMatrixScaling(&MatScale, MODELSCALE, MODELSCALE, 0.01f);
 	D3DXMatrixMultiply(pMatWorld, pMatWorld, &MatScale);
 
 	// 演出用の回転
 	D3DXMatrixRotationZ(&MatRotate, D3DXToRadian(m_DegZ));
 	D3DXMatrixMultiply(pMatWorld, pMatWorld, &MatRotate);
 
-	++m_DegZ;
+	//++m_DegZ;
 
-	m_Info.m_Pos.z = 0.9f;
+	m_Info.m_Pos.z = 0.999f;
 
 	D3DXVECTOR3 ScreenBuff = m_Info.m_Pos;
-	m_Info.m_CollisionPos = ScreenBuff;
+	
+	D3DXVECTOR3 cameraPos;
+	m_rGameLib.GetCameraPos(&cameraPos);
+
+	m_rGameLib.SetCameraPos(0.0f, 0.0f, 0.0f);
+	m_rGameLib.SetCameraTransform();
 
 	D3DXVECTOR3 WorldBuff;
 	WorldBuff = m_rGameLib.TransWorld(ScreenBuff);
+
+	const FLOAT START_Y = 30.0f;
+
+	const FLOAT MOVE_X_MULTI = 1.65f;
+	const FLOAT MOVE_Y_MULTI = MOVE_X_MULTI;
+
+	WorldBuff =
+	{
+		WorldBuff.x * MOVE_X_MULTI,
+		WorldBuff.y * MOVE_Y_MULTI + START_Y,
+		WorldBuff.z
+	};
 
 	// 移動
 	D3DXMatrixTranslation(&MatTrans, WorldBuff.x, WorldBuff.y, WorldBuff.z);
 	D3DXMatrixMultiply(pMatWorld, pMatWorld, &MatTrans);
 
+	m_rGameLib.SetCameraPos(cameraPos);
 	m_rGameLib.SetCameraTransform();
+
+	m_Info.m_CollisionPos = m_rGameLib.TransScreen(WorldBuff);
 }

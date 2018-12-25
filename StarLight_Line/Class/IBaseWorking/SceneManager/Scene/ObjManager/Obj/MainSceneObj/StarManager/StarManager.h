@@ -18,6 +18,7 @@ public:
 	{
 		LoadStarData("StageData/Stage.csv");
 		m_rGameLib.CreateFbx(_T("StarFBX"), "3DModels/EnemyStar/EnemyStar.fbx");
+
 		Init();
 	}
 

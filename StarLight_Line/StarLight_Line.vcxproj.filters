@@ -206,11 +206,17 @@
     <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\Data">
       <UniqueIdentifier>{c206eda6-e6cc-49df-81c7-98a8a56e8da6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameLib\DX\DX3D\TexStorage\FbxModel">
-      <UniqueIdentifier>{d20a9105-0bbf-4a1c-b6ca-b45545d5618a}</UniqueIdentifier>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\TString">
+      <UniqueIdentifier>{073147c6-9221-4b92-a3c2-e5926f64c30e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerResultData">
       <UniqueIdentifier>{6ea572d9-5427-4b6e-b9f0-dc89c4d97df5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLib\Sound">
+      <UniqueIdentifier>{cb067fd4-1096-467d-9cbd-74a0ef2694e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxModel\FbxModel">
+      <UniqueIdentifier>{d20a9105-0bbf-4a1c-b6ca-b45545d5618a}</UniqueIdentifier>
     </Filter>
     <Filter Include="Class\IBaseWorking\SceneManager\Scene\PauseScene">
       <UniqueIdentifier>{32f32bce-01d8-4e36-ae8c-449a3396c6d5}</UniqueIdentifier>
@@ -299,7 +305,7 @@
       <Filter>GameLib\DX\DX3D\FbxStorage\FbxRelated</Filter>
     </ClCompile>
     <ClCompile Include="GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxModel\FbxModel.cpp">
-      <Filter>GameLib\DX\DX3D\TexStorage\FbxModel</Filter>
+        <Filter>GameLib\DX\DX3D\TexStorage\FbxModel</Filter>
     </ClCompile>
     <ClCompile Include="GameLib\DX\DX3D\FbxStorage\FbxStorage.cpp">
       <Filter>GameLib\DX\DX3D\FbxStorage</Filter>
@@ -388,11 +394,17 @@
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Section.cpp">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section</Filter>
     </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\Tstring\TString.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\TString</Filter>
+    </ClCompile>
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerResultData\PlayerResultData.cpp">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerResultData</Filter>
     </ClCompile>
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\PauseScene\PauseScene.cpp">
       <Filter>Class\IBaseWorking\SceneManager\Scene\PauseScene</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLib\Sound\Sound.cpp">
+      <Filter>GameLib\Sound</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -496,7 +508,7 @@
       <Filter>GameLib\DX\DX3D\FbxStorage\FbxRelated</Filter>
     </ClInclude>
     <ClInclude Include="GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxModel\FbxModel.h">
-      <Filter>GameLib\DX\DX3D\TexStorage\FbxModel</Filter>
+      <Filter>GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxModel\FbxModel</Filter>
     </ClInclude>
     <ClInclude Include="GameLib\DX\DX3D\FbxStorage\FbxStorage.h">
       <Filter>GameLib\DX\DX3D\FbxStorage</Filter>
@@ -603,11 +615,17 @@
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\Data\TextFormat.h">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\Data</Filter>
     </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\Tstring\TString.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\TString</Filter>
+    </ClInclude>
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerResultData\PlayerResultData.h">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerResultData</Filter>
-    </ClInclude>
+      </ClInclude>
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\PauseScene\PauseScene.h">
       <Filter>Class\IBaseWorking\SceneManager\Scene\PauseScene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLib\Sound\Sound.h">
+      <Filter>GameLib\Sound</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

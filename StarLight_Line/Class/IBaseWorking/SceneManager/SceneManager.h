@@ -24,6 +24,8 @@ public:
 
 	~SceneManager()
 	{
+		TurnOffBGM();
+
 		delete m_pScene;
 	}
 
@@ -107,20 +109,49 @@ public:
 		m_CanTransferSubScene = CanTransferSubScene;
 	}
 
+	inline VOID TurnOffBGM()
+	{
+		GameLib& rGameLib = GameLib::GetInstance();
+
+		rGameLib.StopSound(m_pBGM_KEY[m_currentScene]);
+	}
+
+	inline VOID TurnOnBGM()
+	{
+		GameLib& rGameLib = GameLib::GetInstance();
+
+		rGameLib.LoopStartSound(m_pBGM_KEY[m_nextScene]);
+	}
+
 private:
 	SceneManager() 
 	{
+		InitBGM();
+		TurnOnBGM();
+
 		m_pScene = new TitleScene();
 	}
 
 	VOID StageTransition();
+
+	VOID InitBGM();
 
 	Scene* m_pScene = nullptr;
 	Scene* m_pSubScene = nullptr;
 
 	SCENE_KIND m_currentScene	= SK_TITLE;
 	SCENE_KIND m_nextScene		= SK_TITLE;
-	
+
+	const TCHAR* m_pBGM_KEY[SK_MAX] =
+	{
+		_T("TITLE_BGM")			,
+		_T("STAGESELECT_BGM")	,
+		_T("GAME_BGM")			,
+		_T("SAVE_DATA_BGM")		,
+		_T("RESULT_BGM")		,
+		_T("END_BGM")			,
+	};
+
 	BOOL m_isRequestedChangeResent = FALSE;
 	BOOL m_CanTransferSubScene = FALSE;
 	BOOL m_SceneTransitionMode = TRUE;

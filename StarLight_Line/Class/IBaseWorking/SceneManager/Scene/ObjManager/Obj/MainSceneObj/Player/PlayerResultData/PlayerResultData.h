@@ -13,6 +13,16 @@ class PlayerResultData :public Obj
 public:
 	PlayerResultData() :Obj(OT_UI, 0.0f), m_rGameCollision(GameCollision::GetInstance())
 	{
+		static BOOL inits = FALSE;
+
+		if (!inits)
+		{
+			m_rGameLib.AddSimultaneousSoundFile(_T("Sounds/Stage/HitBlueStar.mp3"), _T("HitBlue"));
+			m_rGameLib.AddSimultaneousSoundFile(_T("Sounds/Stage/HitGreenStar.mp3"), _T("HitGreen"));
+
+			inits = TRUE;
+		}
+
 		Init();
 	}
 
@@ -39,6 +49,13 @@ public:
 	}
 
 	inline ResultData GetResultData() { return m_Data; }
+
+	inline VOID JudgeGameFailure(INT necessaryNum)
+	{
+		m_Data.m_isFailed = !(m_Data.m_clearStarsNum >= necessaryNum);
+
+		return;
+	}
 
 private:
 	//スコアの桁が繰り上がったら

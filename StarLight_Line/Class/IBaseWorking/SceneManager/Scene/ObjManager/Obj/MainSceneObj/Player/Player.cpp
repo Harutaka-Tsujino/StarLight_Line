@@ -6,7 +6,7 @@ VOID Player::Init()
 	m_PlayerPoint.x = m_MAXXARRAYNUM / 2;
 	m_PlayerPoint.y = m_MAXYARRAYNUM / 2;
 	m_PlayerPoint.z = 1;
-	m_PlayerPos.z = m_CAN_MOVE_Z[1];
+	m_PlayerPos.z = 0.2f;
 	m_Speed.x = m_Speed.y = m_Speed.z = 0.0f;
 	m_PlayerPos.x = m_BasePos[m_PlayerPoint.y][m_PlayerPoint.x].x;	//真ん中に自機を置く
 	m_PlayerPos.y = m_BasePos[m_PlayerPoint.y][m_PlayerPoint.x].y;
@@ -24,7 +24,8 @@ VOID Player::Update()
 	if (m_Hp.GetHP() <= 0)
 	{
 		rSceneManager.SetTransitionMode(FALSE);
-		m_ResultData.SetResultData(TRUE);
+
+		m_ResultData.JudgeGameFailure(7); //引数は適当
 		rSceneManager.SetResultData(m_ResultData.GetResultData());
 		rSceneManager.SetNextScene(SK_RESULT);
 	}
@@ -42,8 +43,6 @@ VOID Player::Update()
 	int* pPoX = &m_PlayerPoint.x;
 	int* pPoY = &m_PlayerPoint.y;
 
-	m_ResultData.Update();
-	m_Hp.Update();
 
 	//キー入力によってプレイヤーの動きを決める
 	//y座標の移動
@@ -71,16 +70,21 @@ VOID Player::Update()
 	{
 		HitKey = RIGHT;
 	}
-	
+
 	DecideSpeed(&PlayerPointBuffer, HitKey);
 	RestrictedMoving();
 
 	//難易度で設定するスコアを変える
 	ObtainScoreToExist(m_StageData.m_level);
+
+	m_ResultData.Update();
+	m_Hp.Update();
 }
 
 VOID Player::Render()
 {
+	m_rGameLib.SetCameraPos(0.0f, -2.15f, -1.0f);
+
 	m_rGameLib.SetCameraTransform();
 	
 	m_ResultData.Render();
@@ -91,7 +95,7 @@ VOID Player::Render()
 	D3DXMatrixIdentity(&MatTrans);
 	D3DXMatrixIdentity(&MatScale);
 
-	const float MODELSCALE = 0.007f;
+	const float MODELSCALE = 0.05f;
 
 	FbxRelated& rEiwi = m_rGameLib.GetFbx(_T("Eiwi"));
 
@@ -114,7 +118,7 @@ VOID Player::Render()
 
 	D3DXMatrixMultiply(&m_World, &m_World, &MatTrans);
 
-	D3DXVECTOR4 EiwiAmbient(0.6f, 190.0f / 255.0f, 190.0f / 255.0f, 0.0f);
+	D3DXVECTOR4 EiwiAmbient(0.7f, 190.0f / 255.0f, 190.0f / 255.0f, 0.0f);
 	rEiwi.SetAmbient(&EiwiAmbient);
 
 	D3DXVECTOR4 EiwiEmissive(0.8f, 170.0f / 255.0f, 160.0f / 255.0f, 0.0f);
@@ -138,17 +142,20 @@ VOID Player::RestrictedMoving()
 
 	NextPos.y = m_BasePos[*pPoY][*pPoX].y;
 	NextPos.x = m_BasePos[*pPoY][*pPoX].x;
-	FLOAT NextPosZ = m_CAN_MOVE_Z[m_PlayerPoint.z];
 
 	//動かす
 	m_PlayerPos.x += m_Speed.x;
 	m_PlayerPos.y += m_Speed.y;
-	m_PlayerPos.z += m_Speed.z;
 
 	//制限をかける
 	m_PlayerPos.x = (m_Speed.x > 0) ? min(NextPos.x, m_PlayerPos.x) : max(NextPos.x, m_PlayerPos.x);
 	m_PlayerPos.y = (m_Speed.y > 0) ? min(NextPos.y, m_PlayerPos.y) : max(NextPos.y, m_PlayerPos.y);
-	m_PlayerPos.z = (m_Speed.z > 0) ? min(NextPosZ, m_PlayerPos.z) : max(NextPosZ, m_PlayerPos.z);
+
+	if (NextPos.y == m_PlayerPos.y && NextPos.x == m_PlayerPos.x)
+	{
+		m_Speed.x = 0.0f;
+		m_Speed.y = 0.0f;
+	}
 }
 
 VOID Player::DecideSpeed(CoordinatePoint* PrevPoint, const HIT_KEY& HitKey)
@@ -158,20 +165,28 @@ VOID Player::DecideSpeed(CoordinatePoint* PrevPoint, const HIT_KEY& HitKey)
 	switch (HitKey)
 	{
 	case UP:
+		if (m_Speed.x) break;
+
 		--m_PlayerPoint.y;
-		++m_PlayerPoint.z;
+
 		break;
 
 	case DOWN:
+		if (m_Speed.x) break;
+
 		++m_PlayerPoint.y;
-		--m_PlayerPoint.z;
+
 		break;
 
 	case LEFT:
+		if (m_Speed.y) break;
+
 		--m_PlayerPoint.x;
 		break;
 
 	case RIGHT:
+		if (m_Speed.y) break;
+
 		++m_PlayerPoint.x;
 		break;
 	}
@@ -181,16 +196,16 @@ VOID Player::DecideSpeed(CoordinatePoint* PrevPoint, const HIT_KEY& HitKey)
 	if (HitKey == UP || HitKey == DOWN)
 	{
 		m_Speed.y = (m_BasePos[m_PlayerPoint.y][m_PlayerPoint.x].y - m_PlayerPos.y) / FRAMENUM;
-		m_Speed.x = 0.f;
-		m_Speed.z = (m_CAN_MOVE_Z[m_PlayerPoint.z] - m_PlayerPos.z) / FRAMENUM;
+
+		return;
 	}
 
 	if (HitKey == LEFT || HitKey == RIGHT)
 	{
 		m_Speed.x = (m_BasePos[m_PlayerPoint.y][m_PlayerPoint.x].x - m_PlayerPos.x) / FRAMENUM;
-		m_Speed.y = 0.f;
-	}
 
+		return;
+	}
 }
 
 VOID Player::ObtainScoreToExist(const INT& Level)

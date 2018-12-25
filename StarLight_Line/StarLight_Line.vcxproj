@@ -142,6 +142,7 @@
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Section.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\ConversationText\ConversationText.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\Text.cpp" />
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\Tstring\TString.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\GameCollision\GameCollision.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\MainSceneObject.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\Player.cpp" />
@@ -184,6 +185,7 @@
     <ClCompile Include="GameLib\DX\DXInput\InputDev\Keyboard\Keyboard.cpp" />
     <ClCompile Include="GameLib\DX\DXInput\InputDev\Mouse\Mouse.cpp" />
     <ClCompile Include="GameLib\GameLib.cpp" />
+    <ClCompile Include="GameLib\Sound\Sound.cpp" />
     <ClCompile Include="GameLib\Timer\Timer.cpp" />
     <ClCompile Include="GameLib\Wnd\Wnd.cpp" />
     <ClCompile Include="Main\Main.cpp" />
@@ -205,6 +207,7 @@
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\ConversationText\ConversationText.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\Data\TextFormat.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\Text.h" />
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\Tstring\TString.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Enum\STAR_TYPE.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\GameCollision\GameCollision.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\MainSceneObject.h" />
@@ -253,6 +256,7 @@
     <ClInclude Include="GameLib\DX\DXInput\InputDev\Mouse\Enum\DIM.h" />
     <ClInclude Include="GameLib\DX\DXInput\InputDev\Mouse\Mouse.h" />
     <ClInclude Include="GameLib\GameLib.h" />
+    <ClInclude Include="GameLib\Sound\Sound.h" />
     <ClInclude Include="GameLib\Timer\Timer.h" />
     <ClInclude Include="GameLib\Wnd\Data\RectSize.h" />
     <ClInclude Include="GameLib\Wnd\Wnd.h" />

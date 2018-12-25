@@ -2,7 +2,7 @@
 
 VOID ScoreStar::Init()
 {
-	
+	//ConvertLocalToWorld(&m_MatWorld);
 }
 
 VOID ScoreStar::Update()
@@ -15,7 +15,7 @@ VOID ScoreStar::Render()
 {
 	DefaultLight();
 
-	if (m_Info.m_Pos.y < -m_STAR_HALF_SCALE || m_Info.m_Pos.y > m_WND_SIZE.m_y + m_STAR_HALF_SCALE) return;
+	if (m_Info.m_CollisionPos.y < -m_STAR_HALF_SCALE || m_Info.m_CollisionPos.y > m_WND_SIZE.m_y + m_STAR_HALF_SCALE) return;
 	
 	ConvertLocalToWorld(&m_MatWorld);
 

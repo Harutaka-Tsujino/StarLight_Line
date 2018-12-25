@@ -19,10 +19,12 @@ VOID PlayerResultData::Init()
 VOID PlayerResultData::Update()
 {
 	const FLOAT PLAYER_RADIUS = 20.f;
-	const FLOAT ENEMY_RADIUS  = 25.f;
+	const FLOAT ENEMY_RADIUS  = 30.f;
 
 	if (m_rGameCollision.HitSomething(_T("Player"), SCORE, PLAYER_RADIUS, ENEMY_RADIUS))
 	{
+		m_rGameLib.OneShotSimultaneousSound(_T("HitBlue"));
+
 		const INT BASIC_POINT = 100;
 
 		m_Data.m_score += BASIC_POINT;
@@ -30,6 +32,9 @@ VOID PlayerResultData::Update()
 
 	if (m_rGameCollision.HitSomething(_T("Player"), CLEAR, PLAYER_RADIUS, ENEMY_RADIUS))
 	{
+		m_rGameLib.StopSound(_T("HitGreen"));
+		m_rGameLib.OneShotSimultaneousSound(_T("HitGreen"));
+
 		const INT BONUS_POINT = 500;
 
 		m_Data.m_score += BONUS_POINT;

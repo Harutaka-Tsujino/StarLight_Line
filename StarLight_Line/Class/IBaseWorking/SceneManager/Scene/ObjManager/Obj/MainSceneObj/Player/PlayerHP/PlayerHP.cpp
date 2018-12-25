@@ -1,5 +1,7 @@
 ﻿#include "PlayerHP.h"
 
+#include "../../../../../../SceneManager.h"
+
 VOID PlayerHP::Init()
 {
 	m_HP = 5;
@@ -14,12 +16,27 @@ VOID PlayerHP::Update()
 	}
 
 	const FLOAT PLAYER_RADIUS = 20.f;
-	const FLOAT ENEMY_RADIUS  = 20.f;
+	const FLOAT ENEMY_RADIUS  = 30.f;
 
 	if (m_rGameCollision.HitSomething(_T("Player"), DAMAGE, PLAYER_RADIUS, ENEMY_RADIUS))
 	{
 		CreateVertex();
+
 		--m_HP;
+
+		if (m_HP <= 0)
+		{
+			SceneManager& rSceneManager = SceneManager::GetInstance();
+
+			rSceneManager.TurnOffBGM();
+
+			m_rGameLib.SetVolume(_T("HitLethal"), 100);
+			m_rGameLib.OneShotSimultaneousSound(_T("HitLethal"));
+
+			return;
+		}
+
+		m_rGameLib.OneShotSimultaneousSound(_T("HitWhite"));
 	}
 }
 

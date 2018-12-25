@@ -10,18 +10,18 @@
 
 struct StarPlace
 {
-	D3DXVECTOR3	m_Pos;				//x,y,z座標
-	STAR_TYPE m_Type;				//スターの種類
-	int m_Measure;					//節数
-	float m_Beat;					//拍数
-	float m_StarsNumInNote;			//n分音符
-	float m_Line;					//n分音符の中の数字
-	float m_DropPerMinute;			//1分間にどれだけ落ちてくるか
-	LONGLONG m_Time;				//落ちてくる時間
-	float m_XMovementDeg;			//x座標の移動量
-	float m_screenXBasePos;			//xの動く前のスクリーン座標
+	D3DXVECTOR3	m_Pos = { 0.0f, -600.0f, 0.0f };		//x,y,z座標
+	STAR_TYPE m_Type;									//スターの種類
+	int m_Measure;										//節数
+	float m_Beat;										//拍数
+	float m_StarsNumInNote;								//n分音符
+	float m_Line;										//n分音符の中の数字
+	float m_DropPerMinute;								//1分間にどれだけ落ちてくるか
+	LONGLONG m_Time;									//落ちてくる時間
+	float m_XMovementDeg;								//x座標の移動量
+	float m_screenXBasePos;								//xの動く前のスクリーン座標
 
-	D3DXVECTOR3 m_CollisionPos;		//当たり判定用の座標
+	D3DXVECTOR3 m_CollisionPos = { 0.0f, -0.0f, 0.0f };	//当たり判定用の座標
 };
 
 /*
@@ -30,7 +30,10 @@ struct StarPlace
 class BaseStar :public Obj
 {
 public:
-	BaseStar() :Obj(OT_TRANSPARENCY, 0.5f) {};
+	BaseStar() :Obj(OT_TRANSPARENCY, 0.5f) 
+	{
+		D3DXMatrixIdentity(&m_MatWorld);
+	}
 
 	virtual ~BaseStar() {};
 

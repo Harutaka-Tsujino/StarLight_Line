@@ -23,8 +23,8 @@ public:
 	TexStorage(const LPDIRECT3DDEVICE9& rpDX3DDev) :m_rpDX3D_DEV(rpDX3DDev) {};
 	~TexStorage()
 	{ 
-		m_pTexMap.clear();
-	};
+		ReleaseTex();
+	}
 
 	/**
 	* @brief テクスチャを作成する

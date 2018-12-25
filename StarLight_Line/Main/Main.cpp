@@ -7,8 +7,6 @@
 #include <cstdio>
 #include <cstdlib>
 
-#include <SoundsManager.h>
-
 #include "../Class/Singleton/Singleton.h"
 #include "../GameLib/GameLib.h"
 #include "../Class/IBaseWorking/SceneManager/SceneManager.h"
@@ -41,12 +39,6 @@ INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR szStr, INT iCmdSh
 	GameLib::Create(hInst, _T("StarLight Line"));
 
 	GameLib& rGameLib = GameLib::GetInstance();
-
-	SoundLib::SoundsManager soundsManager;
-	bool isSuccess = soundsManager.Initialize();
-
-	isSuccess = soundsManager.AddFile(_T("Sounds/Title/BGM.mp3"), _T("BGM"));
-	isSuccess = soundsManager.Start(_T("BGM"), true);
 
 	rGameLib.RunFunc(Func);
 

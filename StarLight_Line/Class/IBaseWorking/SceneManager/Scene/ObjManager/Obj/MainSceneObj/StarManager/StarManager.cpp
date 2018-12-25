@@ -8,6 +8,8 @@
 #include "BaseSter/DamageStar/DamageStar.h"
 #include "BaseSter/ScoreStar/ScoreStar.h"
 #include "BaseSter/ClearStar/ClearStar.h"
+#include "../../../../../SceneManager.h"
+#include "../../../../Enum/SCENE_KIND.h"
 
 VOID StarManager::Init()
 {
@@ -36,6 +38,14 @@ VOID StarManager::Update()
 			m_ResumesGame = TRUE;
 		}
 
+		if (m_End_ms <= m_rGameLib.GetMilliSecond())
+		{
+			SceneManager& rSceneManager = SceneManager::GetInstance();
+			rSceneManager.SetNextScene(SK_RESULT);
+
+			return;
+		}
+
 		for (BaseStar* pI : m_StarNotes)
 		{
 			pI->Update();
@@ -53,11 +63,6 @@ VOID StarManager::Render()
 {
 	m_rGameLib.SetCameraTransform();
 
-	for (BaseStar* pI : m_StarNotes)
-	{
-		pI->Render();
-	}
-
 	if (m_Init)
 	{
 		m_Init = FALSE;
@@ -68,6 +73,12 @@ VOID StarManager::Render()
 				static_cast<BaseStar*>(m_StarNotes[i])->GetCollisionPos(),
 				static_cast<BaseStar*>(m_StarNotes[i])->GetType());
 		}
+	}
+
+	for (INT i = 0; i < m_StarNotes.size(); ++i)
+	{
+		if (m_rGameCollision.GetStarIsCollided(i)) continue;
+		m_StarNotes[i]->Render();
 	}
 }
 
@@ -174,6 +185,7 @@ StarManager::~StarManager()
 	m_StarNotes.clear();
 
 	m_rGameCollision.ReleaseEnemyPoint();
+
 	m_rGameLib.ReleaseTex();
 }
 

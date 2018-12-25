@@ -26,7 +26,7 @@ VOID ResultDataScore::Render()
 	SceneManager& rSceneManager = SceneManager::GetInstance();
 	if (!rSceneManager.LatterTransitionStagingIsEnded()) return;
 
-	INT stagingScore = static_cast<INT>(m_SCORE * (static_cast<FLOAT>(m_increaseStagingCount) / m_INCREASE_STAGING_MAX));
+	INT stagingScore = static_cast<INT>(m_SCORE * (static_cast<FLOAT>(m_increaseStagingFrameCount) / m_INCREASE_STAGING_FRAME_COUNT_MAX));
 
 	INT stagingScoreDigitsNum = static_cast<INT>(log10(stagingScore) + 1);
 
@@ -69,12 +69,12 @@ VOID ResultDataScore::Render()
 
 		m_rGameLib.Render(pDigitScore, m_rGameLib.GetTex(_T("Nums")));
 	}
+	
+	++m_increaseStagingFrameCount;
 
-	++m_increaseStagingCount;
-
-	if (m_increaseStagingCount < m_INCREASE_STAGING_MAX) return;
+	if (m_increaseStagingFrameCount < m_INCREASE_STAGING_FRAME_COUNT_MAX) return;
 		
-	m_increaseStagingCount = m_INCREASE_STAGING_MAX;
+	m_increaseStagingFrameCount = m_INCREASE_STAGING_FRAME_COUNT_MAX;
 
 	m_stagingIsEnd = TRUE;
 }

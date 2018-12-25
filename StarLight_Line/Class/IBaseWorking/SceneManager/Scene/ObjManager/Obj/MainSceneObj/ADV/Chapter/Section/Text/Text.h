@@ -17,82 +17,87 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <algorithm>
 
 #include "../../../../../../../../../../../GameLib/GameLib.h"
 #include "Data\TextFormat.h"
+#include "Tstring\TString.h"
 #include "../../../../../../../../../../../GameLib/DX/DX3D/CustomVertexEditor/Data/ObjData.h"
 #include "../../../../../../../../../../../GameLib/DX/DX3D/CustomVertexEditor/Data/CustomVertex.h"
 
 class Text
 {
 public:
-	Text(const TCHAR* pText, const TCHAR* pFontTexPath) :m_rGameLib(GameLib::GetInstance()), m_pText(pText)
+	Text(const TString& text, const TCHAR* pFontTexPath) :m_rGameLib(GameLib::GetInstance())
 	{
-		const TCHAR* pFONT_KEY = _T("Font");
+		text.WriteOutAll(&m_text);
 
-		if (m_rGameLib.TexExists(pFONT_KEY)) return;
+		DivideTextByNewLine();
 
-		m_rGameLib.CreateTex(pFONT_KEY, pFontTexPath);
+		if (m_rGameLib.TexExists(m_pFONT_KEY)) return;
+
+		m_rGameLib.CreateTex(m_pFONT_KEY, pFontTexPath);
 	}
 
-	VOID Write(const TextFormat& textFormat)
+	~Text()
 	{
-		size_t charsNum = _tcslen(m_pText);
+		std::for_each(m_pOneLineTstringVec.begin(), m_pOneLineTstringVec.end(), [](TString* pI) { delete pI; });
+	}
 
-		ObjData* pCharData = new ObjData[charsNum];
+	virtual VOID Write(const TextFormat& textFormat);
 
-		INT newLinesNum = 0;
+protected:
+	Text& operator=(const Text&) = delete;
+	Text(const Text&) = delete;
 
-		FLOAT halfX = static_cast<FLOAT>(textFormat.m_charHalfScale.m_x);
-		FLOAT halfY = static_cast<FLOAT>(textFormat.m_charHalfScale.m_y);
+	inline VOID DivideTextByNewLine()
+	{
+		TString* pTString = nullptr;
 
-		INT oneLineStrLen = 0;
-
-		std::vector<TCHAR*> m_pOneLineTcharsVec;
-
-		for (INT i = 0;; ++i)
+		while (m_text.TextPtrPointsToEndOfText())
 		{
-			/*m_pOneLineTcharsVec.push_back((m_pText))
+			pTString = new TString();
 
-			m_oneLineTcharsVecVec
-*/
-		}
+			m_text.GetLine(pTString);
 
-
-		for (INT i = 0; i < charsNum; ++i)
-		{
-			//if () oneLineStrLen;
-
-			pCharData[i].m_center = 
-			{ 
-				textFormat.m_topLeft.x + halfX + oneLineStrLen * (halfX * 2 + textFormat.m_charGap.x),
-				textFormat.m_topLeft.y + halfY + newLinesNum * (halfY * 2 + textFormat.m_charGap.y),
-				0.0f 
-			};
-
-			textFormat.m_charHalfScale.TransD3DXVECTOR3(&pCharData[i].m_halfScale);
-
-			
+			m_pOneLineTstringVec.push_back(pTString);
 		}
 	}
 
-private:
-	const TCHAR* GetTokNext(const TCHAR* pString, TCHAR delimiter)
+	inline VOID NewCustomVerticesData(std::vector<ObjData*>* ppCharDatas, std::vector<CustomVertex*>* ppChars, std::vector<TString*>& pOneLineStrings) const
 	{
-		size_t prevTokElementnum = 0;
-		for (INT i = 0; pString[i] != delimiter || pString[i] != delimiter; ++i)
+		size_t oneLineTextNum = pOneLineStrings.size();
+		INT oneLineLength = NULL;
+		for (INT i = 0; i < oneLineTextNum; ++i)
 		{
-			++prevTokElementnum;
-		}
+			oneLineLength = pOneLineStrings[i]->Length();
 
-		return &pString[prevTokElementnum + 2];
+			ppCharDatas->push_back(new ObjData[oneLineLength]);
+			ppChars->push_back(new CustomVertex[CustomVertex::m_RECT_VERTICES_NUM * oneLineLength]);
+		}
 	}
 
-	//const size_t GetLengthToNewLine()
+	inline VOID ReleaseCustomVerticesData(std::vector<ObjData*>* ppCharDatas, std::vector<CustomVertex*>* ppChars, std::vector<TString*>& pOneLineStrings) const
+	{
+		size_t oneLineTextNum = pOneLineStrings.size();
+		INT oneLineLength = NULL;
+		for (INT i = 0; i < oneLineTextNum; ++i)
+		{
+			oneLineLength = pOneLineStrings[i]->Length();
+
+			delete[] (*ppCharDatas)[i];
+			delete[] (*ppChars)[i];
+		}
+	}
+
+	VOID CreateOneLineCharsRects(const TextFormat& textFormat, std::vector<ObjData*>* ppCharDatas, std::vector<CustomVertex*>* ppChars, std::vector<TString*>& pOneLineStrings) const;
 
 	GameLib& m_rGameLib;
 
-	const TCHAR* m_pText = nullptr;
+	const TCHAR* m_pFONT_KEY = _T("Font");
+
+	TString m_text;
+	std::vector<TString*> m_pOneLineTstringVec;
 };
 
 #endif //! TEXT_H
