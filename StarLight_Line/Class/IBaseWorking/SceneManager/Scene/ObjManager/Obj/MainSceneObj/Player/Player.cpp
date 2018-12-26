@@ -104,12 +104,12 @@ VOID Player::Render()
 
 	D3DXMatrixMultiply(&m_World, &m_World, &MatScale);
 
-	static ULONGLONG deg = 0;
-	deg += 2;
+	static FLOAT deg = 0;
+	deg += 1.0f;
 	D3DXMatrixRotationZ(&MatRotate, D3DXToRadian(deg));
 	D3DXMatrixMultiply(&m_World, &m_World, &MatRotate);
 
-	++deg;
+	deg += 0.5f;
 	D3DXMatrixRotationX(&MatRotate, D3DXToRadian(deg));
 	D3DXMatrixMultiply(&m_World, &m_World, &MatRotate);
 
