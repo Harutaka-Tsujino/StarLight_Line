@@ -38,8 +38,11 @@ VOID SceneManager::Factory()
 			delete m_pScene;
 		
 			m_pScene = new MainScene();
+
 			return;
 		}
+
+		m_CanTransferSubScene = FALSE;
 
 		break;
 

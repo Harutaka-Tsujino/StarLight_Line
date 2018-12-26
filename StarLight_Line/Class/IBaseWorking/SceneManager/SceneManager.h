@@ -104,7 +104,7 @@ public:
 		m_SceneTransitionMode = Mode;
 	}
 
-	inline VOID SetCanTransferSubScene(const BOOL& CanTransferSubScene)
+	inline VOID SetCanTransferSubScene(BOOL CanTransferSubScene)
 	{
 		m_CanTransferSubScene = CanTransferSubScene;
 	}
