@@ -1,11 +1,5 @@
 ﻿#include"DamageStar.h"
 
-VOID DamageStar::Update()
-{
-	m_rGameLib.SetEndTime();
-	TransScreenPosByTime(m_rGameLib.GetMilliSecond());
-}
-
 VOID DamageStar::Render()
 {
 	DefaultLight();
@@ -21,11 +15,6 @@ VOID DamageStar::Render()
 	rEnemyStar.SetEmissive(&DamageColor);
 
 	m_rGameLib.Render(rEnemyStar, m_MatWorld);
-}
-
-VOID DamageStar::Init()
-{
-	//ConvertLocalToWorld(&m_MatWorld);
 }
 
 DamageStar::~DamageStar()

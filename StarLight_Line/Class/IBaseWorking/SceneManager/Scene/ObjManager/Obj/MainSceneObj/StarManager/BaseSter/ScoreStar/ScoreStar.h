@@ -15,8 +15,6 @@ public:
 	{
 	}
 
-	VOID Init();
-	VOID Update();
 	VOID Render();
 };
 

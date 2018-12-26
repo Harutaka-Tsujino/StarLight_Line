@@ -10,6 +10,7 @@ VOID BaseStar::Render()
 
 VOID BaseStar::Update()
 {
+	TransScreenPosByTime(m_rGameLib.GetMilliSecond());
 }
 
 VOID BaseStar::TransScreenPosByTime(const LONGLONG& CurrentTime)

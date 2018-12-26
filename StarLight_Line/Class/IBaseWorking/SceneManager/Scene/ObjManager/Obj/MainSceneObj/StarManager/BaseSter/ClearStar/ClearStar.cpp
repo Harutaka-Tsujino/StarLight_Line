@@ -1,16 +1,5 @@
 ﻿#include "ClearStar.h"
 
-VOID ClearStar::Init()
-{
-	//ConvertLocalToWorld(&m_MatWorld);
-}
-
-VOID ClearStar::Update()
-{
-	m_rGameLib.SetEndTime();
-	TransScreenPosByTime(m_rGameLib.GetMilliSecond());
-}
-
 VOID ClearStar::Render()
 {
 	DefaultLight();
