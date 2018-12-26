@@ -1,16 +1,5 @@
 ﻿#include "ScoreStar.h"
 
-VOID ScoreStar::Init()
-{
-	//ConvertLocalToWorld(&m_MatWorld);
-}
-
-VOID ScoreStar::Update()
-{
-	m_rGameLib.SetEndTime();
-	TransScreenPosByTime(m_rGameLib.GetMilliSecond());
-}
-
 VOID ScoreStar::Render()
 {
 	DefaultLight();

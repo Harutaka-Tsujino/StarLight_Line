@@ -13,8 +13,6 @@ public:
 
 	~DamageStar();
 
-	VOID Init();
-	VOID Update();
 	VOID Render();
 };
 

@@ -13,8 +13,6 @@ public:
 
 	~ClearStar() {}
 
-	VOID Init();
-	VOID Update();
 	VOID Render();
 };
 
