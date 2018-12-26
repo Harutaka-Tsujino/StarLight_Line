@@ -27,15 +27,18 @@ VOID Timer::Restart()
 
 LONGLONG Timer::GetSecond()
 {
+	End();
 	return std::chrono::duration_cast<std::chrono::seconds>(m_DiffTime).count();
 }
 
 LONGLONG Timer::GetMilliSecond()
 {
+	End();
 	return std::chrono::duration_cast<std::chrono::milliseconds>(m_DiffTime).count();
 }
 
 LONGLONG Timer::GetMicroSecond()
 {
+	End();
 	return std::chrono::duration_cast<std::chrono::microseconds>(m_DiffTime).count();
 }
