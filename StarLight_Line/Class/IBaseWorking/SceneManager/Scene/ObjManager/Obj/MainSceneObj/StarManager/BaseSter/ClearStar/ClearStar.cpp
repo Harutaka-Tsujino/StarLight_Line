@@ -22,7 +22,7 @@ VOID ClearStar::Render()
 	FbxRelated& rEnemyStar = m_rGameLib.GetFbx(_T("StarFBX"));
 
 	//色の設定
-	D3DXVECTOR4 ClearColor(ColorMax, 0x98 / ColorMax, 0xFB / ColorMax, 0x98 / ColorMax);
+	D3DXVECTOR4 ClearColor(ColorMax / ColorMax, 0x98 / ColorMax, 0xFB / ColorMax, 0x98 / ColorMax);
 
 	rEnemyStar.SetEmissive(&ClearColor);
 
