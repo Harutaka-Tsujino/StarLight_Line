@@ -71,25 +71,32 @@ VOID BaseStar::ConvertLocalToWorld(D3DXMATRIX* pMatWorld)
 	D3DXMatrixIdentity(&MatTrans);
 	D3DXMatrixIdentity(&MatScale);
 
-	const float MODELSCALE = 0.6f;
+	const float MODELSCALE = 0.62f;
 
 	// 拡大
-	D3DXMatrixScaling(&MatScale, MODELSCALE, MODELSCALE, 0.01f);
+	D3DXMatrixScaling(&MatScale, MODELSCALE, MODELSCALE, MODELSCALE);
 	D3DXMatrixMultiply(pMatWorld, pMatWorld, &MatScale);
 
+	D3DXVECTOR3 cameraPos;
+	m_rGameLib.GetCameraPos(&cameraPos);
+	FLOAT tan = (cameraPos.z) ? cameraPos.y / cameraPos.z : 0.0f;
+
 	// 演出用の回転
-	D3DXMatrixRotationZ(&MatRotate, D3DXToRadian(m_DegZ));
+	//D3DXMatrixRotationX(&MatRotate, static_cast<FLOAT>(/*-atan(tan)*//* + D3DX_PI*0.7f*/));
+	//D3DXMatrixMultiply(pMatWorld, pMatWorld, &MatRotate);
+
+	D3DXMatrixRotationY(&MatRotate, static_cast<FLOAT>(D3DX_PI));
 	D3DXMatrixMultiply(pMatWorld, pMatWorld, &MatRotate);
 
-	//++m_DegZ;
+	D3DXMatrixRotationZ(&MatRotate, static_cast<FLOAT>(D3DXToRadian(m_DegZ)));
+	D3DXMatrixMultiply(pMatWorld, pMatWorld, &MatRotate);
+
+	++m_DegZ;
 
 	m_Info.m_Pos.z = 0.999f;
 
 	D3DXVECTOR3 ScreenBuff = m_Info.m_Pos;
 	
-	D3DXVECTOR3 cameraPos;
-	m_rGameLib.GetCameraPos(&cameraPos);
-
 	m_rGameLib.SetCameraPos(0.0f, 0.0f, 0.0f);
 	m_rGameLib.SetCameraTransform();
 
@@ -111,6 +118,8 @@ VOID BaseStar::ConvertLocalToWorld(D3DXMATRIX* pMatWorld)
 	// 移動
 	D3DXMatrixTranslation(&MatTrans, WorldBuff.x, WorldBuff.y, WorldBuff.z);
 	D3DXMatrixMultiply(pMatWorld, pMatWorld, &MatTrans);
+
+	m_rGameLib.TransBillBoard(pMatWorld);
 
 	m_rGameLib.SetCameraPos(cameraPos);
 	m_rGameLib.SetCameraTransform();

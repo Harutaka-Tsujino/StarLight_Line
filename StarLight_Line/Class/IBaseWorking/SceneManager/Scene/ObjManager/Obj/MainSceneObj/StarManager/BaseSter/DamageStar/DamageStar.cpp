@@ -17,7 +17,7 @@ VOID DamageStar::Render()
 	FbxRelated& rEnemyStar = m_rGameLib.GetFbx(_T("StarFBX"));
 
 	//色の設定
-	D3DXVECTOR4 DamageColor(ColorMax, ColorMax, ColorMax, ColorMax);
+	D3DXVECTOR4 DamageColor(ColorMax / ColorMax, ColorMax / ColorMax, ColorMax / ColorMax, ColorMax / ColorMax);
 	rEnemyStar.SetEmissive(&DamageColor);
 
 	m_rGameLib.Render(rEnemyStar, m_MatWorld);
