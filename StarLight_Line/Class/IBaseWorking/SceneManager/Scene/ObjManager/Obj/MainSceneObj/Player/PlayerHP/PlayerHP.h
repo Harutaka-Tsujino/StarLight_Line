@@ -40,12 +40,16 @@ public:
 	VOID ReleaseVertex();
 	INT GetHP() { return m_HP; }
 
+	inline INT GetAdditionalFlashMulti() { return m_AdditionalFlashMulti; }
+
 private:
 	VOID CutUV(TexUV* UV);
 
 	std::vector<CustomVertex*> m_HpRect;
 
 	INT m_HP;
+
+	INT m_AdditionalFlashMulti = 0;
 
 	GameCollision& m_rGameCollision;
 };

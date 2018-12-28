@@ -57,6 +57,10 @@ public:
 		return;
 	}
 
+	inline INT GetAdditionalFlashMulti() { return m_AdditionalFlashMulti; };
+
+	inline INT GetAdditionalRotateSpeed() { return m_EffectAddtionalRotateSpeed; };
+
 private:
 	//スコアの桁が繰り上がったら
 	//矩形を作り、桁数を上げる処理をする関数
@@ -75,6 +79,9 @@ private:
 	std::vector<INT> m_ClearStarNumsDigit;
 
 	ResultData m_Data;
+
+	INT m_EffectAddtionalRotateSpeed = 0;
+	INT m_AdditionalFlashMulti = 0;
 
 	GameCollision& m_rGameCollision;
 };

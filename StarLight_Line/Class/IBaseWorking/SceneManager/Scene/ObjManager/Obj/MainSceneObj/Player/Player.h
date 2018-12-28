@@ -118,6 +118,9 @@ private:
 	PlayerResultData m_ResultData;
 	PlayerHP m_Hp;
 
+	INT m_EffectAddtionalRotateSpeed = 0;
+	INT m_AdditionalFlashMulti = 0;
+
 	GameCollision& m_rGameCollision;
 };
 

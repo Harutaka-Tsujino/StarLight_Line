@@ -21,8 +21,41 @@ VOID PlayerResultData::Update()
 	const FLOAT PLAYER_RADIUS = 20.f;
 	const FLOAT ENEMY_RADIUS  = 30.f;
 
+	const INT DO_NOTHING_FRAME_COUNT_NUM = -1;
+	static INT ChangeDefaultFlashFrameCount = DO_NOTHING_FRAME_COUNT_NUM;
+
+	if (ChangeDefaultFlashFrameCount >= 0)
+	{
+		++ChangeDefaultFlashFrameCount;
+	}
+
+	if (ChangeDefaultFlashFrameCount > 15)
+	{
+		m_AdditionalFlashMulti = 0;
+
+		ChangeDefaultFlashFrameCount = DO_NOTHING_FRAME_COUNT_NUM;
+	}
+
+	static INT ChangeDefaultRotateSpeedFrameCount = DO_NOTHING_FRAME_COUNT_NUM;
+
+	if (ChangeDefaultRotateSpeedFrameCount >= 0)
+	{
+		++ChangeDefaultRotateSpeedFrameCount;
+	}
+
+	if (ChangeDefaultRotateSpeedFrameCount > 60)
+	{
+		m_EffectAddtionalRotateSpeed = 0;
+
+		ChangeDefaultRotateSpeedFrameCount = DO_NOTHING_FRAME_COUNT_NUM;
+	}
+
 	if (m_rGameCollision.HitSomething(_T("Player"), SCORE, PLAYER_RADIUS, ENEMY_RADIUS))
 	{
+		ChangeDefaultFlashFrameCount = 0;
+
+		m_AdditionalFlashMulti = 1;
+
 		m_rGameLib.OneShotSimultaneousSound(_T("HitBlue"));
 
 		const INT BASIC_POINT = 100;
@@ -32,6 +65,12 @@ VOID PlayerResultData::Update()
 
 	if (m_rGameCollision.HitSomething(_T("Player"), CLEAR, PLAYER_RADIUS, ENEMY_RADIUS))
 	{
+		ChangeDefaultRotateSpeedFrameCount = 0;
+
+		m_EffectAddtionalRotateSpeed = 5;
+
+		m_AdditionalFlashMulti = 1;
+
 		m_rGameLib.StopSound(_T("HitGreen"));
 		m_rGameLib.OneShotSimultaneousSound(_T("HitGreen"));
 
