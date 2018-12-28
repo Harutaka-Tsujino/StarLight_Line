@@ -18,8 +18,27 @@ VOID PlayerHP::Update()
 	const FLOAT PLAYER_RADIUS = 20.f;
 	const FLOAT ENEMY_RADIUS  = 30.f;
 
+	const INT DO_NOTHING_FRAME_COUNT_NUM = -1;
+	static INT ChangeDefaultFlashFrameCount = DO_NOTHING_FRAME_COUNT_NUM;
+
+	if (ChangeDefaultFlashFrameCount >= 0)
+	{
+		++ChangeDefaultFlashFrameCount;
+	}
+
+	if (ChangeDefaultFlashFrameCount > 15)
+	{
+		m_AdditionalFlashMulti = 0;
+
+		ChangeDefaultFlashFrameCount = DO_NOTHING_FRAME_COUNT_NUM;
+	}
+
 	if (m_rGameCollision.HitSomething(_T("Player"), DAMAGE, PLAYER_RADIUS, ENEMY_RADIUS))
 	{
+		m_AdditionalFlashMulti = -1;
+
+		ChangeDefaultFlashFrameCount = 0;
+
 		CreateVertex();
 
 		--m_HP;

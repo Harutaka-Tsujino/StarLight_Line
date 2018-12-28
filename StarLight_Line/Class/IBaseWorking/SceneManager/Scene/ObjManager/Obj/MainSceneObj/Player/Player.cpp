@@ -105,7 +105,7 @@ VOID Player::Render()
 	D3DXMatrixMultiply(&m_World, &m_World, &MatScale);
 
 	static FLOAT deg = 0;
-	deg += 1.0f;
+	deg += 1.0f + m_ResultData.GetAdditionalRotateSpeed();
 	D3DXMatrixRotationZ(&MatRotate, D3DXToRadian(deg));
 	D3DXMatrixMultiply(&m_World, &m_World, &MatRotate);
 
@@ -118,18 +118,32 @@ VOID Player::Render()
 
 	D3DXMatrixMultiply(&m_World, &m_World, &MatTrans);
 
-	D3DXVECTOR4 EiwiAmbient(0.7f, 190.0f / 255.0f, 190.0f / 255.0f, 0.0f);
+	if (m_rGameLib.KeyboardIsPressed(DIK_RETURN))
+	{
+		m_AdditionalFlashMulti = (m_AdditionalFlashMulti >= 1) ? -1 : ++m_AdditionalFlashMulti;
+	}
+
+	FLOAT AdditionalColor = 60.0f * (m_ResultData.GetAdditionalFlashMulti() + m_Hp.GetAdditionalFlashMulti());
+
+	D3DXVECTOR4 EiwiAmbient(0.7f, (170.0f + AdditionalColor) / 255.0f, (170.0f + AdditionalColor) / 255.0f, (-30.0f + AdditionalColor) / 255.0f);
 	rEiwi.SetAmbient(&EiwiAmbient);
 
-	D3DXVECTOR4 EiwiEmissive(0.8f, 170.0f / 255.0f, 160.0f / 255.0f, 0.0f);
+	D3DXVECTOR4 EiwiEmissive(0.8f, (150.0f + AdditionalColor) / 255.0f, (130.0f + AdditionalColor) / 255.0f, (-30.0f + AdditionalColor) / 255.0f);
 	rEiwi.SetEmissive(&EiwiEmissive);
+
+	//D3DXVECTOR4 EiwiDiffuse(0.8f, 170.0f / 255.0f, 160.0f / 255.0f, 0.0f);
+	//rEiwi.SetDiffuse(&EiwiEmissive);
 
 	rEiwi.SetPower(0.8f);
 	
 	D3DXVECTOR4 VertexColor(150.0f, 255.0f, 255.0f, 255.0f);
 	rEiwi.SetColor(&VertexColor);
 
+	//m_rGameLib.AddtionBlendMode();
+
 	m_rGameLib.Render(rEiwi, m_World, m_rGameLib.GetTex(_T("PlayerTex")));
+
+	m_rGameLib.DefaultBlendMode();
 }
 
 //名前不安なので募集中
