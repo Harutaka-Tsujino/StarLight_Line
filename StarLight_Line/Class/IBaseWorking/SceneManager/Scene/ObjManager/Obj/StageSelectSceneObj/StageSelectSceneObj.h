@@ -19,6 +19,7 @@
 
 #include "../Obj.h"
 #include "../../../StageSelectScene/Enum/STAGE_LEVEL_KIND.h"
+#include "../../../StageSelectScene/Enum/STAGE_KIND.h"
 #include "../../../../SceneManager.h"
 #include "../../../../Data/StageData.h"
 
@@ -137,7 +138,8 @@ private:
 
 	VOID RenderBackButton(FLOAT iconsCircleRadius) const;
 
-	static const INT m_STAGE_ICONS_MAX = 12;
+	static const INT m_STAGE_ICONS_MAX = STAGE_MAX - 1;
+
 	FLOAT m_deg = 0.0f;			//! 複数のアイコンがなす円の回転角度 大きさが60を超えるとm_selectingStageを変化させ0に戻る
 
 	INT m_selectingStage = 0;
