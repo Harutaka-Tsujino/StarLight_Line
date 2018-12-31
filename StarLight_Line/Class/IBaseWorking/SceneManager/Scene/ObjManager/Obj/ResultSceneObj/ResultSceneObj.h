@@ -20,6 +20,7 @@
 #include "../Obj.h"
 #include "../../../../SceneManager.h"
 #include "../../../../Data/ResultData.h"
+#include "../DataSaver/DataSaver.h"
 
 class ResultSceneBack :public Obj
 {
@@ -492,6 +493,9 @@ public:
 		delete m_pResultSceneResultFont;
 		delete m_pResultSceneResultData;
 		m_rGameLib.ReleaseTex();
+
+		DataSaver& rDataSaver = DataSaver::GetInstance();
+		rDataSaver.Save();
 	}
 
 	inline VOID Init()

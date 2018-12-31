@@ -19,6 +19,7 @@
 
 #include "../Obj.h"
 #include "../../../../SceneManager.h"
+#include "../DataSaver/DataSaver.h"
 
 class SaveDataBack :public Obj
 {
@@ -58,13 +59,16 @@ public:
 class SaveDataSaveDatas :public Obj
 {
 public:
-	SaveDataSaveDatas() :Obj(OT_TRANSPARENCY, 0.9f)
+	SaveDataSaveDatas() :Obj(OT_TRANSPARENCY, 0.9f), m_pPREVIEWS(DataSaver::GetInstance().GetPreviewDatas())
 	{
 		Init();
 	}
 
 	~SaveDataSaveDatas()
 	{
+		DataSaver& rDataSaver = DataSaver::GetInstance();
+		rDataSaver.LoadData(m_selectingData);
+
 		m_rGameLib.ReleaseTex();
 	}
 
@@ -74,8 +78,22 @@ public:
 		m_rGameLib.CreateTex(_T("DetailFrame"), _T("2DTextures/SaveData/SaveData_Frame02.png"));
 	}
 
-	inline VOID Update() 
+	inline VOID Update()
 	{
+		if (UpKeyIsPressed())
+		{
+			m_selectingData = (m_selectingData <= 0) ? m_SAVE_DATAS_MAX - 1 : --m_selectingData;
+
+			return;
+		}
+
+		if (DownKeyIsPressed())
+		{
+			m_selectingData = (m_selectingData >= m_SAVE_DATAS_MAX - 1) ? 0 : ++m_selectingData;
+
+			return;
+		}
+
 		if (ReturnKeyIsPressed())
 		{
 			SceneManager& rSceneManager = SceneManager::GetInstance();
@@ -87,9 +105,11 @@ public:
 	VOID Render();
 
 private:
-	const INT m_SAVE_DATAS_MAX = 3;	//! 仮にこのクラスに持たせているがSaveDataManagerを作りにそれに持たせる予定
+	static const INT m_SAVE_DATAS_MAX = 3;	//! 仮にこのクラスに持たせているがSaveDataManagerを作りにそれに持たせる予定
 
 	INT m_selectingData = 0;
+
+	const PreviewData* m_pPREVIEWS = nullptr;
 };
 
 #endif //! SAVE_DATA_SCENE_OBJ_H
