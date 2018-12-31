@@ -131,7 +131,7 @@ public:
 		return m_rGameLib.CollidesRects(m_Vertex[KeyA], m_Vertex[KeyB]);
 	}
 
-	BOOL GetStarIsCollided(INT elementNum)
+	inline BOOL GetStarIsCollided(INT elementNum)
 	{
 		return m_Enemy[elementNum]->m_IsCollided;
 	}
