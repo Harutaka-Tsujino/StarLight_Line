@@ -221,6 +221,18 @@
     <Filter Include="Class\IBaseWorking\SceneManager\Scene\PauseScene">
       <UniqueIdentifier>{32f32bce-01d8-4e36-ae8c-449a3396c6d5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\DataSaver">
+      <UniqueIdentifier>{8e1e8e5f-dded-4df7-bdd8-11767a506316}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\StageSelectScene\Data">
+      <UniqueIdentifier>{84e3717b-243b-43ce-9b34-d8502498229d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\SaveDataScene\Data">
+      <UniqueIdentifier>{a948dbe4-319f-459d-a621-ab5bfc6e0f6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\NumText">
+      <UniqueIdentifier>{50acb009-9d71-4f29-ab5f-fede6f88d1ba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Class\Singleton\Singleton.cpp">
@@ -303,9 +315,6 @@
     </ClCompile>
     <ClCompile Include="GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxRelated.cpp">
       <Filter>GameLib\DX\DX3D\FbxStorage\FbxRelated</Filter>
-    </ClCompile>
-    <ClCompile Include="GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxModel\FbxModel.cpp">
-        <Filter>GameLib\DX\DX3D\TexStorage\FbxModel</Filter>
     </ClCompile>
     <ClCompile Include="GameLib\DX\DX3D\FbxStorage\FbxStorage.cpp">
       <Filter>GameLib\DX\DX3D\FbxStorage</Filter>
@@ -405,6 +414,13 @@
     </ClCompile>
     <ClCompile Include="GameLib\Sound\Sound.cpp">
       <Filter>GameLib\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxModel\FbxModel.cpp" />
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\DataSaver\DataSaver.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\DataSaver</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\NumText\NumText.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\NumText</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -620,12 +636,24 @@
     </ClInclude>
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerResultData\PlayerResultData.h">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerResultData</Filter>
-      </ClInclude>
-    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\PauseScene\PauseScene.h">
-      <Filter>Class\IBaseWorking\SceneManager\Scene\PauseScene</Filter>
     </ClInclude>
     <ClInclude Include="GameLib\Sound\Sound.h">
       <Filter>GameLib\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\PauseScene\PauseScene.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\PauseScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\DataSaver\DataSaver.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\DataSaver</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\StageSelectScene\Data\StageDetailData.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\StageSelectScene\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\SaveDataScene\Data\PreviewData.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\SaveDataScene\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\NumText\NumText.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\NumText</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
