@@ -26,6 +26,24 @@ public:
 		WriteInAll(pText);
 	}
 
+	explicit TString(FLOAT val, const TCHAR* pFormat)
+	{
+		const INT BUF_SIZE = 30;
+		TCHAR tCharBuf[BUF_SIZE] = _T("");
+		_stprintf_s(tCharBuf, BUF_SIZE, pFormat, val);
+
+		WriteInAll(tCharBuf);
+	}
+
+	explicit TString(INT val, const TCHAR* pFormat)
+	{
+		const INT BUF_SIZE = 30;
+		TCHAR tCharBuf[BUF_SIZE] = _T("");
+		_stprintf_s(tCharBuf, BUF_SIZE, pFormat, val);
+
+		WriteInAll(tCharBuf);
+	}
+
 	~TString() {};
 
 	inline VOID Reset()
@@ -55,7 +73,7 @@ public:
 	{
 		Reset();
 
-		for (INT i = 0; IsTextEnd(pText[i]); ++i) m_tChar.push_back(pText[i]);
+		for (INT i = 0; !IsTextEnd(pText[i]); ++i) m_tChar.push_back(pText[i]);
 
 		m_tChar.push_back(m_TEXT_END);
 	}
@@ -98,7 +116,7 @@ public:
 	{
 		if (TextPtrPointsToEndOfText()) return;
 
-		for (; isLineOrTextEnd(m_tChar[m_textPtr]); ++m_textPtr) pTString->WriteInChar(m_tChar[m_textPtr]);
+		for (; !isLineOrTextEnd(m_tChar[m_textPtr]); ++m_textPtr) pTString->WriteInChar(m_tChar[m_textPtr]);
 
 		pTString->WriteInChar(m_TEXT_END);
 
@@ -125,7 +143,7 @@ public:
 	{
 		INT length = 0;
 
-		for (INT i = 0; IsLineEnd(m_tChar[i]); ++i) ++length;
+		for (INT i = 0; !isLineOrTextEnd(m_tChar[i]); ++i) ++length;
 
 		return length;
 	}

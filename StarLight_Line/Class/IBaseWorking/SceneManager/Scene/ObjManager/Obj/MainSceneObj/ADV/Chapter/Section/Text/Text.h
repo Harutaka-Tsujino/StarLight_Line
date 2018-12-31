@@ -39,7 +39,7 @@ public:
 		m_rGameLib.CreateTex(m_pFONT_KEY, pFontTexPath);
 	}
 
-	~Text()
+	virtual ~Text()
 	{
 		std::for_each(m_pOneLineTstringVec.begin(), m_pOneLineTstringVec.end(), [](TString* pI) { delete pI; });
 	}
@@ -54,7 +54,7 @@ protected:
 	{
 		TString* pTString = nullptr;
 
-		while (m_text.TextPtrPointsToEndOfText())
+		while (!m_text.TextPtrPointsToEndOfText())
 		{
 			pTString = new TString();
 
@@ -70,6 +70,7 @@ protected:
 		INT oneLineLength = NULL;
 		for (INT i = 0; i < oneLineTextNum; ++i)
 		{
+			pOneLineStrings[i]->SeekFirst();
 			oneLineLength = pOneLineStrings[i]->Length();
 
 			ppCharDatas->push_back(new ObjData[oneLineLength]);
@@ -77,20 +78,19 @@ protected:
 		}
 	}
 
-	inline VOID ReleaseCustomVerticesData(std::vector<ObjData*>* ppCharDatas, std::vector<CustomVertex*>* ppChars, std::vector<TString*>& pOneLineStrings) const
+	inline VOID ReleaseCustomVerticesData(std::vector<ObjData*>* ppCharDatas, 
+		std::vector<CustomVertex*>* ppChars, std::vector<TString*>& pOneLineStrings) const
 	{
 		size_t oneLineTextNum = pOneLineStrings.size();
-		INT oneLineLength = NULL;
 		for (INT i = 0; i < oneLineTextNum; ++i)
 		{
-			oneLineLength = pOneLineStrings[i]->Length();
-
 			delete[] (*ppCharDatas)[i];
 			delete[] (*ppChars)[i];
 		}
 	}
 
-	VOID CreateOneLineCharsRects(const TextFormat& textFormat, std::vector<ObjData*>* ppCharDatas, std::vector<CustomVertex*>* ppChars, std::vector<TString*>& pOneLineStrings) const;
+	virtual VOID CreateOneLineCharsRects(const TextFormat& textFormat, std::vector<ObjData*>* ppCharDatas,
+		std::vector<CustomVertex*>* ppChars, std::vector<TString*>& pOneLineStrings) const;
 
 	GameLib& m_rGameLib;
 

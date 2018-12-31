@@ -52,7 +52,8 @@ VOID Text::Write(const TextFormat& textFormat)
 	ReleaseCustomVerticesData(&pCharData, &pCustomVerticesVec, m_pOneLineTstringVec);
 }
 
-VOID Text::CreateOneLineCharsRects(const TextFormat& textFormat, std::vector<ObjData*>* ppCharDatas, std::vector<CustomVertex*>* ppChars,std::vector<TString*>& pOneLineStrings) const
+VOID Text::CreateOneLineCharsRects(const TextFormat& textFormat, std::vector<ObjData*>* ppCharDatas, 
+	std::vector<CustomVertex*>* ppChars,std::vector<TString*>& pOneLineStrings) const
 {
 	INT oneLineLength = NULL;
 
