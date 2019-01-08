@@ -148,10 +148,10 @@ VOID DataSaver::LoadTime(std::ifstream* pIfs)
 	std::istringstream lastPlayStream(str);
 	lastPlayStream >> m_saveData.m_endTimeToPlayTime_s;
 
-	time_t now = time(nullptr);
-	m_saveData.m_playStartSysTime = now;
+	time_t currentTime_s = time(nullptr);
+	m_saveData.m_playStartSysTime = currentTime_s;
 
-	m_saveData.pLastPlayTm = std::localtime(&now);
+	m_saveData.pLastPlayTm = std::localtime(&currentTime_s);
 	ZeroMemory(m_saveData.pLastPlayTm, sizeof(tm));
 	m_saveData.pLastPlayTm->tm_year = -1900;
 
