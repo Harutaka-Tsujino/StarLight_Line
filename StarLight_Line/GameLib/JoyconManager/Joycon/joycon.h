@@ -12,7 +12,7 @@ http://opensource.org/licenses/mit-license.php
 #include <thread>
 #include <d3dx9.h>
 
-#include "hidapi.h"
+#include "hid/hidapi.h"
 
 #pragma comment(lib, "SetupAPI")
 
@@ -70,6 +70,14 @@ public:
 		RELEASE_BUTTON,
 		ON_BUTTON,
 		OFF_BUTTON
+	};
+
+	enum ANALOG_STICK_STATE
+	{
+		UP_SLOPE,
+		DOWN_SLOPE,
+		LEFT_SLOPE,
+		RIGHT_SLOPE
 	};
 
 	/*** コンストラクタ */

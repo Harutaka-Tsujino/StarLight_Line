@@ -383,7 +383,6 @@ void Joycon::CheckButton(int _button)
 
 }
 
-
 void Joycon::SendRumble()
 {
 	int res;
