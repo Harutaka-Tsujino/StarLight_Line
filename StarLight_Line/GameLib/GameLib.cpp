@@ -55,6 +55,8 @@ VOID GameLib::RunFunc(VOID(*pMainFunc)())
 
 		m_pDX->PrepareMessageLoop();
 
+		m_pJoyconManager->InputState();
+
 		pMainFunc();
 
 		m_pDX->CleanUpMessageLoop();

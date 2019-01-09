@@ -80,20 +80,19 @@ public:
 		RIGHT_SLOPE
 	};
 
-	/*** コンストラクタ */
 	Joycon();
-
-	/*** デストラクタ */
 	~Joycon();
 
 	/**
-	* 接続する
+	* @brief 接続する
 	* @param[in] _controllerType 接続するコントローラ
 	* @return 成功すればtrue 失敗すればfalse
 	*/
 	bool Connect(CONTROLLER_TYPE _controllerType);
 
-	/*** 接続を終了する */
+	/**
+	* @brief 接続を終了する 
+	*/
 	void Disconnect()
 	{
 		if (m_IsConnect)
@@ -105,13 +104,13 @@ public:
 	}
 
 	/**
-	* ボタンの状態を更新する
+	* @brief ボタンの状態を更新する
 	* @param[in] _button 更新するボタン
 	*/
 	void CheckButton(int _button);
 
 	/**
-	* アナログスティックの値を取得する
+	* @brief アナログスティックの値を取得する
 	* @return アナログスティックの値
 	*/
 	D3DXVECTOR2 GetAnalogStick() const
@@ -120,7 +119,7 @@ public:
 	}
 
 	/**
-	* 角速度を取得する
+	* @brief 角速度を取得する
 	* @return 角速度
 	*/
 	D3DXVECTOR3 GetGyroSensor()const
@@ -129,7 +128,7 @@ public:
 	}
 
 	/**
-	* 加速度を取得する
+	* @brief 加速度を取得する
 	* @return 加速度
 	*/
 	D3DXVECTOR3 GetAccelerometer()const
@@ -138,7 +137,7 @@ public:
 	}
 
 	/**
-	* ボタンの状態を取得する
+	* @brief ボタンの状態を取得する
 	* @param[in] _button 取得するボタン
 	* @return ボタンの状態
 	*/
@@ -147,10 +146,11 @@ public:
 		return m_ButtonState;
 	}
 private:
-	/*** 更新関数 */
 	void Update();
 
-	/*** 振動させる */
+	/**
+	*@brief 振動させる 
+	*/
 	void SendRumble();
 
 	hid_device*		m_Handle[MAX_CONTROLLER];

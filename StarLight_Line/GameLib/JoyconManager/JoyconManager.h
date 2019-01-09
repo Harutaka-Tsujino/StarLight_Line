@@ -11,7 +11,7 @@ public:
 	~JoyconManager();
 
 	/**
-	* Joyconを取得する
+	* @brief Joyconを取得する
 	* @param controllerType 取得するコントローラの種類
 	*/
 	Joycon* GetJoycon(Joycon::CONTROLLER_TYPE controllerType) const
@@ -29,14 +29,11 @@ public:
 		m_pJoycon[controllerType]->Disconnect();
 	}
 
-	void CheckButton(Joycon::CONTROLLER_TYPE controllerType, int button) const
-	{
-		m_pJoycon[controllerType]->CheckButton(button);
-	}
+	void InputState();
 
 	/**
-	* 引数に渡した向きを入れると
-	* アナログスティックがその方向に向いているかを判断する関数
+	* @brief 引数に渡した向きを入れると
+	*		 アナログスティックがその方向に向いているかを判断する関数
 	*
 	* @param controllerType 取得するコントローラの種類
 	* @param Direction アナログスティックの向き
@@ -44,6 +41,11 @@ public:
 	bool SearchAnalogStick(Joycon::CONTROLLER_TYPE controllerType, int direction);
 
 private:
+	void CheckButton(Joycon::CONTROLLER_TYPE controllerType, int button) const
+	{
+		m_pJoycon[controllerType]->CheckButton(button);
+	}
+
 	JoyconManager(const JoyconManager&) = delete;
 	JoyconManager& operator=(const JoyconManager&) = delete;
 
