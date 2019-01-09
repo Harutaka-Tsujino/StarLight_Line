@@ -78,12 +78,18 @@ VOID DataSaver::Save()
 
 	for (INT bsi = 0; bsi < m_BASIC_STAGES_MAX; ++bsi)
 	{
-		for (INT sli = 0; sli < m_BASIC_LEVELS_MAX; ++sli) SaveStageDetail(&m_basicStageDetails[bsi][sli]);
+		for (INT sli = 0; sli < m_BASIC_LEVELS_MAX; ++sli)
+		{
+			SaveStageDetail(&m_basicStageDetails[bsi][sli]);
+		}
 
 		ofs << std::endl;
 	}
 
-	for (INT sli = 0; sli < m_EXTRA_LEVELS_MAX; ++sli) SaveStageDetail(&m_extraStageDetail[sli]);
+	for (INT sli = 0; sli < m_EXTRA_LEVELS_MAX; ++sli)
+	{
+		SaveStageDetail(&m_extraStageDetail[sli]);
+	}
 }
 
 VOID DataSaver::OpenSelectedSaveData(std::ifstream* pIfs)
