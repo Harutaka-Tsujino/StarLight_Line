@@ -500,11 +500,6 @@ public:
 		m_pJoyconManager->Disconnect(controllerType);
 	}
 
-	inline VOID CheckJoyconButton(Joycon::CONTROLLER_TYPE controllerType, int button)
-	{
-		m_pJoyconManager->CheckButton(controllerType, button);
-	}
-
 	inline BOOL SearchJoyconAnalogStick(Joycon::CONTROLLER_TYPE controllerType, int direction)
 	{
 		return m_pJoyconManager->SearchAnalogStick(controllerType, direction);
