@@ -145,6 +145,12 @@ public:
 	{
 		return m_ButtonState;
 	}
+
+	BOOL GetIsConnect() const
+	{
+		return m_IsConnect;
+	}
+
 private:
 	void Update();
 
@@ -162,6 +168,7 @@ private:
 	D3DXVECTOR3		m_GyroSensor; //!< 回転速度センサー(m/s)
 	D3DXVECTOR3		m_Accelerometer; //!< 加速度センサー(rad/s)
 	bool			m_IsConnect;
+	bool			m_IsFirstFrame;
 
 	// サンプルコードより.
 
