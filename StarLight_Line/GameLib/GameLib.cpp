@@ -30,6 +30,8 @@ Board3D* GameLib::m_pBoard3D = nullptr;
 
 Sound* GameLib::m_pSound = nullptr;
 
+JoyconManager* GameLib::m_pJoyconManager = nullptr;
+
 VOID GameLib::RunFunc(VOID(*pMainFunc)())
 {
 	timeBeginPeriod(1);	//時間の有効数字の設定
