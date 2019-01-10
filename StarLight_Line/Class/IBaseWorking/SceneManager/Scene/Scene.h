@@ -4,7 +4,7 @@
 #include <windows.h>
 
 #include "../../IBaseWorking.h"
-#include "ObjManager\ObjManager.h"
+#include "ObjManager/ObjManager.h"
 
 class Scene :public IBaseWorking
 {

@@ -4,11 +4,11 @@
 
 #include <d3dx9.h>
 
-#include "DX\DX.h"
-#include "Wnd\Wnd.h"
-#include "Timer\Timer.h"
-#include "Collision\Collision.h"
-#include "Sound\Sound.h"
+#include "DX/DX.h"
+#include "Wnd/Wnd.h"
+#include "Timer/Timer.h"
+#include "Collision/Collision.h"
+#include "Sound/Sound.h"
 
 #include <crtdbg.h>
 

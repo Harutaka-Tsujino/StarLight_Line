@@ -18,9 +18,9 @@
 #include "../../../../Enum/OBJ_TYPE.h"
 #include "../../../../Obj.h"
 
-#include "Text\Data\TextFormat.h"
-#include "Text\Tstring\TString.h"
-#include "Text\ConversationText\ConversationText.h"
+#include "Text/Data/TextFormat.h"
+#include "Text/Tstring/TString.h"
+#include "Text/ConversationText/ConversationText.h"
 
 VOID Section::DevideTextsByConversationAndSet(const TString& sectionText)
 {

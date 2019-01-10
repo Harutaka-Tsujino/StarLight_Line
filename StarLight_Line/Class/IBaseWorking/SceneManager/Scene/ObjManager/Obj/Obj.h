@@ -6,7 +6,7 @@
 #include <d3dx9.h>
 
 #include "../../../../IBaseWorking.h"
-#include "Enum\OBJ_TYPE.h"
+#include "Enum/OBJ_TYPE.h"
 #include "../../../../../../GameLib/GameLib.h"
 
 class Obj :public IBaseWorking

@@ -2,18 +2,13 @@
 
 VOID ClearStar::Render()
 {
-	DefaultLight();
-
-	if (m_Info.m_CollisionPos.y < -m_STAR_HALF_SCALE || m_Info.m_CollisionPos.y > m_WND_SIZE.m_y + m_STAR_HALF_SCALE) return;
+	if (ShouldCulling()) return;
 
 	ConvertLocalToWorld(&m_MatWorld);
 
-	FbxRelated& rEnemyStar = m_rGameLib.GetFbx(_T("StarFBX"));
-
 	//色の設定
-	D3DXVECTOR4 ClearColor(ColorMax / ColorMax, 0x98 / ColorMax, 0xFB / ColorMax, 0x98 / ColorMax);
+	static const D3DXVECTOR4 CLEAR_COLOR(ColorMax / ColorMax, 0x98 / ColorMax, 0xFB / ColorMax, 0x98 / ColorMax);
+	m_rEnemyStar.SetEmissive(&CLEAR_COLOR);
 
-	rEnemyStar.SetEmissive(&ClearColor);
-
-	m_rGameLib.Render(rEnemyStar, m_MatWorld);
+	m_rGameLib.Render(m_rEnemyStar, m_MatWorld);
 }

@@ -20,6 +20,9 @@ VOID TitleLogo::Render()
 	m_rGameLib.AddtionBlendMode();
 
 	static INT frameCount = 0;
+
+	if (frameCount == 1) { m_rGameLib.OneShotStartSound(_T("TeamLogo")); };
+
 	const INT FRAME_COUNT_MAX = 40;
 	FLOAT frameProgressRate = static_cast<FLOAT>(frameCount) / FRAME_COUNT_MAX;
 
@@ -237,21 +240,27 @@ VOID TitleMenu::SelectMenu()
 
 	if (UpKeyIsPressed())
 	{
+		m_rGameLib.OneShotSimultaneousSound(_T("ChangeStage"));
+
 		RotateMenuDown();
 	}
 
 	if (DownKeyIsPressed())
 	{
+		m_rGameLib.OneShotSimultaneousSound(_T("ChangeStage"));
+
 		RotateMenuUp();
 	}
 
 	if (!ReturnKeyIsPressed()) return;
 
+	m_rGameLib.OneShotSimultaneousSound(_T("SelectMenu"));
+
 	SceneManager& rSceneManager = SceneManager::GetInstance();
 	switch (m_menuReel[m_CENTER_MENU])
 	{
 	case MK_NEW_GAME:
-		rSceneManager.SetNextScene(SK_RESULT);
+		rSceneManager.SetNextScene(SK_TUTORIAL);
 
 		break;
 

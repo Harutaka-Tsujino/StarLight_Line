@@ -163,6 +163,17 @@ VOID ResultSceneResultFont::Render()
 	m_rGameLib.Render(resultFont, m_rGameLib.GetTex(_T("ResultFont")));
 
 	m_alphaCount = (m_alphaCount >= m_ADDITIONAL_ALPHA_FRAME) ? m_ADDITIONAL_ALPHA_FRAME : ++m_alphaCount;
+
+	if (m_alphaCount != 1) return;
+
+	if (m_IS_FAILED)
+	{
+		m_rGameLib.OneShotStartSound(_T("Failed"));
+
+		return;
+	}
+
+	m_rGameLib.OneShotStartSound(_T("Clear"));
 }
 
 VOID ResultSceneContinue::Render()

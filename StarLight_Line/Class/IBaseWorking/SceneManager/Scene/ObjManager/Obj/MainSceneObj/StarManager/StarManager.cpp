@@ -40,6 +40,10 @@ VOID StarManager::Update()
 
 		if (m_End_ms <= m_rGameLib.GetMilliSecond())
 		{
+			m_Ends = TRUE;
+
+			if (rSceneManager.GetIsTutorial()) return;
+
 			SceneManager& rSceneManager = SceneManager::GetInstance();
 			rSceneManager.SetNextScene(SK_RESULT);
 
@@ -82,6 +86,56 @@ VOID StarManager::Render()
 	}
 }
 
+const CHAR* StarManager::GetStageFilePath()
+{
+	StageData stageData;
+	SceneManager::GetInstance().GetStageData(&stageData);
+
+	switch (stageData.m_stage)
+	{
+	case STAGE_TAURUS:
+		return "StageData/Stage.csv";
+
+	case STAGE_LIBRA:
+		return "StageData/LIBRA.csv";
+
+	case STAGE_VIRGO:
+		return "StageData/VIRGO.csv";
+
+	case STAGE_ARIES:
+		return "StageData/ARIES.csv";
+
+	case STAGE_GEMINI:
+		return "StageData/GEMINI.csv";
+
+	case STAGE_SCORPIUS:
+		return "StageData/SCORPIUS.csv";
+
+	case STAGE_PISCORPIUS:
+		return "StageData/PISCORPIUS.csv";
+
+	case STAGE_LEO:
+		return "StageData/LEO.csv";
+
+	case STAGE_CAPRICORNUS:
+		return "StageData/CAPRICORNUS.csv";
+
+	case STAGE_AQUARIUS:
+		return "StageData/AQUARIUS.csv";
+
+	case STAGE_SAGITTARIUS:
+		return "StageData/SAGITTARIUS.csv";
+
+	case STAGE_CANCER:
+		return "StageData/CANCER.csv";
+
+	case STAGE_BLACK_HOLE:
+		return "StageData/Stage.csv";
+	}
+
+	return nullptr;
+}
+
 VOID StarManager::LoadStarData(const char* pFileName)
 {
 	std::ifstream ifs(pFileName);
@@ -103,6 +157,21 @@ VOID StarManager::LoadStarData(const char* pFileName)
 
 	//ファイルにあるゲームに必要のない情報のから読みをする
 	getline(ifs, str);
+	replace(str.begin(), str.end(), ',', ' ');
+	std::stringstream starsNumsStream(str);
+
+	int starsNums = 0;
+
+	for (int i = 0; i < 3; ++i)
+	{
+		int starsNum = 0;
+
+		starsNumsStream >> starsNum;
+
+		starsNums += starsNum;
+	}
+
+	m_StarNotes.resize(starsNums, nullptr);
 
 	while (getline(ifs, str))
 	{
@@ -167,7 +236,9 @@ VOID StarManager::Create(const STAR_TYPE& Kind)
 		break;
 	}
 
-	m_StarNotes.push_back(pBase);
+	m_StarNotes[m_starCountToLoad] = pBase;
+
+	++m_starCountToLoad;
 }
 
 VOID StarManager::StarDataToAssign(const int& rArrayNum,const StarPlace& rStarPlace)
@@ -199,7 +270,7 @@ VOID StarManager::SetStar_ms(const std::vector<float>& rDropPerMinuteVec, StarPl
 	FLOAT formarBPM = 0;
 
 	LONGLONG* pStart_ms = &pStarInfo->m_Time;
-	*pStart_ms = 0;
+	*pStart_ms = m_WAITING_TIME_ms;
 
 	for (INT i = 0; i < pStarInfo->m_Measure - 1; ++i)
 	{

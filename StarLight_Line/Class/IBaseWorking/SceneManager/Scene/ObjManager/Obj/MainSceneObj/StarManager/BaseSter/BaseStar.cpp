@@ -2,6 +2,15 @@
 
 VOID BaseStar::Init()
 {
+	DefaultLight();
+
+	D3DXVECTOR4 VertexColor(180.0f / ColorMax, 0 / ColorMax, 0 / ColorMax, 0 / ColorMax);
+	m_rEnemyStar.SetDiffuse(&VertexColor);
+	m_rEnemyStar.SetAmbient(&VertexColor);
+
+	D3DXVECTOR4 SpecularColor(180.0f / ColorMax, 80 / ColorMax, 80 / ColorMax, 40 / ColorMax);
+	m_rEnemyStar.SetSpecular(&SpecularColor);
+	m_rEnemyStar.SetPower(1.0f);
 }
 
 VOID BaseStar::Render()
@@ -26,10 +35,8 @@ VOID BaseStar::TransScreenPosByTime(const LONGLONG& CurrentTime)
 	FLOAT oneNoteTakes_ms = (1.0f / m_Info.m_DropPerMinute) * MINUTE_TO__ms;
 
 	m_Info.m_Pos.y = m_WND_SIZE.m_y * (gap_ms / oneNoteTakes_ms);
-
 	m_Info.m_Pos.x = m_Info.m_Pos.y * tan(D3DXToRadian(-m_Info.m_XMovementDeg)) + m_Info.m_screenXBasePos;
-
-	m_Info.m_Pos.y -= 100.0f;
+	m_Info.m_Pos.y -= 150.0f;
 }
 
 VOID BaseStar::SetStarInfo(const struct StarPlace& StarPlace)
@@ -65,14 +72,9 @@ VOID BaseStar::DefaultLight()
 
 VOID BaseStar::ConvertLocalToWorld(D3DXMATRIX* pMatWorld)
 {
-	if (m_Info.m_CollisionPos.y < - 2 * m_STAR_HALF_SCALE || m_Info.m_CollisionPos.y > m_WND_SIZE.m_y +  2 * m_STAR_HALF_SCALE) return;
-
 	D3DXMATRIX MatTrans, MatScale, MatRotate;
 	D3DXMatrixIdentity(pMatWorld);
-	D3DXMatrixIdentity(&MatTrans);
-	D3DXMatrixIdentity(&MatScale);
-
-	const float MODELSCALE = 0.62f;
+	const float MODELSCALE = 0.52f;
 
 	// 拡大
 	D3DXMatrixScaling(&MatScale, MODELSCALE, MODELSCALE, MODELSCALE);
@@ -83,9 +85,6 @@ VOID BaseStar::ConvertLocalToWorld(D3DXMATRIX* pMatWorld)
 	FLOAT tan = (cameraPos.z) ? cameraPos.y / cameraPos.z : 0.0f;
 
 	// 演出用の回転
-	//D3DXMatrixRotationX(&MatRotate, static_cast<FLOAT>(/*-atan(tan)*//* + D3DX_PI*0.7f*/));
-	//D3DXMatrixMultiply(pMatWorld, pMatWorld, &MatRotate);
-
 	D3DXMatrixRotationY(&MatRotate, static_cast<FLOAT>(D3DX_PI));
 	D3DXMatrixMultiply(pMatWorld, pMatWorld, &MatRotate);
 
@@ -119,8 +118,6 @@ VOID BaseStar::ConvertLocalToWorld(D3DXMATRIX* pMatWorld)
 	// 移動
 	D3DXMatrixTranslation(&MatTrans, WorldBuff.x, WorldBuff.y, WorldBuff.z);
 	D3DXMatrixMultiply(pMatWorld, pMatWorld, &MatTrans);
-
-	m_rGameLib.TransBillBoard(pMatWorld);
 
 	m_rGameLib.SetCameraPos(cameraPos);
 	m_rGameLib.SetCameraTransform();

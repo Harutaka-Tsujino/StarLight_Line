@@ -30,9 +30,10 @@ struct StarPlace
 class BaseStar :public Obj
 {
 public:
-	BaseStar() :Obj(OT_TRANSPARENCY, 0.5f) 
+	BaseStar() :Obj(OT_TRANSPARENCY, 0.5f), m_rEnemyStar(m_rGameLib.GetFbx(_T("StarFBX")))
 	{
 		D3DXMatrixIdentity(&m_MatWorld);
+		Init();
 	}
 
 	virtual ~BaseStar() {};
@@ -52,6 +53,13 @@ protected:
 	VOID DefaultLight();										//ライトのデフォルト値設定関数
 	VOID ConvertLocalToWorld(D3DXMATRIX* matWorld);				//ローカル座標からワールド座標への変換
 
+	inline BOOL ShouldCulling()
+	{
+		const FLOAT STAR_HALF_SCALE = 50.0f;
+
+		return (m_Info.m_Pos.y < -STAR_HALF_SCALE - 150.0f || m_Info.m_Pos.y > 2.5f * m_WND_SIZE.m_y + STAR_HALF_SCALE);
+	}
+
 	StarPlace m_Info;				//スターの基本情報
 	D3DXMATRIX m_MatWorld;			//ワールド座標
 
@@ -59,7 +67,7 @@ protected:
 
 	ULONGLONG m_DegZ = 0;	//演出用の回転角度
 
-	const FLOAT m_STAR_HALF_SCALE = 50.0f;
+	FbxRelated& m_rEnemyStar;
 };
 
 #endif // !BASE_STAR_H_

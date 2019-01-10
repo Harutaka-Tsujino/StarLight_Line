@@ -2,6 +2,8 @@
 
 VOID Player::Init()
 {
+	DefaultLight();
+
 	count = 0;
 	m_PlayerPoint.x = m_MAXXARRAYNUM / 2;
 	m_PlayerPoint.y = m_MAXYARRAYNUM / 2;
@@ -21,16 +23,17 @@ VOID Player::Update()
 {
 	SceneManager& rSceneManager = SceneManager::GetInstance();
 
-	if (m_Hp.GetHP() <= 0)
+	if (m_Hp.GetHP() <= 0 && !rSceneManager.GetIsTutorial())
 	{
 		rSceneManager.SetTransitionMode(FALSE);
 
-		m_ResultData.JudgeGameFailure(7); //引数は適当
+		m_ResultData.JudgeGameFailure(8); //引数は適当
 		rSceneManager.SetResultData(m_ResultData.GetResultData());
+
 		rSceneManager.SetNextScene(SK_RESULT);
 	}
 
-	if (m_rGameLib.KeyboardIsPressed(DIK_LSHIFT))
+	if (m_rGameLib.KeyboardIsPressed(DIK_LSHIFT) && !rSceneManager.GetIsTutorial())
 	{
 		m_rGameLib.StopTime();
 		rSceneManager.SetCanTransferSubScene(TRUE);
@@ -42,7 +45,6 @@ VOID Player::Update()
 
 	int* pPoX = &m_PlayerPoint.x;
 	int* pPoY = &m_PlayerPoint.y;
-
 
 	//キー入力によってプレイヤーの動きを決める
 	//y座標の移動
@@ -123,7 +125,28 @@ VOID Player::Render()
 		m_AdditionalFlashMulti = (m_AdditionalFlashMulti >= 1) ? -1 : ++m_AdditionalFlashMulti;
 	}
 
-	FLOAT AdditionalColor = 60.0f * (m_ResultData.GetAdditionalFlashMulti() + m_Hp.GetAdditionalFlashMulti());
+	FLOAT AdditionalColor = 60.0f * (m_ResultData.GetAdditionalFlashMulti());
+
+	if (m_Hp.GetAdditionalFlashMulti() == -1) 
+	{
+		static BOOL Increases = FALSE;
+		static INT AdditionalFlashCount = 0;
+
+		const FLOAT ADDITIONAL_COLOR_MAX = -90.0f;
+		const INT ADDITIONAL_FLASH_COUNT_MAX = 20;
+
+		FLOAT AdditionalColorAbs = (ADDITIONAL_COLOR_MAX / ADDITIONAL_FLASH_COUNT_MAX) * AdditionalFlashCount;
+		AdditionalColor			 = (Increases) ? -AdditionalColorAbs + ADDITIONAL_COLOR_MAX : AdditionalColorAbs;
+
+		++AdditionalFlashCount;
+
+		if (AdditionalFlashCount >= ADDITIONAL_FLASH_COUNT_MAX)
+		{
+			AdditionalFlashCount = 0;
+
+			Increases = !Increases;
+		}
+	}
 
 	D3DXVECTOR4 EiwiAmbient(0.7f, (170.0f + AdditionalColor) / 255.0f, (170.0f + AdditionalColor) / 255.0f, (-30.0f + AdditionalColor) / 255.0f);
 	rEiwi.SetAmbient(&EiwiAmbient);
@@ -144,6 +167,32 @@ VOID Player::Render()
 	m_rGameLib.Render(rEiwi, m_World, m_rGameLib.GetTex(_T("PlayerTex")));
 
 	m_rGameLib.DefaultBlendMode();
+}
+
+VOID Player::DefaultLight()
+{
+	D3DXVECTOR3 vecDirection(-0.5f, -0.5f, -1.0f);
+	D3DLIGHT9 light;
+
+	ZeroMemory(&light, sizeof(D3DLIGHT9));
+
+	light.Type = D3DLIGHT_DIRECTIONAL;
+
+	light.Diffuse.r = 0.8f;
+	light.Diffuse.g = 0.8f;
+	light.Diffuse.b = 0.8f;
+
+	light.Ambient.r = 0.5f;
+	light.Ambient.b = 0.5f;
+	light.Ambient.g = 0.5f;
+
+	light.Specular.r = 0.5f;
+	light.Specular.b = 0.5f;
+	light.Specular.g = 0.5f;
+
+	D3DXVec3Normalize((D3DXVECTOR3*)&light.Direction, &vecDirection);
+
+	m_rGameLib.SetLight(light, 0);
 }
 
 //名前不安なので募集中

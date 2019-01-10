@@ -2,11 +2,13 @@
 
 VOID Timer::Start()
 {
+	Reset();
 	m_StartTime = std::chrono::system_clock::now();
 }
 
 VOID Timer::End()
 {
+	//Restart();
 	m_DiffTime = std::chrono::system_clock::now() - m_StartTime;
 }
 

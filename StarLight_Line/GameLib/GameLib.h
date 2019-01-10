@@ -13,6 +13,7 @@
 #include <d3dx9.h>
 
 #include "../Class/Singleton/Singleton.h"
+<<<<<<< HEAD
 #include "Wnd\Wnd.h"
 #include "DX\DX.h"
 #include "DX\DX3D\CustomVertexEditor\Data\CustomVertex.h"
@@ -22,6 +23,16 @@
 #include "3DBoard\3DBoard.h"
 #include "Sound\Sound.h"
 #include "JoyconManager\JoyconManager.h"
+=======
+#include "Wnd/Wnd.h"
+#include "DX/DX.h"
+#include "DX/DX3D/CustomVertexEditor/Data/CustomVertex.h"
+#include "DX/DX3D/CustomVertexEditor/Data/ObjData.h"
+#include "Timer/Timer.h"
+#include "Collision/Collision.h"
+#include "3DBoard/3DBoard.h"
+#include "Sound/Sound.h"
+>>>>>>> 外部ファイルの追加及びチュートリアルの作成ブラックホールステージ選択の作成
 
 template<typename T>
 VOID SafeRelease(T** ppType)

@@ -57,7 +57,7 @@ VOID PauseScene::RenderPauseFrame()
 	const INT MAX_RECT = 4;
 	CustomVertex Frame[VERTEX_NUM * MAX_RECT];
 
-	for (int i = 0;i < MAX_RECT;++i)
+	for (int i = 0; i < MAX_RECT; ++i)
 	{
 		ObjData Data[MAX_RECT];
 		Data[i].m_center    = { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.35f + (130.f * i), 0.5f };
@@ -73,7 +73,7 @@ VOID PauseScene::RenderPauseEffect()
 	const INT VERTEX_NUM = 4;
 	CustomVertex Effect[VERTEX_NUM];
 
-	for (int i = 0;i < 4;++i)
+	for (int i = 0; i < 4; ++i)
 	{
 		if (i != m_ActivatingKey) continue;
 

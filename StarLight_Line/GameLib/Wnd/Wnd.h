@@ -9,7 +9,7 @@
 
 #include <windows.h>
 
-#include "Data\RectSize.h"
+#include "Data/RectSize.h"
 
 /**
 * @brief ウィンドウクラス

@@ -161,12 +161,14 @@
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\SaveDataSceneObj\SaveDataSceneObj.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\StageSelectSceneObj\StageSelectSceneObj.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\TitleSceneObj\TitleSceneObj.cpp" />
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\TutorialSceneObj\TutorialSceneObj.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\PauseScene\PauseScene.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ResultScene\ResultScene.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\SaveDataScene\SaveDataScene.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\Scene.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\StageSelectScene\StageSelectScene.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\TitleScene\TitleScene.cpp" />
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\TutorialScene\TutorialScene.cpp" />
     <ClCompile Include="Class\Singleton\Singleton.cpp" />
     <ClCompile Include="GameLib\3DBoard\3DBoard.cpp" />
     <ClCompile Include="GameLib\Collision\Collision.cpp" />
@@ -186,6 +188,12 @@
     <ClCompile Include="GameLib\DX\DXInput\InputDev\InputDev.cpp" />
     <ClCompile Include="GameLib\DX\DXInput\InputDev\Keyboard\Keyboard.cpp" />
     <ClCompile Include="GameLib\DX\DXInput\InputDev\Mouse\Mouse.cpp" />
+    <ClCompile Include="GameLib\EffectManager\EffectManager.cpp" />
+    <ClCompile Include="GameLib\EffectManager\Effect\Effect.cpp" />
+    <ClCompile Include="GameLib\EffectManager\Effect\Effects\Effects.cpp" />
+    <ClCompile Include="GameLib\EffectManager\Effect\Particle\Behavior\Behavior.cpp" />
+    <ClCompile Include="GameLib\EffectManager\Effect\Particle\Particle.cpp" />
+    <ClCompile Include="GameLib\EffectManager\Effect\Particle\Shape\Shape.cpp" />
     <ClCompile Include="GameLib\GameLib.cpp" />
     <ClCompile Include="GameLib\JoyconManager\JoyconManager.cpp" />
     <ClCompile Include="GameLib\JoyconManager\Joycon\hid\hid.cpp" />
@@ -232,6 +240,7 @@
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\SaveDataSceneObj\SaveDataSceneObj.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\StageSelectSceneObj\StageSelectSceneObj.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\TitleSceneObj\TitleSceneObj.h" />
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\TutorialSceneObj\TutorialSceneObj.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\PauseScene\PauseScene.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ResultScene\ResultScene.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\SaveDataScene\Data\PreviewData.h" />
@@ -242,6 +251,7 @@
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\StageSelectScene\Enum\STAGE_LEVEL_KIND.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\StageSelectScene\StageSelectScene.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\TitleScene\TitleScene.h" />
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\TutorialScene\TutorialScene.h" />
     <ClInclude Include="Class\Singleton\Singleton.h" />
     <ClInclude Include="GameLib\3DBoard\3DBoard.h" />
     <ClInclude Include="GameLib\Collision\Collision.h" />
@@ -264,6 +274,12 @@
     <ClInclude Include="GameLib\DX\DXInput\InputDev\Keyboard\Keyboard.h" />
     <ClInclude Include="GameLib\DX\DXInput\InputDev\Mouse\Enum\DIM.h" />
     <ClInclude Include="GameLib\DX\DXInput\InputDev\Mouse\Mouse.h" />
+    <ClInclude Include="GameLib\EffectManager\EffectManager.h" />
+    <ClInclude Include="GameLib\EffectManager\Effect\Effect.h" />
+    <ClInclude Include="GameLib\EffectManager\Effect\Effects\Effects.h" />
+    <ClInclude Include="GameLib\EffectManager\Effect\Particle\Behavior\Behavior.h" />
+    <ClInclude Include="GameLib\EffectManager\Effect\Particle\Particle.h" />
+    <ClInclude Include="GameLib\EffectManager\Effect\Particle\Shape\Shape.h" />
     <ClInclude Include="GameLib\GameLib.h" />
     <ClInclude Include="GameLib\JoyconManager\JoyconManager.h" />
     <ClInclude Include="GameLib\JoyconManager\Joycon\hid\hidapi.h" />

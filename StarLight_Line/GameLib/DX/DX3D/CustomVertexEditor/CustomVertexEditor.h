@@ -11,8 +11,8 @@
 
 #include <d3dx9.h>
 
-#include "Data\CustomVertex.h"
-#include "Data\ObjData.h"
+#include "Data/CustomVertex.h"
+#include "Data/ObjData.h"
 
 /**
 * @brief 頂点データ構造体とその構造体の編集を行うクラス

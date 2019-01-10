@@ -82,6 +82,8 @@ public:
 	{
 		if (UpKeyIsPressed())
 		{
+			m_rGameLib.OneShotSimultaneousSound(_T("ChangeStage"));
+
 			m_selectingData = (m_selectingData <= 0) ? m_SAVE_DATAS_MAX - 1 : --m_selectingData;
 
 			return;
@@ -89,6 +91,8 @@ public:
 
 		if (DownKeyIsPressed())
 		{
+			m_rGameLib.OneShotSimultaneousSound(_T("ChangeStage"));
+
 			m_selectingData = (m_selectingData >= m_SAVE_DATAS_MAX - 1) ? 0 : ++m_selectingData;
 
 			return;
@@ -96,8 +100,9 @@ public:
 
 		if (ReturnKeyIsPressed())
 		{
-			SceneManager& rSceneManager = SceneManager::GetInstance();
+			m_rGameLib.OneShotSimultaneousSound(_T("SelectMenu"));
 
+			SceneManager& rSceneManager = SceneManager::GetInstance();
 			rSceneManager.SetNextScene(SK_STAGE_SELECT);
 		}
 	}
@@ -105,6 +110,10 @@ public:
 	VOID Render();
 
 private:
+	VOID RenderBriefDatas();
+
+	VOID RenderDetailData();
+
 	static const INT m_SAVE_DATAS_MAX = 3;	//! 仮にこのクラスに持たせているがSaveDataManagerを作りにそれに持たせる予定
 
 	INT m_selectingData = 0;

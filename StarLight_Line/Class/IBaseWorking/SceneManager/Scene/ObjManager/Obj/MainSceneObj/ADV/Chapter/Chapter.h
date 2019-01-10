@@ -23,8 +23,8 @@
 #include <algorithm>
 
 #include "../../../Obj.h"
-#include "Section\Text\Tstring\TString.h"
-#include "Section\Section.h"
+#include "Section/Text/Tstring/TString.h"
+#include "Section/Section.h"
 
 class Chapter :public Obj
 {

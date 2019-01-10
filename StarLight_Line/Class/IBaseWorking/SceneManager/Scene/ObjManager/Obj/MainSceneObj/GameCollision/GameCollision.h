@@ -43,11 +43,6 @@ public:
 
 	inline VOID ReleaseVertices()
 	{
-		/*for (auto i : m_Vertex)
-		{
-			delete i.second;
-		}*/
-
 		m_Vertex.clear();
 	}
 	
@@ -80,14 +75,19 @@ public:
 		m_PlayerPoint.clear();
 	}
 
-	BOOL HitSomething(const TCHAR* pKey, const STAR_TYPE& Type,
+	inline BOOL HitSomething(const TCHAR* pKey, const STAR_TYPE& Type,
 		const FLOAT& aRadius, const FLOAT& bRadius)
 	{
+		const FLOAT WND_Y_SIZE = static_cast<FLOAT>(m_rGameLib.GetWndSize().m_y);
+		const FLOAT STAR_HALF_SCALE = 50.0f;
+
 		for (int i = 0;i != m_Enemy.size();++i)
 		{
 			if (m_Enemy[i]->m_Type != Type) continue;
 
 			if (m_Enemy[i]->m_IsCollided) continue;
+
+			if (m_Enemy[i]->m_Point->y < -STAR_HALF_SCALE - 150.0f || m_Enemy[i]->m_Point->y > 2.5f * WND_Y_SIZE + STAR_HALF_SCALE) continue;
 
 			if (!CollidesStar(pKey, i, aRadius, bRadius)) continue;
 
@@ -105,25 +105,10 @@ public:
 
 		const FLOAT WND_Y_SIZE = static_cast<FLOAT>(m_rGameLib.GetWndSize().m_y);
 
-		if ((2 * -bRadius > EnemyScreenPos.y) || EnemyScreenPos.y > WND_Y_SIZE + 2 * bRadius) return FALSE;
+		FLOAT playerRadius = 38.0f - 26.0f * (1.0f - (PlayerScreenPos.y / WND_Y_SIZE));
+		FLOAT enemyRadius  = 50.0f - 33.0f * (1.0f - (EnemyScreenPos.y / WND_Y_SIZE));
 
-		FLOAT playerRadius = 38.f - 30.0f * (1.0f - (PlayerScreenPos.y / WND_Y_SIZE));
-
-		/*ObjData obj;
-		obj.m_center = PlayerScreenPos;
-
-		const FLOAT halfScale = 20.0f;
-		obj.m_halfScale = { playerRadius, playerRadius, 0.0f };
-
-		CustomVertex vertex[4];
-
-		m_rGameLib.CreateRect(vertex, obj);
-
-		m_rGameLib.Render(vertex);*/
-
-		//PlayerScreenPos.x += 10.0f;
-
-		return m_rGameLib.CollidesCircles(&PlayerScreenPos, &EnemyScreenPos, playerRadius, bRadius);
+		return m_rGameLib.CollidesCircles(&PlayerScreenPos, &EnemyScreenPos, playerRadius, enemyRadius);
 	}
 
 	inline BOOL CollidesRects(const TCHAR* KeyA, const TCHAR* KeyB)

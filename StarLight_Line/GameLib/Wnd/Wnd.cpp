@@ -2,7 +2,7 @@
 
 #include <windows.h>
 
-#include "Data\RectSize.h"
+#include "Data/RectSize.h"
 
 Wnd::Wnd(const HINSTANCE hInst, const TCHAR* pAppName)
 {

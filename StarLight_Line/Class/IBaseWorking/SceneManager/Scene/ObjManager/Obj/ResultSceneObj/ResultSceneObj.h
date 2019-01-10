@@ -369,6 +369,8 @@ public:
 
 	inline VOID Init()
 	{
+		m_rGameLib.AddSoundFile(_T("Sounds/Result/clear.mp3"), _T("Clear"));
+		m_rGameLib.AddSoundFile(_T("Sounds/Result/failed.mp3"), _T("Failed"));
 		m_rGameLib.CreateTex(_T("ResultFont"), _T("2DTextures/Result/ResultFont.png"));
 	}
 
@@ -420,14 +422,24 @@ public:
 
 	inline VOID Update() 
 	{
-		if (UpKeyIsPressed() || DownKeyIsPressed()) m_isSelectedYes = !m_isSelectedYes;
+		if (UpKeyIsPressed() || DownKeyIsPressed())
+		{
+			m_rGameLib.OneShotSimultaneousSound(_T("ChangeStage"));
+
+			m_isSelectedYes = !m_isSelectedYes;
+		}
 
 		if (!m_rGameLib.KeyboardIsPressed(DIK_RETURN)) return;
+
+		m_rGameLib.OneShotSimultaneousSound(_T("SelectMenu"));
 
 		SceneManager& rSceneManager = SceneManager::GetInstance();
 	
 		rSceneManager.SetTransitionMode(TRUE);
-		rSceneManager.SetNextScene(SK_STAGE_SELECT);
+
+		SCENE_KIND scene = (rSceneManager.GetIsTutorial()) ? SK_SAVE_DATA : SK_STAGE_SELECT;
+
+		rSceneManager.SetNextScene(scene);
 	}
 
 	VOID Render();
@@ -493,6 +505,13 @@ public:
 		delete m_pResultSceneResultFont;
 		delete m_pResultSceneResultData;
 		m_rGameLib.ReleaseTex();
+
+		if ((SceneManager::GetInstance()).GetIsTutorial())
+		{
+			SceneManager::GetInstance().SetIsTutorial(FALSE);
+
+			return;
+		}
 
 		DataSaver& rDataSaver = DataSaver::GetInstance();
 		rDataSaver.Save();

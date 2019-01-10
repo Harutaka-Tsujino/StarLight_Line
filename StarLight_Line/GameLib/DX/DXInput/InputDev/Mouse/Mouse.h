@@ -12,7 +12,7 @@
 #include <dinput.h>
 
 #include "../InputDev.h"
-#include "Enum\DIM.h"
+#include "Enum/DIM.h"
 
 /**
 * @brief マウスクラス,基底クラスのInputDevを参照して下さい

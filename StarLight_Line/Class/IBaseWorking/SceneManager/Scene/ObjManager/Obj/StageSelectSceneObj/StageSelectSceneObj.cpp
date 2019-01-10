@@ -24,28 +24,64 @@ VOID StageSelectSceneStageList::Update()
 	if (m_isDecided) return;
 
 	if (UpKeyIsPressed() &&
-		m_backIsSelected)
+		!m_backIsSelected &&
+		!m_blackHoleIsSelected)
 	{
+		m_blackHoleIsSelected = TRUE;
+
+		m_lengthMulti = -1.0f;
+	}
+
+	if (UpKeyIsPressed() &&
+		m_backIsSelected &&
+		!m_blackHoleIsSelected)
+	{
+		m_rGameLib.OneShotSimultaneousSound(_T("ChangeStage"));
+
 		m_backIsSelected = FALSE;
+	}
+
+	if (DownKeyIsPressed() &&
+		!m_backIsSelected &&
+		m_blackHoleIsSelected)
+	{
+		m_blackHoleIsSelected = FALSE;
+
+		m_lengthMulti = 1.0f;
 	}
 
 	SceneManager& rSceneManager = SceneManager::GetInstance();
 
 	if (ReturnKeyIsPressed() &&
-		m_backIsSelected)
+		m_backIsSelected &&
+		!m_blackHoleIsSelected)
 	{
+		m_rGameLib.OneShotSimultaneousSound(_T("SelectMenu"));
+
 		rSceneManager.SetNextScene(SK_TITLE);
 
 		return;
 	}
 
-	if (m_backIsSelected) return;
+	if (ReturnKeyIsPressed() &&
+		!m_backIsSelected &&
+		m_blackHoleIsSelected &&
+		m_blackHoleStagingEnds)
+	{
+		m_lengthMulti = 0.0f;
+
+		m_isDecided = TRUE;
+	}
+
+	if (m_backIsSelected || m_blackHoleIsSelected) return;
 
 	if (ReturnKeyIsPressed()	&&
 		m_deg == 0.0f			&&
 		m_lengthMulti == 0.0f)
 	{
 		m_lengthMulti = -1.0f;
+
+		m_rGameLib.OneShotSimultaneousSound(_T("SelectMenu"));
 
 		return;
 	}
@@ -54,6 +90,8 @@ VOID StageSelectSceneStageList::Update()
 
 	if (DownKeyIsPressed())
 	{
+		m_rGameLib.OneShotSimultaneousSound(_T("ChangeStage"));
+
 		m_backIsSelected = TRUE;
 
 		return;
@@ -66,8 +104,23 @@ VOID StageSelectSceneStageList::Update()
 
 	if (m_deg != 0) return;
 
-	if (RightKeyIsPressed())m_deg = ROTATE_SPEED;	//! 回転の起動
-	if (LeftKeyIsPressed())m_deg = -ROTATE_SPEED;
+	if (RightKeyIsPressed())
+	{
+		m_deg = ROTATE_SPEED;	//! 回転の起動
+
+		m_rGameLib.OneShotSimultaneousSound(_T("ChangeStage"));
+
+		return;
+	}
+
+	if (LeftKeyIsPressed())
+	{
+		m_deg = -ROTATE_SPEED;
+
+		m_rGameLib.OneShotSimultaneousSound(_T("ChangeStage"));
+
+		return;
+	}
 }
 
 VOID StageSelectSceneStageList::Render()
@@ -84,7 +137,8 @@ VOID StageSelectSceneStageList::Render()
 	iconsCircleRadius = min(max(iconsCircleRadius, 0), ICONS_CIRCLE_RADIUS_MAX);
 
 	if (iconsCircleRadius == ICONS_CIRCLE_RADIUS_MAX ||
-		!iconsCircleRadius)
+		!iconsCircleRadius &&
+		!m_blackHoleIsSelected)
 	{
 		m_lengthMulti = 0.0f;
 
@@ -102,13 +156,13 @@ VOID StageSelectSceneStageList::Render()
 
 	for (int i = 0; i < m_STAGE_ICONS_MAX; ++i)
 	{
-		if (i != m_selectingStage && m_isDecided) continue;
+		if ((i != m_selectingStage || m_blackHoleIsSelected) && m_isDecided ) continue;;
 
 		RotateIconsCenter(stageIconDatas, i, DEG_GAP, iconsCircleRadius);
 		
 		SetHalfScaleByRadius(stageIconDatas, i, iconsCircleRadius, ICONS_CIRCLE_RADIUS_MAX);
 
-		if (i != m_selectingStage)
+		if (i != m_selectingStage || m_blackHoleIsSelected)
 		{
 			alpha = static_cast<BYTE>(255 * (iconsCircleRadius / ICONS_CIRCLE_RADIUS_MAX));
 
@@ -134,6 +188,8 @@ VOID StageSelectSceneStageList::Render()
 		if (m_selectingStage < 0) m_selectingStage = m_STAGE_ICONS_MAX + m_selectingStage;					//! m_selectingStageがマイナスに行ったときの対処
 		m_selectingStage %= m_STAGE_ICONS_MAX;
 	}
+
+	RenderBlackHole();
 
 	m_rGameLib.DefaultBlendMode();
 
@@ -172,6 +228,8 @@ VOID StageSelectSceneLevelSelecter::Update()
 
 	if (UpKeyIsPressed())
 	{
+		m_rGameLib.OneShotSimultaneousSound(_T("ChangeStage"));
+
 		m_backIsSelected = TRUE;
 
 		return;
@@ -179,6 +237,8 @@ VOID StageSelectSceneLevelSelecter::Update()
 
 	if (DownKeyIsPressed())
 	{
+		m_rGameLib.OneShotSimultaneousSound(_T("ChangeStage"));
+
 		m_backIsSelected = FALSE;
 
 		return;
@@ -186,6 +246,8 @@ VOID StageSelectSceneLevelSelecter::Update()
 
 	if (ReturnKeyIsPressed() && m_backIsSelected)
 	{
+		m_rGameLib.OneShotSimultaneousSound(_T("SelectMenu"));
+
 		m_shouldActivateStageSelect = TRUE;
 
 		return;
@@ -195,6 +257,8 @@ VOID StageSelectSceneLevelSelecter::Update()
 
 	if (RightKeyIsPressed())
 	{
+		m_rGameLib.OneShotSimultaneousSound(_T("ChangeStage"));
+
 		m_level = (m_level < SLK_HARD) ? ++m_level : SLK_HARD;
 
 		return;
@@ -202,6 +266,8 @@ VOID StageSelectSceneLevelSelecter::Update()
 
 	if (LeftKeyIsPressed())
 	{
+		m_rGameLib.OneShotSimultaneousSound(_T("ChangeStage"));
+
 		m_level = (m_level > SLK_EASY) ? --m_level : SLK_EASY;
 
 		return;
@@ -209,6 +275,8 @@ VOID StageSelectSceneLevelSelecter::Update()
 
 	if (ReturnKeyIsPressed())
 	{
+		m_rGameLib.OneShotSimultaneousSound(_T("SelectMenu"));
+
 		SceneManager& rSceneManager = SceneManager::GetInstance();
 		rSceneManager.SetNextScene(SK_GAME);
 	}
