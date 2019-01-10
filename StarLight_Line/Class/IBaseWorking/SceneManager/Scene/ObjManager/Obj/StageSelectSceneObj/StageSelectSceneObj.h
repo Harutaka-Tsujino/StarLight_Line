@@ -63,6 +63,11 @@ class StageSelectSceneStageList :public Obj
 public:
 	StageSelectSceneStageList() :Obj(OT_TRANSPARENCY, 0.9f)
 	{
+		StageData stageData;
+		SceneManager::GetInstance().GetStageData(&stageData);
+
+		m_selectingStage = stageData.m_stage;
+
 		Init();
 	}
 
@@ -71,9 +76,10 @@ public:
 		m_rGameLib.ReleaseTex();
 	}
 
-	inline VOID Init() const
+	inline VOID Init()
 	{
 		m_rGameLib.CreateTex(_T("Icons"), _T("2DTextures/StageSelect/StageSelect_icons.png"));
+		m_rGameLib.CreateTex(_T("BlackHoleIcon"), _T("2DTextures/StageSelect/BlackHoleIcon.png"));
 		m_rGameLib.CreateTex(_T("BackButton"), _T("2DTextures/StageSelect/StageSelect_BackButton.png"));
 	}
 
@@ -90,6 +96,8 @@ public:
 	{
 		m_lengthMulti = 1.0f;
 
+		m_blackHoleIsSelected = FALSE;
+
 		m_isDecided = FALSE;
 	}
 
@@ -98,12 +106,64 @@ public:
 		return m_selectingStage;
 	}
 
+	inline BOOL BlackHoleIconSelected()
+	{
+		return m_blackHoleIsSelected;
+	}
+
 private:
 	struct StageIconData
 	{
 		ObjData m_objData;
 		FLOAT m_deg;
 	};
+
+	inline VOID RenderBlackHole()
+	{
+		static ObjData data;
+		data.m_center = { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.4f, m_Z };
+
+		const FLOAT ICONS_CIRCLE_RADIUS_MAX = 300.0f;
+		const FLOAT ICONS_CIRCLE_RADIUS_MIN = 50.0f;
+		static FLOAT iconsCircleRadius = ICONS_CIRCLE_RADIUS_MIN;
+
+		const INT DECIDE_STAGE_FRAMES = 60;
+
+		static INT alpha = 255;
+
+		auto StageBlackHole = [&, this]()
+		{
+			if (!m_blackHoleIsSelected)
+			{
+				alpha += static_cast<INT>(m_lengthMulti * (255 / 60));
+
+				iconsCircleRadius -= ICONS_CIRCLE_RADIUS_MAX / DECIDE_STAGE_FRAMES;
+
+				return;
+			}
+
+			iconsCircleRadius += ICONS_CIRCLE_RADIUS_MAX / DECIDE_STAGE_FRAMES;
+		};
+
+		StageBlackHole();
+
+		iconsCircleRadius = min(max(iconsCircleRadius, ICONS_CIRCLE_RADIUS_MIN), ICONS_CIRCLE_RADIUS_MAX);
+
+		m_blackHoleStagingEnds = FALSE;
+
+		if (iconsCircleRadius == ICONS_CIRCLE_RADIUS_MAX) m_blackHoleStagingEnds = TRUE;
+
+		data.m_halfScale = { iconsCircleRadius, iconsCircleRadius, 0.0f };
+
+		alpha = min(max(alpha, 0), 255);
+		data.m_aRGB = D3DCOLOR_ARGB(alpha, 255, 255, 255);
+
+		data.m_deg.z += 0.25f;
+
+		CustomVertex blackHole[4];
+		m_rGameLib.CreateRect(blackHole, data);
+		m_rGameLib.Render(blackHole, m_rGameLib.GetTex(_T("BlackHoleIcon")));
+	}
 
 	inline VOID RotateIconsCenter(StageIconData* pStageIconDatas, INT iconElementNum, FLOAT degGap, FLOAT iconsCircleRadius)
 	{
@@ -148,13 +208,16 @@ private:
 
 	BOOL m_isDecided = FALSE;
 
+	BOOL m_blackHoleIsSelected = FALSE;
+	BOOL m_blackHoleStagingEnds = FALSE;
+
 	BOOL m_backIsSelected = FALSE;
 };
 
 class StageSelectSceneLevelSelecter :public Obj
 {
 public:
-	StageSelectSceneLevelSelecter(const BOOL& m_stageIsDecided) :Obj(OT_TRANSPARENCY, 9.0f), m_rStageIsDecided(m_stageIsDecided)
+	StageSelectSceneLevelSelecter(const BOOL& m_stageIsDecided) :Obj(OT_TRANSPARENCY, 0.91f), m_rStageIsDecided(m_stageIsDecided)
 	{
 		Init();
 	}
@@ -242,10 +305,7 @@ public:
 
 	inline VOID SendStageDataToSceneManager()
 	{
-		m_pStageList->GetStage();
-		m_pLevelSelecter->Level();
-
-		StageData StageData = { m_pStageList->GetStage(), m_pLevelSelecter->Level() };
+		StageData StageData = { m_pLevelSelecter->Level(), m_pStageList->GetStage() };
 
 		SceneManager& rSceneManager = SceneManager::GetInstance();
 		rSceneManager.SetStageData(StageData);

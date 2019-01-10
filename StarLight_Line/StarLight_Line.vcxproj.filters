@@ -230,6 +230,30 @@
     <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\NumText">
       <UniqueIdentifier>{50acb009-9d71-4f29-ab5f-fede6f88d1ba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\TutorialScene">
+      <UniqueIdentifier>{16ca4bd8-a1c2-4e43-97c7-b64e6b062678}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\TutorialSceneObj">
+      <UniqueIdentifier>{85a5cee9-a9af-4f00-b493-e074cdc29c62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLib\EffectManager">
+      <UniqueIdentifier>{ca84ccab-e0a0-4b98-85c9-8ff3017413c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLib\EffectManager\Effect">
+      <UniqueIdentifier>{3e26863e-ebec-404c-b84f-48a36c897041}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLib\EffectManager\Effect\Particle">
+      <UniqueIdentifier>{407124a2-7ccc-4a1e-8dbb-88fc44637691}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLib\EffectManager\Effect\Particle\Shape">
+      <UniqueIdentifier>{b7f3ba6f-55ca-449b-b1fe-d0e93d603d67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLib\EffectManager\Effect\Particle\Behavior">
+      <UniqueIdentifier>{307c45d5-4171-4e63-be91-43886fc2851d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLib\EffectManager\Effect\Effects">
+      <UniqueIdentifier>{6ae947ac-5e39-4391-91b6-af907af1958c}</UniqueIdentifier>
+    </Filter>
     <Filter Include="GameLib\JoyconManager">
       <UniqueIdentifier>{c67eb53b-26bc-4d94-a1d6-8e07407092be}</UniqueIdentifier>
     </Filter>
@@ -427,6 +451,30 @@
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\NumText\NumText.cpp">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\NumText</Filter>
     </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\TutorialScene\TutorialScene.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\TutorialScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\TutorialSceneObj\TutorialSceneObj.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\TutorialSceneObj</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLib\EffectManager\EffectManager.cpp">
+      <Filter>GameLib\EffectManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLib\EffectManager\Effect\Effect.cpp">
+      <Filter>GameLib\EffectManager\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLib\EffectManager\Effect\Particle\Particle.cpp">
+      <Filter>GameLib\EffectManager\Effect\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLib\EffectManager\Effect\Particle\Behavior\Behavior.cpp">
+      <Filter>GameLib\EffectManager\Effect\Particle\Behavior</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLib\EffectManager\Effect\Particle\Shape\Shape.cpp">
+      <Filter>GameLib\EffectManager\Effect\Particle\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLib\EffectManager\Effect\Effects\Effects.cpp">
+      <Filter>GameLib\EffectManager\Effect\Effects</Filter>
+    </ClCompile>
     <ClCompile Include="GameLib\JoyconManager\Joycon\hid\hid.cpp">
       <Filter>GameLib\JoyconManager\Joycon\hid</Filter>
     </ClCompile>
@@ -491,9 +539,6 @@
     </ClInclude>
     <ClInclude Include="Class\IBaseWorking\IBaseWorking.h">
       <Filter>Class\IBaseWorking</Filter>
-    </ClInclude>
-    <ClInclude Include="Class\IBaseWorking\SceneManager\SceneManager.h">
-      <Filter>Class\IBaseWorking\SceneManager</Filter>
     </ClInclude>
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\TitleScene\TitleScene.h">
       <Filter>Class\IBaseWorking\SceneManager\Scene\TitleScene</Filter>
@@ -575,9 +620,6 @@
     </ClInclude>
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager\BaseSter\ClearStar\ClearStar.h">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager\BaseStar\ClearStar</Filter>
-    </ClInclude>
-    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\MainSceneObject.h">
-      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj</Filter>
     </ClInclude>
     <ClInclude Include="GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxRelated.h">
       <Filter>GameLib\DX\DX3D\FbxStorage\FbxRelated</Filter>
@@ -668,6 +710,36 @@
     </ClInclude>
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\NumText\NumText.h">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\NumText</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\TutorialScene\TutorialScene.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\TutorialScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\TutorialSceneObj\TutorialSceneObj.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\TutorialSceneObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\MainSceneObject.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\SceneManager.h">
+      <Filter>Class\IBaseWorking\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLib\EffectManager\EffectManager.h">
+      <Filter>GameLib\EffectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLib\EffectManager\Effect\Effect.h">
+      <Filter>GameLib\EffectManager\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLib\EffectManager\Effect\Particle\Particle.h">
+      <Filter>GameLib\EffectManager\Effect\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLib\EffectManager\Effect\Particle\Behavior\Behavior.h">
+      <Filter>GameLib\EffectManager\Effect\Particle\Behavior</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLib\EffectManager\Effect\Particle\Shape\Shape.h">
+      <Filter>GameLib\EffectManager\Effect\Particle\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLib\EffectManager\Effect\Effects\Effects.h">
+      <Filter>GameLib\EffectManager\Effect\Effects</Filter>
     </ClInclude>
     <ClInclude Include="GameLib\JoyconManager\Joycon\hid\hidapi.h">
       <Filter>GameLib\JoyconManager\Joycon\hid</Filter>

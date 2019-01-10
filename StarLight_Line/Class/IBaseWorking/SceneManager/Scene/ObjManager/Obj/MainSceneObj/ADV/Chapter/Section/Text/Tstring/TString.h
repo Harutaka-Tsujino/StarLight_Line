@@ -126,7 +126,7 @@ public:
 
 		pTString->WriteInChar(m_TEXT_END);
 
-		m_textPtr += m_NEW_LINE_AND_RETURN_LENGTH;	//! \nと\rを飛ばす
+		m_textPtr += m_NEW_LINE_AND_RETURN_LENGTH;	//! \nと\0を飛ばす
 	}
 
 	inline BOOL TextPtrPointsToEndOfText() const

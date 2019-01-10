@@ -6,12 +6,9 @@
 class ClearStar:public BaseStar
 {
 public:
-	ClearStar() 
-	{
-		Init();
-	}
+	ClearStar() {};
 
-	~ClearStar() {}
+	~ClearStar() {};
 
 	VOID Render();
 };

@@ -35,7 +35,7 @@ public:
 
 	inline VOID Init() const
 	{
-		m_rGameLib.CreateTex(_T("Back"), _T("2DTextures/SaveData/SaveData_Back.png"));
+		m_rGameLib.CreateTex(_T("Back"), _T("2DTextures/SaveData/SaveData_Back.jpg"));
 	}
 
 	inline VOID Update() {};
@@ -70,7 +70,7 @@ public:
 
 	inline VOID Init() const
 	{
-		m_rGameLib.CreateTex(_T("Eiwi"), _T("2DTextures/End/End_Eiwi.png"));
+		m_rGameLib.CreateTex(_T("Eiwi"), _T("2DTextures/End/End_Eiwi.jpg"));
 	}
 
 	inline VOID Update() {};

@@ -9,7 +9,7 @@
 
 #include "../../../../Singleton/Singleton.h"
 #include "../../../IBaseWorking.h"
-#include "Obj\Obj.h"
+#include "Obj/Obj.h"
 
 class ObjManager :public Singleton<ObjManager>, public IBaseWorking
 {

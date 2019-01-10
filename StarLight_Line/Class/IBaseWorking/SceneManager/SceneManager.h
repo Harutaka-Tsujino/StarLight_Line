@@ -7,15 +7,15 @@
 
 #include "../../Singleton/Singleton.h"
 #include "../IBaseWorking.h"
-#include "Scene\Scene.h"
-#include "Scene\Enum\SCENE_KIND.h"
-#include "Scene\TitleScene\TitleScene.h"
+#include "Scene/Scene.h"
+#include "Scene/Enum/SCENE_KIND.h"
+#include "Scene/TitleScene/TitleScene.h"
 
 #include "../../../GameLib/GameLib.h"
 #include "../../../GameLib/DX/DX3D/CustomVertexEditor/Data/ObjData.h"
 #include "../../../GameLib/DX/DX3D/CustomVertexEditor/Data/CustomVertex.h"
-#include "Data\StageData.h"
-#include "Data\ResultData.h"
+#include "Data/StageData.h"
+#include "Data/ResultData.h"
 
 class SceneManager :public IBaseWorking, public Singleton<SceneManager>
 {
@@ -25,6 +25,9 @@ public:
 	~SceneManager()
 	{
 		TurnOffBGM();
+
+		Sleep(1000);	//ながれているBGMを止めるのには少しかかり
+						//再生中にプログラムを終了するとメモリリークが起こる
 
 		delete m_pScene;
 	}
@@ -123,6 +126,16 @@ public:
 		rGameLib.LoopStartSound(m_pBGM_KEY[m_nextScene]);
 	}
 
+	inline VOID SetIsTutorial(BOOL isTutorial)
+	{
+		m_isTutorial = isTutorial;
+	}
+
+	inline BOOL GetIsTutorial() const
+	{
+		return m_isTutorial;
+	}
+
 private:
 	SceneManager() 
 	{
@@ -145,9 +158,11 @@ private:
 	const TCHAR* m_pBGM_KEY[SK_MAX] =
 	{
 		_T("TITLE_BGM")			,
+		_T("TUTORIAL_BGM")		,
 		_T("STAGESELECT_BGM")	,
 		_T("GAME_BGM")			,
 		_T("SAVE_DATA_BGM")		,
+		_T("PAUSE_BGM")			,
 		_T("RESULT_BGM")		,
 		_T("END_BGM")			,
 	};
@@ -160,6 +175,8 @@ private:
 
 	StageData m_stageData;
 	ResultData m_resultData;
+
+	BOOL m_isTutorial = FALSE;
 };
 
 #endif // !SCENE_MANAGER_H

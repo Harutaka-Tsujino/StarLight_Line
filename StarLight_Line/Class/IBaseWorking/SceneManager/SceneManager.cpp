@@ -2,15 +2,16 @@
 
 #include <windows.h>
 
-#include "Scene\Scene.h"
-#include "Scene\Enum\SCENE_KIND.h"
-#include "Scene\TitleScene\TitleScene.h"
-#include "Scene\StageSelectScene\StageSelectScene.h"
-#include "Scene\SaveDataScene\SaveDataScene.h"
-#include "Scene\MainScene\MainScene.h"
-#include "Scene\ResultScene\ResultScene.h"
-#include "Scene\EndScene\EndScene.h"
-#include "Scene\PauseScene\PauseScene.h"
+#include "Scene/Scene.h"
+#include "Scene/Enum/SCENE_KIND.h"
+#include "Scene/TitleScene/TitleScene.h"
+#include "Scene/StageSelectScene/StageSelectScene.h"
+#include "Scene/SaveDataScene/SaveDataScene.h"
+#include "Scene/MainScene/MainScene.h"
+#include "Scene/ResultScene/ResultScene.h"
+#include "Scene/EndScene/EndScene.h"
+#include "Scene/PauseScene/PauseScene.h"
+#include "Scene/TutorialScene/TutorialScene.h"
 
 VOID SceneManager::Factory()
 {
@@ -29,6 +30,13 @@ VOID SceneManager::Factory()
 		delete m_pScene;
 
 		m_pScene = new TitleScene();
+
+		break;
+
+	case SK_TUTORIAL:
+		delete m_pScene;
+
+		m_pScene = new TutorialScene();
 
 		break;
 
@@ -110,7 +118,6 @@ VOID SceneManager::StageTransition()
 	{
 		rGameLib.AddtionBlendMode();
 		data.m_aRGB = D3DCOLOR_ARGB(static_cast<UCHAR>(m_transitionStagingAlpha), 255, 255, 255);
-
 	}
 	
 	CustomVertex cover[4];
@@ -126,15 +133,19 @@ VOID SceneManager::InitBGM()
 	const TCHAR* pBGM_PATH[SK_MAX] =
 	{
 		_T("Sounds/Title/titlesave.mp3")	,
+		_T("Sounds/Stage/Leo/leo.mp3")		,
 		_T("Sounds/StageSelect/Stage.mp3")	,
 		_T("Sounds/Stage/Leo/leo.mp3")		,
 		_T("Sounds/Title/titlesave.mp3")	,
 		_T("Sounds/Result/result.mp3")		,
 		_T("Sounds/Title/titlesave.mp3")	,
+		_T("Sounds/Title/titlesave.mp3")	,
 	};
 
 	static BOOL bGMInits[SK_MAX] =
 	{
+		FALSE,
+		FALSE,
 		FALSE,
 		FALSE,
 		FALSE,
@@ -150,4 +161,6 @@ VOID SceneManager::InitBGM()
 	GameLib& rGameLib = GameLib::GetInstance();
 
 	rGameLib.AddSoundFile(pBGM_PATH[m_nextScene], m_pBGM_KEY[m_nextScene]);
+
+	rGameLib.SetVolume(m_pBGM_KEY[m_nextScene], 40);
 }

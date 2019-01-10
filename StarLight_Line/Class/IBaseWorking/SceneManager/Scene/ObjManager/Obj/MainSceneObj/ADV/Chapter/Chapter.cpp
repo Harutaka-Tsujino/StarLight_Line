@@ -22,8 +22,8 @@
 #include <algorithm>
 
 #include "../../../Obj.h"
-#include "Section\Text\Tstring\TString.h"
-#include "Section\Section.h"
+#include "Section/Text/Tstring/TString.h"
+#include "Section/Section.h"
 
 VOID Chapter::ReadChapterFile(const TCHAR* pChapterTextFilePath, TString* pChapterText) const
 {

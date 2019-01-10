@@ -5,18 +5,18 @@
 
 #include <d3dx9.h>
 
-#include "D3DPP\D3DPP.h"
-#include "ColorBlender\ColorBlender.h"
-#include "Light\Light.h"
-#include "TexStorage\TexStorage.h"
-#include "Camera\Camera.h"
-#include "CustomVertexEditor\CustomVertexEditor.h"
-#include "Renderer\Renderer.h"
+#include "D3DPP/D3DPP.h"
+#include "ColorBlender/ColorBlender.h"
+#include "Light/Light.h"
+#include "TexStorage/TexStorage.h"
+#include "Camera/Camera.h"
+#include "CustomVertexEditor/CustomVertexEditor.h"
+#include "Renderer/Renderer.h"
 #include "../../Wnd/Data/RectSize.h"
-#include "CustomVertexEditor\Data\CustomVertex.h"
-#include "CustomVertexEditor\Data\ObjData.h"
-#include "FbxStorage\FbxStorage.h"
-#include "FbxStorage\FbxRelated\FbxRelated.h"
+#include "CustomVertexEditor/Data/CustomVertex.h"
+#include "CustomVertexEditor/Data/ObjData.h"
+#include "FbxStorage/FbxStorage.h"
+#include "FbxStorage/FbxRelated/FbxRelated.h"
 
 DX3D::DX3D(HWND hWnd, RectSize wndSize, LPDIRECT3D9 pD3D)
 	:m_HWND(hWnd), m_D3DPP(new D3DPP(m_HWND, wndSize))
@@ -93,7 +93,7 @@ VOID DX3D::Create(LPDIRECT3D9 pD3D)
 
 	MessageBox(
 		0, 
-		_T("HALモードでDIRECT3Dデバイスを作成できません\nREFモードで再試行します"),
+		_T("HALモードでDIRECT3Dデバイスを作成できません/nREFモードで再試行します"),
 		NULL, 
 		MB_OK);
 

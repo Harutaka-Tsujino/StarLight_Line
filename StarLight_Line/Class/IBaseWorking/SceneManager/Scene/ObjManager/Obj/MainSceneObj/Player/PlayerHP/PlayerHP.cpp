@@ -10,38 +10,48 @@ VOID PlayerHP::Init()
 
 VOID PlayerHP::Update()
 {
-	if (m_HP <= 0)
+	m_invincibleCount = (m_isInvincible) ? ++m_invincibleCount : 0;
+
+	const INT INVINCIBLE_COUNT_MAX = 120;
+
+	if (m_invincibleCount > INVINCIBLE_COUNT_MAX)
 	{
-		return;
+		m_isInvincible = FALSE;
 	}
 
 	const FLOAT PLAYER_RADIUS = 20.f;
 	const FLOAT ENEMY_RADIUS  = 30.f;
 
-	const INT DO_NOTHING_FRAME_COUNT_NUM = -1;
-	static INT ChangeDefaultFlashFrameCount = DO_NOTHING_FRAME_COUNT_NUM;
-
-	if (ChangeDefaultFlashFrameCount >= 0)
+	if (m_changeDefaultFlashFrameCount >= 0)
 	{
-		++ChangeDefaultFlashFrameCount;
+		++m_changeDefaultFlashFrameCount;
 	}
 
-	if (ChangeDefaultFlashFrameCount > 15)
+	/*if (0 < m_changeDefaultFlashFrameCount && m_changeDefaultFlashFrameCount <= INVINCIBLE_COUNT_MAX)
+	{
+		const INT FLASH_PERIOD_COUNT = 8;
+
+		m_AdditionalFlashMulti = ((m_changeDefaultFlashFrameCount % FLASH_PERIOD_COUNT) / (FLASH_PERIOD_COUNT / 2)) ? -1 : 0;
+	}*/
+
+	if (m_changeDefaultFlashFrameCount > INVINCIBLE_COUNT_MAX)
 	{
 		m_AdditionalFlashMulti = 0;
 
-		ChangeDefaultFlashFrameCount = DO_NOTHING_FRAME_COUNT_NUM;
+		m_changeDefaultFlashFrameCount = m_DO_NOTHING_FRAME_COUNT_NUM;
 	}
+
+	if (m_isInvincible) return;
 
 	if (m_rGameCollision.HitSomething(_T("Player"), DAMAGE, PLAYER_RADIUS, ENEMY_RADIUS))
 	{
+		m_isInvincible = TRUE;
+
 		m_AdditionalFlashMulti = -1;
 
-		ChangeDefaultFlashFrameCount = 0;
+		m_changeDefaultFlashFrameCount = 0;
 
 		CreateVertex();
-
-		--m_HP;
 
 		if (m_HP <= 0)
 		{
@@ -54,6 +64,8 @@ VOID PlayerHP::Update()
 
 			return;
 		}
+
+		--m_HP;
 
 		m_rGameLib.OneShotSimultaneousSound(_T("HitWhite"));
 	}

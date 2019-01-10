@@ -43,7 +43,7 @@ public:
 	{
 		SceneManager& rSceneManager = SceneManager::GetInstance();
 
-		m_ResultData.JudgeGameFailure(7); //引数は適当
+		m_ResultData.JudgeGameFailure(8); //引数は適当
 		rSceneManager.SetResultData(m_ResultData.GetResultData());
 
 		m_rGameLib.GetFbx(_T("Eiwi")).Release();
@@ -61,6 +61,8 @@ private:
 		LEFT,
 		RIGHT,
 	};
+
+	VOID DefaultLight();
 
 	/**
 	*@brief 自機の動きを決め,動く範囲を制限する関数
@@ -117,7 +119,7 @@ private:
 	StageData m_StageData;
 	PlayerResultData m_ResultData;
 	PlayerHP m_Hp;
-
+	
 	INT m_EffectAddtionalRotateSpeed = 0;
 	INT m_AdditionalFlashMulti = 0;
 

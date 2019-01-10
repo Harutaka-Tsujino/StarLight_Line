@@ -45,7 +45,13 @@ public:
 private:
 	VOID CutUV(TexUV* UV);
 
+	static const INT m_DO_NOTHING_FRAME_COUNT_NUM = -1;
+	INT m_changeDefaultFlashFrameCount = m_DO_NOTHING_FRAME_COUNT_NUM;
+
 	std::vector<CustomVertex*> m_HpRect;
+
+	INT m_invincibleCount = 0;
+	BOOL m_isInvincible = FALSE;
 
 	INT m_HP;
 

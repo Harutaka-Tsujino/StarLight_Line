@@ -6,12 +6,9 @@
 class DamageStar :public BaseStar
 {
 public:
-	DamageStar()
-	{
-		Init();
-	}
+	DamageStar() {};
 
-	~DamageStar();
+	~DamageStar() {};
 
 	VOID Render();
 };

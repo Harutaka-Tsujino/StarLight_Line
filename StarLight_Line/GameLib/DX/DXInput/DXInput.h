@@ -12,9 +12,9 @@
 #include <d3dx9.h>
 #include <dinput.h>
 
-#include "InputDev\InputDev.h"
-#include "InputDev\Mouse\Mouse.h"
-#include "InputDev\Keyboard\Keyboard.h"
+#include "InputDev/InputDev.h"
+#include "InputDev/Mouse/Mouse.h"
+#include "InputDev/Keyboard/Keyboard.h"
 
 /**
 * @brief 入力デバイス関係クラスのFacade

@@ -8,7 +8,7 @@
 
 #include <d3dx9.h>
 
-#include "FbxRelated\FbxRelated.h"
+#include "FbxRelated/FbxRelated.h"
 
 class FbxStorage
 {

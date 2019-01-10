@@ -71,7 +71,6 @@ VOID PlayerResultData::Update()
 
 		m_AdditionalFlashMulti = 1;
 
-		m_rGameLib.StopSound(_T("HitGreen"));
 		m_rGameLib.OneShotSimultaneousSound(_T("HitGreen"));
 
 		const INT BONUS_POINT = 500;

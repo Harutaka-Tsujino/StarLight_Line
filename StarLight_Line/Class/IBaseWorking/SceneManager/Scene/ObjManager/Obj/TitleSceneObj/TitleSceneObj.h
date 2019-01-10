@@ -65,6 +65,7 @@ public:
 
 	inline VOID Init() const
 	{
+		m_rGameLib.AddSoundFile(_T("Sounds/Title/TeamLogo.mp3"), _T("TeamLogo"));
 		m_rGameLib.CreateTex(_T("Logo"), _T("2DTextures/Title/TitleLogo.png"));
 	}
 
@@ -88,12 +89,18 @@ public:
 
 	inline VOID Init() const
 	{
+		m_rGameLib.AddSoundFile(_T("Sounds/Title/AnyKeyPressed.mp3"), _T("AnyKeyPressed"));
+		m_rGameLib.AddSimultaneousSoundFile(_T("Sounds/StageSelect/ChangeStage.mp3"), _T("ChangeStage"));
 		m_rGameLib.CreateTex(_T("InputPrompt"), _T("2DTextures/Title/TitleWaitInput.png"));
 	}
 
 	inline VOID Update()
 	{
-		if (m_rGameLib.KeyboardAnyKeyIsPressed()) m_isActive = FALSE;
+		if (m_rGameLib.KeyboardAnyKeyIsPressed() && m_isActive)
+		{
+			m_rGameLib.OneShotStartSound(_T("AnyKeyPressed"));
+			m_isActive = FALSE;
+		}
 	}
 
 	inline VOID Render()
@@ -150,6 +157,7 @@ public:
 
 	inline VOID Init()
 	{
+		m_rGameLib.AddSimultaneousSoundFile(_T("Sounds/Title/SelectMenu.mp3"), _T("SelectMenu"));
 		m_rGameLib.CreateTex(_T("JoyCon"), _T("2DTextures/Title/Joycon.png"));
 		m_rGameLib.CreateTex(_T("ConnectionPrompt"), _T("2DTextures/Title/PromptConnection.png"));
 		m_rGameLib.CreateTex(_T("PlayStyle"), _T("2DTextures/Title/PlayStyle.png"));

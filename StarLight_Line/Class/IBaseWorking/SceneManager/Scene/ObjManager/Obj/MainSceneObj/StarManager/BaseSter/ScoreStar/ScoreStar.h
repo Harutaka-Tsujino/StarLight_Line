@@ -6,14 +6,9 @@
 class ScoreStar:public BaseStar
 {
 public:
-	ScoreStar()
-	{
-		Init();
-	}
+	ScoreStar() {};
 
-	~ScoreStar()
-	{
-	}
+	~ScoreStar() {};
 
 	VOID Render();
 };

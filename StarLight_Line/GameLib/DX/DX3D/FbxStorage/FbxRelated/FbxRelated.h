@@ -9,7 +9,7 @@
 
 #include <fbxsdk.h>
 #include <vector>
-#include "FbxModel\FbxModel.h"
+#include "FbxModel/FbxModel.h"
 
 class FbxRelated
 {
