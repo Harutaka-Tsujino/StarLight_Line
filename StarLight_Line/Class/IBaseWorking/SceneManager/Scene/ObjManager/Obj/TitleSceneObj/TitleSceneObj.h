@@ -232,6 +232,8 @@ private:
 
 	VOID ConnectJoyconRender();
 
+	//別スレッドで回す関数
+	//Joyconがつながるまで回す
 	VOID CheakConnectJoycon()
 	{
 		while(!m_rGameLib.GetIsConnectJoycon(Joycon::LEFT_CONTROLLER) ||
@@ -249,7 +251,6 @@ private:
 	
 	std::thread m_JoyconThread;
 
-	BOOL m_ConnectCompletes = FALSE;
 	BOOL m_isActive = FALSE;
 	BOOL m_isSelected = FALSE;
 	BOOL m_is2P = FALSE;
