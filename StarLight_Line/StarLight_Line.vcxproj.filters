@@ -215,9 +215,6 @@
     <Filter Include="GameLib\Sound">
       <UniqueIdentifier>{cb067fd4-1096-467d-9cbd-74a0ef2694e5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxModel\FbxModel">
-      <UniqueIdentifier>{d20a9105-0bbf-4a1c-b6ca-b45545d5618a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Class\IBaseWorking\SceneManager\Scene\PauseScene">
       <UniqueIdentifier>{32f32bce-01d8-4e36-ae8c-449a3396c6d5}</UniqueIdentifier>
     </Filter>
@@ -232,6 +229,15 @@
     </Filter>
     <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\NumText">
       <UniqueIdentifier>{50acb009-9d71-4f29-ab5f-fede6f88d1ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLib\JoyconManager">
+      <UniqueIdentifier>{c67eb53b-26bc-4d94-a1d6-8e07407092be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLib\JoyconManager\Joycon">
+      <UniqueIdentifier>{9ce95021-21b3-434d-bf89-8d9de35cdd88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLib\JoyconManager\Joycon\hid">
+      <UniqueIdentifier>{a2017d9f-aeee-4381-a635-0d8fb5b6392f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -415,12 +421,20 @@
     <ClCompile Include="GameLib\Sound\Sound.cpp">
       <Filter>GameLib\Sound</Filter>
     </ClCompile>
-    <ClCompile Include="GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxModel\FbxModel.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\DataSaver\DataSaver.cpp">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\DataSaver</Filter>
     </ClCompile>
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\NumText\NumText.cpp">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\NumText</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLib\JoyconManager\Joycon\hid\hid.cpp">
+      <Filter>GameLib\JoyconManager\Joycon\hid</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLib\JoyconManager\Joycon\joycon.cpp">
+      <Filter>GameLib\JoyconManager\Joycon</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLib\JoyconManager\JoyconManager.cpp">
+      <Filter>GameLib\JoyconManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -522,9 +536,6 @@
     </ClInclude>
     <ClInclude Include="GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxRelated.h">
       <Filter>GameLib\DX\DX3D\FbxStorage\FbxRelated</Filter>
-    </ClInclude>
-    <ClInclude Include="GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxModel\FbxModel.h">
-      <Filter>GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxModel\FbxModel</Filter>
     </ClInclude>
     <ClInclude Include="GameLib\DX\DX3D\FbxStorage\FbxStorage.h">
       <Filter>GameLib\DX\DX3D\FbxStorage</Filter>
@@ -637,6 +648,9 @@
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerResultData\PlayerResultData.h">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerResultData</Filter>
     </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\PauseScene\PauseScene.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\PauseScene</Filter>
+    </ClInclude>
     <ClInclude Include="GameLib\Sound\Sound.h">
       <Filter>GameLib\Sound</Filter>
     </ClInclude>
@@ -654,6 +668,18 @@
     </ClInclude>
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\NumText\NumText.h">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\NumText</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLib\JoyconManager\Joycon\hid\hidapi.h">
+      <Filter>GameLib\JoyconManager\Joycon\hid</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLib\JoyconManager\Joycon\joycon.h">
+      <Filter>GameLib\JoyconManager\Joycon</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLib\JoyconManager\JoyconManager.h">
+      <Filter>GameLib\JoyconManager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxModel\FbxModel.h">
+      <Filter>GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxModel</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

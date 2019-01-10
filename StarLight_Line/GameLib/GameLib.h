@@ -21,6 +21,7 @@
 #include "Collision\Collision.h"
 #include "3DBoard\3DBoard.h"
 #include "Sound\Sound.h"
+#include "JoyconManager\JoyconManager.h"
 
 template<typename T>
 VOID SafeRelease(T** ppType)
@@ -45,6 +46,7 @@ public:
 		delete m_pTimer;
 		delete m_pDX;
 		delete m_pWnd;
+		delete m_pJoyconManager;
 	}
 
 	/**
@@ -54,13 +56,14 @@ public:
 	*/
 	inline static VOID Create(const HINSTANCE hInst, const TCHAR* pAppName)
 	{
-		if (!m_pWnd)		m_pWnd = new Wnd(hInst, pAppName);
-		if (!m_pDX)			m_pDX = new DX(m_pWnd->GetHWND(), m_pWnd->GetWndSize());
-		if (!m_pTimer)		m_pTimer = new Timer();
-		if (!m_pCollision)	m_pCollision = new Collision();
-		if (!m_pBoard3D)	m_pBoard3D = new Board3D();
-		if (!m_pSound)		m_pSound = new Sound();
-		
+		if (!m_pWnd)			m_pWnd = new Wnd(hInst, pAppName);
+		if (!m_pDX)				m_pDX = new DX(m_pWnd->GetHWND(), m_pWnd->GetWndSize());
+		if (!m_pTimer)			m_pTimer = new Timer();
+		if (!m_pCollision)		m_pCollision = new Collision();
+		if (!m_pSound)			m_pSound = new Sound();
+		if (!m_pBoard3D)		m_pBoard3D = new Board3D();
+		if (!m_pJoyconManager)	m_pJoyconManager = new JoyconManager();
+
 		GetInstance();
 	}
 
@@ -487,6 +490,26 @@ public:
 		m_pSound->SetVolume(pKey, vol);
 	}
 
+	inline BOOL ConnectJoycon(Joycon::CONTROLLER_TYPE controllerType) const
+	{
+		return m_pJoyconManager->Connect(controllerType);
+	}
+
+	inline VOID DisconnectJoycon(Joycon::CONTROLLER_TYPE controllerType) const
+	{
+		m_pJoyconManager->Disconnect(controllerType);
+	}
+
+	inline VOID CheckJoyconButton(Joycon::CONTROLLER_TYPE controllerType, int button)
+	{
+		m_pJoyconManager->CheckButton(controllerType, button);
+	}
+
+	inline BOOL SearchJoyconAnalogStick(Joycon::CONTROLLER_TYPE controllerType, int direction)
+	{
+		return m_pJoyconManager->SearchAnalogStick(controllerType, direction);
+	}
+
 private:
 	GameLib() {};
 
@@ -501,6 +524,8 @@ private:
 	static Board3D* m_pBoard3D;
 
 	static Sound* m_pSound;
+
+	static JoyconManager* m_pJoyconManager;
 };
 
 #endif //! GAME_LIB_H
