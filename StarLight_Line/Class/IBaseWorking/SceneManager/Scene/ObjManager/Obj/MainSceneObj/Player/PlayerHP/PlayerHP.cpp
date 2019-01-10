@@ -76,7 +76,7 @@ VOID PlayerHP::Render()
 	for (int i = 0;i != m_HpRect.size();++i)
 	{
 		ObjData Data;
-		Data.m_center = { m_WND_SIZE.m_x * (0.38f - 0.082f*i), m_WND_SIZE.m_y * 0.9f, 0.0f };
+		Data.m_center	 = { m_WND_SIZE.m_x * (0.38f - 0.082f*i), m_WND_SIZE.m_y * 0.9f, 0.0f };
 		Data.m_halfScale = { m_WND_SIZE.m_x * 0.0395f, m_WND_SIZE.m_y * 0.032f, 0.0f };
 		CutUV(&Data.m_texUV);
 

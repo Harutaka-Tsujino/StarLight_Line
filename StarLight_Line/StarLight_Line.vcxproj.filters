@@ -412,9 +412,6 @@
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerHP\PlayerHP.cpp">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerHP</Filter>
     </ClCompile>
-    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\GameCollision\GameCollision.cpp">
-      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\GameCollision</Filter>
-    </ClCompile>
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerEffect\PlayerEffect.cpp">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerEffect</Filter>
     </ClCompile>
@@ -483,6 +480,9 @@
     </ClCompile>
     <ClCompile Include="GameLib\JoyconManager\JoyconManager.cpp">
       <Filter>GameLib\JoyconManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\GameCollision\GameCollision.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
