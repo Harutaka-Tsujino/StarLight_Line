@@ -133,6 +133,8 @@ private:
 	BOOL m_isActive = TRUE;
 };
 
+#include <thread>
+
 class TitleMenu :public Obj
 {
 public:
@@ -146,8 +148,11 @@ public:
 		m_rGameLib.ReleaseTex();
 	}
 
-	inline VOID Init() const
+	inline VOID Init()
 	{
+		m_rGameLib.CreateTex(_T("JoyCon"), _T("2DTextures/Title/Joycon.png"));
+		m_rGameLib.CreateTex(_T("ConnectionPrompt"), _T("2DTextures/Title/PromptConnection.png"));
+		m_rGameLib.CreateTex(_T("PlayStyle"), _T("2DTextures/Title/PlayStyle.png"));
 		m_rGameLib.CreateTex(_T("NewGame"), _T("2DTextures/Title/TitleMenuNewGame.png"));
 		m_rGameLib.CreateTex(_T("LoadGame"), _T("2DTextures/Title/TitleMenuLoadGame.png"));
 		m_rGameLib.CreateTex(_T("EndGame"), _T("2DTextures/Title/TitleMenuEndGame.png"));
@@ -158,6 +163,20 @@ public:
 		if (m_rGameLib.KeyboardAnyKeyIsPressed() && !m_isActive)
 		{
 			m_isActive = TRUE;
+
+			return;
+		}
+
+		if (!m_isSelected)
+		{
+			SelectMode();
+
+			return;
+		}
+
+		if (m_is2P)
+		{
+			Transfar2PWhenJoyconIsConnected();
 
 			return;
 		}
@@ -174,6 +193,13 @@ private:
 		MK_LOAD_GAME,
 		MK_END_GAME,
 		MK_MAX
+	};
+
+	enum PLAY_MODE
+	{
+		PM_1P,
+		PM_2P,
+		PM_MAX
 	};
 
 	inline VOID RotateMenuUp()
@@ -196,10 +222,37 @@ private:
 
 	VOID SelectMenu();
 
+	VOID SelectMode();
+
+	VOID Transfar2PWhenJoyconIsConnected();
+
+	VOID SelectModeRender();
+
+	VOID ConnectPromptRender();
+
+	VOID ConnectJoyconRender();
+
+	VOID CheakConnectJoycon()
+	{
+		while(!m_rGameLib.GetIsConnectJoycon(Joycon::LEFT_CONTROLLER) ||
+			  !m_rGameLib.GetIsConnectJoycon(Joycon::RIGHT_CONTROLLER))
+		{
+			m_rGameLib.ConnectJoycon(Joycon::LEFT_CONTROLLER);
+			m_rGameLib.ConnectJoycon(Joycon::RIGHT_CONTROLLER);
+		}
+	}
+
 	MENU_KIND m_menuReel[MK_MAX] = { MK_NEW_GAME, MK_LOAD_GAME, MK_END_GAME };
 	const INT m_CENTER_MENU = 1;
 	
+	PLAY_MODE m_mode = PM_1P;
+	
+	std::thread m_JoyconThread;
+
+	BOOL m_ConnectCompletes = FALSE;
 	BOOL m_isActive = FALSE;
+	BOOL m_isSelected = FALSE;
+	BOOL m_is2P = FALSE;
 };
 
 class TitleCometEffect :public Obj

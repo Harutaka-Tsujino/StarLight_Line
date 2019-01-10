@@ -58,6 +58,21 @@ VOID TitleMenu::Render()
 {
 	if (!m_isActive) return;
 
+	if (!m_isSelected)
+	{
+		SelectModeRender();
+
+		return;
+	}
+
+	if (m_is2P)
+	{
+		ConnectPromptRender();
+		ConnectJoyconRender();
+
+		return;
+	}
+
 	ObjData data;
 	CustomVertex menu[4];
 	const FLOAT CENTER_MENU_SCALE_MULTI = 1.5f;
@@ -92,6 +107,121 @@ VOID TitleMenu::Render()
 		default:
 			break;
 		}
+	}
+}
+
+VOID TitleMenu::ConnectPromptRender()
+{
+	ObjData Data;
+	CustomVertex Prompt[4];
+
+	Data.m_center = { m_WND_SIZE.m_x * 0.5f,m_WND_SIZE.m_y * 0.6f,m_Z };
+	Data.m_halfScale = { m_WND_SIZE.m_x *0.3f,m_WND_SIZE.m_y * 0.1f,0.f };
+
+	m_rGameLib.CreateRect(Prompt, Data);
+
+	m_rGameLib.Render(Prompt, m_rGameLib.GetTex(_T("ConnectionPrompt")));
+}
+
+VOID TitleMenu::ConnectJoyconRender()
+{
+	ObjData Data;
+	CustomVertex ConnectJoycon[4];
+
+	for (int i = 0;i < Joycon::MAX_CONTROLLER;++i)
+	{
+		if (!m_rGameLib.GetIsConnectJoycon(static_cast<Joycon::CONTROLLER_TYPE>(i))) continue;
+
+		Data.m_center = { m_WND_SIZE.m_x * (0.4f + 0.2f * i),m_WND_SIZE.m_y * 0.8f,m_Z };
+		Data.m_halfScale = { m_WND_SIZE.m_x * 0.05f,m_WND_SIZE.m_y * 0.1f,0.f };
+		
+		const FLOAT TU_MAX = 128.f;
+		Data.m_texUV.m_startTU = (i * (TU_MAX / 2)) / TU_MAX;
+		Data.m_texUV.m_endTU = (i + 1)* (TU_MAX / 2) / TU_MAX;
+
+		m_rGameLib.CreateRect(ConnectJoycon, Data);
+
+		m_rGameLib.Render(ConnectJoycon, m_rGameLib.GetTex(_T("JoyCon")));
+	}
+}
+
+VOID TitleMenu::SelectModeRender()
+{
+	ObjData Data;
+	CustomVertex Menu[4];
+
+	for (int i = 0;i < PM_MAX;++i)
+	{
+		Data.m_center = { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * (0.68f + 0.09f * i), m_Z };	//! 現物合わせ
+		Data.m_halfScale = { m_WND_SIZE.m_x * 0.06f, m_WND_SIZE.m_y * 0.033f ,0.0f };			//! 現物合わせ
+
+		if (i == m_mode) Data.m_halfScale *= 1.25f;
+
+		const FLOAT TV_MAX = 128.f;
+		Data.m_texUV.m_startTV = (i * (TV_MAX / 2)) / TV_MAX;
+		Data.m_texUV.m_endTV = (i + 1)* (TV_MAX / 2) / TV_MAX;
+
+		m_rGameLib.CreateRect(Menu, Data);
+
+		m_rGameLib.Render(Menu, m_rGameLib.GetTex(_T("PlayStyle")));
+	}
+}
+
+VOID TitleMenu::SelectMode()
+{
+	static BOOL isFirstFrame = TRUE;
+	if (isFirstFrame)	//!	PRESS ANY KEYが表示されているときEnterを入力したらそのままメニューを選んでしまうので一度return
+	{
+		isFirstFrame = FALSE;
+
+		return;
+	}
+
+	if (UpKeyIsPressed())
+	{
+		m_mode = PM_1P;
+	}
+
+	if (DownKeyIsPressed())
+	{
+		m_mode = PM_2P;
+	}
+
+	if (!ReturnKeyIsPressed()) return;
+
+	m_isSelected = (m_mode == PM_1P) ? TRUE : FALSE;
+
+	if (!m_isSelected)
+	{
+		m_is2P = TRUE;
+		m_isSelected = TRUE;
+	}
+}
+
+VOID TitleMenu::Transfar2PWhenJoyconIsConnected()
+{
+	static BOOL isFirstFrame = TRUE;
+
+	if (isFirstFrame)
+	{
+		m_JoyconThread = std::thread(&TitleMenu::CheakConnectJoycon, this);
+		isFirstFrame = FALSE;
+	}
+
+	if (m_rGameLib.GetIsConnectJoycon(Joycon::LEFT_CONTROLLER) &&
+		m_rGameLib.GetIsConnectJoycon(Joycon::RIGHT_CONTROLLER))
+	{
+		static int count = 0;
+		count++;
+
+		if (count <= 60) return;
+	
+		isFirstFrame = TRUE;
+		m_JoyconThread.join();
+
+		SceneManager& rSceneManager = SceneManager::GetInstance();
+		rSceneManager.SetNextScene(SK_END);
+		count = 0;	
 	}
 }
 
