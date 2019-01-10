@@ -10,6 +10,8 @@
 #include <windows.h>
 #include <tchar.h>
 
+#include <thread>
+
 #include "../Obj.h"
 #include "../../../../../../../GameLib/GameLib.h"
 #include "../../../../../../../GameLib/Wnd/Data/RectSize.h"
@@ -139,8 +141,6 @@ private:
 
 	BOOL m_isActive = TRUE;
 };
-
-#include <thread>
 
 class TitleMenu :public Obj
 {
