@@ -312,7 +312,13 @@ VOID StageSelectSceneLevelSelecter::RenderBack() const
 	CustomVertex back[4];
 	m_rGameLib.CreateRect(back, backData);
 
-	m_rGameLib.Render(back, m_rGameLib.GetTex(_T("LevelBack")));
+	const TCHAR* TEXS[] =
+	{
+		_T("LevelBack"),
+		_T("LevelBack_BH")
+	};
+
+	m_rGameLib.Render(back, m_rGameLib.GetTex(TEXS[m_blackHoleIsSelected]));
 }
 
 VOID StageSelectSceneLevelSelecter::RenderTarget() const

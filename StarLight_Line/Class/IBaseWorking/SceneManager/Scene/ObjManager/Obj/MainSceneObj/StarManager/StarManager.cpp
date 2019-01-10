@@ -94,7 +94,7 @@ const CHAR* StarManager::GetStageFilePath()
 	switch (stageData.m_stage)
 	{
 	case STAGE_TAURUS:
-		return "StageData/Stage.csv";
+		return "StageData/TAURUS.csv";
 
 	case STAGE_LIBRA:
 		return "StageData/LIBRA.csv";
@@ -130,7 +130,7 @@ const CHAR* StarManager::GetStageFilePath()
 		return "StageData/CANCER.csv";
 
 	case STAGE_BLACK_HOLE:
-		return "StageData/Stage.csv";
+		return "StageData/BLACKHOLE.csv";
 	}
 
 	return nullptr;

@@ -73,6 +73,8 @@ public:
 
 	~StageSelectSceneStageList()
 	{
+		m_blackHoleIsSelected = FALSE;
+
 		m_rGameLib.ReleaseTex();
 	}
 
@@ -94,11 +96,11 @@ public:
 
 	inline VOID ActivateStageSelect()
 	{
-		m_lengthMulti = 1.0f;
-
-		m_blackHoleIsSelected = FALSE;
-
 		m_isDecided = FALSE;
+
+		if (m_blackHoleIsSelected) return;
+
+		m_lengthMulti = 1.0f;
 	}
 
 	inline INT GetStage() const
@@ -129,13 +131,13 @@ private:
 
 		const INT DECIDE_STAGE_FRAMES = 60;
 
-		static INT alpha = 255;
-
 		auto StageBlackHole = [&, this]()
 		{
 			if (!m_blackHoleIsSelected)
 			{
-				alpha += static_cast<INT>(m_lengthMulti * (255 / 60));
+				if (m_lengthMulti == 0 && !m_isDecided) m_blackHoleAlpha += (255 / 60);
+
+				m_blackHoleAlpha += static_cast<INT>(m_lengthMulti * (255 / 60));
 
 				iconsCircleRadius -= ICONS_CIRCLE_RADIUS_MAX / DECIDE_STAGE_FRAMES;
 
@@ -155,8 +157,8 @@ private:
 
 		data.m_halfScale = { iconsCircleRadius, iconsCircleRadius, 0.0f };
 
-		alpha = min(max(alpha, 0), 255);
-		data.m_aRGB = D3DCOLOR_ARGB(alpha, 255, 255, 255);
+		m_blackHoleAlpha = min(max(m_blackHoleAlpha, 0), 255);
+		data.m_aRGB = D3DCOLOR_ARGB(m_blackHoleAlpha, 255, 255, 255);
 
 		data.m_deg.z += 0.25f;
 
@@ -211,6 +213,8 @@ private:
 	BOOL m_blackHoleIsSelected = FALSE;
 	BOOL m_blackHoleStagingEnds = FALSE;
 
+	INT m_blackHoleAlpha = 0;
+
 	BOOL m_backIsSelected = FALSE;
 };
 
@@ -230,6 +234,7 @@ public:
 	inline VOID Init()
 	{
 		m_rGameLib.CreateTex(_T("LevelBack"), _T("2DTextures/StageSelect/StageSelect_difficultyBack.png"));
+		m_rGameLib.CreateTex(_T("LevelBack_BH"), _T("2DTextures/StageSelect/StageSelect_difficultyBack_BH.jpg"));
 		m_rGameLib.CreateTex(_T("LevelTarget"), _T("2DTextures/Result/Target.png"));
 		m_rGameLib.CreateTex(_T("LevelBackButton"), _T("2DTextures/StageSelect/difficultyselect_backicon.png"));
 	}
@@ -248,6 +253,11 @@ public:
 		return m_level;
 	}
 
+	inline VOID SetBlackHoleIsSelected(BOOL isSelected)
+	{
+		m_blackHoleIsSelected = isSelected;
+	}
+
 private:
 	VOID RenderBack() const;
 
@@ -263,6 +273,7 @@ private:
 
 	BOOL m_backIsSelected = FALSE;
 	BOOL m_shouldActivateStageSelect = FALSE;
+	BOOL m_blackHoleIsSelected = FALSE;
 };
 
 class StageSelectSceneStages :public Obj
@@ -294,6 +305,7 @@ public:
 		if (m_pLevelSelecter->ShouldActivateStageSelect()) m_pStageList->ActivateStageSelect();
 
 		m_pStageList->Update();
+		m_pLevelSelecter->SetBlackHoleIsSelected(m_pStageList->BlackHoleIconSelected());
 		m_pLevelSelecter->Update();
 	}
 
