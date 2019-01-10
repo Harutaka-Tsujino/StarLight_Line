@@ -495,6 +495,11 @@ public:
 		return m_pJoyconManager->Connect(controllerType);
 	}
 
+	inline BOOL GetIsConnectJoycon(Joycon::CONTROLLER_TYPE controllerType) const
+	{
+		return m_pJoyconManager->GetJoycon(controllerType)->GetIsConnect();
+	}
+
 	inline VOID DisconnectJoycon(Joycon::CONTROLLER_TYPE controllerType) const
 	{
 		m_pJoyconManager->Disconnect(controllerType);

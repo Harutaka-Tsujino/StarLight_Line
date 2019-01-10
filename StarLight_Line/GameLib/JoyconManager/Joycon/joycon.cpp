@@ -119,6 +119,8 @@ Joycon::Joycon() :
 		m_ButtonState[i] = OFF_BUTTON;
 		m_OldButtonState[i] = OFF_BUTTON;
 	}
+
+	m_IsFirstFrame = true;
 }
 
 
@@ -259,7 +261,13 @@ bool Joycon::Connect(CONTROLLER_TYPE _controllerType)
 	gyro_cal_coeff[1] = (float)(936.0 / (float)(13371 - uint16_to_int16(sensor_cal[1][1])) * 0.01745329251994);
 	gyro_cal_coeff[2] = (float)(936.0 / (float)(13371 - uint16_to_int16(sensor_cal[1][2])) * 0.01745329251994);
 	m_IsConnect = true;
-	m_Thread = std::thread(&Joycon::Update, this);
+
+	if (m_IsFirstFrame)
+	{
+		m_Thread = std::thread(&Joycon::Update, this);
+		m_IsFirstFrame = false;
+	}
+
 	return true;
 }
 
