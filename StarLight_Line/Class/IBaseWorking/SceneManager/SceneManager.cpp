@@ -6,6 +6,7 @@
 #include "Scene/Enum/SCENE_KIND.h"
 #include "Scene/TitleScene/TitleScene.h"
 #include "Scene/StageSelectScene/StageSelectScene.h"
+#include "Scene/2PScenes/2PSelectScene/SelectStage2PScene.h"
 #include "Scene/SaveDataScene/SaveDataScene.h"
 #include "Scene/MainScene/MainScene.h"
 #include "Scene/ResultScene/ResultScene.h"
@@ -63,6 +64,13 @@ VOID SceneManager::Factory()
 		delete m_pScene;
 
 		m_pScene = new StageSelectScene();
+
+		break;
+
+	case SK_2P_STAGE_SELECT:
+		delete m_pScene;
+
+		m_pScene = new StageSelectTwoPlayerScene();
 
 		break;
 
