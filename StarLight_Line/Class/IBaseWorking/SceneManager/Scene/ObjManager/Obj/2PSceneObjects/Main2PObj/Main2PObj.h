@@ -1,0 +1,6 @@
+﻿#ifndef MAIN_TWO_PLAYER_OBJ_H_
+#define MAIN_TWO_PLAYER_OBJ_H_
+
+
+
+#endif // !MAIN_TWO_PLAYER_OBJ_H_
