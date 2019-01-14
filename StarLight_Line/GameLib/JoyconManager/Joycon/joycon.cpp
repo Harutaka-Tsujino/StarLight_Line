@@ -116,8 +116,8 @@ Joycon::Joycon() :
 
 	for (int i = 0; i < MAX_BUTTON; i++)
 	{
-		m_ButtonState[i] = OFF_BUTTON;
-		m_OldButtonState[i] = OFF_BUTTON;
+		m_ButtonState[i] = NEUTRAL_BUTTON;
+		m_OldButtonState[i] = NEUTRAL_BUTTON;
 	}
 
 	m_IsFirstFrame = true;
@@ -330,6 +330,8 @@ void Joycon::Update()
 				m_AnalogStick.x = cal_x[1];
 				m_AnalogStick.y = cal_y[1];
 
+				CheackAnalogStick();
+
 				m_Accelerometer.x = (float)(uint16_to_int16(buf_reply[13] | (buf_reply[14] << 8) & 0xFF00)) * acc_cal_coeff[0];
 				m_Accelerometer.y = (float)(uint16_to_int16(buf_reply[15] | (buf_reply[16] << 8) & 0xFF00)) * acc_cal_coeff[1];
 				m_Accelerometer.z = (float)(uint16_to_int16(buf_reply[17] | (buf_reply[18] << 8) & 0xFF00)) * acc_cal_coeff[2];
@@ -349,21 +351,21 @@ void Joycon::CheckButton(int _button)
 	{
 		if (_buttonCheck)
 		{
-			if (m_OldButtonState[_button] == ON_BUTTON)
-				m_ButtonState[_button] = ON_BUTTON;
+			if (m_OldButtonState[_button] == HOLD_BUTTON)
+				m_ButtonState[_button] = HOLD_BUTTON;
 			else
 				m_ButtonState[_button] = PUSH_BUTTON;
 
-			m_OldButtonState[_button] = ON_BUTTON;
+			m_OldButtonState[_button] = HOLD_BUTTON;
 		}
 		else
 		{
-			if (m_OldButtonState[_button] == ON_BUTTON)
+			if (m_OldButtonState[_button] == HOLD_BUTTON)
 				m_ButtonState[_button] = RELEASE_BUTTON;
 			else
-				m_ButtonState[_button] = OFF_BUTTON;
+				m_ButtonState[_button] = NEUTRAL_BUTTON;
 
-			m_OldButtonState[_button] = OFF_BUTTON;
+			m_OldButtonState[_button] = NEUTRAL_BUTTON;
 		}
 	};
 
@@ -389,6 +391,47 @@ void Joycon::CheckButton(int _button)
 		break;
 	}
 
+}
+
+void Joycon::CheackAnalogStick()
+{
+	if (!m_IsConnect) return;
+
+	ANALOG_STICK_STATE Prev[MAX_TILT];
+	memcpy(Prev, m_AnalogStickState, sizeof(m_AnalogStickState));
+
+	auto CheckState = [&](int State, bool IsInputed)
+	{
+		if (IsInputed)
+		{
+			if (Prev[State] == INPUTED_ANALOG_STICK ||
+				Prev[State] == INCLINED_ANALOG_STICK)
+			{
+				m_AnalogStickState[State] = INCLINED_ANALOG_STICK;
+
+				return;
+			}
+			
+			m_AnalogStickState[State] = INPUTED_ANALOG_STICK;
+			
+			return;
+		}
+		
+		if (Prev[State] == INPUTED_ANALOG_STICK ||
+			Prev[State] == INCLINED_ANALOG_STICK)
+		{
+			m_AnalogStickState[State] = RELEASE_ANALOG_STICK;
+
+			return;
+		}
+		
+		m_AnalogStickState[State] = NEUTRAL_ANALOG_STICK;
+	};
+
+	for (int i = 0;i < MAX_TILT;++i)
+	{
+		CheckState(i, InputDirection(i));
+	}
 }
 
 void Joycon::SendRumble()
@@ -519,6 +562,35 @@ void Joycon::SendRumble()
 	}
 }
 
+bool Joycon::InputDirection(int Direction)
+{
+	const FLOAT THRESHOLD_VALUE = 0.15f;
+
+	switch (Direction)
+	{
+	case UP_TILT:
+		if (m_AnalogStick.y > THRESHOLD_VALUE) return true;
+
+		break;
+
+	case DOWN_TILT:
+		if (m_AnalogStick.y < -THRESHOLD_VALUE) return true;
+
+		break;
+
+	case RIGHT_TILT:
+		if (m_AnalogStick.x < -THRESHOLD_VALUE) return true;
+
+		break;
+
+	case LEFT_TILT:
+		if (m_AnalogStick.x > THRESHOLD_VALUE) return true;
+
+		break;
+	}
+
+	return false;
+}
 
 int Joycon::get_spi_data(u32 offset, const u16 read_len, u8 *test_buf)
 {

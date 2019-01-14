@@ -68,16 +68,25 @@ public:
 	{
 		PUSH_BUTTON,
 		RELEASE_BUTTON,
-		ON_BUTTON,
-		OFF_BUTTON
+		HOLD_BUTTON,
+		NEUTRAL_BUTTON
+	};
+
+	enum ANALOG_STICK_DIRECTION
+	{
+		UP_TILT,
+		DOWN_TILT,
+		LEFT_TILT,
+		RIGHT_TILT,
+		MAX_TILT
 	};
 
 	enum ANALOG_STICK_STATE
 	{
-		UP_SLOPE,
-		DOWN_SLOPE,
-		LEFT_SLOPE,
-		RIGHT_SLOPE
+		INPUTED_ANALOG_STICK,
+		INCLINED_ANALOG_STICK,
+		RELEASE_ANALOG_STICK,
+		NEUTRAL_ANALOG_STICK,
 	};
 
 	Joycon();
@@ -108,6 +117,8 @@ public:
 	* @param[in] _button 更新するボタン
 	*/
 	void CheckButton(int _button);
+
+	void CheackAnalogStick();
 
 	/**
 	* @brief アナログスティックの値を取得する
@@ -146,29 +157,45 @@ public:
 		return m_ButtonState;
 	}
 
+	/**
+	* @brief アナログステックの状態を取得する
+	* @return アナログステックの状態 
+	*/
+	const ANALOG_STICK_STATE* GetAnalogStickState() const
+	{
+		return m_AnalogStickState;
+	}
+
+	/**
+	* @breif Joyconが繋がっているかを判断する
+	* @return 繋がっているのか
+	*/
 	BOOL GetIsConnect() const
 	{
 		return m_IsConnect;
 	}
 
-private:
-	void Update();
-
 	/**
-	*@brief 振動させる 
+	*@brief 振動させる
 	*/
 	void SendRumble();
 
-	hid_device*		m_Handle[MAX_CONTROLLER];
-	CONTROLLER_TYPE m_ControllerType;
-	std::thread		m_Thread;
-	BUTTON_STATE    m_ButtonState[MAX_BUTTON];
-	BUTTON_STATE    m_OldButtonState[MAX_BUTTON];
-	D3DXVECTOR2		m_AnalogStick;
-	D3DXVECTOR3		m_GyroSensor; //!< 回転速度センサー(m/s)
-	D3DXVECTOR3		m_Accelerometer; //!< 加速度センサー(rad/s)
-	bool			m_IsConnect;
-	bool			m_IsFirstFrame;
+private:
+	void Update();
+
+	bool InputDirection(int Direction);
+
+	hid_device*			m_Handle[MAX_CONTROLLER];
+	CONTROLLER_TYPE		m_ControllerType;
+	std::thread			m_Thread;
+	BUTTON_STATE		m_ButtonState[MAX_BUTTON];
+	BUTTON_STATE		m_OldButtonState[MAX_BUTTON];
+	ANALOG_STICK_STATE  m_AnalogStickState[MAX_TILT];
+	D3DXVECTOR2			m_AnalogStick;
+	D3DXVECTOR3			m_GyroSensor; //!< 回転速度センサー(m/s)
+	D3DXVECTOR3			m_Accelerometer; //!< 加速度センサー(rad/s)
+	bool				m_IsConnect;
+	bool				m_IsFirstFrame;
 
 	// サンプルコードより.
 

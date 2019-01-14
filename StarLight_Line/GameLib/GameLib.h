@@ -505,9 +505,49 @@ public:
 		m_pJoyconManager->Disconnect(controllerType);
 	}
 
-	inline BOOL SearchJoyconAnalogStick(Joycon::CONTROLLER_TYPE controllerType, int direction)
+	inline BOOL PushJoyconButton(Joycon::CONTROLLER_TYPE controllerType, int button) const
 	{
-		return m_pJoyconManager->SearchAnalogStick(controllerType, direction);
+		return m_pJoyconManager->PushButton(controllerType, button);
+	}
+
+	inline BOOL ReleaseJoyconButton(Joycon::CONTROLLER_TYPE controllerType, int button) const
+	{
+		return m_pJoyconManager->ReleaseButton(controllerType, button);
+	}
+
+	inline BOOL HoldJoyconButton(Joycon::CONTROLLER_TYPE controllerType, int button) const
+	{
+		return m_pJoyconManager->HoldButton(controllerType, button);
+	}
+
+	inline BOOL NeutralJoyconButton(Joycon::CONTROLLER_TYPE controllerType, int button) const
+	{
+		return m_pJoyconManager->NeutralButton(controllerType, button);
+	}
+
+	inline BOOL InputedJoyconAnalogStick(Joycon::CONTROLLER_TYPE controllerType, int direction) const
+	{
+		return m_pJoyconManager->InputedAnalogStick(controllerType, direction);
+	}
+
+	inline BOOL InclinedJoyconAnalogStick(Joycon::CONTROLLER_TYPE controllerType, int direction) const
+	{
+		return m_pJoyconManager->InclinedAnalogStick(controllerType, direction);
+	}
+
+	inline BOOL ReleaseJoyconAnalogStick(Joycon::CONTROLLER_TYPE controllerType, int direction) const
+	{
+		return m_pJoyconManager->ReleaseAnalogStick(controllerType, direction);
+	}
+
+	inline BOOL NeutralJoyconAnalogStick(Joycon::CONTROLLER_TYPE controllerType, int direction) const
+	{
+		return m_pJoyconManager->NeutralAnalogStick(controllerType, direction);
+	}
+
+	inline VOID JoyconRumble(Joycon::CONTROLLER_TYPE controllerType)
+	{
+		m_pJoyconManager->GetJoycon(controllerType)->SendRumble();
 	}
 
 private:
