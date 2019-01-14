@@ -223,7 +223,7 @@ VOID TitleMenu::Transfar2PWhenJoyconIsConnected()
 		m_JoyconThread.join();
 
 		SceneManager& rSceneManager = SceneManager::GetInstance();
-		rSceneManager.SetNextScene(SK_END);
+		rSceneManager.SetNextScene(SK_2P_STAGE_SELECT);
 		count = 0;	
 	}
 }
