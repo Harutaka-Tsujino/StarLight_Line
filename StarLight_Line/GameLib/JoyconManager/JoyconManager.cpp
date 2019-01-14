@@ -12,6 +12,11 @@ JoyconManager::~JoyconManager()
 {
 	for (int i = 0; i < Joycon::MAX_CONTROLLER; i++)
 	{
+		if (m_pJoycon[i]->GetIsConnect())
+		{
+			m_pJoycon[i]->Disconnect();
+		}
+
 		delete m_pJoycon[i];
 		m_pJoycon[i] = nullptr;
 	}
@@ -38,34 +43,4 @@ void JoyconManager::InputState()
 	CheckButton(Joycon::LEFT_CONTROLLER, Joycon::SL_BUTTON);
 	CheckButton(Joycon::LEFT_CONTROLLER, Joycon::HOME_BUTTON);
 	CheckButton(Joycon::LEFT_CONTROLLER, Joycon::MINUS_PLUS_BUTTON);
-}
-
-bool JoyconManager::SearchAnalogStick(Joycon::CONTROLLER_TYPE controllerType, int direction)
-{
-	const FLOAT THRESHOLD_VALUE = 0.15f;
-
-	switch (direction)
-	{
-	case Joycon::UP_SLOPE:
-		if (m_pJoycon[controllerType]->GetAnalogStick().y > THRESHOLD_VALUE) return TRUE;
-
-		break;
-
-	case Joycon::DOWN_SLOPE:
-		if (m_pJoycon[controllerType]->GetAnalogStick().y < -THRESHOLD_VALUE) return TRUE;
-
-		break;
-
-	case Joycon::RIGHT_SLOPE:
-		if (m_pJoycon[controllerType]->GetAnalogStick().x < -THRESHOLD_VALUE) return TRUE;
-
-		break;
-
-	case Joycon::LEFT_SLOPE:
-		if (m_pJoycon[controllerType]->GetAnalogStick().x > THRESHOLD_VALUE) return TRUE;
-
-		break;
-	}
-
-	return FALSE;
 }
