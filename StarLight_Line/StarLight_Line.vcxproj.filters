@@ -263,6 +263,24 @@
     <Filter Include="GameLib\JoyconManager\Joycon\hid">
       <UniqueIdentifier>{a2017d9f-aeee-4381-a635-0d8fb5b6392f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\2PScenes">
+      <UniqueIdentifier>{aabc0e08-36c9-4d64-8a4d-f5c37d7961fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\2PScenes\SelectStage2PScene">
+      <UniqueIdentifier>{c694eab0-b0cc-49e7-ae83-b3a13537e870}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\2PSceneObjects">
+      <UniqueIdentifier>{bc484b9c-8ac1-4a5b-9dd8-c9fe9837e802}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\2PSceneObjects\StageSelect2PObj">
+      <UniqueIdentifier>{1ff746a7-e974-48f5-9cb3-3c71d828ef30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\2PSceneObjects\Main2pObj">
+      <UniqueIdentifier>{957080e7-b5e7-432d-bbf2-d0bd19974599}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\2PScenes\Main2PScene">
+      <UniqueIdentifier>{5e3c4e4c-fe6a-44e1-86a7-367abe829b7e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Class\Singleton\Singleton.cpp">
@@ -483,6 +501,18 @@
     </ClCompile>
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\GameCollision\GameCollision.cpp">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\2PScenes\2PSelectScene\SelectStage2PScene.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\2PScenes\SelectStage2PScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\2PSceneObjects\StageSelect2PObj\StageSelect2PObj.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\2PSceneObjects\StageSelect2PObj</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\2PScenes\2PMainScene\Main2PScene.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\2PScenes\Main2PScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\2PSceneObjects\Main2PObj\Main2PObj.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\2PSceneObjects\Main2pObj</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -752,6 +782,18 @@
     </ClInclude>
     <ClInclude Include="GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxModel\FbxModel.h">
       <Filter>GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxModel</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\2PScenes\2PSelectScene\SelectStage2PScene.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\2PScenes\SelectStage2PScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\2PSceneObjects\StageSelect2PObj\StageSelect2PObj.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\2PSceneObjects\StageSelect2PObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\2PScenes\2PMainScene\Main2PScene.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\2PScenes\Main2PScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\2PSceneObjects\Main2PObj\Main2PObj.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\2PSceneObjects\Main2pObj</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

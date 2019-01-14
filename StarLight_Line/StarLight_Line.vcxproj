@@ -133,9 +133,13 @@
   <ItemGroup>
     <ClCompile Include="Class\IBaseWorking\IBaseWorking.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\SceneManager.cpp" />
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\2PScenes\2PMainScene\Main2PScene.cpp" />
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\2PScenes\2PSelectScene\SelectStage2PScene.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\EndScene\EndScene.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\MainScene\MainScene.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\ObjManager.cpp" />
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\2PSceneObjects\Main2PObj\Main2PObj.cpp" />
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\2PSceneObjects\StageSelect2PObj\StageSelect2PObj.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\DataSaver\DataSaver.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\EndSceneObj\EndSceneObj.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\ADV.cpp" />
@@ -208,10 +212,14 @@
     <ClInclude Include="Class\IBaseWorking\SceneManager\Data\ResultData.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Data\StageData.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\SceneManager.h" />
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\2PScenes\2PMainScene\Main2PScene.h" />
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\2PScenes\2PSelectScene\SelectStage2PScene.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\EndScene\EndScene.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\Enum\SCENE_KIND.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\MainScene\MainScene.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\ObjManager.h" />
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\2PSceneObjects\Main2PObj\Main2PObj.h" />
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\2PSceneObjects\StageSelect2PObj\StageSelect2PObj.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\DataSaver\DataSaver.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\EndSceneObj\EndSceneObj.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\Enum\OBJ_TYPE.h" />
