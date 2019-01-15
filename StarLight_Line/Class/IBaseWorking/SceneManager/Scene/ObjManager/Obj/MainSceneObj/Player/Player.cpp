@@ -27,7 +27,7 @@ VOID Player::Update()
 	{
 		rSceneManager.SetTransitionMode(FALSE);
 
-		m_ResultData.JudgeGameFailure(8); //引数は適当
+		m_ResultData.JudgeGameFailure(8);	//引数はクリアの星の数
 		rSceneManager.SetResultData(m_ResultData.GetResultData());
 
 		rSceneManager.SetNextScene(SK_RESULT);
@@ -145,8 +145,6 @@ VOID Player::DefaultLight()
 	m_rGameLib.SetLight(light, 0);
 }
 
-//名前不安なので募集中
-//プレイヤーの動きを制限する関数
 VOID Player::RestrictedMoving()
 {
 	SurfaceCoordinate NextPos;
