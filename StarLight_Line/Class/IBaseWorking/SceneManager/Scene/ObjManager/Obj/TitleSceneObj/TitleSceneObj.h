@@ -187,7 +187,7 @@ public:
 			return;
 		}
 
-		if (!m_isSelected)
+		if (!m_shouldSelectPlayMode)
 		{
 			SelectMode();
 
@@ -261,7 +261,11 @@ private:
 		{
 			m_rGameLib.ConnectJoycon(Joycon::LEFT_CONTROLLER);
 			m_rGameLib.ConnectJoycon(Joycon::RIGHT_CONTROLLER);
+
+			if (m_isAborted) m_isFinished = TRUE;
 		}
+
+		return;
 	}
 
 	MENU_KIND m_menuReel[MK_MAX] = { MK_NEW_GAME, MK_LOAD_GAME, MK_END_GAME };
@@ -272,8 +276,10 @@ private:
 	std::thread m_JoyconThread;
 
 	BOOL m_isActive = FALSE;
-	BOOL m_isSelected = FALSE;
+	BOOL m_shouldSelectPlayMode = FALSE;
 	BOOL m_is2P = FALSE;
+	BOOL m_isAborted = FALSE;
+	BOOL m_isFinished = FALSE;
 };
 
 class TitleCometEffect :public Obj

@@ -61,7 +61,7 @@ VOID TitleMenu::Render()
 {
 	if (!m_isActive) return;
 
-	if (!m_isSelected)
+	if (!m_shouldSelectPlayMode)
 	{
 		SelectModeRender();
 
@@ -192,12 +192,12 @@ VOID TitleMenu::SelectMode()
 
 	if (!ReturnKeyIsPressed()) return;
 
-	m_isSelected = (m_mode == PM_1P) ? TRUE : FALSE;
+	m_shouldSelectPlayMode = (m_mode == PM_1P) ? TRUE : FALSE;
 
-	if (!m_isSelected)
+	if (!m_shouldSelectPlayMode)
 	{
 		m_is2P = TRUE;
-		m_isSelected = TRUE;
+		m_shouldSelectPlayMode = TRUE;
 	}
 }
 
@@ -207,15 +207,22 @@ VOID TitleMenu::Transfar2PWhenJoyconIsConnected()
 
 	if (isFirstFrame)
 	{
-		m_JoyconThread = std::thread(&TitleMenu::CheakConnectJoycon, this);
 		isFirstFrame = FALSE;
+		m_isAborted = FALSE;
+		m_JoyconThread = std::thread(&TitleMenu::CheakConnectJoycon, this);
 	}
 
 	if (m_rGameLib.KeyboardIsPressed(DIK_BACK))
 	{
+		m_isAborted = TRUE;
+	}
+
+	if (m_isFinished)
+	{
 		isFirstFrame = TRUE;
 		m_is2P = FALSE;
-		m_isSelected = FALSE;
+		m_shouldSelectPlayMode = FALSE;
+		m_isFinished = FALSE;
 		m_JoyconThread.join();
 	}
 
