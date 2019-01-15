@@ -53,7 +53,7 @@ VOID Text::Write(const TextFormat& textFormat)
 }
 
 VOID Text::CreateOneLineCharsRects(const TextFormat& textFormat, std::vector<ObjData*>* ppCharDatas, 
-	std::vector<CustomVertex*>* ppChars,std::vector<TString*>& pOneLineStrings) const
+	std::vector<CustomVertex*>* ppChars,std::vector<TString*>& pOneLineStrings)
 {
 	INT oneLineLength = NULL;
 
@@ -76,6 +76,8 @@ VOID Text::CreateOneLineCharsRects(const TextFormat& textFormat, std::vector<Obj
 			};
 
 			textFormat.m_charHalfScale.TransD3DXVECTOR3(&(*ppCharDatas)[si][li].m_halfScale);
+
+			CutTuTvA_Z_0_9(&(*ppCharDatas)[si][li], m_pOneLineTstringVec[si]->GetTChar(li));
 		}
 	}
 }

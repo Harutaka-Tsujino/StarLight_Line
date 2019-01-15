@@ -3,8 +3,36 @@
 #include <windows.h>
 #include <tchar.h>
 
+VOID NumText::Write(const TextFormat& textFormat)
+{
+	std::vector<ObjData*> pCharData;
+	std::vector<CustomVertex*> pCustomVerticesVec;
+
+	NewCustomVerticesData(&pCharData, &pCustomVerticesVec, m_pOneLineTstringVec);
+
+	CreateOneLineCharsRects(textFormat, &pCharData, &pCustomVerticesVec, m_pOneLineTstringVec);
+
+	INT oneLineLength = NULL;
+
+	const INT RECT_VERTICES_NUM = CustomVertex::m_RECT_VERTICES_NUM;
+
+	for (INT si = 0; si < m_pOneLineTstringVec.size(); ++si)
+	{
+		oneLineLength = m_pOneLineTstringVec[si]->Length();
+
+		for (INT li = 0; li < oneLineLength; ++li)
+		{
+			m_rGameLib.CreateRect(&pCustomVerticesVec[si][RECT_VERTICES_NUM * li], pCharData[si][li]);
+
+			m_rGameLib.Render(&pCustomVerticesVec[si][RECT_VERTICES_NUM * li], m_rGameLib.GetTex(_T("Nums")));
+		}
+	}
+
+	ReleaseCustomVerticesData(&pCharData, &pCustomVerticesVec, m_pOneLineTstringVec);
+}
+
 VOID NumText::CreateOneLineCharsRects(const TextFormat& textFormat, std::vector<ObjData*>* ppCharDatas,
-	std::vector<CustomVertex*>* ppChars, std::vector<TString*>& pOneLineStrings) const
+	std::vector<CustomVertex*>* ppChars, std::vector<TString*>& pOneLineStrings)
 {
 	INT oneLineLength = NULL;
 

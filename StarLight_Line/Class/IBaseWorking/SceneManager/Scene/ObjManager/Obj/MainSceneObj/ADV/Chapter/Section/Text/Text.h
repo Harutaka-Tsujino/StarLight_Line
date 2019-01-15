@@ -19,6 +19,8 @@
 #include <sstream>
 #include <algorithm>
 
+#include <d3dx9.h>
+
 #include "../../../../../../../../../../../GameLib/GameLib.h"
 #include "Data/TextFormat.h"
 #include "Tstring/TString.h"
@@ -34,7 +36,7 @@ public:
 
 		DivideTextByNewLine();
 
-		if (m_rGameLib.TexExists(m_pFONT_KEY)) return;
+		if (pFontTexPath == nullptr) return;
 
 		m_rGameLib.CreateTex(m_pFONT_KEY, pFontTexPath);
 	}
@@ -90,7 +92,47 @@ protected:
 	}
 
 	virtual VOID CreateOneLineCharsRects(const TextFormat& textFormat, std::vector<ObjData*>* ppCharDatas,
-		std::vector<CustomVertex*>* ppChars, std::vector<TString*>& pOneLineStrings) const;
+		std::vector<CustomVertex*>* ppChars, std::vector<TString*>& pOneLineStrings);
+
+	inline VOID CutTuTvA_Z_0_9(ObjData* pObjData, TCHAR tChar)
+	{
+		const INT CHARS_MAX = 38;
+		const TCHAR CHARS[CHARS_MAX] =
+		{
+			_T("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ")
+		};
+		
+		INT fontNum = CHARS_MAX - 2;
+
+		for (INT i = 0; i < CHARS_MAX - 1; ++i)
+		{
+			if (tChar == CHARS[i])
+			{
+				fontNum = i;
+
+				break;
+			}
+		}
+
+		const FLOAT ILUUST_SIZE = 2048.0f;
+		const D3DXVECTOR2 FONT_SCALE = { 200.0f, 300.0f };
+		const INT ONE_COLUMN_CHARS_NUM = 6;
+
+		if (fontNum == CHARS_MAX - 2)
+		{
+			pObjData->m_texUV = { 0.0f, 0.0f, 0.0f, 0.0f };
+
+			return;
+		}
+
+		pObjData->m_texUV =
+		{
+			FONT_SCALE.x * (fontNum % 6)	 / ILUUST_SIZE,
+			FONT_SCALE.y * (fontNum / 6)	 / ILUUST_SIZE,
+			FONT_SCALE.x * (fontNum % 6 + 1) / ILUUST_SIZE,
+			FONT_SCALE.y * (fontNum / 6 + 1) / ILUUST_SIZE
+		};
+	}
 
 	GameLib& m_rGameLib;
 
