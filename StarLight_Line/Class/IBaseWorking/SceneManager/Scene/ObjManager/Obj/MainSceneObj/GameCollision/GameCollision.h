@@ -1,12 +1,15 @@
 ﻿#ifndef GAME_COLLISION_H_
 #define GAME_COLLISION_H_
 
+#include <windows.h>
+
 #include <map>
 #include <vector>
 
 #include "../../../../../../../../GameLib/GameLib.h"
 #include "../../../../../../../Singleton/Singleton.h"
-
+#include "../../../../../../../../GameLib/EffectManager/EffectManager.h"
+#include "../../../../../../../../GameLib/EffectManager/Effect/Effects/Enum/EFFECT_ID.h"
 #include "../Enum/STAR_TYPE.h"
 
 #include <crtdbg.h>
@@ -91,6 +94,11 @@ public:
 
 			if (!CollidesStar(pKey, i, aRadius, bRadius)) continue;
 
+			D3DXVECTOR3 PlayerScreenPos(m_rGameLib.TransScreen(*m_PlayerPoint[pKey]));
+			PlayerScreenPos.z = 0.0f;
+
+			rEffectManager.CreateEffect(PlayerScreenPos, m_Enemy[i]->m_Type);
+	
 			return m_Enemy[i]->m_IsCollided =  TRUE;
 		}
 
@@ -122,7 +130,7 @@ public:
 	}
 	
 private:
-	GameCollision() :m_rGameLib(GameLib::GetInstance())
+	GameCollision() :m_rGameLib(GameLib::GetInstance()), rEffectManager(EffectManager::GetInstance())
 	{
 	}
 
@@ -131,6 +139,8 @@ private:
 	std::map<const TCHAR*, const CustomVertex*> m_Vertex;
 	std::map<const TCHAR*, const D3DXVECTOR3*> m_PlayerPoint;
 	std::vector<StarCollisionData*> m_Enemy;
+
+	EffectManager& rEffectManager;
 };
 
 #endif // !GAME_COLLISION_H_
