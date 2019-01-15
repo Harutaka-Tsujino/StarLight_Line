@@ -9,6 +9,7 @@
 #include "Scene/2PScenes/2PSelectScene/SelectStage2PScene.h"
 #include "Scene/SaveDataScene/SaveDataScene.h"
 #include "Scene/MainScene/MainScene.h"
+#include "Scene/2PScenes/2PMainScene/Main2PScene.h"
 #include "Scene/ResultScene/ResultScene.h"
 #include "Scene/EndScene/EndScene.h"
 #include "Scene/PauseScene/PauseScene.h"
@@ -52,6 +53,14 @@ VOID SceneManager::Factory()
 		}
 
 		m_CanTransferSubScene = FALSE;
+
+		break;
+
+
+	case SK_2P_GAME:
+		delete m_pScene;
+
+		m_pScene = new MainTwoPlayerScene();
 
 		break;
 
