@@ -211,6 +211,14 @@ VOID TitleMenu::Transfar2PWhenJoyconIsConnected()
 		isFirstFrame = FALSE;
 	}
 
+	if (m_rGameLib.KeyboardIsPressed(DIK_BACK))
+	{
+		isFirstFrame = TRUE;
+		m_is2P = FALSE;
+		m_isSelected = FALSE;
+		m_JoyconThread.join();
+	}
+
 	if (m_rGameLib.GetIsConnectJoycon(Joycon::LEFT_CONTROLLER) &&
 		m_rGameLib.GetIsConnectJoycon(Joycon::RIGHT_CONTROLLER))
 	{
@@ -220,8 +228,8 @@ VOID TitleMenu::Transfar2PWhenJoyconIsConnected()
 		if (count <= 60) return;
 	
 		isFirstFrame = TRUE;
-		m_JoyconThread.join();
 
+		m_JoyconThread.join();
 		SceneManager& rSceneManager = SceneManager::GetInstance();
 		rSceneManager.SetNextScene(SK_2P_STAGE_SELECT);
 		count = 0;	

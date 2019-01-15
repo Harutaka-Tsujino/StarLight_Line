@@ -21,7 +21,6 @@ public:
 	{
 
 	}
-
 };
 
 #endif // !STAGE_SELECT_TWO_PLAYER_SCENE_H_

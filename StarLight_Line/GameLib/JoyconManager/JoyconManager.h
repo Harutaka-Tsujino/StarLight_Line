@@ -38,11 +38,11 @@ public:
 	* @param controllerType 取得するコントローラの種類
 	* @param Direction アナログスティックの向き
 	*/
-	bool InputedAnalogStick(Joycon::CONTROLLER_TYPE controllerType, int direction) const
+	bool PushAnalogStick(Joycon::CONTROLLER_TYPE controllerType, int direction) const
 	{
 		const Joycon::ANALOG_STICK_STATE* AnalogStick = m_pJoycon[controllerType]->GetAnalogStickState();
 
-		if (AnalogStick[direction] == Joycon::INPUTED_ANALOG_STICK) return true;
+		if (AnalogStick[direction] == Joycon::PUSH_ANALOG_STICK) return true;
 
 		return false;
 	}
@@ -54,11 +54,11 @@ public:
 	* @param controllerType 取得するコントローラの種類
 	* @param Direction アナログスティックの向き
 	*/
-	bool InclinedAnalogStick(Joycon::CONTROLLER_TYPE controllerType, int direction) const
+	bool HoldAnalogStick(Joycon::CONTROLLER_TYPE controllerType, int direction) const
 	{
 		const Joycon::ANALOG_STICK_STATE* AnalogStick = m_pJoycon[controllerType]->GetAnalogStickState();
 
-		if (AnalogStick[direction] == Joycon::INCLINED_ANALOG_STICK) return true;
+		if (AnalogStick[direction] == Joycon::HOLD_ANALOG_STICK) return true;
 
 		return false;
 	}
