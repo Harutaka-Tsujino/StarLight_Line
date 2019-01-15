@@ -20,8 +20,11 @@ public:
 
 	virtual ~Effect() 
 	{
-		for (auto i : m_particles) delete i;
-		
+		for (auto i : m_particles)
+		{
+			delete i;
+		}
+
 		m_particles.clear();
 		m_particles.shrink_to_fit();
 	}

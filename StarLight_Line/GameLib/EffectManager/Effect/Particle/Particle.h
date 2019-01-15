@@ -42,7 +42,6 @@ public:
 	inline VOID FormatCenter(const D3DXVECTOR3& center, FLOAT minLengthToCenter, FLOAT centerDifference)
 	{
 		m_behavior.FormatCenter(&m_objData, center, minLengthToCenter, centerDifference);
-
 	}
 
 	inline VOID FormatInitialVelocity(FLOAT initialSpeed, FLOAT direction_deg, FLOAT directionDifference_deg = 0.0f)
@@ -106,14 +105,14 @@ public:
 		m_behavior.SetAlpha(&m_objData, alpha);
 	}
 
-	inline VOID FeedIn(INT startFrame, INT takesFrame)
+	inline VOID FadeIn(INT startFrame, INT takesFrame)
 	{
-		m_behavior.FeedIn(&m_objData, startFrame, takesFrame, m_lifeFrame);
+		m_behavior.FadeIn(&m_objData, startFrame, takesFrame, m_lifeFrame);
 	}
 
-	inline VOID FeedOut(INT startFrame, INT takesFrame)
+	inline VOID FadeOut(INT startFrame, INT takesFrame)
 	{
-		m_behavior.FeedOut(&m_objData, startFrame, takesFrame, m_lifeFrame);
+		m_behavior.FadeOut(&m_objData, startFrame, takesFrame, m_lifeFrame);
 	}
 
 	inline VOID RotateX(FLOAT deg)
