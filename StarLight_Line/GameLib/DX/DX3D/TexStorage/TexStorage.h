@@ -33,6 +33,8 @@ public:
 	*/
 	inline VOID CreateTex(const TCHAR* pTexKey, const TCHAR* pTexPath)
 	{
+		if (Exists(pTexKey)) return;
+
 		D3DXCreateTextureFromFile(
 			m_rpDX3D_DEV, 
 			pTexPath, 
