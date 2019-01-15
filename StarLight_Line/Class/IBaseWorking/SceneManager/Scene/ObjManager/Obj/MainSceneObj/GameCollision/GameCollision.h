@@ -90,7 +90,8 @@ public:
 
 			if (m_Enemy[i]->m_IsCollided) continue;
 
-			if (m_Enemy[i]->m_Point->y < -STAR_HALF_SCALE - 150.0f || m_Enemy[i]->m_Point->y > 2.5f * WND_Y_SIZE + STAR_HALF_SCALE) continue;
+			//当たることのない星は判定をとらないようにする
+			if (m_Enemy[i]->m_Point->y < -STAR_HALF_SCALE - WND_Y_SIZE * 0.3f || m_Enemy[i]->m_Point->y > 2.5f * WND_Y_SIZE + STAR_HALF_SCALE) continue;
 
 			if (!CollidesStar(pKey, i, aRadius, bRadius)) continue;
 

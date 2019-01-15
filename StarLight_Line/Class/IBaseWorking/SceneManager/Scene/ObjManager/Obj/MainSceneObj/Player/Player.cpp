@@ -85,13 +85,6 @@ VOID Player::Update()
 
 VOID Player::Render()
 {
-	m_rGameLib.SetCameraPos(0.0f, -2.15f, -1.0f);
-
-	m_rGameLib.SetCameraTransform();
-	
-	m_ResultData.Render();
-	m_Hp.Render();
-
 	D3DXMATRIX MatTrans, MatScale,MatRotate;
 	D3DXMatrixIdentity(&m_World);
 	D3DXMatrixIdentity(&MatTrans);
@@ -103,7 +96,6 @@ VOID Player::Render()
 
 	// 拡大
 	D3DXMatrixScaling(&MatScale, MODELSCALE, MODELSCALE, MODELSCALE);
-
 	D3DXMatrixMultiply(&m_World, &m_World, &MatScale);
 
 	static FLOAT deg = 0;
@@ -117,56 +109,14 @@ VOID Player::Render()
 
 	// 移動
 	D3DXMatrixTranslation(&MatTrans, m_PlayerPos.x, m_PlayerPos.y, m_PlayerPos.z);
-
 	D3DXMatrixMultiply(&m_World, &m_World, &MatTrans);
 
-	if (m_rGameLib.KeyboardIsPressed(DIK_RETURN))
-	{
-		m_AdditionalFlashMulti = (m_AdditionalFlashMulti >= 1) ? -1 : ++m_AdditionalFlashMulti;
-	}
+	SetPlayerFbxMaterial();
 
-	FLOAT AdditionalColor = 60.0f * (m_ResultData.GetAdditionalFlashMulti());
+	m_rGameLib.Render(m_rGameLib.GetFbx(_T("Eiwi")), m_World, m_rGameLib.GetTex(_T("PlayerTex")));
 
-	if (m_Hp.GetAdditionalFlashMulti() == -1) 
-	{
-		static BOOL Increases = FALSE;
-		static INT AdditionalFlashCount = 0;
-
-		const FLOAT ADDITIONAL_COLOR_MAX = -90.0f;
-		const INT ADDITIONAL_FLASH_COUNT_MAX = 20;
-
-		FLOAT AdditionalColorAbs = (ADDITIONAL_COLOR_MAX / ADDITIONAL_FLASH_COUNT_MAX) * AdditionalFlashCount;
-		AdditionalColor			 = (Increases) ? -AdditionalColorAbs + ADDITIONAL_COLOR_MAX : AdditionalColorAbs;
-
-		++AdditionalFlashCount;
-
-		if (AdditionalFlashCount >= ADDITIONAL_FLASH_COUNT_MAX)
-		{
-			AdditionalFlashCount = 0;
-
-			Increases = !Increases;
-		}
-	}
-
-	D3DXVECTOR4 EiwiAmbient(0.7f, (170.0f + AdditionalColor) / 255.0f, (170.0f + AdditionalColor) / 255.0f, (-30.0f + AdditionalColor) / 255.0f);
-	rEiwi.SetAmbient(&EiwiAmbient);
-
-	D3DXVECTOR4 EiwiEmissive(0.8f, (150.0f + AdditionalColor) / 255.0f, (130.0f + AdditionalColor) / 255.0f, (-30.0f + AdditionalColor) / 255.0f);
-	rEiwi.SetEmissive(&EiwiEmissive);
-
-	//D3DXVECTOR4 EiwiDiffuse(0.8f, 170.0f / 255.0f, 160.0f / 255.0f, 0.0f);
-	//rEiwi.SetDiffuse(&EiwiEmissive);
-
-	rEiwi.SetPower(0.8f);
-	
-	D3DXVECTOR4 VertexColor(150.0f, 255.0f, 255.0f, 255.0f);
-	rEiwi.SetColor(&VertexColor);
-
-	//m_rGameLib.AddtionBlendMode();
-
-	m_rGameLib.Render(rEiwi, m_World, m_rGameLib.GetTex(_T("PlayerTex")));
-
-	m_rGameLib.DefaultBlendMode();
+	m_ResultData.Render();
+	m_Hp.Render();
 }
 
 VOID Player::DefaultLight()
@@ -302,4 +252,47 @@ VOID Player::ObtainScoreToExist(const INT& Level)
 		m_ResultData.SetScore(Score);
 		count = 0;
 	}
+}
+
+VOID Player::DecideColorByHit(FLOAT* pAdditionalColor)
+{
+	if (m_Hp.GetAdditionalFlashMulti() == -1)
+	{
+		static BOOL Increases = FALSE;
+		static INT AdditionalFlashCount = 0;
+
+		const FLOAT ADDITIONAL_COLOR_MAX = -90.0f;
+		const INT ADDITIONAL_FLASH_COUNT_MAX = 20;
+
+		FLOAT AdditionalColorAbs = (ADDITIONAL_COLOR_MAX / ADDITIONAL_FLASH_COUNT_MAX) * AdditionalFlashCount;
+		*pAdditionalColor = (Increases) ? -AdditionalColorAbs + ADDITIONAL_COLOR_MAX : AdditionalColorAbs;
+
+		++AdditionalFlashCount;
+
+		if (AdditionalFlashCount >= ADDITIONAL_FLASH_COUNT_MAX)
+		{
+			AdditionalFlashCount = 0;
+
+			Increases = !Increases;
+		}
+	}
+}
+
+VOID Player::SetPlayerFbxMaterial()
+{
+	FLOAT AdditionalColor = 60.0f * (m_ResultData.GetAdditionalFlashMulti());
+	DecideColorByHit(&AdditionalColor);
+	
+	FbxRelated& rEiwi = m_rGameLib.GetFbx(_T("Eiwi"));
+
+	D3DXVECTOR4 EiwiAmbient(0.7f, (170.0f + AdditionalColor) / 255.0f, (170.0f + AdditionalColor) / 255.0f, (-30.0f + AdditionalColor) / 255.0f);
+	rEiwi.SetAmbient(&EiwiAmbient);
+
+	D3DXVECTOR4 EiwiEmissive(0.8f, (150.0f + AdditionalColor) / 255.0f, (130.0f + AdditionalColor) / 255.0f, (-30.0f + AdditionalColor) / 255.0f);
+	rEiwi.SetEmissive(&EiwiEmissive);
+
+	rEiwi.SetPower(0.8f);
+
+	D3DXVECTOR4 VertexColor(150.0f, 255.0f, 255.0f, 255.0f);
+	rEiwi.SetColor(&VertexColor);
 }
