@@ -162,6 +162,26 @@ public:
 		return length;
 	}
 
+	inline VOID WriteInNumPrevEnd(INT val, const TCHAR* pFormat)
+	{
+		const INT BUF_SIZE = 30;
+		TCHAR tCharBuf[BUF_SIZE] = _T("");
+		_stprintf_s(tCharBuf, BUF_SIZE, pFormat, val);
+
+		for (INT i = 0; i < BUF_SIZE; ++i)
+		{
+			if (tCharBuf[i] == m_TEXT_END) return;
+
+			WriteInCharPrevEnd(tCharBuf[i]);
+		}
+	}
+
+	inline VOID WriteInCharPrevEnd(TCHAR tChar)
+	{
+		m_tChar[(m_tChar.size() - 1)] = tChar;
+		m_tChar.push_back(m_TEXT_END);
+	}
+
 	static const INT m_NEW_LINE_AND_RETURN_LENGTH = 2;
 
 	static const TCHAR m_NEW_LINE = _T('\n');

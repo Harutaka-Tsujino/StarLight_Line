@@ -84,10 +84,10 @@ VOID Text::CreateOneLineCharsRects(const TextFormat& textFormat, std::vector<Obj
 
 VOID Text::CutTuTvA_Z_0_9(ObjData* pObjData, TCHAR tChar)
 {
-	const INT CHARS_MAX = 38;
+	const INT CHARS_MAX = 40;
 	const TCHAR CHARS[CHARS_MAX] =
 	{
-		_T("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ")
+		_T("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789:/ ")
 	};
 
 	INT fontNum = CHARS_MAX - 2;
@@ -106,9 +106,17 @@ VOID Text::CutTuTvA_Z_0_9(ObjData* pObjData, TCHAR tChar)
 	const D3DXVECTOR2 FONT_SCALE = { 200.0f, 300.0f };
 	const INT ONE_COLUMN_CHARS_NUM = 6;
 
-	if (fontNum == CHARS_MAX - 2)
+	const INT NOT_NUMBER = 36;
+
+	if (fontNum >= NOT_NUMBER)
 	{
-		pObjData->m_texUV = { 0.0f, 0.0f, 0.0f, 0.0f };
+		pObjData->m_texUV =
+		{
+			FONT_SCALE.x * (6 + fontNum - NOT_NUMBER) / ILUUST_SIZE,
+			0.0f									  / ILUUST_SIZE,
+			FONT_SCALE.x * (7 + fontNum - NOT_NUMBER) / ILUUST_SIZE,
+			FONT_SCALE.y							  / ILUUST_SIZE
+		};
 
 		return;
 	}
