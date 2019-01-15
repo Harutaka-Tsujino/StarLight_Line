@@ -525,14 +525,14 @@ public:
 		return m_pJoyconManager->NeutralButton(controllerType, button);
 	}
 
-	inline BOOL InputedJoyconAnalogStick(Joycon::CONTROLLER_TYPE controllerType, int direction) const
+	inline BOOL PushJoyconAnalogStick(Joycon::CONTROLLER_TYPE controllerType, int direction) const
 	{
-		return m_pJoyconManager->InputedAnalogStick(controllerType, direction);
+		return m_pJoyconManager->PushAnalogStick(controllerType, direction);
 	}
 
-	inline BOOL InclinedJoyconAnalogStick(Joycon::CONTROLLER_TYPE controllerType, int direction) const
+	inline BOOL HoldJoyconAnalogStick(Joycon::CONTROLLER_TYPE controllerType, int direction) const
 	{
-		return m_pJoyconManager->InclinedAnalogStick(controllerType, direction);
+		return m_pJoyconManager->HoldAnalogStick(controllerType, direction);
 	}
 
 	inline BOOL ReleaseJoyconAnalogStick(Joycon::CONTROLLER_TYPE controllerType, int direction) const

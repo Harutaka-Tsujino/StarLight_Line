@@ -404,21 +404,21 @@ void Joycon::CheackAnalogStick()
 	{
 		if (IsInputed)
 		{
-			if (Prev[State] == INPUTED_ANALOG_STICK ||
-				Prev[State] == INCLINED_ANALOG_STICK)
+			if (Prev[State] == PUSH_ANALOG_STICK ||
+				Prev[State] == HOLD_ANALOG_STICK)
 			{
-				m_AnalogStickState[State] = INCLINED_ANALOG_STICK;
+				m_AnalogStickState[State] = HOLD_ANALOG_STICK;
 
 				return;
 			}
 			
-			m_AnalogStickState[State] = INPUTED_ANALOG_STICK;
+			m_AnalogStickState[State] = PUSH_ANALOG_STICK;
 			
 			return;
 		}
 		
-		if (Prev[State] == INPUTED_ANALOG_STICK ||
-			Prev[State] == INCLINED_ANALOG_STICK)
+		if (Prev[State] == PUSH_ANALOG_STICK ||
+			Prev[State] == HOLD_ANALOG_STICK)
 		{
 			m_AnalogStickState[State] = RELEASE_ANALOG_STICK;
 
