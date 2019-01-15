@@ -160,6 +160,7 @@ private:
 		_T("TITLE_BGM")			,
 		_T("TUTORIAL_BGM")		,
 		_T("STAGESELECT_BGM")	,
+		_T("2P_STAGESELECT_BGM"),
 		_T("GAME_BGM")			,
 		_T("SAVE_DATA_BGM")		,
 		_T("PAUSE_BGM")			,
