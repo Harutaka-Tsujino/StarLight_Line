@@ -10,6 +10,7 @@
 #include "../Class/Singleton/Singleton.h"
 #include "../GameLib/GameLib.h"
 #include "../Class/IBaseWorking/SceneManager/SceneManager.h"
+#include "../GameLib/EffectManager/EffectManager.h"
 
 #define _CRTDBG_MAP_ALLOC
 #define new ::new(_NORMAL_BLOCK, __FILE__, __LINE__)
@@ -30,6 +31,10 @@ VOID Func()
 	rSceneManager.Factory();
 	rSceneManager.Update();
 	rSceneManager.Render();
+
+	EffectManager& rEffectManager = EffectManager::GetInstance();
+	rEffectManager.Update();
+	rEffectManager.Render();
 }
 
 INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR szStr, INT iCmdShow)
@@ -39,6 +44,8 @@ INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR szStr, INT iCmdSh
 	GameLib::Create(hInst, _T("StarLight Line"));
 
 	GameLib& rGameLib = GameLib::GetInstance();
+
+	ShowCursor(FALSE);
 
 	rGameLib.RunFunc(Func);
 
