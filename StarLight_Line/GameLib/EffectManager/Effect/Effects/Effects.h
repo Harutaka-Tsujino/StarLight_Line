@@ -17,7 +17,10 @@ public:
 	{
 		if (m_COUNT_TO_ACTIVE_MAX != 0) return;
 
-		for (auto i : m_particles) { Init(i); };
+		for (auto i : m_particles) 
+		{
+			Init(i); 
+		}
 	}
 
 	~GetScoreStarEffect() {};
@@ -48,7 +51,10 @@ public:
 	{
 		if (m_COUNT_TO_ACTIVE_MAX != 0) return;
 
-		for (auto i : m_particles) { Init(i); };
+		for (auto i : m_particles) 
+		{
+			Init(i); 
+		}
 	}
 
 	~GetClearStarEffect() {};
@@ -79,7 +85,10 @@ public:
 	{
 		if (m_COUNT_TO_ACTIVE_MAX != 0) return;
 
-		for (auto i : m_particles) { Init(i); };
+		for (auto i : m_particles) 
+		{
+			Init(i); 
+		}
 	}
 
 	~GetDamageStarEffect() {};

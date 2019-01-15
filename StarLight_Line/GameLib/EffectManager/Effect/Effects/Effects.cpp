@@ -20,8 +20,8 @@ VOID GetScoreStarEffect::Update()
 			return;
 		}
 
-		m_particles[i]->FeedIn(0, 10);
-		m_particles[i]->FeedOut(20, 25);
+		m_particles[i]->FadeIn(0, 10);
+		m_particles[i]->FadeOut(20, 25);
 		m_particles[i]->RotateZ(3.0f);
 		m_particles[i]->Update();
 	}
@@ -42,8 +42,8 @@ VOID GetClearStarEffect::Update()
 			return;
 		}
 
-		m_particles[i]->FeedIn(0, 10);
-		m_particles[i]->FeedOut(20, 25);
+		m_particles[i]->FadeIn(0, 10);
+		m_particles[i]->FadeOut(20, 25);
 		m_particles[i]->RotateZ(3.0f);
 		m_particles[i]->Circulate(5.0f);
 		m_particles[i]->Update();
@@ -65,8 +65,8 @@ VOID GetDamageStarEffect::Update()
 			return;
 		}
 
-		m_particles[i]->FeedIn(0, 10);
-		m_particles[i]->FeedOut(10, 20);
+		m_particles[i]->FadeIn(0, 10);
+		m_particles[i]->FadeOut(10, 20);
 		m_particles[i]->RotateZ(3.0f);
 		m_particles[i]->Update();
 	}
@@ -93,8 +93,8 @@ VOID MouseCursorEffect::Update()
 
 		if (m_particles[i]->LifeFrame() > 60) Init(m_particles[i]);
 
-		m_particles[i]->FeedIn(0, 10);
-		m_particles[i]->FeedOut(30, 25);
+		m_particles[i]->FadeIn(0, 10);
+		m_particles[i]->FadeOut(30, 25);
 		m_particles[i]->RotateZ(3.0f);
 		m_particles[i]->Accelarate(gravity);
 		m_particles[i]->Update();

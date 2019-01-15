@@ -159,7 +159,7 @@ public:
 	{
 		std::uniform_real_distribution<FLOAT> additionalRangMultiRand(1.0f, 1.0f + differenceAdditionalRangeMulti);
 
-		FLOAT additionalRangMulti = additionalRangMultiRand(m_randEngine);
+		FLOAT additionalRangMulti  = additionalRangMultiRand(m_randEngine);
 		D3DXVECTOR3 additonalRange = { additionalRangMulti * additionalRangeMin.x, additionalRangMulti * additionalRangeMin.y, objData.m_center.z };
 
 		D3DXVECTOR3 radiusVec = objData.m_center - m_baseCenter;
@@ -176,14 +176,14 @@ public:
 		pObjData->m_aRGB += (alpha << 24);
 	}
 
-	inline VOID FeedIn(ObjData* pObjData, INT startFrame, INT takesFrame, INT lifeTime)
+	inline VOID FadeIn(ObjData* pObjData, INT startFrame, INT takesFrame, INT lifeTime)
 	{
 		if (lifeTime < startFrame || lifeTime > startFrame + takesFrame) return;
 
 		SetAlpha(pObjData, static_cast<BYTE>(255.0f * (lifeTime - startFrame) / takesFrame));
 	}
 
-	inline VOID FeedOut(ObjData* pObjData, INT startFrame, INT takesFrame, INT lifeTime)
+	inline VOID FadeOut(ObjData* pObjData, INT startFrame, INT takesFrame, INT lifeTime)
 	{
 		if (lifeTime < startFrame || lifeTime > startFrame + takesFrame) return;
 
