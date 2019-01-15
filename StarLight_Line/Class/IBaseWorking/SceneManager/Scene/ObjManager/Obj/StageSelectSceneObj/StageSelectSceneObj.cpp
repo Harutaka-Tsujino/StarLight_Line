@@ -19,6 +19,10 @@
 #include "../../../Enum/SCENE_KIND.h"
 #include "../../../../SceneManager.h"
 
+const FLOAT StageSelectSceneStageList::m_ICONS_CIRCLE_RADIUS_MAX = 230.0f;
+
+const FLOAT StageSelectSceneStageList::m_BLACK_HOLE_RADIUSU_MIN = 100.0f;
+
 VOID StageSelectSceneStageList::Update()
 {
 	if (m_isDecided) return;
@@ -127,22 +131,19 @@ VOID StageSelectSceneStageList::Render()
 {
 	if (m_isDecided) m_rGameLib.AddtionBlendMode();
 
-	const FLOAT ICONS_CIRCLE_RADIUS_MAX = 230.0f;											//! 複数のアイコンがなす円の半径の最大値
-	static FLOAT iconsCircleRadius = ICONS_CIRCLE_RADIUS_MAX;								//! 複数のアイコンがなす円の半径
-
 	const FLOAT DEG_GAP = -360.0f / m_STAGE_ICONS_MAX;										//! アイコンとアイコンの角度
 
 	const INT DECIDE_STAGE_FRAMES = 60;
-	iconsCircleRadius += m_lengthMulti * ICONS_CIRCLE_RADIUS_MAX / DECIDE_STAGE_FRAMES;		//! DECIDE_STAGE_FRAMESで半径が最大値に達する
-	iconsCircleRadius = min(max(iconsCircleRadius, 0), ICONS_CIRCLE_RADIUS_MAX);
+	m_iconsCircleRadius += m_lengthMulti * m_ICONS_CIRCLE_RADIUS_MAX / DECIDE_STAGE_FRAMES;		//! DECIDE_STAGE_FRAMESで半径が最大値に達する
+	m_iconsCircleRadius = min(max(m_iconsCircleRadius, 0), m_ICONS_CIRCLE_RADIUS_MAX);
 
-	if (iconsCircleRadius == ICONS_CIRCLE_RADIUS_MAX ||
-		!iconsCircleRadius &&
+	if (m_iconsCircleRadius == m_ICONS_CIRCLE_RADIUS_MAX ||
+		!m_iconsCircleRadius &&
 		!m_blackHoleIsSelected)
 	{
 		m_lengthMulti = 0.0f;
 
-		m_isDecided = !iconsCircleRadius;
+		m_isDecided = !m_iconsCircleRadius;
 	}
 
 	BYTE alpha = NULL;
@@ -158,13 +159,13 @@ VOID StageSelectSceneStageList::Render()
 	{
 		if ((i != m_selectingStage || m_blackHoleIsSelected) && m_isDecided ) continue;;
 
-		RotateIconsCenter(stageIconDatas, i, DEG_GAP, iconsCircleRadius);
+		RotateIconsCenter(stageIconDatas, i, DEG_GAP, m_iconsCircleRadius);
 		
-		SetHalfScaleByRadius(stageIconDatas, i, iconsCircleRadius, ICONS_CIRCLE_RADIUS_MAX);
+		SetHalfScaleByRadius(stageIconDatas, i, m_iconsCircleRadius, m_ICONS_CIRCLE_RADIUS_MAX);
 
 		if (i != m_selectingStage || m_blackHoleIsSelected)
 		{
-			alpha = static_cast<BYTE>(255 * (iconsCircleRadius / ICONS_CIRCLE_RADIUS_MAX));
+			alpha = static_cast<BYTE>(255 * (m_iconsCircleRadius / m_ICONS_CIRCLE_RADIUS_MAX));
 
 			stageIconDatas[i].m_objData.m_aRGB = D3DCOLOR_ARGB(alpha, 255, 255, 255);
 		}
@@ -193,7 +194,7 @@ VOID StageSelectSceneStageList::Render()
 
 	m_rGameLib.DefaultBlendMode();
 
-	if (iconsCircleRadius != 0.0f) RenderBackButton(iconsCircleRadius);
+	if (m_iconsCircleRadius != 0.0f) RenderBackButton(m_iconsCircleRadius);
 }
 
 VOID StageSelectSceneStageList::RenderBackButton(FLOAT iconsCircleRadius) const
@@ -259,6 +260,13 @@ VOID StageSelectSceneLevelSelecter::Update()
 	{
 		m_rGameLib.OneShotSimultaneousSound(_T("ChangeStage"));
 
+		if (m_blackHoleIsSelected)
+		{
+			m_level = (m_level < SLK_HARD) ? m_level + 2 : SLK_HARD;
+
+			return;
+		}
+
 		m_level = (m_level < SLK_HARD) ? ++m_level : SLK_HARD;
 
 		return;
@@ -267,6 +275,13 @@ VOID StageSelectSceneLevelSelecter::Update()
 	if (LeftKeyIsPressed())
 	{
 		m_rGameLib.OneShotSimultaneousSound(_T("ChangeStage"));
+
+		if (m_blackHoleIsSelected)
+		{
+			m_level = (m_level > SLK_EASY) ? m_level - 2 : SLK_EASY;
+
+			return;
+		}
 
 		m_level = (m_level > SLK_EASY) ? --m_level : SLK_EASY;
 
@@ -311,37 +326,55 @@ VOID StageSelectSceneLevelSelecter::RenderBack() const
 
 	CustomVertex back[4];
 	m_rGameLib.CreateRect(back, backData);
-
-	const TCHAR* TEXS[] =
-	{
-		_T("LevelBack"),
-		_T("LevelBack_BH")
-	};
-
-	m_rGameLib.Render(back, m_rGameLib.GetTex(TEXS[m_blackHoleIsSelected]));
+	m_rGameLib.Render(back, m_rGameLib.GetTex(_T("LevelBack")));
 }
 
 VOID StageSelectSceneLevelSelecter::RenderTarget() const
 {
+	ObjData levelData;
 
-	ObjData targetData;
-	targetData.m_center		= { m_WND_SIZE.m_x * 0.262f + m_WND_SIZE.m_x * 0.238f * m_level, m_WND_SIZE.m_y * 0.657f, m_Z };	//! 現物合わせ
-	targetData.m_halfScale	= { m_WND_SIZE.m_y * 0.017f, m_WND_SIZE.m_y * 0.017f, 0.0f };										//! 現物合わせ
-
-	targetData.m_aRGB = D3DCOLOR_ARGB(m_alpha, 255, 255, 255);
-
-	targetData.m_deg.z = 90.0f;
-
-	if (m_backIsSelected)
+	for (INT i = 0; i < SLK_EXTREME; ++i)
 	{
-		targetData.m_center = { m_WND_SIZE.m_x * 0.1865f, m_WND_SIZE.m_y * 0.17f, m_Z };										//! 現物合わせ
-		targetData.m_deg.z = 180.0f;
+		if (m_blackHoleIsSelected && i == SLK_NORMAL) continue;
+
+		levelData.m_center	  = { m_WND_SIZE.m_x * 0.262f + m_WND_SIZE.m_x * 0.238f * i, m_WND_SIZE.m_y * 0.727f, m_Z };
+		levelData.m_halfScale = { m_WND_SIZE.m_x * 0.06f, m_WND_SIZE.m_y * 0.034f, 0.0f };
+
+		levelData.m_aRGB = D3DCOLOR_ARGB(m_alpha, 255, 255, 255);
+
+		INT levelNum = i;
+		if (m_blackHoleIsSelected) levelNum = (levelNum == SLK_EASY) ? SLK_HARD : SLK_EXTREME;
+
+		const D3DXVECTOR2 ILLUST_SCALE = { 1024.0f, 64.0f };
+		const D3DXVECTOR2 LEVEL_SCALE  = { 150.0f,50.0f };
+
+		levelData.m_texUV =
+		{
+			LEVEL_SCALE.x * levelNum / ILLUST_SCALE.x,
+			0.0f,
+			LEVEL_SCALE.x * (levelNum + 1) / ILLUST_SCALE.x,
+			LEVEL_SCALE.y / ILLUST_SCALE.y
+		};
+
+		CustomVertex level[4];
+		m_rGameLib.CreateRect(level, levelData);
+
+		m_rGameLib.Render(level, m_rGameLib.GetTex(_T("LevelTexts")));
+
+		if (i != m_level || m_backIsSelected) continue;
+
+		levelData.m_halfScale.x *= 1.03f;
+		levelData.m_halfScale.y *= 1.09f;
+
+		levelData.m_texUV.m_startTU = LEVEL_SCALE.x * (SLK_EXTREME + 1) / ILLUST_SCALE.x;
+		levelData.m_texUV.m_endTU	= levelData.m_texUV.m_startTU + LEVEL_SCALE.x / ILLUST_SCALE.x;
+
+		m_rGameLib.CreateRect(level, levelData);
+
+		m_rGameLib.AddtionBlendMode();
+		m_rGameLib.Render(level, m_rGameLib.GetTex(_T("LevelTexts")));
+		m_rGameLib.DefaultBlendMode();
 	}
-
-	CustomVertex target[4];
-	m_rGameLib.CreateRect(target, targetData);
-
-	m_rGameLib.Render(target, m_rGameLib.GetTex(_T("LevelTarget")));
 }
 
 VOID StageSelectSceneLevelSelecter::RenderBackButton() const
@@ -351,6 +384,17 @@ VOID StageSelectSceneLevelSelecter::RenderBackButton() const
 	backButtonData.m_halfScale	= { m_WND_SIZE.m_y * 0.05f, m_WND_SIZE.m_y * 0.05f, 0.0f };										//! 現物合わせ
 
 	backButtonData.m_aRGB = D3DCOLOR_ARGB(m_alpha, 255, 255, 255);
+
+	const D3DXVECTOR2 ILLUST_SCALE		= { 300.0f, 150.0f };
+	const D3DXVECTOR2 BACK_BUTTON_SCALE = { 150.0f, 150.0f };
+
+	backButtonData.m_texUV =
+	{
+		BACK_BUTTON_SCALE.x * ((m_backIsSelected) ? 1 : 0) / ILLUST_SCALE.x,
+		0.0f,
+		BACK_BUTTON_SCALE.x * ((m_backIsSelected) ? 2 : 1) / ILLUST_SCALE.x,
+		BACK_BUTTON_SCALE.y / ILLUST_SCALE.y
+	};
 
 	CustomVertex backButton[4];
 	m_rGameLib.CreateRect(backButton, backButtonData);

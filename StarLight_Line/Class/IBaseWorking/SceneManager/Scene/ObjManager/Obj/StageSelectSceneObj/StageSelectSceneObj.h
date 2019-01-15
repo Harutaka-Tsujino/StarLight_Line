@@ -38,7 +38,7 @@ public:
 
 	inline VOID Init() const
 	{
-		m_rGameLib.CreateTex(_T("Back"), _T("2DTextures/Title/title_background.png"));
+		m_rGameLib.CreateTex(_T("Back"), _T("2DTextures/StageSelect/StageSelectBack.png"));
 	}
 
 	inline VOID Update() {};
@@ -63,12 +63,10 @@ class StageSelectSceneStageList :public Obj
 public:
 	StageSelectSceneStageList() :Obj(OT_TRANSPARENCY, 0.9f)
 	{
+		Init();
+
 		StageData stageData;
 		SceneManager::GetInstance().GetStageData(&stageData);
-
-		m_selectingStage = stageData.m_stage;
-
-		Init();
 	}
 
 	~StageSelectSceneStageList()
@@ -105,6 +103,8 @@ public:
 
 	inline INT GetStage() const
 	{
+		if (m_blackHoleIsSelected) return STAGE_BLACK_HOLE;
+
 		return m_selectingStage;
 	}
 
@@ -125,9 +125,7 @@ private:
 		static ObjData data;
 		data.m_center = { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.4f, m_Z };
 
-		const FLOAT ICONS_CIRCLE_RADIUS_MAX = 300.0f;
-		const FLOAT ICONS_CIRCLE_RADIUS_MIN = 50.0f;
-		static FLOAT iconsCircleRadius = ICONS_CIRCLE_RADIUS_MIN;
+		const FLOAT BLACK_HOLE_RADIUSU_MAX = 540.0f;
 
 		const INT DECIDE_STAGE_FRAMES = 60;
 
@@ -139,23 +137,23 @@ private:
 
 				m_blackHoleAlpha += static_cast<INT>(m_lengthMulti * (255 / 60));
 
-				iconsCircleRadius -= ICONS_CIRCLE_RADIUS_MAX / DECIDE_STAGE_FRAMES;
+				m_blackHoleRadius -= BLACK_HOLE_RADIUSU_MAX / DECIDE_STAGE_FRAMES;
 
 				return;
 			}
 
-			iconsCircleRadius += ICONS_CIRCLE_RADIUS_MAX / DECIDE_STAGE_FRAMES;
+			m_blackHoleRadius += BLACK_HOLE_RADIUSU_MAX / DECIDE_STAGE_FRAMES;
 		};
 
 		StageBlackHole();
 
-		iconsCircleRadius = min(max(iconsCircleRadius, ICONS_CIRCLE_RADIUS_MIN), ICONS_CIRCLE_RADIUS_MAX);
+		m_blackHoleRadius = min(max(m_blackHoleRadius, m_BLACK_HOLE_RADIUSU_MIN), BLACK_HOLE_RADIUSU_MAX);
 
 		m_blackHoleStagingEnds = FALSE;
 
-		if (iconsCircleRadius == ICONS_CIRCLE_RADIUS_MAX) m_blackHoleStagingEnds = TRUE;
+		if (m_blackHoleRadius == BLACK_HOLE_RADIUSU_MAX) m_blackHoleStagingEnds = TRUE;
 
-		data.m_halfScale = { iconsCircleRadius, iconsCircleRadius, 0.0f };
+		data.m_halfScale = { m_blackHoleRadius, m_blackHoleRadius, 0.0f };
 
 		m_blackHoleAlpha = min(max(m_blackHoleAlpha, 0), 255);
 		data.m_aRGB = D3DCOLOR_ARGB(m_blackHoleAlpha, 255, 255, 255);
@@ -206,6 +204,8 @@ private:
 
 	INT m_selectingStage = 0;
 
+	static const FLOAT m_ICONS_CIRCLE_RADIUS_MAX;	//! 複数のアイコンがなす円の半径の最大値
+	FLOAT m_iconsCircleRadius = m_ICONS_CIRCLE_RADIUS_MAX;	//! 複数のアイコンがなす円の半径
 	FLOAT m_lengthMulti = 0.0f;	//! 毎フレーム複数のアイコンがなす円の半径を変化させるときに加える長さの倍率
 
 	BOOL m_isDecided = FALSE;
@@ -214,6 +214,8 @@ private:
 	BOOL m_blackHoleStagingEnds = FALSE;
 
 	INT m_blackHoleAlpha = 0;
+	static const FLOAT m_BLACK_HOLE_RADIUSU_MIN;
+	FLOAT m_blackHoleRadius = m_BLACK_HOLE_RADIUSU_MIN;
 
 	BOOL m_backIsSelected = FALSE;
 };
@@ -233,8 +235,8 @@ public:
 
 	inline VOID Init()
 	{
-		m_rGameLib.CreateTex(_T("LevelBack"), _T("2DTextures/StageSelect/StageSelect_difficultyBack.png"));
-		m_rGameLib.CreateTex(_T("LevelBack_BH"), _T("2DTextures/StageSelect/StageSelect_difficultyBack_BH.jpg"));
+		m_rGameLib.CreateTex(_T("LevelBack"), _T("2DTextures/StageSelect/StageSelectLevelBack.png"));
+		m_rGameLib.CreateTex(_T("LevelTexts"), _T("2DTextures/StageSelect/LevelTexts.png"));
 		m_rGameLib.CreateTex(_T("LevelTarget"), _T("2DTextures/Result/Target.png"));
 		m_rGameLib.CreateTex(_T("LevelBackButton"), _T("2DTextures/StageSelect/difficultyselect_backicon.png"));
 	}
