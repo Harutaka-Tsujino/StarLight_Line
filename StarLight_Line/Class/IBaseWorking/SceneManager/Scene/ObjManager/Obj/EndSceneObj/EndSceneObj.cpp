@@ -27,12 +27,12 @@ VOID EndSceneEiwi::Render()
 
 	static INT frameCount = 0;
 
-	static INT feedinCount = 0;
+	static INT fadeInCount = 0;
 	const INT FADE_IN_COUNT_MAX = 220;
 	const INT FRAME_COUNT_MAX = FADE_IN_COUNT_MAX + 30;
 
-	feedinCount = (frameCount >= FADE_IN_COUNT_MAX) ? FADE_IN_COUNT_MAX : ++feedinCount;
-	data.m_aRGB = D3DCOLOR_ARGB(static_cast<BYTE>(255 * feedinCount / FADE_IN_COUNT_MAX), 255, 255, 255);
+	fadeInCount = (frameCount >= FADE_IN_COUNT_MAX) ? FADE_IN_COUNT_MAX : ++fadeInCount;
+	data.m_aRGB = D3DCOLOR_ARGB(static_cast<BYTE>(255 * fadeInCount / FADE_IN_COUNT_MAX), 255, 255, 255);
 
 	CustomVertex eiwi[4];
 	m_rGameLib.CreateRect(eiwi, data);
