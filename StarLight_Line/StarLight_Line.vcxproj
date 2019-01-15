@@ -285,6 +285,7 @@
     <ClInclude Include="GameLib\EffectManager\EffectManager.h" />
     <ClInclude Include="GameLib\EffectManager\Effect\Effect.h" />
     <ClInclude Include="GameLib\EffectManager\Effect\Effects\Effects.h" />
+    <ClInclude Include="GameLib\EffectManager\Effect\Effects\Enum\EFFECT_ID.h" />
     <ClInclude Include="GameLib\EffectManager\Effect\Particle\Behavior\Behavior.h" />
     <ClInclude Include="GameLib\EffectManager\Effect\Particle\Particle.h" />
     <ClInclude Include="GameLib\EffectManager\Effect\Particle\Shape\Shape.h" />
