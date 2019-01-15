@@ -36,32 +36,44 @@ public:
 	/*
 	* 初期化関数群 初めに1度しか呼んではいけない
 	*/
-	inline VOID FormatCenter(ObjData* pObjData, const D3DXVECTOR3& center, FLOAT centerDifferenceX, FLOAT centerDifferenceY)
+	//inline VOID FormatCenter(ObjData* pObjData, const D3DXVECTOR3& center, FLOAT centerDifferenceX, FLOAT centerDifferenceY)
+	//{
+	//	std::uniform_real_distribution<FLOAT> centerXRand(-centerDifferenceX, centerDifferenceX);
+	//	std::uniform_real_distribution<FLOAT> centerYRand(-centerDifferenceY, centerDifferenceY);
+	//	
+	//	pObjData->m_center = m_baseCenter = center;
+	//	pObjData->m_center.x += centerXRand(m_randEngine);
+	//	pObjData->m_center.y += centerYRand(m_randEngine);
+	//}
+
+	inline VOID FormatCenter(ObjData* pObjData, const D3DXVECTOR3& center, FLOAT centerDifference)
 	{
-		std::uniform_real_distribution<FLOAT> centerXRand(-centerDifferenceX, centerDifferenceX);
-		std::uniform_real_distribution<FLOAT> centerYRand(-centerDifferenceY, centerDifferenceY);
-		
+		std::uniform_real_distribution<FLOAT> centerRand(-centerDifference, centerDifference);
+		std::uniform_real_distribution<FLOAT> radRand(0.0f, 2.0f * D3DX_PI);
+
+		D3DXVECTOR3 centerDifferenceVec = { centerRand(m_randEngine), 0.0f, pObjData->m_center.z };
+
+		RotateVec3(&centerDifferenceVec, radRand(m_randEngine));
+
 		pObjData->m_center = m_baseCenter = center;
-		pObjData->m_center.x += centerXRand(m_randEngine);
-		pObjData->m_center.y += centerYRand(m_randEngine);
+		pObjData->m_center += centerDifferenceVec;
 	}
 
-	inline VOID FormatCenter(ObjData* pObjData, const D3DXVECTOR3& center, FLOAT centerDifference = 0.0f)
+	inline VOID FormatCenter(ObjData* pObjData, const D3DXVECTOR3& center, FLOAT minLengthToCenter, FLOAT centerDifference)
 	{
-		std::random_device randDev;
-		std::minstd_rand m_randEngine(randDev());
+		std::uniform_real_distribution<FLOAT> centerRand(minLengthToCenter, minLengthToCenter + centerDifference);
+		std::uniform_real_distribution<FLOAT> radRand(0.0f, 2.0f * D3DX_PI);
 
-		std::uniform_real_distribution<FLOAT> centerRand(-centerDifference, centerDifference);
+		D3DXVECTOR3 centerDifferenceVec = { centerRand(m_randEngine), 0.0f, pObjData->m_center.z };
+
+		RotateVec3(&centerDifferenceVec, radRand(m_randEngine));
 
 		pObjData->m_center = m_baseCenter = center;
-		pObjData->m_center.x += centerRand(m_randEngine);
-		pObjData->m_center.y += centerRand(m_randEngine);
+		pObjData->m_center += centerDifferenceVec;
 	}
 
 	inline VOID FormatInitialVelocity(FLOAT initialSpeed, FLOAT direction_deg, FLOAT directionDifference_deg = 0.0f)
 	{
-		std::random_device randDev;
-		std::minstd_rand m_randEngine(randDev());
 		std::uniform_real_distribution<FLOAT> degRand(-directionDifference_deg, directionDifference_deg);
 
 		D3DXMATRIX rotateMatrix;
@@ -108,7 +120,7 @@ public:
 		ZeroMemory(&m_velocity, sizeof(D3DXVECTOR2));
 	}
 
-	inline VOID CalcCenter(ObjData* pObjData) const
+	inline VOID CalcCenter(ObjData* pObjData)
 	{
 		pObjData->m_center.x += m_velocity.x;
 		pObjData->m_center.y += m_velocity.y;
@@ -117,33 +129,89 @@ public:
 	inline VOID Circulate(ObjData* pObjData, const D3DXVECTOR3& rotationBasePos, FLOAT minRotate_deg, FLOAT differenceAdditionalRotate_deg = 0.0f)
 	{
 		D3DXVECTOR3 vectorBaseToCurrentPos = pObjData->m_center - rotationBasePos;
-		D3DXVECTOR3 centerForRotate = vectorBaseToCurrentPos;
 
-		
 		std::uniform_real_distribution<FLOAT> degRand(minRotate_deg, minRotate_deg + differenceAdditionalRotate_deg);
 
 		D3DXMATRIX rotateMatrix;
 		D3DXMatrixRotationZ(&rotateMatrix, -D3DXToRadian(degRand(m_randEngine)));
-		D3DXVec3TransformCoord(&centerForRotate, &centerForRotate, &rotateMatrix);
+		D3DXVec3TransformCoord(&vectorBaseToCurrentPos, &vectorBaseToCurrentPos, &rotateMatrix);
 		
-		pObjData->m_center += centerForRotate;
+		pObjData->m_center = vectorBaseToCurrentPos + rotationBasePos;
+	}
+
+	inline VOID Circulate(ObjData* pObjData, FLOAT minRotate_deg, FLOAT differenceAdditionalRotate_deg = 0.0f)
+	{
+		D3DXVECTOR3 vectorBaseToCurrentPos = pObjData->m_center - m_baseCenter;
+
+		std::uniform_real_distribution<FLOAT> degRand(minRotate_deg, minRotate_deg + differenceAdditionalRotate_deg);
+
+		D3DXMATRIX rotateMatrix;
+		D3DXMatrixRotationZ(&rotateMatrix, -D3DXToRadian(degRand(m_randEngine)));
+		D3DXVec3TransformCoord(&vectorBaseToCurrentPos, &vectorBaseToCurrentPos, &rotateMatrix);
+
+		pObjData->m_center = vectorBaseToCurrentPos + m_baseCenter;
+	}
+
+	/*
+	* 処理をループさせるための関数
+	*/
+	inline BOOL IsOutSide(const ObjData& objData, const D3DXVECTOR3& additionalRangeMin, FLOAT differenceAdditionalRangeMulti = 0.0f)
+	{
+		std::uniform_real_distribution<FLOAT> additionalRangMultiRand(1.0f, 1.0f + differenceAdditionalRangeMulti);
+
+		FLOAT additionalRangMulti = additionalRangMultiRand(m_randEngine);
+		D3DXVECTOR3 additonalRange = { additionalRangMulti * additionalRangeMin.x, additionalRangMulti * additionalRangeMin.y, objData.m_center.z };
+
+		D3DXVECTOR3 radiusVec = objData.m_center - m_baseCenter;
+		FLOAT radius = D3DXVec3Length(&radiusVec);
+
+		if (radius > D3DXVec3Length(&additonalRange)) return TRUE;
+
+		return FALSE;
+	}
+
+	inline VOID SetAlpha(ObjData* pObjData , BYTE alpha)
+	{
+		pObjData->m_aRGB &= 0x00FFFFFF;
+		pObjData->m_aRGB += (alpha << 24);
+	}
+
+	inline VOID FeedIn(ObjData* pObjData, INT startFrame, INT takesFrame, INT lifeTime)
+	{
+		if (lifeTime < startFrame || lifeTime > startFrame + takesFrame) return;
+
+		SetAlpha(pObjData, static_cast<BYTE>(255.0f * (lifeTime - startFrame) / takesFrame));
+	}
+
+	inline VOID FeedOut(ObjData* pObjData, INT startFrame, INT takesFrame, INT lifeTime)
+	{
+		if (lifeTime < startFrame || lifeTime > startFrame + takesFrame) return;
+
+		SetAlpha(pObjData, static_cast<BYTE>(255.0f * (1.0f - (lifeTime - startFrame) / static_cast<FLOAT>(takesFrame))));
 	}
 
 private:
 	inline FLOAT CalcDegreeAgainstRightVector(const D3DXVECTOR3& vectorPos) const
 	{
-		FLOAT radius = 0.0f;
+		FLOAT radian = 0.0f;
 		FLOAT vectorBaseToCurrentPosLength = D3DXVec3Length(&vectorPos);
 
 		if (vectorBaseToCurrentPosLength != 0.0f)
 		{
-			const D3DXVECTOR3 BASE_VECTOR = { 1.0f, 0.0f, 0.0f };
+			const D3DXVECTOR3 BASE_VECTOR = { 1.0f, 0.0f, m_baseCenter.z };
 
 			FLOAT cos = D3DXVec3Dot(&BASE_VECTOR, &vectorPos) / vectorBaseToCurrentPosLength;
-			radius = acos(cos) * ((vectorPos.y >= 0.0f) ? +1.0f : -1.0f);
+			radian = acos(cos) * ((vectorPos.y >= 0.0f) ? -1.0f : +1.0f);
 		}
 
-		return D3DXToDegree(radius);
+		return D3DXToDegree(radian);
+	}
+
+	inline VOID RotateVec3(D3DXVECTOR3* pVec3, FLOAT rad)
+	{
+		D3DXMATRIX rotateMatrix;
+		D3DXMatrixRotationZ(&rotateMatrix, rad);
+		D3DXVec3TransformCoord(pVec3, pVec3, &rotateMatrix);
 	}
 
 	std::minstd_rand m_randEngine;
