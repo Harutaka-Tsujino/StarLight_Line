@@ -65,6 +65,8 @@ VOID StarManager::Update()
 
 VOID StarManager::Render()
 {
+	m_rGameLib.SetCameraPos(0.0f, -2.15f, -1.0f);
+
 	m_rGameLib.SetCameraTransform();
 
 	if (m_Init)

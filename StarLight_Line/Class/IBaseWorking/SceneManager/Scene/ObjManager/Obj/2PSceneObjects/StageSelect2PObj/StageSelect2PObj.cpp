@@ -249,7 +249,7 @@ VOID StageSelectTwoPlayerSceneLevelSelecter::Update()
 		m_rGameLib.OneShotSimultaneousSound(_T("SelectMenu"));
 
 		SceneManager& rSceneManager = SceneManager::GetInstance();
-		rSceneManager.SetNextScene(SK_GAME);
+		rSceneManager.SetNextScene(SK_2P_GAME);
 	}
 }
 
