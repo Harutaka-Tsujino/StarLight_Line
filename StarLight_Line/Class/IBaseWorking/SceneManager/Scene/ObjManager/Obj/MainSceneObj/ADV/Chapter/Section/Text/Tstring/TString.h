@@ -110,6 +110,11 @@ public:
 		return buf;
 	}
 
+	inline TCHAR GetTChar(INT index)
+	{
+		return m_tChar[index];
+	}
+
 	inline VOID WriteInChar(TCHAR tChar)
 	{
 		m_tChar.push_back(tChar);
