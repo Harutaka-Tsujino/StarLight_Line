@@ -57,7 +57,7 @@ protected:
 	{
 		const FLOAT STAR_HALF_SCALE = 50.0f;
 
-		return (m_Info.m_Pos.y < -STAR_HALF_SCALE - 150.0f || m_Info.m_Pos.y > 2.5f * m_WND_SIZE.m_y + STAR_HALF_SCALE);
+		return (m_Info.m_Pos.y < -STAR_HALF_SCALE - 100.0f || m_Info.m_Pos.y > 2.5f * m_WND_SIZE.m_y + STAR_HALF_SCALE);
 	}
 
 	StarPlace m_Info;				//スターの基本情報
