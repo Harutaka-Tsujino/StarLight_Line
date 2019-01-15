@@ -111,8 +111,16 @@ public:
 	VOID Render();
 
 private:
+	VOID RenderBriefFrame();
+	VOID RenderSelectFrame(ObjData* pObjData);
+	VOID RenderSaveDataNum();
+	VOID RenderClearAchievement();
+	VOID RenderTotalTimeBrief();
+	VOID RenderLastTimeBrief();
 	VOID RenderBriefDatas();
 
+	VOID RenderDetailFrame();
+	VOID RenderDetailStageIcons();
 	VOID RenderDetailData();
 
 	static const INT m_SAVE_DATAS_MAX = 3;	//! 仮にこのクラスに持たせているがSaveDataManagerを作りにそれに持たせる予定
