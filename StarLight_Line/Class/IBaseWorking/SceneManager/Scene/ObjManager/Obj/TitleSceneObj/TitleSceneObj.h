@@ -16,6 +16,7 @@
 #include "../../../../../../../GameLib/GameLib.h"
 #include "../../../../../../../GameLib/Wnd/Data/RectSize.h"
 #include "../../../Enum/SCENE_KIND.h"
+#include "../MainSceneObj/ADV/Chapter/Section/Text/Text.h"
 
 class TitleBack :public Obj
 {
@@ -27,11 +28,15 @@ public:
 
 	~TitleBack()
 	{
+		delete m_pGetScoreStarEffect;
 		m_rGameLib.ReleaseTex();
 	}
 
-	inline VOID Init() const
+	inline VOID Init()
 	{
+		const D3DXVECTOR3 effectCenter = { 640.0f, 360.0f, 0.0f };
+		m_pGetScoreStarEffect = new GetScoreStarEffect(effectCenter);
+
 		m_rGameLib.CreateTex(_T("Back"), _T("2DTextures/Title/title_background.png"));
 	}
 
@@ -49,7 +54,20 @@ public:
 		m_rGameLib.CreateRect(back, data);
 
 		m_rGameLib.Render(back, m_rGameLib.GetTex(_T("Back")));
+
+		TString testString(_T("TEST STRING\n\rEIWI"));
+		Text testText(testString, _T("2DTextures/Fonts/a_9.png"));
+
+		TextFormat testTextFormat;
+		testTextFormat.m_charHalfScale = { 20, 30 };
+		testTextFormat.m_topLeft = { 100.0f, 100.0f };
+
+		testText.Write(testTextFormat);
 	}
+
+private:
+	GetScoreStarEffect* m_pGetScoreStarEffect = nullptr;
+	MouseCursorEffect m_mouseCursorEffect;
 };
 
 class TitleLogo :public Obj
