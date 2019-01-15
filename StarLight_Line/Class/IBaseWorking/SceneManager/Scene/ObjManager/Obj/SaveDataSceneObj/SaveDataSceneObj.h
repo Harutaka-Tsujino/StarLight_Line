@@ -76,6 +76,7 @@ public:
 	{
 		m_rGameLib.CreateTex(_T("Frame"), _T("2DTextures/SaveData/SaveData_Frame01.png"));
 		m_rGameLib.CreateTex(_T("DetailFrame"), _T("2DTextures/SaveData/SaveData_Frame02.png"));
+		m_rGameLib.CreateTex(_T("StageIcons"), _T("2DTextures/StageSelect/StageSelect_icons.png"));
 	}
 
 	inline VOID Update()
