@@ -14,6 +14,11 @@ class MainScene :public Scene
 public:
 	MainScene()
 	{
+		GameLib& rGameLib = GameLib::GetInstance();
+
+		rGameLib.SetCameraPos(0.0f, -2.15f, -1.0f);
+		rGameLib.SetCameraTransform();
+
 		m_pObjManager->Resister(static_cast<Obj*>(new MainBack()));
 		m_pObjManager->Resister(static_cast<Obj*>(new TitleSmallStarEffect()));
 		m_pObjManager->Resister(static_cast<Obj*>(new PlayerEffect()));

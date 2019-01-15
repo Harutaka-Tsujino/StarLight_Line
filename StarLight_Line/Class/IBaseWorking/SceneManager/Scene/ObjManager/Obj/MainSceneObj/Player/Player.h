@@ -77,6 +77,10 @@ private:
 	*/
 	VOID ObtainScoreToExist(const INT& LevelScore);
 
+	VOID DecideColorByHit(FLOAT* pAdditionalColor);
+	
+	VOID SetPlayerFbxMaterial();
+
 	D3DXVECTOR3 m_Speed;
 
 	static const int m_MAXXARRAYNUM = 4;
