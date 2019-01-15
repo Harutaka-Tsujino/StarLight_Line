@@ -28,14 +28,12 @@ public:
 
 	~TitleBack()
 	{
-		delete m_pGetScoreStarEffect;
 		m_rGameLib.ReleaseTex();
 	}
 
 	inline VOID Init()
 	{
 		const D3DXVECTOR3 effectCenter = { 640.0f, 360.0f, 0.0f };
-		m_pGetScoreStarEffect = new GetScoreStarEffect(effectCenter);
 
 		m_rGameLib.CreateTex(_T("Back"), _T("2DTextures/Title/title_background.png"));
 	}
@@ -64,10 +62,6 @@ public:
 
 		testText.Write(testTextFormat);
 	}
-
-private:
-	GetScoreStarEffect* m_pGetScoreStarEffect = nullptr;
-	MouseCursorEffect m_mouseCursorEffect;
 };
 
 class TitleLogo :public Obj
