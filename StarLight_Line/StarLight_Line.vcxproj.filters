@@ -281,6 +281,9 @@
     <Filter Include="Class\IBaseWorking\SceneManager\Scene\2PScenes\Main2PScene">
       <UniqueIdentifier>{5e3c4e4c-fe6a-44e1-86a7-367abe829b7e}</UniqueIdentifier>
     </Filter>
+     <Filter Include="GameLib\EffectManager\Effect\Effects\Enum">
+      <UniqueIdentifier>{003c273b-a5d0-4483-863e-5bb21a218f70}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Class\Singleton\Singleton.cpp">
@@ -354,9 +357,6 @@
     </ClCompile>
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\TitleSceneObj\TitleSceneObj.cpp">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\TitleSceneObj</Filter>
-    </ClCompile>
-    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\StageSelectScene\StageSelectScene.cpp">
-      <Filter>Class\IBaseWorking\SceneManager\Scene\StageSelectScene</Filter>
     </ClCompile>
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\StageSelectSceneObj\StageSelectSceneObj.cpp">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\StageSelectSceneObj</Filter>
@@ -498,6 +498,9 @@
     </ClCompile>
     <ClCompile Include="GameLib\JoyconManager\JoyconManager.cpp">
       <Filter>GameLib\JoyconManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\StageSelectScene\StageSelectScene.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\StageSelectScene</Filter>
     </ClCompile>
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\GameCollision\GameCollision.cpp">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player</Filter>
@@ -794,6 +797,9 @@
     </ClInclude>
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\2PSceneObjects\Main2PObj\Main2PObj.h">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\2PSceneObjects\Main2pObj</Filter>
+      </ClInclude>
+    <ClInclude Include="GameLib\EffectManager\Effect\Effects\Enum\EFFECT_ID.h">
+      <Filter>GameLib\EffectManager\Effect\Effects\Enum</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
