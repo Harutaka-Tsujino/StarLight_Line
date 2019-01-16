@@ -41,6 +41,9 @@ private:
 	VOID RenderPauseFrame();
 	VOID RenderPauseEffect();
 
+	VOID RenderPauseHead();
+	VOID RenderPauseText();
+
 	GameLib& m_rGameLib;
 	const RectSize m_WND_SIZE = { 0,0 };
 };
