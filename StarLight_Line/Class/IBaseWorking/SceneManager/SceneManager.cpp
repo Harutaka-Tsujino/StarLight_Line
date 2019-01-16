@@ -154,6 +154,7 @@ VOID SceneManager::InitBGM()
 		_T("Sounds/StageSelect/Stage.mp3")	,
 		_T("Sounds/StageSelect/Stage.mp3")	,
 		_T("Sounds/Stage/Leo/leo.mp3")		,
+		_T("Sounds/Stage/Leo/leo.mp3")		,
 		_T("Sounds/Title/titlesave.mp3")	,
 		_T("Sounds/Result/result.mp3")		,
 		_T("Sounds/Title/titlesave.mp3")	,
@@ -162,6 +163,8 @@ VOID SceneManager::InitBGM()
 
 	static BOOL bGMInits[SK_MAX] =
 	{
+		FALSE,
+		FALSE,
 		FALSE,
 		FALSE,
 		FALSE,

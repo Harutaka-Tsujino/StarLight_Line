@@ -166,6 +166,7 @@ VOID PlayerResultData::IncreaseDigit(const INT& Type)
 
 			m_ClearStarNumsDigit.push_back(NextDigit);
 		}
+
 		break;
 	}
 }
