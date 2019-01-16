@@ -21,6 +21,9 @@
 #include "../../../../SceneManager.h"
 #include "../../../../Data/ResultData.h"
 #include "../DataSaver/DataSaver.h"
+#include "../MainSceneObj/ADV/Chapter/Section/Text/Tstring/TString.h"
+#include "../MainSceneObj/ADV/Chapter/Section/Text/Data/TextFormat.h"
+#include "../MainSceneObj/ADV/Chapter/Section/Text/Text.h"
 
 class ResultSceneBack :public Obj
 {
@@ -44,6 +47,8 @@ public:
 
 	inline VOID Render()
 	{
+		RenderHead();
+
 		m_rGameLib.SetCameraTransform();
 
 		ObjData data;
@@ -55,6 +60,9 @@ public:
 
 		m_rGameLib.Render(back, m_rGameLib.GetTex(_T("Back")));
 	}
+
+private:
+	VOID RenderHead();
 };
 
 class ResultDataScore :public Obj
@@ -117,6 +125,8 @@ private:
 		m_rGameLib.Render(scoreCase, nullptr);
 	}
 
+	VOID RenderHead();
+
 	const INT m_SCORE;
 	INT m_digitsNum = NULL;
 	std::vector<DigitScore> m_digitScoresVec;
@@ -142,33 +152,15 @@ public:
 		m_rGameLib.ReleaseTex();
 	}
 
-	inline VOID Init() const
+	inline VOID Init()
 	{
-		//m_rGameLib.CreateTex(_T("Back"), _T("2DTextures/SaveData/SaveData_Back.png"));
+		SceneManager& rSceneManager = SceneManager::GetInstance();
+		rSceneManager.GetStageData(&m_stageData);
 	}
 
 	inline VOID Update() {};
 
-	inline VOID Render()
-	{
-		RenderCase();
-
-		/*ObjData stageData;
-		stageData.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, m_Z };
-		stageData.m_halfScale	= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, 0.0f };
-
-		CustomVertex stage[4];
-		m_rGameLib.CreateRect(stage, stageData);
-		m_rGameLib.Render(stage, m_rGameLib.GetTex(_T("Back")));
-
-		ObjData difficultyData;
-		difficultyData.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, m_Z };
-		difficultyData.m_halfScale	= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, 0.0f };
-
-		CustomVertex difficulty[4];
-		m_rGameLib.CreateRect(difficulty, difficultyData);
-		m_rGameLib.Render(difficulty, m_rGameLib.GetTex(_T("Back")));*/
-	}
+	VOID Render();
 
 private:
 	inline VOID RenderCase() const
@@ -183,6 +175,12 @@ private:
 		m_rGameLib.CreateRect(stageCase, stageCaseData);
 		m_rGameLib.Render(stageCase, nullptr);
 	}
+
+	VOID GetStageStringAndCharsNum(TString* pTString, INT* pCharsNum);
+
+	VOID GetStageLevelAndCharsNum(TString* pTString, INT* pCharsNum);
+
+	StageData m_stageData;
 
 	const DWORD m_CASE_COLOR;
 };
@@ -256,6 +254,8 @@ private:
 		m_rGameLib.CreateRect(starCase, starCaseData);
 		m_rGameLib.Render(starCase, nullptr);
 	}
+
+	VOID RenderHead();
 
 	const INT m_CLEAR_STARS_MAX = NULL;
 	const INT m_CLEAR_STARS_NUM = NULL;
@@ -382,7 +382,7 @@ private:
 	inline VOID DarkenFontAround()
 	{	
 		ObjData blackMaskData;
-		blackMaskData.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, m_Z };
+		blackMaskData.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, 0.0f };
 		blackMaskData.m_halfScale	= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, 0.0f };
 
 		INT alpha = static_cast<INT>(140 * static_cast<FLOAT>(m_alphaCount) / m_ADDITIONAL_ALPHA_FRAME);
@@ -437,7 +437,9 @@ public:
 	
 		rSceneManager.SetTransitionMode(TRUE);
 
-		SCENE_KIND scene = (rSceneManager.GetIsTutorial()) ? SK_SAVE_DATA : SK_STAGE_SELECT;
+		SCENE_KIND scene = (m_isSelectedYes) ? SK_GAME : SK_STAGE_SELECT;
+
+		scene = (rSceneManager.GetIsTutorial()) ? SK_SAVE_DATA : scene;
 
 		rSceneManager.SetNextScene(scene);
 	}
@@ -450,8 +452,8 @@ private:
 	inline VOID RenderFrame() const
 	{
 		ObjData ContinueFrameData;
-		ContinueFrameData.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, m_Z };
-		ContinueFrameData.m_halfScale	= { m_WND_SIZE.m_x * 0.28f, m_WND_SIZE.m_y * 0.28f, 0.0f };	//! 現物合わせ
+		ContinueFrameData.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, 0.0f };
+		ContinueFrameData.m_halfScale	= { m_WND_SIZE.m_x * 0.28f, m_WND_SIZE.m_y * 0.38f, 0.0f };	//! 現物合わせ
 
 		CustomVertex ContinueFrame[4];
 		m_rGameLib.CreateRect(ContinueFrame, ContinueFrameData);
@@ -461,8 +463,18 @@ private:
 
 	inline VOID RenderTexts() const
 	{
+		TString continueString(_T("CONTINUE"));
+
+		Text continueText(continueString, _T("2DTextures/Fonts/a_9.png"));
+
+		TextFormat txtFormat;
+		txtFormat.m_charHalfScale = { 30, 45 };
+		txtFormat.m_topLeft = { 640.0f - 2.0f * txtFormat.m_charHalfScale.m_x * 4.0f, m_WND_SIZE.m_y * 0.25f };
+
+		continueText.Write(txtFormat);
+
 		ObjData YesNoData;
-		YesNoData.m_center = { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, m_Z };
+		YesNoData.m_center = { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.6f, 0.0f };
 
 		const FLOAT HALF_SCALE = m_WND_SIZE.m_y * 0.22f;
 		YesNoData.m_halfScale = { HALF_SCALE, HALF_SCALE, 0.0f };
@@ -477,9 +489,9 @@ private:
 	{
 		ObjData targetData;
 
-		const FLOAT CENTER_Y_WND_MULTI_BASE = 0.423f;
+		const FLOAT CENTER_Y_WND_MULTI_BASE = 0.523f;
 		FLOAT centerYWndMulti = (m_isSelectedYes) ? CENTER_Y_WND_MULTI_BASE : CENTER_Y_WND_MULTI_BASE + 0.158f;
-		targetData.m_center = { m_WND_SIZE.m_x * 0.4f, m_WND_SIZE.m_y * centerYWndMulti, m_Z }; //! 現物合わせ
+		targetData.m_center = { m_WND_SIZE.m_x * 0.4f, m_WND_SIZE.m_y * centerYWndMulti, 0.0f }; //! 現物合わせ
 
 		const FLOAT TARGET_HALF_SCALE = m_WND_SIZE.m_x * 0.02f;
 		targetData.m_halfScale = { TARGET_HALF_SCALE, TARGET_HALF_SCALE, 0.0f };
