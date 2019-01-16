@@ -284,6 +284,18 @@
     <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\SaveDataSceneObj">
       <UniqueIdentifier>{da3b01f8-7068-4de0-9d3e-73dde20f81d3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerBase">
+      <UniqueIdentifier>{a35bed18-5de9-4c05-8b7f-96317f08ebec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\2PSceneObjects\Main2pObj\Player1">
+      <UniqueIdentifier>{30070e8e-0e2f-455a-be20-e6b8563cb541}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\2PSceneObjects\Main2pObj\Player2">
+      <UniqueIdentifier>{3062089d-91c6-4903-86db-923e12c010c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerResultData\2PResultData">
+      <UniqueIdentifier>{45b7eccc-d1fc-4b9c-909e-21bfd29dec80}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Class\Singleton\Singleton.cpp">
@@ -516,6 +528,18 @@
     </ClCompile>
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\GameCollision\GameCollision.cpp">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\GameCollision</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerBase\PlayerBase.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerBase</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\2PSceneObjects\Main2PObj\Player1\Player1.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\2PSceneObjects\Main2pObj\Player1</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\2PSceneObjects\Main2PObj\Player2\Player2.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\2PSceneObjects\Main2pObj\Player2</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerResultData\2PResultData\2PResultData.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerResultData\2PResultData</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -800,6 +824,18 @@
     </ClInclude>
     <ClInclude Include="GameLib\EffectManager\Effect\Effects\Enum\EFFECT_ID.h">
       <Filter>GameLib\EffectManager\Effect\Effects\Enum</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerBase\PlayerBase.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\2PSceneObjects\Main2PObj\Player1\Player1.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\2PSceneObjects\Main2pObj\Player1</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\2PSceneObjects\Main2PObj\Player2\Player2.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\2PSceneObjects\Main2pObj\Player2</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerResultData\2PResultData\2PResultData.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerResultData\2PResultData</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
