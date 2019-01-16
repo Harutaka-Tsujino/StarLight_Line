@@ -196,7 +196,7 @@ VOID SaveDataSaveDatas::RenderDetailStageIcons()
 		};
 
 		//! クリアしているステージは白色
-		obj.m_aRGB = (i < m_pPREVIEWS[m_selectingData].m_clearNum) ? 0xFFFFFFFF : 0xFF888888;
+		obj.m_aRGB = (i < m_pPREVIEWS[m_selectingData].m_clearNum) ? 0xFFFFFFFF : 0xFF333333;
 
 		CustomVertex vertices[4];
 		m_rGameLib.CreateRect(vertices, obj);
