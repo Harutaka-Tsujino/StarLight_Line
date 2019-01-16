@@ -13,7 +13,7 @@
 class GetScoreStarEffect :public Effect
 {
 public:
-	GetScoreStarEffect(const D3DXVECTOR3& center) :Effect(20, _T("2DTextures/EffectTexture/Star.png"), 0), m_center(center)
+	GetScoreStarEffect(const D3DXVECTOR3& center) :Effect(13, _T("2DTextures/EffectTexture/Star.png"), 0), m_center(center)
 	{
 		if (m_COUNT_TO_ACTIVE_MAX != 0) return;
 
@@ -81,7 +81,7 @@ protected:
 class GetDamageStarEffect :public Effect
 {
 public:
-	GetDamageStarEffect(const D3DXVECTOR3& center) :Effect(30, _T("2DTextures/EffectTexture/Star.png"), 0), m_center(center)
+	GetDamageStarEffect(const D3DXVECTOR3& center) :Effect(25, _T("2DTextures/EffectTexture/Star.png"), 0), m_center(center)
 	{
 		if (m_COUNT_TO_ACTIVE_MAX != 0) return;
 

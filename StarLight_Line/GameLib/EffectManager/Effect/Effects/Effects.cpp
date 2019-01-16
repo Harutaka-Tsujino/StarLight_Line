@@ -13,7 +13,7 @@ VOID GetScoreStarEffect::Update()
 	{
 		if (i > m_activeLimit) continue;
 
-		if (m_particles[i]->LifeFrame() > 50)
+		if (m_particles[i]->LifeFrame() > 40)
 		{
 			m_ends = TRUE;
 
@@ -21,7 +21,7 @@ VOID GetScoreStarEffect::Update()
 		}
 
 		m_particles[i]->FadeIn(0, 10);
-		m_particles[i]->FadeOut(20, 25);
+		m_particles[i]->FadeOut(15, 20);
 		m_particles[i]->RotateZ(3.0f);
 		m_particles[i]->Update();
 	}
