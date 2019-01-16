@@ -347,7 +347,7 @@ VOID StageSelectSceneLevelSelecter::RenderTarget() const
 
 		const D3DXVECTOR2 ILLUST_SCALE = { 1024.0f, 64.0f };
 		const D3DXVECTOR2 LEVEL_SCALE  = { 150.0f,50.0f };
-
+			
 		levelData.m_texUV =
 		{
 			LEVEL_SCALE.x * levelNum / ILLUST_SCALE.x,

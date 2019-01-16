@@ -162,6 +162,7 @@ private:
 		_T("STAGESELECT_BGM")	,
 		_T("2P_STAGESELECT_BGM"),
 		_T("GAME_BGM")			,
+		_T("2P_GAME_BGM")		,
 		_T("SAVE_DATA_BGM")		,
 		_T("PAUSE_BGM")			,
 		_T("RESULT_BGM")		,

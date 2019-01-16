@@ -28,7 +28,7 @@ public:
 
 	inline VOID Init() const
 	{
-		m_rGameLib.CreateTex(_T("Back"), _T("2DTextures/Title/title_background.png"));
+		m_rGameLib.CreateTex(_T("Back"), _T("2DTextures/StageSelect/StageSelectBack.png"));
 	}
 
 	inline VOID Update() {};
@@ -161,8 +161,8 @@ public:
 
 	inline VOID Init()
 	{
-		m_rGameLib.CreateTex(_T("LevelBack"), _T("2DTextures/StageSelect/StageSelect_difficultyBack.png"));
-		m_rGameLib.CreateTex(_T("LevelTarget"), _T("2DTextures/Result/Target.png"));
+		m_rGameLib.CreateTex(_T("LevelBack"), _T("2DTextures/StageSelect/StageSelectLevelBack.png"));
+		m_rGameLib.CreateTex(_T("LevelTexts"), _T("2DTextures/StageSelect/LevelTexts.png"));
 		m_rGameLib.CreateTex(_T("LevelBackButton"), _T("2DTextures/StageSelect/difficultyselect_backicon.png"));
 	}
 
