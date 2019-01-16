@@ -1,11 +1,17 @@
 ﻿#include "PauseScene.h"
 
+#include <tchar.h>
+
+#include "../ObjManager/Obj/MainSceneObj/ADV/Chapter/Section/Text/Tstring/TString.h"
+#include "../ObjManager/Obj/MainSceneObj/ADV/Chapter/Section/Text/Data/TextFormat.h"
+#include "../ObjManager/Obj/MainSceneObj/ADV/Chapter/Section/Text/Text.h"
+
 VOID PauseScene::Init()
 {
 	m_ActivatingKey = RESUME_KEY;
 	m_rGameLib.CreateTex(_T("PauseBack"), _T("2DTextures/Pause/pause_background.png"));
 	m_rGameLib.CreateTex(_T("PauseFrame"), _T("2DTextures/Pause/pause_textframe.png"));
-	m_rGameLib.CreateTex(_T("PauseEffect"), _T("2DTextures/Pause/RedFrame.png"));
+	m_rGameLib.CreateTex(_T("PauseEffect"), _T("2DTextures/Pause/PauseSelectFrame.png"));
 }
 
 VOID PauseScene::Update()
@@ -35,6 +41,9 @@ VOID PauseScene::Render()
 	RenderPauseFrame();
 
 	RenderPauseEffect();
+
+	RenderPauseHead();
+	RenderPauseText();
 }
 
 VOID PauseScene::RenderPauseBack()
@@ -79,7 +88,7 @@ VOID PauseScene::RenderPauseEffect()
 
 		ObjData Data;
 		Data.m_center	 = { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.35f + (130.f * i), 0.f };
-		Data.m_halfScale = { m_WND_SIZE.m_x * 0.43f, m_WND_SIZE.m_y * 0.083f, 0.f };
+		Data.m_halfScale = { m_WND_SIZE.m_x * 0.4f, m_WND_SIZE.m_y * 0.08f, 0.5f };
 
 		m_rGameLib.CreateRect(Effect, Data);
 		m_rGameLib.Render(Effect, m_rGameLib.GetTex(_T("PauseEffect")));
@@ -119,4 +128,55 @@ VOID PauseScene::TransferScene(const TRANSFER_KEY& Key)
 	default:
 		break;
 	}
+}
+
+VOID PauseScene::RenderPauseHead()
+{
+	const D3DXVECTOR2 CENTER_POS = { m_WND_SIZE.m_x *0.5f, m_WND_SIZE.m_y *0.5f };
+
+	TextFormat headFormat;
+	headFormat.m_charHalfScale = { 30, 60 };
+
+	//! 真ん中にテキストを持っていくためテキストの半径を求める
+	headFormat.m_topLeft = { CENTER_POS.x - 2.0f * headFormat.m_charHalfScale.m_x * 2.5f, 40.0f };
+
+	TString pause(_T("PAUSE"));
+	Text pauseText(pause, _T("2DTextures/Fonts/a_9.png"));
+
+	pauseText.Write(headFormat);
+}
+
+VOID PauseScene::RenderPauseText()
+{
+	const D3DXVECTOR2 CENTER_POS = { m_WND_SIZE.m_x *0.5f, m_WND_SIZE.m_y *0.5f };
+
+	TextFormat menuFormat;
+	menuFormat.m_charHalfScale = { 24, 36 };
+	menuFormat.m_topLeft = { CENTER_POS.x - 2.0f * menuFormat.m_charHalfScale.m_x * 4.0f, 216.0f };
+
+	TString continueStr(_T("CONTINUE"));
+	Text continueText(continueStr, _T("2DTextures/Fonts/a_9.png"));
+
+	continueText.Write(menuFormat);
+
+	TString backToTitle(_T("BACK TO TITLE"));
+	Text backToTitleText(backToTitle, _T("2DTextures/Fonts/a_9.png"));
+
+	menuFormat.m_topLeft.x = CENTER_POS.x - 2.0f * menuFormat.m_charHalfScale.m_x * 6.5f;
+	menuFormat.m_topLeft.y += 130.0f;
+	backToTitleText.Write(menuFormat);
+
+	TString backToStageselect(_T("BACK TO STAGESELECT"));
+	Text backToStageselectText(backToStageselect, _T("2DTextures/Fonts/a_9.png"));
+
+	menuFormat.m_topLeft.x = CENTER_POS.x - 2.0f * menuFormat.m_charHalfScale.m_x * 9.5f;
+	menuFormat.m_topLeft.y += 130.0f;
+	backToStageselectText.Write(menuFormat);
+
+	TString restart(_T("RESTART"));
+	Text restartText(restart, _T("2DTextures/Fonts/a_9.png"));
+
+	menuFormat.m_topLeft.x = CENTER_POS.x - 2.0f * menuFormat.m_charHalfScale.m_x * 3.5f;
+	menuFormat.m_topLeft.y += 130.0f;
+	restartText.Write(menuFormat);
 }
