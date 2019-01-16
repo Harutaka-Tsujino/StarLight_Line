@@ -2,16 +2,18 @@
 
 VOID PlayerOne::Init()
 {
+	m_pOnePlayerData = new TwoPlayerResultData(_T("PlayerOne"), m_contrllerType);
+
 	DefaultLight();
 
 	m_rGameLib.CreateFbx(_T("Eiwi"), "3DModels/Eiwi/Eiwi.fbx");
 
-	m_PlayerPoint.x = m_MAXXARRAYNUM / 2;
+	m_PlayerPoint.x = m_MAXXARRAYNUM / 3;
 	m_PlayerPoint.y = m_MAXYARRAYNUM / 2;
 	m_PlayerPoint.z = 1;
 	m_PlayerPos.z = 0.2f;
 	m_Speed.x = m_Speed.y = m_Speed.z = 0.0f;
-	m_PlayerPos.x = m_BasePos[m_PlayerPoint.y][m_PlayerPoint.x].x;	//真ん中に自機を置く
+	m_PlayerPos.x = m_BasePos[m_PlayerPoint.y][m_PlayerPoint.x].x;
 	m_PlayerPos.y = m_BasePos[m_PlayerPoint.y][m_PlayerPoint.x].y;
 
 	m_rGameCollision.ResiterPlayerPoint(_T("PlayerOne"), &m_PlayerPos);
@@ -19,15 +21,6 @@ VOID PlayerOne::Init()
 
 VOID PlayerOne::Update()
 {
-	SceneManager& rSceneManager = SceneManager::GetInstance();
-
-	if (m_rGameLib.KeyboardIsPressed(DIK_LSHIFT) && !rSceneManager.GetIsTutorial())
-	{
-		m_rGameLib.StopTime();
-		rSceneManager.SetCanTransferSubScene(TRUE);
-		rSceneManager.SetNextScene(SK_PAUSE);
-	}
-
 	CoordinatePoint PlayerPointBuffer = m_PlayerPoint;
 	HIT_KEY HitKey;
 
@@ -63,6 +56,8 @@ VOID PlayerOne::Update()
 
 	DecideSpeed(&PlayerPointBuffer, HitKey);
 	RestrictedMoving();
+
+	m_pOnePlayerData->Update();
 }
 
 VOID PlayerOne::Render()
@@ -96,6 +91,8 @@ VOID PlayerOne::Render()
 	SetPlayerFbxMaterial();
 
 	m_rGameLib.Render(m_rGameLib.GetFbx(_T("Eiwi")), m_World, m_rGameLib.GetTex(_T("PlayerTex")));
+
+	m_pOnePlayerData->Render();
 }
 
 VOID PlayerOne::SetPlayerFbxMaterial()
@@ -112,6 +109,6 @@ VOID PlayerOne::SetPlayerFbxMaterial()
 
 	rEiwi.SetPower(0.8f);
 
-	D3DXVECTOR4 VertexColor(150.0f, 255.0f, 255.0f, 255.0f);
+	D3DXVECTOR4 VertexColor(255.0f, 255.0f, 255.0f, 255.0f);
 	rEiwi.SetColor(&VertexColor);
 }
