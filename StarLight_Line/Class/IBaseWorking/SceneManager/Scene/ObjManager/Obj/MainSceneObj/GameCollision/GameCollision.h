@@ -26,6 +26,7 @@ public:
 	STAR_TYPE m_Type = static_cast<STAR_TYPE>(NULL);
 	const D3DXVECTOR3* m_Point;
 	BOOL m_IsCollided =  FALSE;
+	BOOL m_Is2PCollided = FALSE;
 };
 
 class GameCollision :public Singleton<GameCollision>
@@ -78,36 +79,37 @@ public:
 		m_PlayerPoint.clear();
 	}
 
-	inline BOOL HitSomething(const TCHAR* pKey, const STAR_TYPE& Type,
-		const FLOAT& aRadius, const FLOAT& bRadius)
+	inline BOOL HitSomething(const TCHAR* pKey, const STAR_TYPE& Type,const INT& Mode)
 	{
-		const FLOAT WND_Y_SIZE = static_cast<FLOAT>(m_rGameLib.GetWndSize().m_y);
-		const FLOAT STAR_HALF_SCALE = 50.0f;
-
 		for (int i = 0;i != m_Enemy.size();++i)
 		{
 			if (m_Enemy[i]->m_Type != Type) continue;
 
-			if (m_Enemy[i]->m_IsCollided) continue;
+			switch (Mode)
+			{
+			case 1:
+				if (!Hit1PMode(pKey, i)) continue;
 
-			//当たることのない星は判定をとらないようにする
-			if (m_Enemy[i]->m_Point->y < -STAR_HALF_SCALE - WND_Y_SIZE * 0.3f || m_Enemy[i]->m_Point->y > 2.5f * WND_Y_SIZE + STAR_HALF_SCALE) continue;
+				break;
 
-			if (!CollidesStar(pKey, i, aRadius, bRadius)) continue;
+			case 2:
+				if (!Hit2PMode(pKey, i)) continue;
 
-			D3DXVECTOR3 PlayerScreenPos(m_rGameLib.TransScreen(*m_PlayerPoint[pKey]));
-			PlayerScreenPos.z = 0.0f;
+				break;
 
-			rEffectManager.CreateEffect(PlayerScreenPos, m_Enemy[i]->m_Type);
-	
-			return m_Enemy[i]->m_IsCollided =  TRUE;
+			default:
+				return FALSE;
+
+				break;
+			}
+
+			return TRUE;
 		}
 
 		return FALSE;
 	}
 
-	inline BOOL CollidesStar(const TCHAR* pKey, const INT& StarNum,
-		const FLOAT& aRadius, const FLOAT& bRadius)
+	inline BOOL CollidesStar(const TCHAR* pKey, const INT& StarNum)
 	{
 		D3DXVECTOR3 PlayerScreenPos(m_rGameLib.TransScreen(*m_PlayerPoint[pKey]));
 		D3DXVECTOR3 EnemyScreenPos = { m_Enemy[StarNum]->m_Point->x,m_Enemy[StarNum]->m_Point->y,m_Enemy[StarNum]->m_Point->z };
@@ -130,10 +132,34 @@ public:
 		return m_Enemy[elementNum]->m_IsCollided;
 	}
 	
+	//2Pプレイで使用する
+	inline VOID DisableEnemyHitForHit()
+	{
+		for (int i = 0;i != m_Enemy.size();++i)
+		{
+			if (m_Enemy[i]->m_IsCollided)
+			{
+				m_Enemy[i]->m_Is2PCollided = TRUE;
+
+				continue;
+			}
+
+			if (m_Enemy[i]->m_Is2PCollided)
+			{
+				m_Enemy[i]->m_IsCollided = TRUE;
+
+				continue;
+			}
+		}
+	}
+
 private:
 	GameCollision() :m_rGameLib(GameLib::GetInstance()), rEffectManager(EffectManager::GetInstance())
 	{
 	}
+
+	BOOL Hit1PMode(const TCHAR* key, int loop);
+	BOOL Hit2PMode(const TCHAR* key, int loop);
 
 	GameLib& m_rGameLib;
 
