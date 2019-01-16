@@ -210,7 +210,7 @@ VOID StageSelectTwoPlayerSceneLevelSelecter::Update()
 		return;
 	}
 
-	if ((m_rGameLib.PushJoyconButton(Joycon::LEFT_CONTROLLER, Joycon::LEFT_BUTTON) ||
+	if ((m_rGameLib.PushJoyconButton(Joycon::LEFT_CONTROLLER, Joycon::RIGHT_BUTTON) ||
 		m_rGameLib.PushJoyconButton(Joycon::RIGHT_CONTROLLER, Joycon::A_BUTTON))   && 
 		m_backIsSelected)
 	{
@@ -223,8 +223,8 @@ VOID StageSelectTwoPlayerSceneLevelSelecter::Update()
 
 	if (m_backIsSelected) return;
 
-	if (m_rGameLib.PushJoyconAnalogStick(Joycon::LEFT_CONTROLLER, Joycon::LEFT_TILT) ||
-		m_rGameLib.PushJoyconAnalogStick(Joycon::RIGHT_CONTROLLER,Joycon::LEFT_TILT))
+	if (m_rGameLib.PushJoyconAnalogStick(Joycon::LEFT_CONTROLLER, Joycon::RIGHT_TILT) ||
+		m_rGameLib.PushJoyconAnalogStick(Joycon::RIGHT_CONTROLLER,Joycon::RIGHT_TILT))
 	{
 		m_rGameLib.OneShotSimultaneousSound(_T("ChangeStage"));
 
@@ -233,8 +233,8 @@ VOID StageSelectTwoPlayerSceneLevelSelecter::Update()
 		return;
 	}
 
-	if (m_rGameLib.PushJoyconAnalogStick(Joycon::LEFT_CONTROLLER, Joycon::RIGHT_TILT) ||
-		m_rGameLib.PushJoyconAnalogStick(Joycon::RIGHT_CONTROLLER,Joycon::RIGHT_TILT))
+	if (m_rGameLib.PushJoyconAnalogStick(Joycon::LEFT_CONTROLLER, Joycon::LEFT_TILT) ||
+		m_rGameLib.PushJoyconAnalogStick(Joycon::RIGHT_CONTROLLER,Joycon::LEFT_TILT))
 	{
 		m_rGameLib.OneShotSimultaneousSound(_T("ChangeStage"));
 
@@ -243,7 +243,7 @@ VOID StageSelectTwoPlayerSceneLevelSelecter::Update()
 		return;
 	}
 
-	if (m_rGameLib.PushJoyconButton(Joycon::LEFT_CONTROLLER, Joycon::LEFT_BUTTON) ||
+	if (m_rGameLib.PushJoyconButton(Joycon::LEFT_CONTROLLER, Joycon::RIGHT_BUTTON) ||
 		m_rGameLib.PushJoyconButton(Joycon::RIGHT_CONTROLLER, Joycon::A_BUTTON))
 	{
 		m_rGameLib.OneShotSimultaneousSound(_T("SelectMenu"));
@@ -288,34 +288,66 @@ VOID StageSelectTwoPlayerSceneLevelSelecter::RenderBack() const
 
 VOID StageSelectTwoPlayerSceneLevelSelecter::RenderTarget() const
 {
+	ObjData levelData;
 
-	ObjData targetData;
-	targetData.m_center = { m_WND_SIZE.m_x * 0.262f + m_WND_SIZE.m_x * 0.238f * m_level, m_WND_SIZE.m_y * 0.657f, m_Z };	//! 現物合わせ
-	targetData.m_halfScale = { m_WND_SIZE.m_y * 0.017f, m_WND_SIZE.m_y * 0.017f, 0.0f };										//! 現物合わせ
-
-	targetData.m_aRGB = D3DCOLOR_ARGB(m_alpha, 255, 255, 255);
-
-	targetData.m_deg.z = 90.0f;
-
-	if (m_backIsSelected)
+	for (INT i = 0; i < SLK_EXTREME; ++i)
 	{
-		targetData.m_center = { m_WND_SIZE.m_x * 0.1865f, m_WND_SIZE.m_y * 0.17f, m_Z };										//! 現物合わせ
-		targetData.m_deg.z = 180.0f;
+		levelData.m_center = { m_WND_SIZE.m_x * 0.262f + m_WND_SIZE.m_x * 0.238f * i, m_WND_SIZE.m_y * 0.727f, m_Z };
+		levelData.m_halfScale = { m_WND_SIZE.m_x * 0.06f, m_WND_SIZE.m_y * 0.034f, 0.0f };
+
+		levelData.m_aRGB = D3DCOLOR_ARGB(m_alpha, 255, 255, 255);
+
+		const D3DXVECTOR2 ILLUST_SCALE = { 1024.0f, 64.0f };
+		const D3DXVECTOR2 LEVEL_SCALE = { 150.0f,50.0f };
+
+		levelData.m_texUV =
+		{
+			LEVEL_SCALE.x * i / ILLUST_SCALE.x,
+			0.0f,
+			LEVEL_SCALE.x * (i + 1) / ILLUST_SCALE.x,
+			LEVEL_SCALE.y / ILLUST_SCALE.y
+		};
+
+		CustomVertex level[4];
+		m_rGameLib.CreateRect(level, levelData);
+
+		m_rGameLib.Render(level, m_rGameLib.GetTex(_T("LevelTexts")));
+
+		if (i != m_level || m_backIsSelected) continue;
+
+		levelData.m_halfScale.x *= 1.03f;
+		levelData.m_halfScale.y *= 1.09f;
+
+		levelData.m_texUV.m_startTU = LEVEL_SCALE.x * (SLK_EXTREME + 1) / ILLUST_SCALE.x;
+		levelData.m_texUV.m_endTU = levelData.m_texUV.m_startTU + LEVEL_SCALE.x / ILLUST_SCALE.x;
+
+		m_rGameLib.CreateRect(level, levelData);
+
+		m_rGameLib.AddtionBlendMode();
+		m_rGameLib.Render(level, m_rGameLib.GetTex(_T("LevelTexts")));
+		m_rGameLib.DefaultBlendMode();
 	}
-
-	CustomVertex target[4];
-	m_rGameLib.CreateRect(target, targetData);
-
-	m_rGameLib.Render(target, m_rGameLib.GetTex(_T("LevelTarget")));
 }
 
 VOID StageSelectTwoPlayerSceneLevelSelecter::RenderBackButton() const
 {
 	ObjData backButtonData;
+	
 	backButtonData.m_center = { m_WND_SIZE.m_x * 0.14f, m_WND_SIZE.m_y * 0.17f, m_Z };										//! 現物合わせ
 	backButtonData.m_halfScale = { m_WND_SIZE.m_y * 0.05f, m_WND_SIZE.m_y * 0.05f, 0.0f };										//! 現物合わせ
 
 	backButtonData.m_aRGB = D3DCOLOR_ARGB(m_alpha, 255, 255, 255);
+
+	const D3DXVECTOR2 ILLUST_SCALE = { 300.0f, 150.0f };
+	const D3DXVECTOR2 BACK_BUTTON_SCALE = { 150.0f, 150.0f };
+
+	backButtonData.m_texUV =
+	{
+		BACK_BUTTON_SCALE.x * ((m_backIsSelected) ? 1 : 0) / ILLUST_SCALE.x,
+		0.0f,
+		BACK_BUTTON_SCALE.x * ((m_backIsSelected) ? 2 : 1) / ILLUST_SCALE.x,
+		BACK_BUTTON_SCALE.y / ILLUST_SCALE.y
+	};
 
 	CustomVertex backButton[4];
 	m_rGameLib.CreateRect(backButton, backButtonData);
