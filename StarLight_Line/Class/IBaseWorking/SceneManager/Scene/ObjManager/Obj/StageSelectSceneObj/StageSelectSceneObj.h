@@ -250,9 +250,19 @@ public:
 		return m_shouldActivateStageSelect;
 	}
 
-	inline INT Level() const
+	inline INT Level()
 	{
-		return m_level;
+		if (m_backIsSelected)
+		{
+			m_level = static_cast<INT>(SLK_EXTREME);
+
+			if (m_level == SLK_EASY)
+			{
+				m_level = static_cast<INT>(SLK_HARD);
+			}
+		}
+
+		return  m_level;
 	}
 
 	inline VOID SetBlackHoleIsSelected(BOOL isSelected)
