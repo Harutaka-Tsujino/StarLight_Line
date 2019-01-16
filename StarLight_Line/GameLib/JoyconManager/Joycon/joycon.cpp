@@ -330,8 +330,6 @@ void Joycon::Update()
 				m_AnalogStick.x = cal_x[1];
 				m_AnalogStick.y = cal_y[1];
 
-				CheackAnalogStick();
-
 				m_Accelerometer.x = (float)(uint16_to_int16(buf_reply[13] | (buf_reply[14] << 8) & 0xFF00)) * acc_cal_coeff[0];
 				m_Accelerometer.y = (float)(uint16_to_int16(buf_reply[15] | (buf_reply[16] << 8) & 0xFF00)) * acc_cal_coeff[1];
 				m_Accelerometer.z = (float)(uint16_to_int16(buf_reply[17] | (buf_reply[18] << 8) & 0xFF00)) * acc_cal_coeff[2];
@@ -579,12 +577,12 @@ bool Joycon::InputDirection(int Direction)
 		break;
 
 	case RIGHT_TILT:
-		if (m_AnalogStick.x < -THRESHOLD_VALUE) return true;
+		if (m_AnalogStick.x > THRESHOLD_VALUE) return true;
 
 		break;
 
 	case LEFT_TILT:
-		if (m_AnalogStick.x > THRESHOLD_VALUE) return true;
+		if (m_AnalogStick.x < -THRESHOLD_VALUE) return true;
 
 		break;
 	}
