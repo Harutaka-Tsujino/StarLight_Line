@@ -18,10 +18,30 @@
 
 #include "../Obj.h"
 #include "../../../../SceneManager.h"
+#include "../MainSceneObj/ADV/Chapter/Section/Text/Tstring/TString.h"
+#include "../MainSceneObj/ADV/Chapter/Section/Text/Data/TextFormat.h"
+#include "../MainSceneObj/ADV/Chapter/Section/Text/Text.h"
+
+VOID ResultSceneBack::RenderHead()
+{
+	TString resultString(_T("RESULT"));
+
+	Text resultText(resultString, _T("2DTextures/Fonts/a_9.png"));
+
+	TextFormat txtFormat;
+	txtFormat.m_charHalfScale = { 27, 41 };
+
+	//! RESULTの文字数の半分が3
+	txtFormat.m_topLeft = { m_WND_SIZE.m_x * 0.5f - 2.0f * txtFormat.m_charHalfScale.m_x * 3 , 13.0f };
+
+	resultText.Write(txtFormat);
+}
 
 VOID ResultDataScore::Render()
 {
 	RenderCase();
+
+	RenderHead();
 
 	SceneManager& rSceneManager = SceneManager::GetInstance();
 	if (!rSceneManager.LatterTransitionStagingIsEnded()) return;
@@ -30,46 +50,18 @@ VOID ResultDataScore::Render()
 
 	INT stagingScoreDigitsNum = static_cast<INT>(log10(stagingScore) + 1);
 
-	INT* pDigitNum = nullptr;
+	TString scoreString(stagingScore, _T("%d"));
 
-	const INT DIGIT_OVER = 10;
+	Text scoreText(scoreString, _T("2DTextures/Fonts/a_9.png"));
 
-	const FLOAT DIGIT_HALF_SCALE = m_WND_SIZE.m_y * 0.07f;
-	const FLOAT DIGIT_POS_Y_GAP	= DIGIT_HALF_SCALE * 1.0f;
+	TextFormat txtFormat;
+	txtFormat.m_charHalfScale = { 25, 37 };
 
-	ObjData* pDigitScoreData = nullptr;
+	//! SCOREの文字数の半分が2.5f
+	txtFormat.m_topLeft = { m_WND_SIZE.m_x * 0.85f - 2.0f * txtFormat.m_charHalfScale.m_x * stagingScoreDigitsNum , 150.0f };
 
-	const FLOAT NUMS_ILLUST_SCALE = 32.0f;
-	const INT NUMS_NUM_IN_ROW		= 8;
-	const INT NUMS_NUM_IN_COLUMN	= 2;
+	scoreText.Write(txtFormat);
 
-	CustomVertex* pDigitScore = nullptr;
-
-	for (INT i = 0; m_digitsNum; ++i)
-	{
-		if (i + 1 > stagingScoreDigitsNum) break;
-
-		pDigitNum = &m_digitScoresVec[i].m_num;
-		*pDigitNum = (stagingScore / static_cast<INT>(pow(DIGIT_OVER, i))) % DIGIT_OVER;
-
-		pDigitScoreData = &m_digitScoresVec[i].m_objData;
-		pDigitScoreData->m_center		= { m_WND_SIZE.m_x * 0.8f - DIGIT_POS_Y_GAP * i, m_WND_SIZE.m_y * 0.26f, m_Z };	//! 現物合わせ
-		pDigitScoreData->m_halfScale	= { DIGIT_HALF_SCALE, DIGIT_HALF_SCALE, 0.0f };
-
-		pDigitScoreData->m_texUV =																						//! 統合ファイルのテクスチャの座標
-		{
-			NUMS_ILLUST_SCALE * ((*pDigitNum) % NUMS_NUM_IN_ROW)		/ (NUMS_ILLUST_SCALE * NUMS_NUM_IN_ROW),
-			NUMS_ILLUST_SCALE * ((*pDigitNum) / NUMS_NUM_IN_ROW)		/ (NUMS_ILLUST_SCALE * NUMS_NUM_IN_COLUMN),
-			NUMS_ILLUST_SCALE * ((*pDigitNum) % NUMS_NUM_IN_ROW + 1)	/ (NUMS_ILLUST_SCALE * NUMS_NUM_IN_ROW),
-			NUMS_ILLUST_SCALE * ((*pDigitNum) / NUMS_NUM_IN_ROW + 1)	/ (NUMS_ILLUST_SCALE * NUMS_NUM_IN_COLUMN),
-		};
-
-		pDigitScore = m_digitScoresVec[i].m_customVertices;
-		m_rGameLib.CreateRect(pDigitScore, *pDigitScoreData);
-
-		m_rGameLib.Render(pDigitScore, m_rGameLib.GetTex(_T("Nums")));
-	}
-	
 	++m_increaseStagingFrameCount;
 
 	if (m_increaseStagingFrameCount < m_INCREASE_STAGING_FRAME_COUNT_MAX) return;
@@ -79,9 +71,187 @@ VOID ResultDataScore::Render()
 	m_stagingIsEnd = TRUE;
 }
 
+VOID ResultDataScore::RenderHead()
+{
+	TString resultString(_T("SCORE"));
+
+	Text resultText(resultString, _T("2DTextures/Fonts/a_9.png"));
+
+	TextFormat txtFormat;
+	txtFormat.m_charHalfScale = { 25, 37 };
+
+	//! SCOREの文字数の半分が2.5f
+	txtFormat.m_topLeft = { m_WND_SIZE.m_x * 0.24f - 2.0f * txtFormat.m_charHalfScale.m_x * 2.5f , 150.0f };
+
+	resultText.Write(txtFormat);
+}
+
+VOID ResultDataStage::Render()
+{
+	RenderCase();
+
+	TString stageString;
+	INT stageCharsNum = 0;
+
+	GetStageStringAndCharsNum(&stageString, &stageCharsNum);
+
+	Text stageText(stageString, _T("2DTextures/Fonts/a_9.png"));
+
+	TextFormat txtFormat;
+	txtFormat.m_charHalfScale = { 22, 35 };
+	txtFormat.m_topLeft = { 396.0f - 2.0f * txtFormat.m_charHalfScale.m_x * stageCharsNum * 0.5f, 400.0f };
+
+	stageText.Write(txtFormat);
+
+	TString levelString;
+	INT levelCharsNum = 0;
+
+	GetStageLevelAndCharsNum(&levelString, &levelCharsNum);
+
+	Text levelText(levelString, _T("2DTextures/Fonts/a_9.png"));
+
+	txtFormat.m_topLeft.x = 393.0f - 2.0f * txtFormat.m_charHalfScale.m_x * levelCharsNum * 0.5f;
+	txtFormat.m_topLeft.y += 120.0f;
+
+	levelText.Write(txtFormat);
+}
+
+VOID ResultDataStage::GetStageStringAndCharsNum(TString* pTString, INT* pCharsNum)
+{
+	switch (m_stageData.m_stage)
+	{
+	case STAGE_TAURUS:
+
+		pTString->WriteInAll(_T("TAURUS"));
+		*pCharsNum = 6;
+
+		break;
+
+	case STAGE_LIBRA:
+
+		pTString->WriteInAll(_T("LIBRA"));
+		*pCharsNum = 5;
+
+		break;
+
+	case STAGE_VIRGO:
+
+		pTString->WriteInAll(_T("VIRGO"));
+		*pCharsNum = 5;
+
+		break;
+
+	case STAGE_ARIES:
+
+		pTString->WriteInAll(_T("ARIES"));
+		*pCharsNum = 5;
+
+		break;
+
+	case STAGE_GEMINI:
+
+		pTString->WriteInAll(_T("GEMINI"));
+		*pCharsNum = 6;
+
+		break;
+
+	case STAGE_SCORPIUS:
+
+		pTString->WriteInAll(_T("SCORPIUS"));
+		*pCharsNum = 8;
+
+		break;
+
+	case STAGE_PISCORPIUS:
+
+		pTString->WriteInAll(_T("PISCORPIUS"));
+		*pCharsNum = 10;
+
+		break;
+
+	case STAGE_LEO:
+
+		pTString->WriteInAll(_T("LEO"));
+		*pCharsNum = 3;
+
+		break;
+
+	case STAGE_CAPRICORNUS:
+
+		pTString->WriteInAll(_T("CAPRICORNUS"));
+		*pCharsNum = 11;
+
+		break;
+
+	case STAGE_AQUARIUS:
+
+		pTString->WriteInAll(_T("AQUARIUS"));
+		*pCharsNum = 8;
+
+		break;
+
+	case STAGE_SAGITTARIUS:
+
+		pTString->WriteInAll(_T("SAGITTARIUS"));
+		*pCharsNum = 11;
+
+		break;
+
+	case STAGE_CANCER:
+
+		pTString->WriteInAll(_T("CANCER"));
+		*pCharsNum = 6;
+
+		break;
+
+	case STAGE_BLACK_HOLE:
+
+		pTString->WriteInAll(_T("BLACK HOLE"));
+		*pCharsNum = 10;
+
+		break;
+	}
+}
+
+VOID ResultDataStage::GetStageLevelAndCharsNum(TString* pTString, INT* pCharsNum)
+{
+	switch (m_stageData.m_level)
+	{
+	case SLK_EASY:
+
+		pTString->WriteInAll(_T("EASY"));
+		*pCharsNum = 4;
+
+		break;
+
+	case SLK_NORMAL:
+
+		pTString->WriteInAll(_T("NORMAL"));
+		*pCharsNum = 6;
+
+		break;
+
+	case SLK_HARD:
+
+		pTString->WriteInAll(_T("HARD"));
+		*pCharsNum = 4;
+
+		break;
+
+	case SLK_EXTREME:
+
+		pTString->WriteInAll(_T("EXTREME"));
+		*pCharsNum = 7;
+
+		break;
+	}
+}
+
 VOID ResultDataClearStar::Render()
 {
 	RenderCase();
+
+	RenderHead();
 
 	const INT FRAME_ONE_STAR_TAKES = 15;
 
@@ -135,12 +305,27 @@ VOID ResultDataClearStar::Render()
 	m_stagingIsEnd = TRUE;
 }
 
+VOID ResultDataClearStar::RenderHead()
+{
+	TString headString(_T("GREEN STAR"));
+
+	Text headText(headString, _T("2DTextures/Fonts/a_9.png"));
+
+	TextFormat txtFormat;
+	txtFormat.m_charHalfScale = { 15, 22 };
+
+	//! RESULTの文字数の半分が3
+	txtFormat.m_topLeft = { m_WND_SIZE.m_x * 0.691f - 2.0f * txtFormat.m_charHalfScale.m_x * 3 , 390.0f };
+
+	headText.Write(txtFormat);
+}
+
 VOID ResultSceneResultFont::Render()
 {
 	DarkenFontAround();
 
 	ObjData resultFontData;
-	resultFontData.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, m_Z };
+	resultFontData.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, 0.0f };
 	resultFontData.m_halfScale	= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.14f, 0.0f };	//! 現物合わせ
 
 	BYTE alpha = static_cast<BYTE>(255 * static_cast<FLOAT>(m_alphaCount) / m_ADDITIONAL_ALPHA_FRAME);
