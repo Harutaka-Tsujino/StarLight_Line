@@ -6,6 +6,7 @@
 #include "../../ObjManager/Obj/MainSceneObj/StarManager/StarManager.h"
 #include "../../ObjManager/Obj/2PSceneObjects/Main2PObj/Main2PObj.h"
 #include "../../ObjManager/Obj/2PSceneObjects/Main2PObj/Player1/Player1.h"
+#include "../../ObjManager/Obj/2PSceneObjects/Main2PObj/Player2/Player2.h"
 
 class MainTwoPlayerScene :public Scene
 {
@@ -21,6 +22,7 @@ public:
 		m_pObjManager->Resister(static_cast<Obj*>(new MainLine()));
 		m_pObjManager->Resister(static_cast<Obj*>(new ScoreFrameforTwoPlayer()));
 		m_pObjManager->Resister(static_cast<Obj*>(new PlayerOne()));
+		m_pObjManager->Resister(static_cast<Obj*>(new PlayerTwo()));
 		m_pObjManager->Resister(static_cast<Obj*>(new StarManager()));
 	}
 
