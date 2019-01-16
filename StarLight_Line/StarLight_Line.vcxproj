@@ -139,6 +139,8 @@
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\MainScene\MainScene.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\ObjManager.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\2PSceneObjects\Main2PObj\Main2PObj.cpp" />
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\2PSceneObjects\Main2PObj\Player1\Player1.cpp" />
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\2PSceneObjects\Main2PObj\Player2\Player2.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\2PSceneObjects\StageSelect2PObj\StageSelect2PObj.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\DataSaver\DataSaver.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\EndSceneObj\EndSceneObj.cpp" />
@@ -152,8 +154,10 @@
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\GameCollision\GameCollision.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\MainSceneObject.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\Player.cpp" />
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerBase\PlayerBase.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerEffect\PlayerEffect.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerHP\PlayerHP.cpp" />
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerResultData\2PResultData\2PResultData.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerResultData\PlayerResultData.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager\BaseSter\BaseStar.cpp" />
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager\BaseSter\ClearStar\ClearStar.cpp" />
@@ -219,6 +223,8 @@
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\MainScene\MainScene.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\ObjManager.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\2PSceneObjects\Main2PObj\Main2PObj.h" />
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\2PSceneObjects\Main2PObj\Player1\Player1.h" />
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\2PSceneObjects\Main2PObj\Player2\Player2.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\2PSceneObjects\StageSelect2PObj\StageSelect2PObj.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\DataSaver\DataSaver.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\EndSceneObj\EndSceneObj.h" />
@@ -235,8 +241,10 @@
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\GameCollision\GameCollision.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\MainSceneObject.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\Player.h" />
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerBase\PlayerBase.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerEffect\PlayerEffect.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerHP\PlayerHP.h" />
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerResultData\2PResultData\2PResultData.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerResultData\PlayerResultData.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager\BaseSter\BaseStar.h" />
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StarManager\BaseSter\ClearStar\ClearStar.h" />
