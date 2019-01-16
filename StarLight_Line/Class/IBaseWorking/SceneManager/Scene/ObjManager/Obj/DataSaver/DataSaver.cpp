@@ -252,7 +252,7 @@ VOID DataSaver::SingleOutMaxScoreAndStars()
 
 	pPreviews->m_clearNum = 0;
 
-	BOOL clearIsFoundInOneStage = FALSE;
+	BOOL clearIsFoundInOneStage = FALSE; //! 別難易度をクリアしてもステージクリア数を増やさないため
 
 	for (INT bsi = 0; bsi < m_BASIC_STAGES_MAX; ++bsi)
 	{
