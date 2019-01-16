@@ -1,1 +1,36 @@
-﻿#pragma once
+﻿#ifndef TWO_PLAYER_RESULT_DATA_H_
+#define TWO_PLAYER_RESULT_DATA_H_
+
+#include <vector>
+
+#include "../../../../Obj.h"
+#include "../../../../../../../../.././../GameLib/GameLib.h"
+#include "../../../GameCollision/GameCollision.h"
+#include "../../../../../../../Data/ResultData.h"
+
+class TwoPlayerResultData :public Obj
+{
+public:
+	TwoPlayerResultData(const TCHAR* PlayerKey)
+		:Obj(OT_TRANSPARENCY, 1.0f), m_rGameCollision(GameCollision::GetInstance()), m_PlayerTypeKey(PlayerKey)
+	{
+		Init();
+	}
+
+	~TwoPlayerResultData()
+	{
+		m_rGameLib.ReleaseTex();
+	}
+
+	VOID Init();
+	VOID Update();
+	VOID Render();
+
+private:
+	INT m_Score;
+	const TCHAR* m_PlayerTypeKey;	//当たり判定用
+
+	GameCollision& m_rGameCollision;
+};
+
+#endif // !TWO_PLAYER_RESULT_DATA_H_
