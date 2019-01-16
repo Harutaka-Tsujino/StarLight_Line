@@ -19,9 +19,6 @@ VOID PlayerHP::Update()
 		m_isInvincible = FALSE;
 	}
 
-	const FLOAT PLAYER_RADIUS = 20.f;
-	const FLOAT ENEMY_RADIUS  = 30.f;
-
 	if (m_changeDefaultFlashFrameCount >= 0)
 	{
 		++m_changeDefaultFlashFrameCount;
@@ -43,7 +40,9 @@ VOID PlayerHP::Update()
 
 	if (m_isInvincible) return;
 
-	if (m_rGameCollision.HitSomething(_T("Player"), DAMAGE, PLAYER_RADIUS, ENEMY_RADIUS))
+	const INT HIT_MODE = 1;
+
+	if (m_rGameCollision.HitSomething(_T("Player"), DAMAGE, HIT_MODE))
 	{
 		m_isInvincible = TRUE;
 

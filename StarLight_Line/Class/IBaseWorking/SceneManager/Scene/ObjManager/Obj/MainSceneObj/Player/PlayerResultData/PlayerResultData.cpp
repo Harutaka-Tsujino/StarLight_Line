@@ -18,9 +18,6 @@ VOID PlayerResultData::Init()
 
 VOID PlayerResultData::Update()
 {
-	const FLOAT PLAYER_RADIUS = 20.f;
-	const FLOAT ENEMY_RADIUS  = 30.f;
-
 	const INT DO_NOTHING_FRAME_COUNT_NUM = -1;
 	static INT ChangeDefaultFlashFrameCount = DO_NOTHING_FRAME_COUNT_NUM;
 
@@ -50,7 +47,10 @@ VOID PlayerResultData::Update()
 		ChangeDefaultRotateSpeedFrameCount = DO_NOTHING_FRAME_COUNT_NUM;
 	}
 
-	if (m_rGameCollision.HitSomething(_T("Player"), SCORE, PLAYER_RADIUS, ENEMY_RADIUS))
+	//当たり判定の取り方
+	const INT HIT_MODE = 1;
+
+	if (m_rGameCollision.HitSomething(_T("Player"), SCORE, HIT_MODE))
 	{
 		ChangeDefaultFlashFrameCount = 0;
 
@@ -63,7 +63,7 @@ VOID PlayerResultData::Update()
 		m_Data.m_score += BASIC_POINT;
 	}
 
-	if (m_rGameCollision.HitSomething(_T("Player"), CLEAR, PLAYER_RADIUS, ENEMY_RADIUS))
+	if (m_rGameCollision.HitSomething(_T("Player"), CLEAR, HIT_MODE))
 	{
 		ChangeDefaultRotateSpeedFrameCount = 0;
 
