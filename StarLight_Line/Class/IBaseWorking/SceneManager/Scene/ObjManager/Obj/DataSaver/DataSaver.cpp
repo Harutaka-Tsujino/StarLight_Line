@@ -250,17 +250,32 @@ VOID DataSaver::SingleOutMaxScoreAndStars()
 {
 	PreviewData* pPreviews = &m_previews[m_currentDataNum];
 
+	pPreviews->m_clearNum = 0;
+
+	BOOL clearIsFoundInOneStage = FALSE;
+
 	for (INT bsi = 0; bsi < m_BASIC_STAGES_MAX; ++bsi)
 	{
+		clearIsFoundInOneStage = FALSE;
+
 		for (INT sli = 0; sli < m_BASIC_LEVELS_MAX; ++sli)
 		{
 			StageDetailData* pStageDetail = &m_basicStageDetails[bsi][sli];
 
 			pPreviews->m_maxScore = max(pPreviews->m_maxScore, pStageDetail->m_score);
 
-			pPreviews->m_clearNum += ((pStageDetail->m_isClear) ? 1 : 0);
+			if (!pStageDetail->m_isClear || clearIsFoundInOneStage)
+			{
+				continue;
+			}
+
+			++(pPreviews->m_clearNum);
+
+			clearIsFoundInOneStage = TRUE;
 		}
 	}
+
+	clearIsFoundInOneStage = FALSE;
 
 	for (INT sli = 0; sli < m_EXTRA_LEVELS_MAX; ++sli)
 	{
@@ -268,6 +283,13 @@ VOID DataSaver::SingleOutMaxScoreAndStars()
 
 		pPreviews->m_maxScore = max(pPreviews->m_maxScore, pStageDetail->m_score);
 
-		pPreviews->m_clearNum += ((pStageDetail->m_isClear) ? 1 : 0);
+		if (!pStageDetail->m_isClear || clearIsFoundInOneStage)
+		{
+			continue;
+		}
+
+		++(pPreviews->m_clearNum);
+
+		clearIsFoundInOneStage = TRUE;
 	}
 }
