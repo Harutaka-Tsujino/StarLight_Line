@@ -125,9 +125,6 @@
     <Filter Include="Class\IBaseWorking\SceneManager\Scene\SaveDataScene">
       <UniqueIdentifier>{ec33f56e-4ab9-4d36-9e04-4c0854c32bec}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\SaveDataSceneObj">
-      <UniqueIdentifier>{da3b01f8-7068-4de0-9d3e-73dde20f81d3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Class\IBaseWorking\SceneManager\Scene\MainScene">
       <UniqueIdentifier>{f66406c0-2392-47e5-999f-77445e855644}</UniqueIdentifier>
     </Filter>
@@ -283,6 +280,9 @@
     </Filter>
     <Filter Include="GameLib\EffectManager\Effect\Effects\Enum">
       <UniqueIdentifier>{003c273b-a5d0-4483-863e-5bb21a218f70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\SaveDataSceneObj">
+      <UniqueIdentifier>{da3b01f8-7068-4de0-9d3e-73dde20f81d3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
