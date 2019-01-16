@@ -296,6 +296,12 @@
     <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerResultData\2PResultData">
       <UniqueIdentifier>{45b7eccc-d1fc-4b9c-909e-21bfd29dec80}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\2PSceneObjects\Result2PObj">
+      <UniqueIdentifier>{7659bcb3-8535-4a7a-9563-139f87cbaa9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\2PScenes\Result2PScene">
+      <UniqueIdentifier>{a957ed33-451c-4c7e-8b1b-0bccbecf58d8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Class\Singleton\Singleton.cpp">
@@ -540,6 +546,12 @@
     </ClCompile>
     <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerResultData\2PResultData\2PResultData.cpp">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerResultData\2PResultData</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\2PScenes\2PResultScene\Result2PScene.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\2PScenes\Result2PScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\2PSceneObjects\Result2PObj\Result2PObj.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\2PSceneObjects\Result2PObj</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -836,6 +848,12 @@
     </ClInclude>
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerResultData\2PResultData\2PResultData.h">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\Player\PlayerResultData\2PResultData</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\2PScenes\2PResultScene\Result2PScene.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\2PScenes\Result2PScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\2PSceneObjects\Result2PObj\Result2PObj.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\2PSceneObjects\Result2PObj</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
