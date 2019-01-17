@@ -1,6 +1,8 @@
 ﻿#include "MainSceneObject.h"
 
 #include "../../../../../../../GameLib/Wnd/Data/RectSize.h"
+#include "../../../StageSelectScene/Data/StageDetailData.h"
+#include "../../../StageSelectScene/Enum/STAGE_KIND.h"
 
 VOID MainBack::Init()
 {
@@ -115,8 +117,6 @@ VOID PlayerClearStarObj::RenderStarObtained()
 	ObjData data;
 	data.m_center		= { m_WND_SIZE.m_x * 0.487f, m_WND_SIZE.m_y * 0.9f, 0.004f };
 	data.m_halfScale	= { m_WND_SIZE.m_x * 0.017f, m_WND_SIZE.m_y * 0.027f, 0.0f };
-
-	data.m_aRGB = 0xFF98FB98;
 
 	CustomVertex StarImage[4];
 	m_rGameLib.CreateRect(StarImage, data);

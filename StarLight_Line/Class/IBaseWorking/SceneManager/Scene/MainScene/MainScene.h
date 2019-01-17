@@ -21,7 +21,7 @@ public:
 
 		m_pObjManager->Resister(static_cast<Obj*>(new MainBack()));
 		m_pObjManager->Resister(static_cast<Obj*>(new TitleSmallStarEffect()));
-		m_pObjManager->Resister(static_cast<Obj*>(new PlayerEffect()));
+		//m_pObjManager->Resister(static_cast<Obj*>(new PlayerEffect()));
 		m_pObjManager->Resister(static_cast<Obj*>(new MainLine()));
 		m_pObjManager->Resister(static_cast<Obj*>(new Player()));
 		m_pObjManager->Resister(static_cast<Obj*>(new PlayerLifeFrame()));

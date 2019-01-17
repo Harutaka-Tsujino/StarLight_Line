@@ -198,6 +198,10 @@ private:
 
 	VOID RenderBackButton(FLOAT iconsCircleRadius) const;
 
+	VOID RenderStageName();
+
+	VOID GetStageStringAndCharsNum(TString* pTString, INT* pCharsNum);
+
 	static const INT m_STAGE_ICONS_MAX = STAGE_MAX - 1;
 
 	FLOAT m_deg = 0.0f;			//! 複数のアイコンがなす円の回転角度 大きさが60を超えるとm_selectingStageを変化させ0に戻る

@@ -156,8 +156,8 @@ VOID SceneManager::InitBGM()
 		_T("Sounds/Stage/Leo/leo.mp3")		,
 		_T("Sounds/Stage/Leo/leo.mp3")		,
 		_T("Sounds/Title/titlesave.mp3")	,
-		_T("Sounds/Result/result.mp3")		,
 		_T("Sounds/Title/titlesave.mp3")	,
+		_T("Sounds/Result/result.mp3")		,
 		_T("Sounds/Title/titlesave.mp3")	,
 	};
 

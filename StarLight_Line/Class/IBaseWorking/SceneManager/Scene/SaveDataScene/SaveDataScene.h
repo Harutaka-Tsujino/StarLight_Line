@@ -10,6 +10,7 @@
 #include "../Scene.h"
 #include "../ObjManager/Obj/Obj.h"
 #include "../ObjManager/Obj/SaveDataSceneObj/SaveDataSceneObj.h"
+#include "../ObjManager/Obj/TitleSceneObj/TitleSceneObj.h"
 
 class SaveDataScene :public Scene
 {
@@ -17,6 +18,7 @@ public:
 	SaveDataScene()
 	{
 		m_pObjManager->Resister(static_cast<Obj*>(new SaveDataBack()));
+		m_pObjManager->Resister(static_cast<Obj*>(new TitleSmallStarEffect()));
 		m_pObjManager->Resister(static_cast<Obj*>(new SaveDataSaveDatas()));
 	}
 
