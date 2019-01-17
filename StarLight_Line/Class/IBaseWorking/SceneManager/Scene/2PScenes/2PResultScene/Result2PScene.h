@@ -11,6 +11,8 @@ public:
 	{
 		m_pObjManager->Resister(static_cast<Obj*>(new ResultTwoPlayerBack()));
 		m_pObjManager->Resister(static_cast<Obj*>(new ResultTwoPlayerFrame()));
+		m_pObjManager->Resister(static_cast<Obj*>(new ResultTwoPlayerStage()));
+		m_pObjManager->Resister(static_cast<Obj*>(new ResultTwoPlayerScore()));
 	}
 
 	~ResultTwoPlayerScene()

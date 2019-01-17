@@ -50,7 +50,7 @@ private:
 class ResultTwoPlayerFrame :public Obj
 {
 public:
-	ResultTwoPlayerFrame() :Obj(OT_UI, 0.9)
+	ResultTwoPlayerFrame() :Obj(OT_UI, 0.9f)
 	{
 		Init();
 	}
@@ -73,9 +73,8 @@ public:
 private:
 	const INT PLAYER_TYPE_MAX = 2;
 
-	VOID FrameRender();
-
 	VOID PlayerTextRender();
+	VOID FrameRender();
 };
 
 class ResultTwoPlayerScore :public Obj
@@ -86,7 +85,7 @@ public:
 		Init();
 	}
 
-	~ResultTwoPlayerScore();
+	~ResultTwoPlayerScore() {};
 
 	VOID Init()
 	{
@@ -102,7 +101,58 @@ public:
 	VOID Render();
 
 private:
+	inline VOID SkipStage()
+	{
+		for (int i = 0;i < Joycon::MAX_CONTROLLER;++i)
+		{
+			m_increaseStagingFrameCount[i] = m_INCREASE_STAGING_FRAME_COUNT_MAX;
+		}
+	}
+
+	VOID ScoreRender();
+
+	VOID RenderDraw();
+
+	VOID RenderWinner();
+
+	VOID RenderLoser();
+
 	INT m_Score[Joycon::MAX_CONTROLLER];
+
+	const INT m_INCREASE_STAGING_FRAME_COUNT_MAX = 150;
+	INT m_increaseStagingFrameCount[Joycon::MAX_CONTROLLER] = { 0,0 };	//! 現物合わせ
+
+	BOOL m_stagingIsEnd = FALSE;
+};
+
+class ResultTwoPlayerStage :public Obj
+{
+public:
+	ResultTwoPlayerStage() :Obj(OT_TRANSPARENCY, 0.f)
+	{
+		Init();
+	}
+
+	~ResultTwoPlayerStage()
+	{
+
+	}
+
+	VOID Init()
+	{
+		SceneManager& rSceneManager = SceneManager::GetInstance();
+		rSceneManager.GetStageData(&m_stageData);
+	}
+
+	VOID Update() {};
+	VOID Render();
+
+private:
+	VOID GetStageStringAndCharsNum(TString* pTString, INT* pCharsNum);
+
+	VOID GetStageLevelAndCharsNum(TString* pTString, INT* pCharsNum);
+
+	StageData m_stageData;
 };
 
 #endif // !RESULT_TWO_PLAYER_OBJ_H_
