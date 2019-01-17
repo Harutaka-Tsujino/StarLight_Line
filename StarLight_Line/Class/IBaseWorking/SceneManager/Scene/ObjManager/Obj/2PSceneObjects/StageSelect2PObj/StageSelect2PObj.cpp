@@ -148,6 +148,8 @@ VOID StageSelectTwoPlayerSceneStageList::Render()
 
 	m_rGameLib.DefaultBlendMode();
 
+	RenderStageName();
+
 	if (iconsCircleRadius != 0.0f) RenderBackButton(iconsCircleRadius);
 }
 
@@ -174,6 +176,117 @@ VOID StageSelectTwoPlayerSceneStageList::RenderBackButton(FLOAT iconsCircleRadiu
 
 	m_rGameLib.Render(backButton, m_rGameLib.GetTex(_T("BackButton")));
 }
+
+VOID StageSelectTwoPlayerSceneStageList::RenderStageName()
+{
+	TString stageString;
+	INT stageCharsNum = 0;
+
+	GetStageStringAndCharsNum(&stageString, &stageCharsNum);
+
+	Text stageText(stageString, _T("2DTextures/Fonts/a_9.png"));
+
+	TextFormat txtFormat;
+	txtFormat.m_charHalfScale = { 22, 33 };
+	txtFormat.m_topLeft = { 640.0f - 2.0f * txtFormat.m_charHalfScale.m_x * stageCharsNum * 0.5f, 580.0f };
+
+	stageText.Write(txtFormat);
+}
+
+VOID StageSelectTwoPlayerSceneStageList::GetStageStringAndCharsNum(TString* pTString, INT* pCharsNum)
+{
+	switch (m_selectingStage)
+	{
+	case STAGE_TAURUS:
+
+		pTString->WriteInAll(_T("TAURUS"));
+		*pCharsNum = 6;
+
+		break;
+
+	case STAGE_LIBRA:
+
+		pTString->WriteInAll(_T("LIBRA"));
+		*pCharsNum = 5;
+
+		break;
+
+	case STAGE_VIRGO:
+
+		pTString->WriteInAll(_T("VIRGO"));
+		*pCharsNum = 5;
+
+		break;
+
+	case STAGE_ARIES:
+
+		pTString->WriteInAll(_T("ARIES"));
+		*pCharsNum = 5;
+
+		break;
+
+	case STAGE_GEMINI:
+
+		pTString->WriteInAll(_T("GEMINI"));
+		*pCharsNum = 6;
+
+		break;
+
+	case STAGE_SCORPIUS:
+
+		pTString->WriteInAll(_T("SCORPIUS"));
+		*pCharsNum = 8;
+
+		break;
+
+	case STAGE_PISCORPIUS:
+
+		pTString->WriteInAll(_T("PISCORPIUS"));
+		*pCharsNum = 10;
+
+		break;
+
+	case STAGE_LEO:
+
+		pTString->WriteInAll(_T("LEO"));
+		*pCharsNum = 3;
+
+		break;
+
+	case STAGE_CAPRICORNUS:
+
+		pTString->WriteInAll(_T("CAPRICORNUS"));
+		*pCharsNum = 11;
+
+		break;
+
+	case STAGE_AQUARIUS:
+
+		pTString->WriteInAll(_T("AQUARIUS"));
+		*pCharsNum = 8;
+
+		break;
+
+	case STAGE_SAGITTARIUS:
+
+		pTString->WriteInAll(_T("SAGITTARIUS"));
+		*pCharsNum = 11;
+
+		break;
+
+	case STAGE_CANCER:
+
+		pTString->WriteInAll(_T("CANCER"));
+		*pCharsNum = 6;
+
+		break;
+
+	default:
+
+		break;
+	}
+}
+
 
 VOID StageSelectTwoPlayerSceneLevelSelecter::Update()
 {
