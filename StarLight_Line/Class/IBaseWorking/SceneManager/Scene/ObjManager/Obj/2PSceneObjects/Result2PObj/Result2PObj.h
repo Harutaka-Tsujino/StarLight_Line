@@ -117,12 +117,15 @@ private:
 
 	VOID RenderLoser();
 
+	VOID RenderCheckStar();
+
 	INT m_Score[Joycon::MAX_CONTROLLER];
 
 	const INT m_INCREASE_STAGING_FRAME_COUNT_MAX = 150;
 	INT m_increaseStagingFrameCount[Joycon::MAX_CONTROLLER] = { 0,0 };	//! 現物合わせ
 
 	BOOL m_stagingIsEnd = FALSE;
+	BOOL m_pushButton[Joycon::MAX_CONTROLLER] = { FALSE,FALSE };
 };
 
 class ResultTwoPlayerStage :public Obj

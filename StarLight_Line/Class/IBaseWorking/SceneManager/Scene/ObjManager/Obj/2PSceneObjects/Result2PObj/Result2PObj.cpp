@@ -65,9 +65,22 @@ VOID ResultTwoPlayerScore::Update()
 
 	if (m_rGameLib.PushJoyconButton(Joycon::LEFT_CONTROLLER, Joycon::RIGHT_BUTTON))
 	{
-		SceneManager& rSceneManager = SceneManager::GetInstance();
-		rSceneManager.SetNextScene(SK_2P_STAGE_SELECT);
+		m_pushButton[Joycon::LEFT_CONTROLLER] = TRUE;
 	}
+
+	if (m_rGameLib.PushJoyconButton(Joycon::RIGHT_CONTROLLER, Joycon::A_BUTTON))
+	{
+		m_pushButton[Joycon::RIGHT_CONTROLLER] = TRUE;
+	}
+
+	if (!m_pushButton[Joycon::LEFT_CONTROLLER] ||
+		!m_pushButton[Joycon::RIGHT_CONTROLLER])
+	{
+		return;
+	}
+
+	SceneManager& rSceneManager = SceneManager::GetInstance();
+	rSceneManager.SetNextScene(SK_2P_STAGE_SELECT);
 }
 
 VOID ResultTwoPlayerScore::Render()
@@ -77,6 +90,8 @@ VOID ResultTwoPlayerScore::Render()
 	
 	ScoreRender();
 	
+	//RenderCheckStar();
+
 	if (!m_stagingIsEnd) return;
 
 	if (m_Score[Joycon::LEFT_CONTROLLER] == m_Score[Joycon::RIGHT_CONTROLLER])
@@ -89,6 +104,17 @@ VOID ResultTwoPlayerScore::Render()
 	RenderWinner();
 
 	RenderLoser();
+}
+
+VOID ResultTwoPlayerScore::RenderCheckStar()
+{
+	ObjData data;
+
+	for (int i = 0;i < Joycon::MAX_CONTROLLER;++i)
+	{
+		data.m_center = { m_WND_SIZE.m_x * (0.47f * (0.25f * (i + 1))),m_WND_SIZE.m_y * 0.1f,0.0f };
+		data.m_halfScale = { 50.f,50.f,0.f };
+	}
 }
 
 VOID ResultTwoPlayerScore::ScoreRender()
@@ -109,7 +135,7 @@ VOID ResultTwoPlayerScore::ScoreRender()
 		txtFormat.m_charHalfScale = { 30, 40 };
 
 		//! SCOREの文字数の半分が2.5f
-		txtFormat.m_topLeft = { m_WND_SIZE.m_x * (0.35f + (0.25f * (i * 2))) - 2.0f * txtFormat.m_charHalfScale.m_x * stagingScoreDigitsNum , 400.0f };
+		txtFormat.m_topLeft = { m_WND_SIZE.m_x * (0.25f + (0.25f * (i * 2))) - 2.0f * txtFormat.m_charHalfScale.m_x * stagingScoreDigitsNum * 0.5f , 400.0f };
 
 		scoreText.Write(txtFormat);
 
