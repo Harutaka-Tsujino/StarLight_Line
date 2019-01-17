@@ -3,6 +3,7 @@
 
 #include <vector>
 
+#include "../../../../../../../SceneManager.h"
 #include "../../../../Obj.h"
 #include "../../../../../../../../.././../GameLib/GameLib.h"
 #include "../../../GameCollision/GameCollision.h"
@@ -22,6 +23,9 @@ public:
 
 	~TwoPlayerResultData()
 	{
+		SceneManager& rSceneManager = SceneManager::GetInstance();
+		rSceneManager.Set2PModeScore(m_controllerType, m_Score);
+
 		m_rGameLib.ReleaseTex();
 	}
 

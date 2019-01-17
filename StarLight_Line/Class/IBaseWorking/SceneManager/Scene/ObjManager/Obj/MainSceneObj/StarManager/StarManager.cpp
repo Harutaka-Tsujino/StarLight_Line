@@ -44,7 +44,13 @@ VOID StarManager::Update()
 
 			if (rSceneManager.GetIsTutorial()) return;
 
-			SceneManager& rSceneManager = SceneManager::GetInstance();
+			if (rSceneManager.Get2PlayMode())
+			{
+				rSceneManager.SetNextScene(SK_2P_RESULT);
+
+				return;
+			}
+
 			rSceneManager.SetNextScene(SK_RESULT);
 
 			return;
