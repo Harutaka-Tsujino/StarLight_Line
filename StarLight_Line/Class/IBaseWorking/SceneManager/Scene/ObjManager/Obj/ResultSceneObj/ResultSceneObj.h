@@ -80,11 +80,6 @@ public:
 
 	inline VOID Init()
 	{
-		m_digitsNum = static_cast<INT>(log10(m_SCORE) + 1);
-
-		m_digitScoresVec.resize(m_digitsNum);
-
-		m_rGameLib.CreateTex(_T("Nums"), _T("2DTextures/Result/Nums.png"));
 	}
 
 	inline VOID Update() {};
@@ -102,16 +97,6 @@ public:
 	}
 
 private:
-	struct DigitScore
-	{
-	public:
-		INT m_num = 0;
-
-		ObjData m_objData;
-
-		CustomVertex m_customVertices[4];
-	};
-
 	inline VOID RenderCase() const
 	{
 		ObjData scoreCaseData;
@@ -128,8 +113,6 @@ private:
 	VOID RenderHead();
 
 	const INT m_SCORE;
-	INT m_digitsNum = NULL;
-	std::vector<DigitScore> m_digitScoresVec;
 
 	const INT m_INCREASE_STAGING_FRAME_COUNT_MAX = 150;
 	INT m_increaseStagingFrameCount = 0;	//! 現物合わせ
