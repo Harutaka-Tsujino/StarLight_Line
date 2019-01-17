@@ -102,6 +102,26 @@ public:
 		*pResultData = m_resultData;
 	}
 
+	inline VOID Set2PModeScore(const INT& Player,const INT& Score)
+	{
+		m_2PModeScore[Player] = Score;
+	}
+
+	inline INT Get2PModeScore(const INT& Player)
+	{
+		return m_2PModeScore[Player];
+	}
+
+	inline VOID Set2PlayMode(const BOOL& Mode)
+	{
+		m_is2PMode = Mode;
+	}
+
+	inline BOOL Get2PlayMode() const
+	{
+		return m_is2PMode;
+	}
+
 	inline VOID SetTransitionMode(const BOOL& Mode)
 	{
 		m_SceneTransitionMode = Mode;
@@ -166,6 +186,7 @@ private:
 		_T("SAVE_DATA_BGM")		,
 		_T("PAUSE_BGM")			,
 		_T("RESULT_BGM")		,
+		_T("2P_RESULT_BGM")		,
 		_T("END_BGM")			,
 	};
 
@@ -175,10 +196,13 @@ private:
 
 	INT m_transitionStagingAlpha = 0;
 
+	INT m_2PModeScore[Joycon::MAX_CONTROLLER];
+
 	StageData m_stageData;
 	ResultData m_resultData;
 
 	BOOL m_isTutorial = FALSE;
+	BOOL m_is2PMode = FALSE;
 };
 
 #endif // !SCENE_MANAGER_H
