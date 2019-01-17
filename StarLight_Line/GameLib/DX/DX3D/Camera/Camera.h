@@ -117,6 +117,8 @@ public:
 			NULL,
 			&m_view);
 
+		viewInverse._41 = viewInverse._42 = viewInverse._43 = 0.0f;
+	
 		D3DXMatrixMultiply(
 			pWorld,
 			pWorld,
