@@ -11,6 +11,7 @@
 #include "Scene/MainScene/MainScene.h"
 #include "Scene/2PScenes/2PMainScene/Main2PScene.h"
 #include "Scene/ResultScene/ResultScene.h"
+#include "Scene/2PScenes/2PResultScene/Result2PScene.h"
 #include "Scene/EndScene/EndScene.h"
 #include "Scene/PauseScene/PauseScene.h"
 #include "Scene/TutorialScene/TutorialScene.h"
@@ -97,6 +98,13 @@ VOID SceneManager::Factory()
 
 		break;
 		
+	case SK_2P_RESULT:
+		delete m_pScene;
+
+		m_pScene = new ResultTwoPlayerScene();
+
+		break;
+
 	case SK_END:
 		delete m_pScene;
 
@@ -156,6 +164,8 @@ VOID SceneManager::InitBGM()
 		_T("Sounds/Stage/Leo/leo.mp3")		,
 		_T("Sounds/Stage/Leo/leo.mp3")		,
 		_T("Sounds/Title/titlesave.mp3")	,
+		_T("Sounds/Result/result.mp3")		,
+		_T("Sounds/Result/result.mp3")		,
 		_T("Sounds/Title/titlesave.mp3")	,
 		_T("Sounds/Result/result.mp3")		,
 		_T("Sounds/Title/titlesave.mp3")	,
@@ -163,6 +173,7 @@ VOID SceneManager::InitBGM()
 
 	static BOOL bGMInits[SK_MAX] =
 	{
+		FALSE,
 		FALSE,
 		FALSE,
 		FALSE,
