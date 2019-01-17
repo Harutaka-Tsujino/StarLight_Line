@@ -37,15 +37,6 @@ VOID StageSelectTwoPlayerSceneStageList::Update()
 		return;
 	}
 
-	if ((m_rGameLib.PushJoyconButton(Joycon::RIGHT_CONTROLLER, Joycon::A_BUTTON) ||
-		 m_rGameLib.PushJoyconButton(Joycon::LEFT_CONTROLLER, Joycon::RIGHT_BUTTON)) &&
-		!m_backIsSelected)
-	{
-		m_lengthMulti = 0.0f;
-
-		m_isDecided = TRUE;
-	}
-
 	if (m_backIsSelected) return;
 
 	if ((m_rGameLib.PushJoyconButton(Joycon::RIGHT_CONTROLLER, Joycon::A_BUTTON) ||
