@@ -33,8 +33,6 @@ public:
 
 	inline VOID Init()
 	{
-		const D3DXVECTOR3 effectCenter = { 640.0f, 360.0f, 0.0f };
-
 		m_rGameLib.CreateTex(_T("Back"), _T("2DTextures/Title/title_background.png"));
 	}
 
@@ -52,15 +50,6 @@ public:
 		m_rGameLib.CreateRect(back, data);
 
 		m_rGameLib.Render(back, m_rGameLib.GetTex(_T("Back")));
-
-		TString testString(_T("TEST STRING\n\rEIWI"));
-		Text testText(testString, _T("2DTextures/Fonts/a_9.png"));
-
-		TextFormat testTextFormat;
-		testTextFormat.m_charHalfScale = { 20, 30 };
-		testTextFormat.m_topLeft = { 100.0f, 100.0f };
-
-		testText.Write(testTextFormat);
 	}
 };
 
