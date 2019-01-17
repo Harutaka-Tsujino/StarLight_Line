@@ -251,7 +251,12 @@ private:
 			m_rGameLib.ConnectJoycon(Joycon::LEFT_CONTROLLER);
 			m_rGameLib.ConnectJoycon(Joycon::RIGHT_CONTROLLER);
 
-			if (m_isAborted) m_isFinished = TRUE;
+			if (m_isAborted)
+			{
+				m_isFinished = TRUE;
+
+				return;
+			}
 		}
 
 		return;
