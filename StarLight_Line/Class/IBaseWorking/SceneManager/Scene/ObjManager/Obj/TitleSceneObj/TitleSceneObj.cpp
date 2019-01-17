@@ -238,6 +238,7 @@ VOID TitleMenu::Transfar2PWhenJoyconIsConnected()
 
 		m_JoyconThread.join();
 		SceneManager& rSceneManager = SceneManager::GetInstance();
+		rSceneManager.Set2PlayMode(TRUE);
 		rSceneManager.SetNextScene(SK_2P_STAGE_SELECT);
 		count = 0;	
 	}
@@ -272,6 +273,8 @@ VOID TitleMenu::SelectMenu()
 	m_rGameLib.OneShotSimultaneousSound(_T("SelectMenu"));
 
 	SceneManager& rSceneManager = SceneManager::GetInstance();
+	rSceneManager.Set2PlayMode(FALSE);
+
 	switch (m_menuReel[m_CENTER_MENU])
 	{
 	case MK_NEW_GAME:
