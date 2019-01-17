@@ -287,7 +287,6 @@ VOID StageSelectTwoPlayerSceneStageList::GetStageStringAndCharsNum(TString* pTSt
 	}
 }
 
-
 VOID StageSelectTwoPlayerSceneLevelSelecter::Update()
 {
 	m_shouldActivateStageSelect = FALSE;
