@@ -280,7 +280,7 @@ VOID ResultDataClearStar::Render()
 
 		pAlphaCount = &m_starsVec[i].m_alphaCount;
 
-		if (i < (m_stagingCount / FRAME_ONE_STAR_TAKES))
+		if (i < (m_stagingCount / FRAME_ONE_STAR_TAKES) && m_CLEAR_STARS_NUM)
 		{
 			*pAlphaCount = (*pAlphaCount >= FRAME_ONE_STAR_TAKES) ? FRAME_ONE_STAR_TAKES : *pAlphaCount + 1;
 			alpha = static_cast<INT>(255 * (static_cast<FLOAT>(*pAlphaCount) / FRAME_ONE_STAR_TAKES));
@@ -294,7 +294,7 @@ VOID ResultDataClearStar::Render()
 		m_rGameLib.Render(pStar, m_rGameLib.GetTex(_T("Star")));
 	}
 
-	m_stageCountMax = FRAME_ONE_STAR_TAKES * m_CLEAR_STARS_NUM;
+	m_stageCountMax = (m_CLEAR_STARS_NUM <= 0) ? 5 : FRAME_ONE_STAR_TAKES * m_CLEAR_STARS_NUM;
 
 	if (m_stagingCount) ++m_stagingCount;																//!演出の起動は他クラスで行う
 
