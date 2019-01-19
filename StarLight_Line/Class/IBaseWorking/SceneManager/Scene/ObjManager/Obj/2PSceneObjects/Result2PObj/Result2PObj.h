@@ -85,7 +85,10 @@ public:
 		Init();
 	}
 
-	~ResultTwoPlayerScore() {};
+	~ResultTwoPlayerScore() 
+	{
+		m_rGameLib.ReleaseTex();
+	};
 
 	VOID Init()
 	{
@@ -95,6 +98,8 @@ public:
 		{
 			m_Score[i] = rSceneManager.Get2PModeScore(i);
 		}
+
+		m_rGameLib.CreateTex(_T("CheckStar"), _T("2DTextures/Result/StarNoteWhite.png"));
 	}
 
 	VOID Update();
