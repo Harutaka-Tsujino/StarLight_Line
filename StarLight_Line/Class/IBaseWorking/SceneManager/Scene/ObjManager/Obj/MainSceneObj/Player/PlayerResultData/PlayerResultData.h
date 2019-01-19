@@ -3,6 +3,7 @@
 
 #include <vector>
 
+#include "../../../../../../SceneManager.h"
 #include "../../../Obj.h"
 #include "../../../../../../../.././../GameLib/GameLib.h"
 #include "../../GameCollision/GameCollision.h"
@@ -52,6 +53,13 @@ public:
 
 	inline VOID JudgeGameFailure(INT necessaryNum)
 	{
+		if (SceneManager::GetInstance().GetIsTutorial())
+		{
+			m_Data.m_isFailed = FALSE;
+
+			return;
+		}
+
 		m_Data.m_isFailed = !(m_Data.m_clearStarsNum >= necessaryNum);
 
 		return;
