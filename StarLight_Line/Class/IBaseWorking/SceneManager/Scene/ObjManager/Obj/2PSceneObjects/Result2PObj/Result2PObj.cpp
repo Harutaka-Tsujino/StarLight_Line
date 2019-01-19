@@ -90,7 +90,7 @@ VOID ResultTwoPlayerScore::Render()
 	
 	ScoreRender();
 	
-	//RenderCheckStar();
+	RenderCheckStar();
 
 	if (!m_stagingIsEnd) return;
 
@@ -109,11 +109,19 @@ VOID ResultTwoPlayerScore::Render()
 VOID ResultTwoPlayerScore::RenderCheckStar()
 {
 	ObjData data;
+	CustomVertex CheakStar[4];
 
 	for (int i = 0;i < Joycon::MAX_CONTROLLER;++i)
 	{
-		data.m_center = { m_WND_SIZE.m_x * (0.47f * (0.25f * (i + 1))),m_WND_SIZE.m_y * 0.1f,0.0f };
+		data.m_center = { m_WND_SIZE.m_x * (0.42f + 0.5f * i),m_WND_SIZE.m_y * 0.9f,0.0f };
 		data.m_halfScale = { 50.f,50.f,0.f };
+
+		data.m_aRGB = (m_pushButton[i]) ? D3DCOLOR_ARGB(255,  255, 255, 255) : 
+										  D3DCOLOR_ARGB(80,   255, 255, 255);
+
+		m_rGameLib.CreateRect(CheakStar, data);
+
+		m_rGameLib.Render(CheakStar, m_rGameLib.GetTex(_T("CheckStar")));
 	}
 }
 
