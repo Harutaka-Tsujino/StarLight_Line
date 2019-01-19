@@ -422,6 +422,14 @@ public:
 
 		SCENE_KIND scene = (m_isSelectedYes) ? SK_GAME : SK_STAGE_SELECT;
 
+		ResultData result;
+		rSceneManager.GetResultData(&result);
+
+		if (!result.m_isFailed)
+		{
+			scene = SK_STAGE_SELECT;
+		}
+
 		scene = (rSceneManager.GetIsTutorial()) ? SK_SAVE_DATA : scene;
 
 		rSceneManager.SetNextScene(scene);
@@ -546,7 +554,10 @@ public:
 
 		m_pResultSceneResultFont->Render();
 
-		if(m_shouldShowContinue) m_pResultSceneContinue->Render();
+		if (m_shouldShowContinue && m_isFailed && !SceneManager::GetInstance().GetIsTutorial())
+		{
+			m_pResultSceneContinue->Render();
+		}
 	}
 
 private:
