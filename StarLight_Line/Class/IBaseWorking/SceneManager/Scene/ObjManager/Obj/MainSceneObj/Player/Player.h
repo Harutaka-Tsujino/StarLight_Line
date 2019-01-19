@@ -23,6 +23,12 @@ public:
 		SceneManager& rSceneManager = SceneManager::GetInstance();
 
 		m_ResultData.JudgeGameFailure(8); //引数は適当
+
+		if (m_Hp.GetHP() <= 0 && !rSceneManager.GetIsTutorial())
+		{
+			m_ResultData.SetResultData(TRUE);
+		}
+
 		rSceneManager.SetResultData(m_ResultData.GetResultData());
 
 		m_rGameLib.GetFbx(_T("Eiwi")).Release();

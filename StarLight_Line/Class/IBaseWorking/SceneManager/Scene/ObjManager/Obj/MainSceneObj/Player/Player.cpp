@@ -29,7 +29,7 @@ VOID Player::Update()
 	{
 		rSceneManager.SetTransitionMode(FALSE);
 
-		m_ResultData.JudgeGameFailure(8);	//引数はクリアの星の数
+		m_ResultData.SetResultData(TRUE);
 		rSceneManager.SetResultData(m_ResultData.GetResultData());
 
 		rSceneManager.SetNextScene(SK_RESULT);
