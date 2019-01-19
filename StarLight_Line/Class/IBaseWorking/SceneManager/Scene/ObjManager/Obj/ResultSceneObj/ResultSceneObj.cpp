@@ -118,6 +118,14 @@ VOID ResultDataStage::Render()
 
 VOID ResultDataStage::GetStageStringAndCharsNum(TString* pTString, INT* pCharsNum)
 {
+	if (SceneManager::GetInstance().GetIsTutorial())
+	{
+		pTString->WriteInAll(_T("TUTORIAL"));
+		*pCharsNum = 8;
+
+		return;
+	}
+
 	switch (m_stageData.m_stage)
 	{
 	case STAGE_TAURUS:
@@ -215,6 +223,14 @@ VOID ResultDataStage::GetStageStringAndCharsNum(TString* pTString, INT* pCharsNu
 
 VOID ResultDataStage::GetStageLevelAndCharsNum(TString* pTString, INT* pCharsNum)
 {
+	if (SceneManager::GetInstance().GetIsTutorial())
+	{
+		pTString->WriteInAll(_T("EXTRA"));
+		*pCharsNum = 5;
+
+		return;
+	}
+
 	switch (m_stageData.m_level)
 	{
 	case SLK_EASY:
