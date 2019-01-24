@@ -70,6 +70,9 @@ public:
 
 	inline VOID EraseTex(const TCHAR* pTexKey)
 	{
+		if (Exists(pTexKey)) return;
+
+		m_pTexMap[pTexKey]->Release();
 		m_pTexMap.erase(pTexKey);
 	}
 
