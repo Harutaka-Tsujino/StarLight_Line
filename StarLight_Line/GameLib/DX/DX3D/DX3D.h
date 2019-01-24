@@ -24,6 +24,7 @@
 #include "CustomVertexEditor/Data/ObjData.h"
 #include "FbxStorage/FbxStorage.h"
 #include "FbxStorage/FbxRelated/FbxRelated.h"
+#include "Font/Font.h"
 
 /**
 * @brief 描画関係クラスのFacade
@@ -42,6 +43,7 @@ public:
 		delete m_pLight;
 		delete m_pColorBlender;
 		delete m_D3DPP;
+		delete m_pFont;
 		m_pDX3DDev->Release();
 	}
 
@@ -296,6 +298,20 @@ public:
 		m_pRenderer->Render(pVertex3D, rWorld, pTexture);
 	}
 
+	inline VOID Render(const D3DXVECTOR2& topLeft, const TCHAR* pText, UINT format, LPD3DXFONT pFont, DWORD color)
+	{
+		m_pRenderer->Render(topLeft, pText, format, pFont, color);
+	}
+
+	inline VOID CreateAndRenderRect(const ObjData& rObjData, const LPDIRECT3DTEXTURE9 pTexture = nullptr) const
+	{
+		CustomVertex vertices[CustomVertex::m_RECT_VERTICES_NUM];
+
+		m_pCustomVertex->Create(vertices, rObjData);
+
+		m_pRenderer->Render(vertices, pTexture);
+	}
+
 	inline VOID CreateFbx(const TCHAR* pKey, const CHAR* pFilePath)
 	{
 		m_pFbxStorage->CreateFbx(pKey, pFilePath);
@@ -304,6 +320,31 @@ public:
 	inline FbxRelated& GetFbx(const TCHAR* pKey)
 	{
 		return m_pFbxStorage->GetFbx(pKey);
+	}
+
+	inline VOID ReleaseFont()
+	{
+		m_pFont->Release();
+	}
+
+	inline VOID EraseFont(const TCHAR* pFontKey)
+	{
+		m_pFont->Erase(pFontKey);
+	}
+
+	inline VOID CreateFont(const TCHAR* pKey, D3DXVECTOR2 scale, const TCHAR* pFontName, UINT thickness = 0)
+	{
+		m_pFont->Create(pKey, scale, pFontName, thickness);
+	}
+
+	inline BOOL FontExists(const TCHAR* pKey)
+	{
+		return m_pFont->Exists(pKey);
+	}
+
+	inline const LPD3DXFONT GetFont(const TCHAR* pKey)
+	{
+		return m_pFont->Get(pKey);
 	}
 
 private:
@@ -332,6 +373,8 @@ private:
 	Renderer* m_pRenderer = nullptr;
 
 	FbxStorage* m_pFbxStorage = nullptr;
+
+	Font* m_pFont = nullptr;
 };
 
 #endif //! DX3D_H

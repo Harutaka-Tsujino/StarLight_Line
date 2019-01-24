@@ -319,6 +319,16 @@ public:
 		m_pDX->Render(pVertex3D, rWorld, pTexture);
 	}
 
+	inline VOID Render(const D3DXVECTOR2& topLeft, const TCHAR* pText, UINT format, LPD3DXFONT pFont, DWORD color)
+	{
+		m_pDX->Render(topLeft, pText, format, pFont, color);
+	}
+
+	inline VOID CreateAndRenderRect(const ObjData& rObjData, const LPDIRECT3DTEXTURE9 pTexture = nullptr) const
+	{
+		m_pDX->CreateAndRenderRect(rObjData, pTexture);
+	}
+
 	inline VOID CreateFbx(const TCHAR* pKey, const CHAR* pFilePath)
 	{
 		m_pDX->CreateFbx(pKey, pFilePath);
@@ -548,6 +558,31 @@ public:
 	inline VOID JoyconRumble(Joycon::CONTROLLER_TYPE controllerType)
 	{
 		m_pJoyconManager->GetJoycon(controllerType)->SendRumble();
+	}
+
+	inline VOID ReleaseFont()
+	{
+		m_pDX->ReleaseFont();
+	}
+
+	inline VOID EraseFont(const TCHAR* pFontKey)
+	{
+		m_pDX->EraseFont(pFontKey);
+	}
+
+	inline VOID CreateFont(const TCHAR* pKey, D3DXVECTOR2 scale, const TCHAR* pFontName, UINT thickness = 0)
+	{
+		m_pDX->CreateFont(pKey, scale, pFontName, thickness);
+	}
+
+	inline BOOL FontExists(const TCHAR* pKey)
+	{
+		return m_pDX->FontExists(pKey);
+	}
+
+	inline const LPD3DXFONT GetFont(const TCHAR* pKey)
+	{
+		return m_pDX->GetFont(pKey);
 	}
 
 private:

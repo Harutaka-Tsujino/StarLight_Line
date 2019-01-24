@@ -280,6 +280,16 @@ public:
 		m_pDX3D->Render(pVertex3D, rWorld, pTexture);
 	}
 
+	inline VOID Render(const D3DXVECTOR2& topLeft, const TCHAR* pText, UINT format, LPD3DXFONT pFont, DWORD color)
+	{
+		m_pDX3D->Render(topLeft, pText, format, pFont, color);
+	}
+
+	inline VOID CreateAndRenderRect(const ObjData& rObjData, const LPDIRECT3DTEXTURE9 pTexture = nullptr) const
+	{
+		m_pDX3D->CreateAndRenderRect(rObjData, pTexture);
+	}
+
 	inline VOID CreateFbx(const TCHAR* pKey, const CHAR* pFilePath)
 	{
 		m_pDX3D->CreateFbx(pKey, pFilePath);
@@ -348,6 +358,31 @@ public:
 	inline BOOL KeyboardAnyKeyIsPressed() const
 	{
 		return m_pDXInput->KeyboardAnyKeyIsPressed();
+	}
+
+	inline VOID ReleaseFont()
+	{
+		m_pDX3D->ReleaseFont();
+	}
+
+	inline VOID EraseFont(const TCHAR* pFontKey)
+	{
+		m_pDX3D->EraseFont(pFontKey);
+	}
+
+	inline VOID CreateFont(const TCHAR* pKey, D3DXVECTOR2 scale, const TCHAR* pFontName, UINT thickness = 0)
+	{
+		m_pDX3D->CreateFont(pKey, scale, pFontName, thickness);
+	}
+
+	inline BOOL FontExists(const TCHAR* pKey)
+	{
+		return m_pDX3D->FontExists(pKey);
+	}
+
+	inline const LPD3DXFONT GetFont(const TCHAR* pKey)
+	{
+		return m_pDX3D->GetFont(pKey);
 	}
 
 private:

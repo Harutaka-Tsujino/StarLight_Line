@@ -99,6 +99,18 @@ public:
 		pBuffer->Release();
 	}
 
+	inline VOID Render(const D3DXVECTOR2& topLeft, const TCHAR* pText, UINT format, LPD3DXFONT pFont, DWORD color)
+	{
+		RECT rect;
+		SetRectEmpty(&rect);
+
+		pFont->DrawText(NULL, pText, -1, &rect, format | DT_CALCRECT, color);
+
+		OffsetRect(&rect, static_cast<INT>(topLeft.x), static_cast<INT>(topLeft.y));
+
+		pFont->DrawText(NULL, pText, -1, &rect, format, color);
+	}
+
 private:
 	const LPDIRECT3DDEVICE9& m_rpDX3D_DEV = nullptr;
 };

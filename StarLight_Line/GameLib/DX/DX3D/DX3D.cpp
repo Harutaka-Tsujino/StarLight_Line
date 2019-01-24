@@ -42,6 +42,8 @@ DX3D::DX3D(HWND hWnd, RectSize wndSize, LPDIRECT3D9 pD3D)
 
 	m_pFbxStorage = new FbxStorage(m_pDX3DDev);
 
+	m_pFont = new Font(m_pDX3DDev);
+
 	InitViewPort();
 }
 
