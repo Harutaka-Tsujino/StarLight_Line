@@ -191,6 +191,7 @@
     <ClCompile Include="GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxModel\FbxModel.cpp" />
     <ClCompile Include="GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxRelated.cpp" />
     <ClCompile Include="GameLib\DX\DX3D\FbxStorage\FbxStorage.cpp" />
+    <ClCompile Include="GameLib\DX\DX3D\Font\Font.cpp" />
     <ClCompile Include="GameLib\DX\DX3D\Light\Light.cpp" />
     <ClCompile Include="GameLib\DX\DX3D\Renderer\Renderer.cpp" />
     <ClCompile Include="GameLib\DX\DX3D\TexStorage\TexStorage.cpp" />
@@ -286,6 +287,7 @@
     <ClInclude Include="GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxModel\FbxModel.h" />
     <ClInclude Include="GameLib\DX\DX3D\FbxStorage\FbxRelated\FbxRelated.h" />
     <ClInclude Include="GameLib\DX\DX3D\FbxStorage\FbxStorage.h" />
+    <ClInclude Include="GameLib\DX\DX3D\Font\Font.h" />
     <ClInclude Include="GameLib\DX\DX3D\Light\Light.h" />
     <ClInclude Include="GameLib\DX\DX3D\Renderer\Renderer.h" />
     <ClInclude Include="GameLib\DX\DX3D\TexStorage\TexStorage.h" />
