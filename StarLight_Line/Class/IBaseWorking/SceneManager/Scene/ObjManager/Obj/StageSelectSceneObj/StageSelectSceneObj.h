@@ -256,7 +256,7 @@ public:
 
 	inline INT Level()
 	{
-		if (m_backIsSelected)
+		if (m_blackHoleIsSelected)
 		{
 			m_level = static_cast<INT>(SLK_EXTREME);
 
