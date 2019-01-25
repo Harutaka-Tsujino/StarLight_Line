@@ -258,12 +258,12 @@ public:
 	{
 		if (m_blackHoleIsSelected)
 		{
-			m_level = static_cast<INT>(SLK_EXTREME);
-
-			if (m_level == SLK_EASY)
+			if (m_level == SLK_HARD)
 			{
-				m_level = static_cast<INT>(SLK_HARD);
+				return (m_level = static_cast<INT>(SLK_EXTREME));
 			}
+
+			m_level = static_cast<INT>(SLK_HARD);
 		}
 
 		return  m_level;
