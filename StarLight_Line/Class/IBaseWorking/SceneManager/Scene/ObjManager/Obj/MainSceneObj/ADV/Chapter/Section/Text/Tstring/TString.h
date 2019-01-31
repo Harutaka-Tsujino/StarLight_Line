@@ -95,6 +95,16 @@ public:
 		pTString->WriteInChar(m_TEXT_END);
 	}
 
+	inline VOID WriteOutAll(TCHAR* pOut) const
+	{
+		for (INT i = 0; ; ++i)
+		{
+			pOut[i] = m_tChar[i];
+
+			if (pOut[i] == m_TEXT_END) return;
+		}
+	}
+
 	inline VOID WriteOutAll(TCHAR* pText)
 	{
 		for (INT i = 0; i < Size(); ++i) pText[i] = m_tChar[i];

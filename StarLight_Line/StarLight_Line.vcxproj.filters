@@ -305,6 +305,9 @@
     <Filter Include="GameLib\DX\DX3D\Font">
       <UniqueIdentifier>{7c4a2674-9375-43f1-9aba-471f1b2cb2ab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StageProgress">
+      <UniqueIdentifier>{de8826a7-e21b-4e4d-a7ef-258d759aefdf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Class\Singleton\Singleton.cpp">
@@ -559,6 +562,9 @@
     <ClCompile Include="GameLib\DX\DX3D\Font\Font.cpp">
       <Filter>GameLib\DX\DX3D\Font</Filter>
     </ClCompile>
+    <ClCompile Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StageProgress\StageProgress.cpp">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StageProgress</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Class\Singleton\Singleton.h">
@@ -744,9 +750,6 @@
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Section.h">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section</Filter>
     </ClInclude>
-    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\Text.h">
-      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text</Filter>
-    </ClInclude>
     <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\ConversationText\ConversationText.h">
       <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\ConversationText</Filter>
     </ClInclude>
@@ -863,6 +866,12 @@
     </ClInclude>
     <ClInclude Include="GameLib\DX\DX3D\Font\Font.h">
       <Filter>GameLib\DX\DX3D\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text\Text.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\ADV\Chapter\Section\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StageProgress\StageProgress.h">
+      <Filter>Class\IBaseWorking\SceneManager\Scene\ObjManager\Obj\MainSceneObj\StageProgress</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -36,6 +36,7 @@ private:
 	std::chrono::system_clock::time_point	m_StartTime;	//!< 計測開始時間.
 	std::chrono::system_clock::time_point	m_StartTimeBuff;
 	DebugDiffTime m_DiffTime;								//!< 計測時間.
+	BOOL m_isStoped = FALSE;
 };
 
 #endif // !TIMER_H_

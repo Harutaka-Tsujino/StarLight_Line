@@ -27,36 +27,25 @@
 
 VOID ConversationText::Write(const TextFormat& textFormat)
 {
+	D3DXVECTOR2 fontScale = { static_cast<FLOAT>(textFormat.m_charHalfScale.m_x), static_cast<FLOAT>(textFormat.m_charHalfScale.m_y) };
+
+	m_rGameLib.CreateFont(m_pCONV_FONT_KEY, fontScale, _T("遊ゴシック"), 0);
+
 	CountUp();
 
-	std::vector<ObjData*> pCharData;
-	std::vector<CustomVertex*> pCustomVerticesVec;
+	INT convTextCatForStagingLength = m_currentTextLength + 1;
 
-	NewCustomVerticesData(&pCharData, &pCustomVerticesVec, m_pOneLineTstringVec);
+	if (convTextCatForStagingLength <= 1) return;
 
-	CreateOneLineCharsRects(textFormat, &pCharData, &pCustomVerticesVec, m_pOneLineTstringVec);
+	TCHAR* pConvTextCatForStaging = new TCHAR[convTextCatForStagingLength];
 
-	INT oneLineLength = NULL;
+	ZeroMemory(pConvTextCatForStaging, sizeof(TCHAR)* convTextCatForStagingLength);
 
-	const INT RECT_VERTICES_NUM = CustomVertex::m_RECT_VERTICES_NUM;
+	_tcsncpy_s(pConvTextCatForStaging, convTextCatForStagingLength, m_pConvText, _TRUNCATE);
 
-	INT charRectsNum = 0;
+	m_rGameLib.Render(textFormat.m_topLeft, pConvTextCatForStaging, DT_LEFT, m_rGameLib.GetFont(m_pCONV_FONT_KEY));
 
-	for (INT si = 0; si < m_pOneLineTstringVec.size(); ++si)
-	{
-		oneLineLength = m_pOneLineTstringVec[si]->Length();
+	delete[] pConvTextCatForStaging;
 
-		if (charRectsNum > m_currentCharRectsMax) break;
-
-		for (INT li = 0; li < oneLineLength; ++li)
-		{
-			m_rGameLib.CreateRect(&pCustomVerticesVec[si][RECT_VERTICES_NUM * li], pCharData[si][li]);
-
-			m_rGameLib.Render(&pCustomVerticesVec[si][RECT_VERTICES_NUM * li], m_rGameLib.GetTex(m_pFONT_KEY));
-
-			++charRectsNum;
-		}
-	}
-
-	ReleaseCustomVerticesData(&pCharData, &pCustomVerticesVec, m_pOneLineTstringVec);
+	m_rGameLib.EraseFont(m_pCONV_FONT_KEY);
 }
