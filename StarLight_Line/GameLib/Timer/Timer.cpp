@@ -19,11 +19,20 @@ VOID Timer::Reset()
 
 VOID Timer::Stop()
 {
+	if (m_isStoped)
+	{
+		return;
+	}
+
+	m_isStoped = TRUE;
+
 	m_StartTimeBuff = std::chrono::system_clock::now();
 }
 
 VOID Timer::Restart()
 {
+	m_isStoped = FALSE;
+
 	m_StartTime += (std::chrono::system_clock::now() - m_StartTimeBuff);
 }
 

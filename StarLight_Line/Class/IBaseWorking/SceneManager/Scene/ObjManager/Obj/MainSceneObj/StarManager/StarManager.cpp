@@ -87,10 +87,16 @@ VOID StarManager::Render()
 		}
 	}
 
-	for (INT i = 0; i < m_StarNotes.size(); ++i)
+	for (INT sti = SCORE; sti >= DAMAGE; --sti)
 	{
-		if (m_rGameCollision.GetStarIsCollided(i)) continue;
-		m_StarNotes[i]->Render();
+		for (INT i = 0; i < m_StarNotes.size(); ++i)
+		{
+			if (sti != m_StarNotes[i]->GetType()) continue;
+
+			if (m_rGameCollision.GetStarIsCollided(i)) continue;
+
+			m_StarNotes[i]->Render();
+		}
 	}
 }
 

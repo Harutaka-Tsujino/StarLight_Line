@@ -37,6 +37,11 @@ public:
 		return m_Ends;
 	}
 
+	inline const LONGLONG& GetStageTime_ms()
+	{
+		return m_End_ms;
+	}
+
 private:
 	const CHAR* GetStageFilePath();
 

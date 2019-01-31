@@ -8,6 +8,7 @@
 #include "../ObjManager/Obj/MainSceneObj/Player/Player.h"
 #include "../ObjManager/Obj/TitleSceneObj/TitleSceneObj.h"
 #include "../ObjManager/Obj/MainSceneObj/Player/PlayerEffect/PlayerEffect.h"
+#include "../ObjManager/Obj/MainSceneObj/StageProgress/StageProgress.h"
 
 class MainScene :public Scene
 {
@@ -21,13 +22,11 @@ public:
 
 		m_pObjManager->Resister(static_cast<Obj*>(new MainBack()));
 		m_pObjManager->Resister(static_cast<Obj*>(new TitleSmallStarEffect()));
-		//m_pObjManager->Resister(static_cast<Obj*>(new PlayerEffect()));
 		m_pObjManager->Resister(static_cast<Obj*>(new MainLine()));
-		m_pObjManager->Resister(static_cast<Obj*>(new Player()));
 		m_pObjManager->Resister(static_cast<Obj*>(new PlayerLifeFrame()));
 		m_pObjManager->Resister(static_cast<Obj*>(new PlayerScoreFrame()));
 		m_pObjManager->Resister(static_cast<Obj*>(new PlayerClearStarObj()));
-		m_pObjManager->Resister(static_cast<Obj*>(new StarManager()));
+		m_pObjManager->Resister(static_cast<Obj*>(new StageProgress()));
 	}
 
 	~MainScene() {};

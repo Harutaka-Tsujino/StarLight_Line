@@ -319,7 +319,7 @@ public:
 		m_pDX->Render(pVertex3D, rWorld, pTexture);
 	}
 
-	inline VOID Render(const D3DXVECTOR2& topLeft, const TCHAR* pText, UINT format, LPD3DXFONT pFont, DWORD color)
+	inline VOID Render(const D3DXVECTOR2& topLeft, const TCHAR* pText, UINT format, LPD3DXFONT pFont, DWORD color = 0xFFFFFFFF)
 	{
 		m_pDX->Render(topLeft, pText, format, pFont, color);
 	}

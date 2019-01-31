@@ -29,8 +29,8 @@
 class Chapter :public Obj
 {
 public:
-	Chapter(const TCHAR* pChapterTextFilePath, const ULONGLONG& currentMSec, const ULONGLONG& stageMSec) 
-		:Obj(OT_TRANSPARENCY, 0.0f), m_rCurrentMSec(currentMSec), m_rStageMSec(stageMSec)
+	Chapter(const TCHAR* pChapterTextFilePath, const LONGLONG& stageMSec) 
+		:Obj(OT_TRANSPARENCY, 0.0f), m_rStageMSec(stageMSec)
 	{
 		TString chapterText;
 		ReadChapterFile(pChapterTextFilePath, &chapterText);
@@ -52,7 +52,7 @@ public:
 
 	inline VOID Update()
 	{
-		if (!ShouldOperationSction()) return;
+		if (!ShouldOperationSection()) return;
 
 		Section* pCurrentSecion = m_pSections[m_currentSectionDetail];
 
@@ -63,7 +63,7 @@ public:
 
 	inline VOID Render()
 	{
-		if (!ShouldOperationSction()) return;
+		if (!ShouldOperationSection()) return;
 
 		m_pSections[m_currentSectionDetail]->Render();
 	}
@@ -71,6 +71,10 @@ public:
 	inline VOID TransNextSection()
 	{
 		m_currentSectionDetail = (m_currentSectionDetail >= SD_LAST) ? SD_LAST : ++m_currentSectionDetail;
+
+		m_rGameLib.RestartTime();
+
+		m_isActive = FALSE;
 	}
 
 	inline BOOL CurrentSctionEnds() const
@@ -81,6 +85,11 @@ public:
 	inline BOOL AllSectionEnds() const
 	{
 		return m_pSections[SD_LAST]->Ends();
+	}
+
+	inline BOOL IsActive()
+	{
+		return m_isActive;
 	}
 
 private:
@@ -99,25 +108,46 @@ private:
 
 	VOID DevideTextsBySectionAndSet(TString* pChapterText);
 
-	inline BOOL ShouldOperationSction()
+	inline BOOL ShouldOperationSection()
 	{
-		FLOAT ratioInsertSction = static_cast<FLOAT>(m_currentSectionDetail) / SD_MAX;
+		FLOAT ratioInsertSection = static_cast<FLOAT>(m_currentSectionDetail) / (SD_MAX - 1);
 
-		const ULONGLONG m_ACCEPTABLE_M_SEC_LAG = 300;
+		const LONGLONG m_ACCEPTABLE_M_SEC_LAG = 300;
 
-		if (m_rCurrentMSec - m_ACCEPTABLE_M_SEC_LAG < m_rStageMSec * ratioInsertSction) return FALSE;
+		static LONGLONG currentStageTime = NULL;
+
+		if (!m_isActive)
+		{
+			currentStageTime = m_rGameLib.GetMilliSecond();
+		}
+
+		if (static_cast<LONGLONG>(currentStageTime + m_ACCEPTABLE_M_SEC_LAG) <=
+			static_cast<LONGLONG>(m_rStageMSec * ratioInsertSection)) return FALSE;
 		if (m_pSections[m_currentSectionDetail]->Ends()) return FALSE;
+
+		if (m_currentSectionDetail == SD_MIDDLE)
+		{
+			int i = 0;
+		}
+
+		if (!m_isActive)
+		{
+			m_rGameLib.StopTime();
+		}
+
+		m_isActive = TRUE;
 
 		return TRUE;
 	}
+	
+	BOOL m_isActive = FALSE;
 
 	const TCHAR m_SECTION_TAG = '#';
 
 	std::array<TString, SD_MAX> m_sectionsTexts;
 	std::array<Section*, SD_MAX> m_pSections;
 
-	const ULONGLONG& m_rCurrentMSec = NULL;
-	const ULONGLONG& m_rStageMSec = NULL;
+	const LONGLONG& m_rStageMSec = NULL;
 	
 	INT m_currentSectionDetail = SD_FIRST;
 };

@@ -16,21 +16,12 @@
 
 #include "../../Obj.h"
 #include "../../../../../Data/StageData.h"
-#include "../../../../../SceneManager.h"
 #include "Chapter/Chapter.h"
 
 class ADV :public Obj
 {
 public:
-	ADV() :Obj(OT_TRANSPARENCY, 0.0f)
-	{
-		SceneManager& rSceneManager = SceneManager::GetInstance();
-
-		StageData stageData;
-		rSceneManager.GetStageData(&stageData);
-
-		//m_pChapter = new Chapter(stageData)
-	}
+	explicit ADV(const LONGLONG& stageTime_ms);
 
 	~ADV()
 	{
@@ -45,6 +36,11 @@ public:
 	inline VOID Render()
 	{
 		m_pChapter->Render();
+	}
+
+	inline BOOL IsActive()
+	{
+		return m_pChapter->IsActive();
 	}
 
 private:

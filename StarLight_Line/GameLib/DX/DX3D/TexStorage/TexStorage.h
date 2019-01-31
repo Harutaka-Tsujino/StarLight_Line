@@ -70,7 +70,7 @@ public:
 
 	inline VOID EraseTex(const TCHAR* pTexKey)
 	{
-		if (Exists(pTexKey)) return;
+		if (!Exists(pTexKey)) return;
 
 		m_pTexMap[pTexKey]->Release();
 		m_pTexMap.erase(pTexKey);
@@ -83,7 +83,7 @@ public:
 	*/
 	inline const BOOL Exists(const TCHAR* pTexKey)
 	{
-		return static_cast<BOOL>(m_pTexMap.count(pTexKey));
+		return (m_pTexMap.find(pTexKey) != m_pTexMap.end());
 	}
 
 private:

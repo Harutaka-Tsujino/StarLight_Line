@@ -28,7 +28,7 @@ public:
 
 	inline VOID Erase(const TCHAR* pFontKey)
 	{
-		if (Exists(pFontKey)) return;
+		if (!Exists(pFontKey)) return;
 
 		m_fonts[pFontKey]->Release();
 		m_fonts.erase(pFontKey);
@@ -54,7 +54,7 @@ public:
 
 	inline BOOL Exists(const TCHAR* pKey)
 	{
-		return (m_fonts[pKey] != nullptr);
+		return (m_fonts.find(pKey) != m_fonts.end());
 	}
 
 	inline const LPD3DXFONT Get(const TCHAR* pKey)

@@ -31,26 +31,36 @@ class ConversationText :public Text
 public:
 	ConversationText(const TString& speaker, const TString& text, const TCHAR* pFontTexPath) :Text(text, pFontTexPath)
 	{
-		speaker.WriteOutAll(&m_speaker);
+		m_pSpeaker = new TCHAR[speaker.Size()];
+		speaker.WriteOutAll(m_pSpeaker);
 
-		for (auto i : m_pOneLineTstringVec)
-		{
-			m_charRectsMax += i->Length();
-		}
+		m_pConvText = new TCHAR[text.Size()];
+		text.WriteOutAll(m_pConvText);
+
+		m_textSize = static_cast<INT>(text.Size());
+
+		m_rGameLib.CreateTex(m_pADV_BACK_TEX_KEY, _T("2DTextures/Main/adv_textframe.png"));
+	}
+
+	~ConversationText()
+	{
+		m_rGameLib.EraseTex(m_pADV_BACK_TEX_KEY);
+		delete[] m_pConvText;
+		delete[] m_pSpeaker;
 	}
 
 	inline VOID Write(const TextFormat& speakerNameFormat, const TextFormat& textFormat)
 	{
+		RenderBack();
+
 		WriteSpeaker(speakerNameFormat);
 
 		Write(textFormat);
 	}
 
-	VOID Write(const TextFormat& textFormat);
-
 	inline VOID SkipStaging()
 	{
-		m_currentCharRectsMax = m_charRectsMax;
+		m_currentTextLength = m_textSize;
 	}
 
 	inline BOOL StagingEnds() const
@@ -59,23 +69,28 @@ public:
 	}
 
 private:
+	inline VOID RenderBack()
+	{
+		RectSize m_wndSize = m_rGameLib.GetWndSize();
+
+		ObjData rectData;
+		rectData.m_center	 = { m_wndSize.m_x * 0.5f, m_wndSize.m_y *0.83f, 0.0f };
+		rectData.m_halfScale = { m_wndSize.m_x * 0.4f, m_wndSize.m_y *0.17f, 0.0f };
+
+		m_rGameLib.CreateAndRenderRect(rectData, m_rGameLib.GetTex(m_pADV_BACK_TEX_KEY));
+	}
+
+	VOID Write(const TextFormat& textFormat);
+
 	inline VOID WriteSpeaker(const TextFormat& speakerNameFormat) const
 	{
-		ObjData speakerData;
-		CustomVertex speaker[CustomVertex::m_RECT_VERTICES_NUM];
+		D3DXVECTOR2 fontScale = { static_cast<FLOAT>(speakerNameFormat.m_charHalfScale.m_x), static_cast<FLOAT>(speakerNameFormat.m_charHalfScale.m_y) };
 
-		speakerData.m_center =
-		{
-			speakerNameFormat.m_topLeft.x + speakerNameFormat.m_charHalfScale.m_x,
-			speakerNameFormat.m_topLeft.y + speakerNameFormat.m_charHalfScale.m_y,
-			0.0f
-		};
+		m_rGameLib.CreateFont(m_pSPEAKER_FONT_KEY, fontScale, _T("遊ゴシック"), 0);
 
-		speakerNameFormat.m_charHalfScale.TransD3DXVECTOR3(&speakerData.m_halfScale);
+		m_rGameLib.Render(speakerNameFormat.m_topLeft, m_pSpeaker, DT_LEFT, m_rGameLib.GetFont(m_pSPEAKER_FONT_KEY));
 
-		m_rGameLib.CreateRect(speaker, speakerData);
-
-		m_rGameLib.Render(speaker, m_rGameLib.GetTex(m_pFONT_KEY));
+		m_rGameLib.EraseFont(m_pSPEAKER_FONT_KEY);
 	}
 
 	inline VOID CountUp()
@@ -86,13 +101,13 @@ private:
 
 		if (m_oneCharStagingFrameCount < ONE_CHAR_STAGING_FRAME) return;
 
-		++m_currentCharRectsMax;
+		++m_currentTextLength;
 
 		m_oneCharStagingFrameCount = 0;
 
-		if (m_currentCharRectsMax < m_charRectsMax) return;
+		if (m_currentTextLength < m_textSize) return;
 
-		m_currentCharRectsMax = m_charRectsMax;
+		m_currentTextLength = m_textSize;
 
 		m_stagingEnds = TRUE;
 	}
@@ -100,13 +115,18 @@ private:
 	ConversationText(const ConversationText &other) = delete;
 	ConversationText &operator=(const ConversationText &other) = delete;
 
-	TString m_speaker;
+	const TCHAR* m_pADV_BACK_TEX_KEY = _T("ADVBack");
 
-	INT m_currentCharRectsMax = 0; 
+	const TCHAR* m_pSPEAKER_FONT_KEY = _T("SpeakerFont");
+	const TCHAR* m_pCONV_FONT_KEY = _T("ConvFont");
 
+	TCHAR* m_pSpeaker = nullptr;
+	TCHAR* m_pConvText = nullptr;
+
+	INT m_currentTextLength = 0;
 	INT m_oneCharStagingFrameCount = 0;
 
-	INT m_charRectsMax = 0;
+	INT m_textSize = 0;
 
 	BOOL m_stagingEnds = FALSE;
 };

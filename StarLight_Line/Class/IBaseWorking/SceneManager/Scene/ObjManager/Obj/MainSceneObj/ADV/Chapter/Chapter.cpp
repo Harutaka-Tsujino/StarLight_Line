@@ -29,19 +29,30 @@ VOID Chapter::ReadChapterFile(const TCHAR* pChapterTextFilePath, TString* pChapt
 {
 	std::ifstream ifs(pChapterTextFilePath);
 
-	std::vector<CHAR>charsBuf;
-	CHAR tmp = NULL;
-	while (ifs >> tmp) charsBuf.push_back(tmp);
+	std::string charsBuf;
+	std::string tmp;
+	while (std::getline(ifs, tmp))
+	{
+		charsBuf += tmp;
+		charsBuf.push_back('\n');
+		charsBuf.push_back('\r');
+	}
+
+	charsBuf.push_back('\0');
 
 	size_t charsNum = charsBuf.size();
 	CHAR* pCharsToTChars = new CHAR[charsNum];
-	for (INT i = 0; i < charsNum; ++i) 	pCharsToTChars[i] = charsBuf[i];
+
+	for (INT i = 0; i < charsNum; ++i)
+	{
+		pCharsToTChars[i] = charsBuf[i];
+	}
 
 	TCHAR* pTCharBuf = new TCHAR[charsNum];
 	setlocale(LC_CTYPE, "jpn");
 
 	size_t lengthConverted;
-	mbstowcs_s(&lengthConverted, pTCharBuf, sizeof(TCHAR) * charsNum, pCharsToTChars, sizeof(CHAR) * charsNum);
+	mbstowcs_s(&lengthConverted, pTCharBuf, charsNum, pCharsToTChars, _TRUNCATE);
 
 	pChapterText->WriteInAll(pTCharBuf);
 

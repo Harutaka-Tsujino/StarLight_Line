@@ -6,6 +6,7 @@
 #include "../Scene.h"
 #include "../ObjManager/Obj/Obj.h"
 #include "../ObjManager/Obj/TitleSceneObj/TitleSceneObj.h"
+#include "../ObjManager/Obj/MainSceneObj/ADV/ADV.h"
 
 class TitleScene :public Scene
 {
@@ -18,6 +19,7 @@ public:
 		m_pObjManager->Resister(static_cast<Obj*>(new TitleMenu()));
 		m_pObjManager->Resister(static_cast<Obj*>(new TitleCometEffect()));
 		m_pObjManager->Resister(static_cast<Obj*>(new TitleSmallStarEffect()));
+		//m_pObjManager->Resister(static_cast<Obj*>(new ADV()));
 	}
 
 	~TitleScene() {};
