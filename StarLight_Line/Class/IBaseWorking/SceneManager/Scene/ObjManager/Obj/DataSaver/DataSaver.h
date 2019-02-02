@@ -9,7 +9,6 @@
 #include<algorithm>
 
 #include "../../../../../../Singleton/Singleton.h"
-#include "../../../../SceneManager.h"
 #include "../../../../Data/StageData.h"
 #include "../../../../Data/ResultData.h"
 #include "../../../StageSelectScene/Data/StageDetailData.h"
@@ -51,6 +50,8 @@ public:
 
 		return pSTAGE_DETAIL;
 	}
+
+	BOOL CurrentZodiacIsCleared();
 
 private:
 	struct SaveData

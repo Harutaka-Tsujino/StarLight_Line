@@ -293,3 +293,28 @@ VOID DataSaver::SingleOutMaxScoreAndStars()
 		clearIsFoundInOneStage = TRUE;
 	}
 }
+
+BOOL DataSaver::CurrentZodiacIsCleared()
+{
+	StageData stageData;
+	SceneManager::GetInstance().GetStageData(&stageData);
+
+	BOOL isCleared = FALSE;
+
+	if (stageData.m_stage == STAGE_BLACK_HOLE)
+	{
+		for (INT i = 0; i < m_EXTRA_LEVELS_MAX; ++i)
+		{
+			isCleared = (m_extraStageDetail[i].m_isClear) ? TRUE : isCleared;
+		}
+
+		return isCleared;
+	} 
+
+	for (INT li = 0; li < m_BASIC_LEVELS_MAX; ++li)
+	{
+		isCleared = (m_basicStageDetails[stageData.m_stage][li].m_isClear) ? TRUE : isCleared;
+	}
+
+	return isCleared;
+}

@@ -33,7 +33,7 @@ public:
 		m_zodiacSignsObjData.m_center	 = { m_WND_SIZE.m_x * 0.5f, -m_ZODIAC_SIGNS_POS_Y, 0.0f };
 		m_zodiacSignsObjData.m_halfScale = { m_WND_SIZE.m_x * 0.4f,  m_WND_SIZE.m_y * 0.4f, 0.0f };
 
-		m_rGameLib.CreateTex(m_pFONT_TEX_PATH, _T("2DTextures/Main/adv_icon01.png"));
+		m_rGameLib.CreateTex(m_pZODIAC_ICON_TEX_KEY, GetTexPath());
 	}
 
 	~Section()
@@ -48,7 +48,7 @@ public:
 			delete i;
 		}
 
-		m_rGameLib.EraseTex(m_pFONT_TEX_PATH);
+		m_rGameLib.EraseTex(m_pZODIAC_ICON_TEX_KEY);
 	}
 
 	inline VOID Update()
@@ -173,7 +173,7 @@ private:
 
 	inline VOID RenderZodiacSigns()
 	{
-		m_rGameLib.CreateAndRenderRect(m_zodiacSignsObjData, m_rGameLib.GetTex(m_pFONT_TEX_PATH));
+		m_rGameLib.CreateAndRenderRect(m_zodiacSignsObjData, m_rGameLib.GetTex(m_pZODIAC_ICON_TEX_KEY));
 	}
 
 	inline VOID TransEndedTextNextText()
@@ -229,9 +229,11 @@ private:
 
 	VOID DevideTextsByConversationAndSet(const TString& sectionText);
 
+	const TCHAR* GetTexPath();
+
 	PART m_part = PART_ZODIAC_APPEARANCE;
 
-	const FLOAT m_ZODIAC_SIGNS_POS_Y = 400.0f;
+	const FLOAT m_ZODIAC_SIGNS_POS_Y = 280.0f;
 	const INT m_ZODIAC_STAGING_FRAME_COUNT = 120;
 
 	ObjData m_zodiacSignsObjData;
@@ -244,7 +246,7 @@ private:
 	
 	std::vector<ConversationTString*> m_pConversationTStrings;
 
-	const TCHAR* m_pFONT_TEX_PATH = _T("ZodiacSigns");
+	const TCHAR* m_pZODIAC_ICON_TEX_KEY = _T("ZodiacSigns");
 
 	std::vector<ConversationText*> m_pConversationTexts;
 };

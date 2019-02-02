@@ -80,17 +80,9 @@ VOID TitleMenu::Render()
 	CustomVertex menu[4];
 	const FLOAT CENTER_MENU_SCALE_MULTI = 1.5f;
 
-	for (INT i = 0; i < MK_MAX; ++i)
+	auto RenderMenu = [&](INT  loopItr)
 	{
-		data.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * (0.68f + 0.07f * i), m_Z };	//! 現物合わせ
-		data.m_halfScale	= { m_WND_SIZE.m_x * 0.06f, m_WND_SIZE.m_y * 0.033f ,0.0f };			//! 現物合わせ
-		if (i == m_CENTER_MENU) data.m_halfScale *= CENTER_MENU_SCALE_MULTI;
-
-		data.m_aRGB = D3DCOLOR_ARGB(200, 255, 255, 255);											//! 現物合わせ
-
-		m_rGameLib.CreateRect(menu, data);
-
-		switch (m_menuReel[i])
+		switch (m_menuReel[loopItr])
 		{
 		case MK_NEW_GAME:
 			m_rGameLib.Render(menu, m_rGameLib.GetTex(_T("NewGame")));
@@ -110,6 +102,37 @@ VOID TitleMenu::Render()
 		default:
 			break;
 		}
+	};
+
+	for (INT i = 0; i < MK_MAX; ++i)
+	{
+		data.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * (0.68f + 0.07f * i), m_Z };	//! 現物合わせ
+		data.m_halfScale	= { m_WND_SIZE.m_x * 0.06f, m_WND_SIZE.m_y * 0.033f ,0.0f };			//! 現物合わせ
+		if (i == m_CENTER_MENU) data.m_halfScale *= CENTER_MENU_SCALE_MULTI;
+
+		if (i == m_CENTER_MENU)
+		{
+			const FLOAT SELECTING_MENU_HALF_SCALE_MULTI = 1.0f;
+
+			data.m_halfScale *= SELECTING_MENU_HALF_SCALE_MULTI;
+			data.m_aRGB = 0xFFFFFF00;
+
+			m_rGameLib.CreateRect(menu, data);
+
+			static INT selectFlashFrameCnt = 0;
+
+			m_rGameLib.FlashRect(menu, &selectFlashFrameCnt, 120, 190, 70);
+
+			RenderMenu(i);
+
+			data.m_halfScale /= SELECTING_MENU_HALF_SCALE_MULTI;
+		}
+
+		data.m_aRGB = D3DCOLOR_ARGB(200, 255, 255, 255);											//! 現物合わせ
+
+		m_rGameLib.CreateRect(menu, data);
+
+		RenderMenu(i);
 	}
 }
 

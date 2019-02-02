@@ -181,6 +181,8 @@ VOID StageSelectSceneStageList::Render()
 		m_rGameLib.CreateRect(stageIcon, stageIconDatas[i].m_objData);
 
 		m_rGameLib.Render(stageIcon, m_rGameLib.GetTex(_T("Icons")));
+		
+		RenderSelectIconStaging(i, &stageIconDatas[i].m_objData);
 
 		if (m_deg != DEG_GAP && m_deg != -DEG_GAP) continue;
 		m_selectingStage -= static_cast<INT>(m_deg / DEG_GAP);												//! 角度が60を超えるとm_selectingStageを次の値に変える
@@ -221,6 +223,71 @@ VOID StageSelectSceneStageList::RenderBackButton(FLOAT iconsCircleRadius) const
 	m_rGameLib.CreateRect(backButton, backButtonData);
 
 	m_rGameLib.Render(backButton, m_rGameLib.GetTex(_T("BackButton")));
+}
+
+VOID StageSelectSceneStageList::RenderSelectIconStaging(INT loopItr, ObjData* pObjData)
+{
+	if (loopItr == m_selectingStage && !m_blackHoleIsSelected && m_deg == 0.0f)
+	{
+		CustomVertex vertices[4];
+
+		m_rGameLib.AddtionBlendMode();
+
+		pObjData->m_aRGB = 0xFFFFFF00;
+		m_rGameLib.CreateRect(vertices, *pObjData);
+
+		static INT selectIconFlashFrameCnt = 0;
+		m_rGameLib.FlashRect(vertices, &selectIconFlashFrameCnt, 120, 190, 70);
+
+		m_rGameLib.Render(vertices, m_rGameLib.GetTex(_T("Icons")));
+
+		m_rGameLib.DefaultBlendMode();
+	}
+}
+
+VOID StageSelectSceneStageList::RenderBlackHole()
+{
+	static ObjData data;
+	data.m_center = { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.4f, m_Z };
+
+	const FLOAT BLACK_HOLE_RADIUSU_MAX = 540.0f;
+
+	const INT DECIDE_STAGE_FRAMES = 60;
+
+	auto StageBlackHole = [&, this]()
+	{
+		if (!m_blackHoleIsSelected)
+		{
+			if (m_lengthMulti == 0 && !m_isDecided) m_blackHoleAlpha += (255 / 60);
+
+			m_blackHoleAlpha += static_cast<INT>(m_lengthMulti * (255 / 60));
+
+			m_blackHoleRadius -= BLACK_HOLE_RADIUSU_MAX / DECIDE_STAGE_FRAMES;
+
+			return;
+		}
+
+		m_blackHoleRadius += BLACK_HOLE_RADIUSU_MAX / DECIDE_STAGE_FRAMES;
+	};
+
+	StageBlackHole();
+
+	m_blackHoleRadius = min(max(m_blackHoleRadius, m_BLACK_HOLE_RADIUSU_MIN), BLACK_HOLE_RADIUSU_MAX);
+
+	m_blackHoleStagingEnds = FALSE;
+
+	if (m_blackHoleRadius == BLACK_HOLE_RADIUSU_MAX) m_blackHoleStagingEnds = TRUE;
+
+	data.m_halfScale = { m_blackHoleRadius, m_blackHoleRadius, 0.0f };
+
+	m_blackHoleAlpha = min(max(m_blackHoleAlpha, 0), 255);
+	data.m_aRGB = D3DCOLOR_ARGB(m_blackHoleAlpha, 255, 255, 255);
+
+	data.m_deg.z += 0.25f;
+
+	CustomVertex blackHole[4];
+	m_rGameLib.CreateRect(blackHole, data);
+	m_rGameLib.Render(blackHole, m_rGameLib.GetTex(_T("BlackHoleIcon")));
 }
 
 VOID StageSelectSceneStageList::RenderStageName()

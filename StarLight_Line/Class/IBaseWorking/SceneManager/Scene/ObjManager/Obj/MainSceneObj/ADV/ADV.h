@@ -17,11 +17,15 @@
 #include "../../Obj.h"
 #include "../../../../../Data/StageData.h"
 #include "Chapter/Chapter.h"
+#include "../../DataSaver/DataSaver.h"
 
 class ADV :public Obj
 {
 public:
-	explicit ADV(const LONGLONG& stageTime_ms);
+	explicit ADV(const LONGLONG& stageTime_ms) :Obj(OT_TRANSPARENCY, 0.0f)
+	{
+		m_pChapter = new Chapter(GetTextPath(), stageTime_ms);
+	}
 
 	~ADV()
 	{
@@ -30,11 +34,21 @@ public:
 
 	inline VOID Update()
 	{
+		if (DataSaver::GetInstance().CurrentZodiacIsCleared())
+		{
+			return;
+		}
+
 		m_pChapter->Update();
 	}
 
 	inline VOID Render()
 	{
+		if (DataSaver::GetInstance().CurrentZodiacIsCleared())
+		{
+			return;
+		}
+
 		m_pChapter->Render();
 	}
 
@@ -44,6 +58,8 @@ public:
 	}
 
 private:
+	const TCHAR* GetTextPath();
+
 	ADV& operator=(const ADV&) = delete;
 	ADV(const ADV&) = delete;
 

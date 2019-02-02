@@ -78,6 +78,8 @@ VOID Text::CreateOneLineCharsRects(const TextFormat& textFormat, std::vector<Obj
 			textFormat.m_charHalfScale.TransD3DXVECTOR3(&(*ppCharDatas)[si][li].m_halfScale);
 
 			CutTuTvA_Z_0_9(&(*ppCharDatas)[si][li], m_pOneLineTstringVec[si]->GetTChar(li));
+
+			(*ppCharDatas)[si][li].m_aRGB = textFormat.m_color;
 		}
 	}
 }

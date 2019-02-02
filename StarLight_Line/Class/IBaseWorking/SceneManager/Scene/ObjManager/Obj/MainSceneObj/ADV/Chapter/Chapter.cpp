@@ -81,3 +81,35 @@ VOID Chapter::DevideTextsBySectionAndSet(TString* pChapterText)
 		m_sectionsTexts[i].WriteInChar(TString::m_TEXT_END);
 	}
 }
+
+BOOL Chapter::ShouldOperationSection()
+{
+	FLOAT ratioInsertSection = static_cast<FLOAT>(m_currentSectionDetail) / (SD_MAX - 1);
+
+	const LONGLONG m_ACCEPTABLE_M_SEC_LAG = 300;
+
+	static LONGLONG currentStageTime = NULL;
+
+	if (!m_isActive)
+	{
+		currentStageTime = m_rGameLib.GetMilliSecond();
+	}
+
+	if (static_cast<LONGLONG>(currentStageTime + m_ACCEPTABLE_M_SEC_LAG) <=
+		static_cast<LONGLONG>(m_rStageMSec * ratioInsertSection)) return FALSE;
+	if (m_pSections[m_currentSectionDetail]->Ends()) return FALSE;
+
+	if (m_currentSectionDetail == SD_MIDDLE)
+	{
+		int i = 0;
+	}
+
+	if (!m_isActive)
+	{
+		m_rGameLib.StopTime();
+	}
+
+	m_isActive = TRUE;
+
+	return TRUE;
+}
