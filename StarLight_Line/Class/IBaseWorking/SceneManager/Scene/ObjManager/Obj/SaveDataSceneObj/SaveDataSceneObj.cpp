@@ -57,8 +57,10 @@ VOID SaveDataSaveDatas::RenderSelectFrame(ObjData* pObjData)
 	pObjData->m_texUV = { 0.0f, 0.5f, 1.0f, 1.0f };
 
 	CustomVertex frame[4];
-
 	m_rGameLib.CreateRect(frame, *pObjData);
+
+	static INT flashFrameCnt = 0;
+	m_rGameLib.FlashRect(frame, &flashFrameCnt, 120, 255, 80);
 
 	m_rGameLib.Render(frame, m_rGameLib.GetTex(_T("Frame")));
 }

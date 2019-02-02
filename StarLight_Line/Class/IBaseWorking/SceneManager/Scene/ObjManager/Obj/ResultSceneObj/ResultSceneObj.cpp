@@ -377,6 +377,38 @@ VOID ResultSceneResultFont::Render()
 	m_rGameLib.OneShotStartSound(_T("Clear"));
 }
 
+VOID ResultSceneContinue::Update()
+{
+	if (UpKeyIsPressed() || DownKeyIsPressed())
+	{
+		m_rGameLib.OneShotSimultaneousSound(_T("ChangeStage"));
+
+		m_isSelectedYes = !m_isSelectedYes;
+	}
+
+	if (!m_rGameLib.KeyboardIsPressed(DIK_RETURN)) return;
+
+	m_rGameLib.OneShotSimultaneousSound(_T("SelectMenu"));
+
+	SceneManager& rSceneManager = SceneManager::GetInstance();
+
+	rSceneManager.SetTransitionMode(TRUE);
+
+	SCENE_KIND scene = (m_isSelectedYes) ? SK_GAME : SK_STAGE_SELECT;
+
+	ResultData result;
+	rSceneManager.GetResultData(&result);
+
+	if (!result.m_isFailed)
+	{
+		scene = SK_STAGE_SELECT;
+	}
+
+	scene = (rSceneManager.GetIsTutorial()) ? SK_SAVE_DATA : scene;
+
+	rSceneManager.SetNextScene(scene);
+}
+
 VOID ResultSceneContinue::Render()
 {
 	RenderFrame();
@@ -384,6 +416,30 @@ VOID ResultSceneContinue::Render()
 	RenderTexts();
 
 	RenderTarget();
+}
+
+VOID ResultSceneContinue::RenderTexts() const
+{
+	TString continueString(_T("CONTINUE"));
+
+	Text continueText(continueString, _T("2DTextures/Fonts/a_9.png"));
+
+	TextFormat txtFormat;
+	txtFormat.m_charHalfScale = { 30, 45 };
+	txtFormat.m_topLeft = { 640.0f - 2.0f * txtFormat.m_charHalfScale.m_x * 4.0f, m_WND_SIZE.m_y * 0.25f };
+
+	continueText.Write(txtFormat);
+
+	ObjData YesNoData;
+	YesNoData.m_center = { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.6f, 0.0f };
+
+	const FLOAT HALF_SCALE = m_WND_SIZE.m_y * 0.22f;
+	YesNoData.m_halfScale = { HALF_SCALE, HALF_SCALE, 0.0f };
+
+	CustomVertex YesNo[4];
+	m_rGameLib.CreateRect(YesNo, YesNoData);
+
+	m_rGameLib.Render(YesNo, m_rGameLib.GetTex(_T("YesNo")));
 }
 
 VOID ResultSceneResult::Update()

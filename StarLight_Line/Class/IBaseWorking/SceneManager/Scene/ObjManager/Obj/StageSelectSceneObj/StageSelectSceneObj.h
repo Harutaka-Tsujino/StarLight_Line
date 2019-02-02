@@ -119,51 +119,10 @@ private:
 		ObjData m_objData;
 		FLOAT m_deg;
 	};
+	
+	VOID StageSelectSceneStageList::RenderSelectIconStaging(INT loopItr, ObjData* pObjData);
 
-	inline VOID RenderBlackHole()
-	{
-		static ObjData data;
-		data.m_center = { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.4f, m_Z };
-
-		const FLOAT BLACK_HOLE_RADIUSU_MAX = 540.0f;
-
-		const INT DECIDE_STAGE_FRAMES = 60;
-
-		auto StageBlackHole = [&, this]()
-		{
-			if (!m_blackHoleIsSelected)
-			{
-				if (m_lengthMulti == 0 && !m_isDecided) m_blackHoleAlpha += (255 / 60);
-
-				m_blackHoleAlpha += static_cast<INT>(m_lengthMulti * (255 / 60));
-
-				m_blackHoleRadius -= BLACK_HOLE_RADIUSU_MAX / DECIDE_STAGE_FRAMES;
-
-				return;
-			}
-
-			m_blackHoleRadius += BLACK_HOLE_RADIUSU_MAX / DECIDE_STAGE_FRAMES;
-		};
-
-		StageBlackHole();
-
-		m_blackHoleRadius = min(max(m_blackHoleRadius, m_BLACK_HOLE_RADIUSU_MIN), BLACK_HOLE_RADIUSU_MAX);
-
-		m_blackHoleStagingEnds = FALSE;
-
-		if (m_blackHoleRadius == BLACK_HOLE_RADIUSU_MAX) m_blackHoleStagingEnds = TRUE;
-
-		data.m_halfScale = { m_blackHoleRadius, m_blackHoleRadius, 0.0f };
-
-		m_blackHoleAlpha = min(max(m_blackHoleAlpha, 0), 255);
-		data.m_aRGB = D3DCOLOR_ARGB(m_blackHoleAlpha, 255, 255, 255);
-
-		data.m_deg.z += 0.25f;
-
-		CustomVertex blackHole[4];
-		m_rGameLib.CreateRect(blackHole, data);
-		m_rGameLib.Render(blackHole, m_rGameLib.GetTex(_T("BlackHoleIcon")));
-	}
+	VOID RenderBlackHole();
 
 	inline VOID RotateIconsCenter(StageIconData* pStageIconDatas, INT iconElementNum, FLOAT degGap, FLOAT iconsCircleRadius)
 	{

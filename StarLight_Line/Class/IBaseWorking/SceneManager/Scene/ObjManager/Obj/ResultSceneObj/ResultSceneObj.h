@@ -368,11 +368,13 @@ private:
 		blackMaskData.m_center		= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, 0.0f };
 		blackMaskData.m_halfScale	= { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, 0.0f };
 
-		INT alpha = static_cast<INT>(140 * static_cast<FLOAT>(m_alphaCount) / m_ADDITIONAL_ALPHA_FRAME);
-		blackMaskData.m_aRGB = D3DCOLOR_ARGB(alpha, 0, 0, 0);
-
 		CustomVertex blackMask[4];
 		m_rGameLib.CreateRect(blackMask, blackMaskData);
+
+		INT alpha = static_cast<INT>(230 * static_cast<FLOAT>(m_alphaCount) / m_ADDITIONAL_ALPHA_FRAME);
+		m_rGameLib.SetTopBottomARGB(blackMask, 
+									D3DCOLOR_ARGB(alpha, 0, 0, 0), 
+									D3DCOLOR_ARGB(static_cast<BYTE>(alpha * 0.7f), 0, 0, 0));
 
 		m_rGameLib.Render(blackMask, nullptr);
 	}
@@ -403,37 +405,7 @@ public:
 		m_rGameLib.CreateTex(_T("Target"), _T("2DTextures/Result/Target.png"));
 	}
 
-	inline VOID Update() 
-	{
-		if (UpKeyIsPressed() || DownKeyIsPressed())
-		{
-			m_rGameLib.OneShotSimultaneousSound(_T("ChangeStage"));
-
-			m_isSelectedYes = !m_isSelectedYes;
-		}
-
-		if (!m_rGameLib.KeyboardIsPressed(DIK_RETURN)) return;
-
-		m_rGameLib.OneShotSimultaneousSound(_T("SelectMenu"));
-
-		SceneManager& rSceneManager = SceneManager::GetInstance();
-	
-		rSceneManager.SetTransitionMode(TRUE);
-
-		SCENE_KIND scene = (m_isSelectedYes) ? SK_GAME : SK_STAGE_SELECT;
-
-		ResultData result;
-		rSceneManager.GetResultData(&result);
-
-		if (!result.m_isFailed)
-		{
-			scene = SK_STAGE_SELECT;
-		}
-
-		scene = (rSceneManager.GetIsTutorial()) ? SK_SAVE_DATA : scene;
-
-		rSceneManager.SetNextScene(scene);
-	}
+	VOID Update();
 
 	VOID Render();
 
@@ -452,29 +424,7 @@ private:
 		m_rGameLib.Render(ContinueFrame, m_rGameLib.GetTex(_T("ContinueFrame")));
 	}
 
-	inline VOID RenderTexts() const
-	{
-		TString continueString(_T("CONTINUE"));
-
-		Text continueText(continueString, _T("2DTextures/Fonts/a_9.png"));
-
-		TextFormat txtFormat;
-		txtFormat.m_charHalfScale = { 30, 45 };
-		txtFormat.m_topLeft = { 640.0f - 2.0f * txtFormat.m_charHalfScale.m_x * 4.0f, m_WND_SIZE.m_y * 0.25f };
-
-		continueText.Write(txtFormat);
-
-		ObjData YesNoData;
-		YesNoData.m_center = { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.6f, 0.0f };
-
-		const FLOAT HALF_SCALE = m_WND_SIZE.m_y * 0.22f;
-		YesNoData.m_halfScale = { HALF_SCALE, HALF_SCALE, 0.0f };
-
-		CustomVertex YesNo[4];
-		m_rGameLib.CreateRect(YesNo, YesNoData);
-
-		m_rGameLib.Render(YesNo, m_rGameLib.GetTex(_T("YesNo")));
-	}
+	VOID RenderTexts() const;
 
 	inline VOID RenderTarget()
 	{

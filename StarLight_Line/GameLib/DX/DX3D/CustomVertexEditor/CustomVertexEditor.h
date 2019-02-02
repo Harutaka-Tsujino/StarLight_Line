@@ -176,6 +176,56 @@ public:
 		}
 	}
 
+	inline VOID SetTopBottomARGB(CustomVertex *pCustomVertices, DWORD topARGB, DWORD bottomARGB) const
+	{
+		for (int i = 0; i < m_RECT_VERTICES_NUM; ++i)
+		{
+			if (i < m_RECT_VERTICES_NUM / 2)
+			{
+				pCustomVertices[i].m_aRGB = topARGB;
+
+				continue;
+			}
+
+			pCustomVertices[i].m_aRGB = bottomARGB;
+		}
+	}
+
+	inline VOID SetLeftRightARGB(CustomVertex *pCustomVertices, DWORD leftARGB, DWORD rightARGB) const
+	{
+		for (int i = 0; i < m_RECT_VERTICES_NUM; ++i)
+		{
+			if (i == 0 || i == 3)
+			{
+				pCustomVertices[i].m_aRGB = leftARGB;
+
+				continue;
+			}
+
+			pCustomVertices[i].m_aRGB = rightARGB;
+		}
+	}
+
+	inline VOID Flash(CustomVertex* pVertices ,INT* pFrameCnt, INT flashFlameMax, BYTE alphaMax, BYTE alphaMin = 0)
+	{
+		BYTE alpha = 0;
+		DWORD color = pVertices->m_aRGB;
+
+		FLOAT frameRatio = static_cast<FLOAT>(*pFrameCnt) / flashFlameMax;
+		alpha = static_cast<BYTE>((alphaMax - alphaMin) * (cos(2 * D3DX_PI * frameRatio) + 1) * 0.5f + alphaMin);	//cos波を調整し0~1を行き来する値を作成
+
+		color &= 0x00FFFFFF;
+		color += (alpha << 24);
+		SetARGB(pVertices, color);
+
+		++(*pFrameCnt);
+
+		if ((*pFrameCnt) >= flashFlameMax)
+		{
+			(*pFrameCnt) = 0;
+		}
+	}
+
 	/**
 	* @brief 頂点データ構造体を引数の値から作成する
 	* @param[out] pCustomVertices 頂点データ配列の先頭アドレス

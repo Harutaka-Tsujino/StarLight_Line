@@ -29,7 +29,7 @@
 class ConversationText :public Text
 {
 public:
-	ConversationText(const TString& speaker, const TString& text, const TCHAR* pFontTexPath) :Text(text, pFontTexPath)
+	ConversationText(const TString& speaker, const TString& text, const TCHAR* pFontTexPath) :Text(text, nullptr)
 	{
 		m_pSpeaker = new TCHAR[speaker.Size()];
 		speaker.WriteOutAll(m_pSpeaker);

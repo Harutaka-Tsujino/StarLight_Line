@@ -281,7 +281,22 @@ public:
 	{
 		m_pDX->SetRectARGB(pCustomVertices, aRGB);
 	}
+
+	inline VOID SetTopBottomARGB(CustomVertex *pCustomVertices, DWORD topARGB, DWORD bottomARGB) const
+	{
+		m_pDX->SetTopBottomARGB(pCustomVertices, topARGB, bottomARGB);
+	}
+
+	inline VOID SetLeftRightARGB(CustomVertex *pCustomVertices, DWORD leftARGB, DWORD rightARGB) const
+	{
+		m_pDX->SetLeftRightARGB(pCustomVertices, leftARGB, rightARGB);
+	}
 	
+	inline VOID FlashRect(CustomVertex* pVertices, INT* pFrameCnt, INT flashFlameMax, BYTE alphaMax, BYTE alphaMin = 0)
+	{
+		m_pDX->FlashRect(pVertices, pFrameCnt, flashFlameMax, alphaMax, alphaMin);
+	}
+
 	inline VOID CreateRect(CustomVertex *pCustomVertices, const D3DXVECTOR3& rCenter, const D3DXVECTOR3& rHalfScale,
 		DWORD aRGB = 0xFFFFFFFF, FLOAT startTU = 0.0f, FLOAT startTV = 0.0f, FLOAT endTU = 1.0f, FLOAT endTV = 1.0f) const
 	{
