@@ -43,6 +43,8 @@ public:
 	}
 
 private:
+	VOID RenderProgressBar();
+
 	const CHAR* GetStageFilePath();
 
 	VOID LoadStarData(const char* pFileName);
@@ -64,6 +66,8 @@ private:
 
 	LONGLONG m_End_ms = m_WAITING_TIME_ms;	//総再生時間(ms)
 	BOOL m_Ends = FALSE;
+
+	FLOAT m_progressRatio = 0;
 };
 
 #endif // !STAR_MANAGER_H_

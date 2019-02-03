@@ -366,9 +366,20 @@ VOID TitleCometEffect::Render()
 
 VOID TitleCometEffect::InitEffect(EffectData* pEffectDatas)
 {
-	if (!m_rGameLib.KeyboardAnyKeyIsPressed()	||													//! ボタンが押されないとエフェクトを流さないまた一つしか一フレームに初期化しない
-		pEffectDatas->m_isInit					|| 
-		m_isInitInFrame) return;
+	//! ボタンが押されないとエフェクトを流さないまた一つしか一フレームに初期化しない
+
+	if (!m_rGameLib.KeyboardAnyKeyIsPressed())
+	{
+		if (!m_isInfinityMode)
+		{
+			return;
+		}
+	}
+
+	if (pEffectDatas->m_isInit || m_isInitInFrame)
+	{
+		return;
+	}
 
 	m_isInitInFrame = TRUE;
 

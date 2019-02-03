@@ -19,6 +19,7 @@ public:
 	{
 		m_pObjManager->Resister(static_cast<Obj*>(new SaveDataBack()));
 		m_pObjManager->Resister(static_cast<Obj*>(new TitleSmallStarEffect()));
+		m_pObjManager->Resister(static_cast<Obj*>(new TitleCometEffect(TRUE)));
 		m_pObjManager->Resister(static_cast<Obj*>(new SaveDataSaveDatas()));
 	}
 

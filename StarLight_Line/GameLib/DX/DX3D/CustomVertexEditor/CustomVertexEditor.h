@@ -209,14 +209,19 @@ public:
 	inline VOID Flash(CustomVertex* pVertices ,INT* pFrameCnt, INT flashFlameMax, BYTE alphaMax, BYTE alphaMin = 0)
 	{
 		BYTE alpha = 0;
-		DWORD color = pVertices->m_aRGB;
 
 		FLOAT frameRatio = static_cast<FLOAT>(*pFrameCnt) / flashFlameMax;
 		alpha = static_cast<BYTE>((alphaMax - alphaMin) * (cos(2 * D3DX_PI * frameRatio) + 1) * 0.5f + alphaMin);	//cos波を調整し0~1を行き来する値を作成
 
-		color &= 0x00FFFFFF;
-		color += (alpha << 24);
-		SetARGB(pVertices, color);
+		for (INT i = 0; i < m_RECT_VERTICES_NUM; ++i)
+		{
+			DWORD color = pVertices[i].m_aRGB;
+
+			color &= 0x00FFFFFF;
+			color += (alpha << 24);
+		
+			pVertices[i].m_aRGB = color;
+		}
 
 		++(*pFrameCnt);
 

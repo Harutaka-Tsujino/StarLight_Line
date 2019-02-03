@@ -23,6 +23,8 @@ VOID StarManager::Init()
 	{
 		pI->Init();
 	}
+
+	m_rGameLib.CreateTex(_T("ProgressBar"), _T("2DTextures/Main/ProgressBar.png"));
 }
 
 VOID StarManager::Update()
@@ -98,6 +100,8 @@ VOID StarManager::Render()
 			m_StarNotes[i]->Render();
 		}
 	}
+
+	RenderProgressBar();
 }
 
 const CHAR* StarManager::GetStageFilePath()
@@ -298,4 +302,34 @@ VOID StarManager::SetStar_ms(const std::vector<float>& rDropPerMinuteVec, StarPl
 
 	*pStart_ms += static_cast<LONGLONG>(ONE_BEATS_TAKES__ms * (0.5f / pStarInfo->m_StarsNumInNote));	//! 第一ラインは半ラインずれた位置にある
 	*pStart_ms += static_cast<LONGLONG>(ONE_BEATS_TAKES__ms * ((pStarInfo->m_Line - 1) / pStarInfo->m_StarsNumInNote));
+}
+
+VOID StarManager::RenderProgressBar()
+{
+	if (!m_rGameLib.GetTimeIsStoped())
+	{
+		m_progressRatio = static_cast<FLOAT>(m_rGameLib.GetMilliSecond()) / m_End_ms;
+	}
+
+	ObjData barData;
+	barData.m_center	  = { m_WND_SIZE.m_x * 0.5f * m_progressRatio, m_WND_SIZE.m_y * 0.975f, m_Z };
+	barData.m_halfScale	  = { m_WND_SIZE.m_x * 0.5f * m_progressRatio, m_WND_SIZE.m_y * 0.01125f, 0.0f };
+
+	CustomVertex bar[4];
+	m_rGameLib.CreateRect(bar, barData);
+
+	m_rGameLib.SetTopBottomARGB(bar, 0xEEFFFF99, 0xEECCFF99);
+
+	static INT frashCnt = 0;
+	m_rGameLib.FlashRect(bar, &frashCnt, 120, 240, 160);
+
+	m_rGameLib.Render(bar);
+
+	ObjData frameData;
+	frameData.m_center	  = { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.975f, m_Z };
+	frameData.m_halfScale = { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.025f, 0.0f };
+
+	frameData.m_aRGB = 0xCCFFFFFF;
+
+	m_rGameLib.CreateAndRenderRect(frameData, m_rGameLib.GetTex(_T("ProgressBar")));
 }

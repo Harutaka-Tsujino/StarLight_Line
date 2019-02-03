@@ -14,6 +14,8 @@ VOID Timer::End()
 
 VOID Timer::Reset()
 {
+	m_isStoped = FALSE;
+
 	m_DiffTime = m_DiffTime.zero();
 }
 
