@@ -79,6 +79,7 @@ public:
 	inline VOID Init()
 	{
 		m_rGameLib.CreateTex(_T("Icons"), _T("2DTextures/StageSelect/StageSelect_icons.png"));
+		m_rGameLib.CreateTex(_T("Zodiacs"), _T("2DTextures/StageSelect/StageDetailZodiacs.png"));
 		m_rGameLib.CreateTex(_T("BlackHoleIcon"), _T("2DTextures/StageSelect/BlackHoleIcon.png"));
 		m_rGameLib.CreateTex(_T("BackButton"), _T("2DTextures/StageSelect/StageSelect_BackButton.png"));
 	}
@@ -160,6 +161,8 @@ private:
 	VOID RenderStageName();
 
 	VOID GetStageStringAndCharsNum(TString* pTString, INT* pCharsNum);
+
+	VOID RenderZodiacs();
 
 	static const INT m_STAGE_ICONS_MAX = STAGE_MAX - 1;
 
