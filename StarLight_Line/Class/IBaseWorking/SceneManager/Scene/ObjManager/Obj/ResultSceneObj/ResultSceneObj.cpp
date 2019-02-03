@@ -56,6 +56,7 @@ VOID ResultDataScore::Render()
 
 	TextFormat txtFormat;
 	txtFormat.m_charHalfScale = { 25, 37 };
+	txtFormat.m_color = 0xEE87CEFA;
 
 	//! SCOREの文字数の半分が2.5f
 	txtFormat.m_topLeft = { m_WND_SIZE.m_x * 0.85f - 2.0f * txtFormat.m_charHalfScale.m_x * stagingScoreDigitsNum , 150.0f };
@@ -79,6 +80,7 @@ VOID ResultDataScore::RenderHead()
 
 	TextFormat txtFormat;
 	txtFormat.m_charHalfScale = { 25, 37 };
+	txtFormat.m_color = 0xEE87CEFA;
 
 	//! SCOREの文字数の半分が2.5f
 	txtFormat.m_topLeft = { m_WND_SIZE.m_x * 0.24f - 2.0f * txtFormat.m_charHalfScale.m_x * 2.5f , 150.0f };
@@ -100,13 +102,14 @@ VOID ResultDataStage::Render()
 	TextFormat txtFormat;
 	txtFormat.m_charHalfScale = { 22, 35 };
 	txtFormat.m_topLeft = { 396.0f - 2.0f * txtFormat.m_charHalfScale.m_x * stageCharsNum * 0.5f, 400.0f };
+	//txtFormat.m_color = 0xEE2323FF;
 
 	stageText.Write(txtFormat);
 
 	TString levelString;
 	INT levelCharsNum = 0;
 
-	GetStageLevelAndCharsNum(&levelString, &levelCharsNum);
+	GetStageLevelAndCharsNum(&levelString, &levelCharsNum, &txtFormat);
 
 	Text levelText(levelString, _T("2DTextures/Fonts/a_9.png"));
 
@@ -221,12 +224,14 @@ VOID ResultDataStage::GetStageStringAndCharsNum(TString* pTString, INT* pCharsNu
 	}
 }
 
-VOID ResultDataStage::GetStageLevelAndCharsNum(TString* pTString, INT* pCharsNum)
+VOID ResultDataStage::GetStageLevelAndCharsNum(TString* pTString, INT* pCharsNum, TextFormat* pTextFormat)
 {
 	if (SceneManager::GetInstance().GetIsTutorial())
 	{
 		pTString->WriteInAll(_T("EXTRA"));
 		*pCharsNum = 5;
+
+		pTextFormat->m_color = 0xEEFF9123;
 
 		return;
 	}
@@ -238,12 +243,16 @@ VOID ResultDataStage::GetStageLevelAndCharsNum(TString* pTString, INT* pCharsNum
 		pTString->WriteInAll(_T("EASY"));
 		*pCharsNum = 4;
 
+		pTextFormat->m_color = 0xEE23FF23;
+
 		break;
 
 	case SLK_NORMAL:
 
 		pTString->WriteInAll(_T("NORMAL"));
 		*pCharsNum = 6;
+
+		pTextFormat->m_color = 0xEE23FFFF;
 
 		break;
 
@@ -252,12 +261,16 @@ VOID ResultDataStage::GetStageLevelAndCharsNum(TString* pTString, INT* pCharsNum
 		pTString->WriteInAll(_T("HARD"));
 		*pCharsNum = 4;
 
+		pTextFormat->m_color = 0xEEFF23FF;
+
 		break;
 
 	case SLK_EXTREME:
 
 		pTString->WriteInAll(_T("EXTREME"));
 		*pCharsNum = 7;
+
+		pTextFormat->m_color = 0xEEFF2323;
 
 		break;
 	}
@@ -329,6 +342,7 @@ VOID ResultDataClearStar::RenderHead()
 
 	TextFormat txtFormat;
 	txtFormat.m_charHalfScale = { 15, 22 };
+	txtFormat.m_color = 0xEE98FF98;
 
 	//! RESULTの文字数の半分が3
 	txtFormat.m_topLeft = { m_WND_SIZE.m_x * 0.691f - 2.0f * txtFormat.m_charHalfScale.m_x * 3 , 390.0f };

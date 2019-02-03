@@ -161,7 +161,7 @@ private:
 
 	VOID GetStageStringAndCharsNum(TString* pTString, INT* pCharsNum);
 
-	VOID GetStageLevelAndCharsNum(TString* pTString, INT* pCharsNum);
+	VOID GetStageLevelAndCharsNum(TString* pTString, INT* pCharsNum, TextFormat* pTextFormat);
 
 	StageData m_stageData;
 

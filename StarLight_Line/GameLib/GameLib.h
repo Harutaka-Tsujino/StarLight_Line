@@ -393,6 +393,11 @@ public:
 	{
 		return m_pTimer->GetMicroSecond();
 	}
+
+	inline BOOL GetTimeIsStoped()
+	{
+		return m_pTimer->GetIsStoped();
+	}
 	
 	inline BOOL MouseIsPressed(INT key) const
 	{

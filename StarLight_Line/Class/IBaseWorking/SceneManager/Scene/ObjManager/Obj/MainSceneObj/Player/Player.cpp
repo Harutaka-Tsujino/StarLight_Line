@@ -32,6 +32,8 @@ VOID Player::Update()
 		m_ResultData.SetResultData(TRUE);
 		rSceneManager.SetResultData(m_ResultData.GetResultData());
 
+		m_rGameLib.StopTime();
+
 		rSceneManager.SetNextScene(SK_RESULT);
 	}
 

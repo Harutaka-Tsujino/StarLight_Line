@@ -62,6 +62,10 @@ VOID PlayerLifeFrame::Render()
 	m_rGameLib.CreateRect(PlayerLifeBack, Center, HalfScale,
 		0xFFFFFFFF, UV.m_startTU, UV.m_startTV, UV.m_endTU, UV.m_endTV);
 
+	static INT flashCnt = 0;
+
+	m_rGameLib.FlashRect(PlayerLifeBack, &flashCnt, 120, 255, 180);
+
 	m_rGameLib.Render(PlayerLifeBack, m_rGameLib.GetTex(_T("HpMax")));
 }
 

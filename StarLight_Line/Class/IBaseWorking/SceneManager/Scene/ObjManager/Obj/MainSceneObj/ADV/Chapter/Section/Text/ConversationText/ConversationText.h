@@ -95,7 +95,7 @@ private:
 
 	inline VOID CountUp()
 	{
-		const INT ONE_CHAR_STAGING_FRAME = 10;
+		const INT ONE_CHAR_STAGING_FRAME = 6;
 
 		++m_oneCharStagingFrameCount;
 

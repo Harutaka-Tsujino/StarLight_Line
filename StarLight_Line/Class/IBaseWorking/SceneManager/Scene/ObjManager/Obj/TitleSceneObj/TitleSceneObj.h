@@ -279,7 +279,7 @@ private:
 class TitleCometEffect :public Obj
 {
 public:
-	TitleCometEffect() :Obj(OT_TRANSPARENCY, 0.99f)
+	explicit TitleCometEffect(BOOL isInfinity = FALSE) :Obj(OT_TRANSPARENCY, 0.99f), m_isInfinityMode(isInfinity)
 	{
 		Init();
 	}
@@ -312,6 +312,8 @@ private:
 	VOID InitEffect(EffectData* pEffectDatas);
 
 	BOOL m_isInitInFrame = FALSE;
+
+	BOOL m_isInfinityMode = FALSE;
 };
 
 class TitleSmallStarEffect :public Obj

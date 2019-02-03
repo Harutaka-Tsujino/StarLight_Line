@@ -72,6 +72,8 @@ VOID PlayerHP::Update()
 
 VOID PlayerHP::Render()
 {
+	//static INT flashCnt[5];
+
 	for (int i = 0;i != m_HpRect.size();++i)
 	{
 		ObjData Data;
@@ -80,6 +82,8 @@ VOID PlayerHP::Render()
 		CutUV(&Data.m_texUV);
 
 		m_rGameLib.CreateRect(m_HpRect[i], Data);
+
+		//m_rGameLib.FlashRect(m_HpRect[i], &flashCnt[i], 60, 250, 190);
 
 		m_rGameLib.Render(m_HpRect[i], m_rGameLib.GetTex(_T("HP")));
 	}

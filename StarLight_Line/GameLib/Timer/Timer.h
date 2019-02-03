@@ -28,6 +28,11 @@ public:
 	LONGLONG GetMilliSecond();		//ミリ秒取得
 	LONGLONG GetMicroSecond();		//マイクロ秒取得
 
+	inline BOOL GetIsStoped()
+	{
+		return m_isStoped;
+	}
+
 private:
 	typedef std::chrono::duration<
 		std::chrono::system_clock::rep,

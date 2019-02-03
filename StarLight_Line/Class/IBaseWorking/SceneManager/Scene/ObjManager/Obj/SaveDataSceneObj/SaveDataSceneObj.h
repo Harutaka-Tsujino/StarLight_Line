@@ -36,7 +36,7 @@ public:
 
 	inline VOID Init() const
 	{
-		m_rGameLib.CreateTex(_T("Back"), _T("2DTextures/SaveData/SaveData_Back.png"));
+		m_rGameLib.CreateTex(_T("Back"), _T("2DTextures/SaveData/SaveData_Back02.png"));
 	}
 
 	inline VOID Update() {};
@@ -128,6 +128,13 @@ private:
 	INT m_selectingData = 0;
 
 	const PreviewData* m_pPREVIEWS = nullptr;
+
+	const DWORD m_COLOR[m_SAVE_DATAS_MAX][2] =
+	{
+		{ 0xEEFF7F7F, 0xEEFFB7B7 },
+		{ 0xEE7FFF7F, 0xEEB7FFB7 },
+		{ 0xEE7F7FFF, 0xEEB7B7FF },
+	};
 };
 
 #endif //! SAVE_DATA_SCENE_OBJ_H
