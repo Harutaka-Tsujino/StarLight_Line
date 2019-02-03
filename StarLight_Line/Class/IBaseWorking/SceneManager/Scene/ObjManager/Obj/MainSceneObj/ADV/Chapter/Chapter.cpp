@@ -99,11 +99,6 @@ BOOL Chapter::ShouldOperationSection()
 		static_cast<LONGLONG>(m_rStageMSec * ratioInsertSection)) return FALSE;
 	if (m_pSections[m_currentSectionDetail]->Ends()) return FALSE;
 
-	if (m_currentSectionDetail == SD_MIDDLE)
-	{
-		int i = 0;
-	}
-
 	if (!m_isActive)
 	{
 		m_rGameLib.StopTime();
