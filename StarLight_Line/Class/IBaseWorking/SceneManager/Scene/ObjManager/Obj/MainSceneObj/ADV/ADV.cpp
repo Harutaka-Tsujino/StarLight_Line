@@ -20,7 +20,7 @@ const TCHAR* ADV::GetTextPath()
 	StageData stageData;
 	SceneManager::GetInstance().GetStageData(&stageData);
 
-	return _T("StageData/Chapter/TAURUS.txt");	//現在このファイルしかないので
+	//return _T("StageData/Chapter/TAURUS.txt");	//現在このファイルしかないので
 
 	switch (stageData.m_stage)
 	{
