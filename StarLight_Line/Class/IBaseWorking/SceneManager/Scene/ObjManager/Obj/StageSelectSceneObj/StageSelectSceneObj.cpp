@@ -155,6 +155,8 @@ VOID StageSelectSceneStageList::Render()
 	StageIconData stageIconDatas[m_STAGE_ICONS_MAX];
 	CustomVertex stageIcon[4];
 
+	RenderZodiacs();
+
 	for (int i = 0; i < m_STAGE_ICONS_MAX; ++i)
 	{
 		if ((i != m_selectingStage || m_blackHoleIsSelected) && m_isDecided ) continue;;
@@ -406,6 +408,35 @@ VOID StageSelectSceneStageList::GetStageStringAndCharsNum(TString* pTString, INT
 
 		break;
 	}
+}
+
+VOID StageSelectSceneStageList::RenderZodiacs()
+{
+	if (m_blackHoleIsSelected || m_deg != 0.0f)
+	{
+		return;
+	}
+	
+	ObjData obj;
+	obj.m_center	= { m_WND_SIZE.m_x * 0.2f, m_WND_SIZE.m_y * 0.65f, m_Z };
+	obj.m_halfScale = { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, 0.0f };
+
+	const D3DXVECTOR2 ILLUST_SCALE = { 1280.0f,720.0f };
+	const D3DXVECTOR2 TEX_SCALE	 = { 8192.0f,2048.0f };
+
+	const INT ILLUST_ROWS_MAX = 6;
+
+	obj.m_texUV =
+	{
+		ILLUST_SCALE.x * (m_selectingStage % ILLUST_ROWS_MAX)	  / TEX_SCALE.x,
+		ILLUST_SCALE.y * (m_selectingStage / ILLUST_ROWS_MAX)	  / TEX_SCALE.y,
+		ILLUST_SCALE.x * (m_selectingStage % ILLUST_ROWS_MAX + 1) / TEX_SCALE.x,
+		ILLUST_SCALE.y * (m_selectingStage / ILLUST_ROWS_MAX + 1) / TEX_SCALE.y
+	};
+
+	obj.m_aRGB = 0x99FFFFFF;
+
+	m_rGameLib.CreateAndRenderRect(obj, m_rGameLib.GetTex(_T("Zodiacs")));
 }
 
 VOID StageSelectSceneLevelSelecter::Update()
