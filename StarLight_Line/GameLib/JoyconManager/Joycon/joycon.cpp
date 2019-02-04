@@ -391,11 +391,11 @@ void Joycon::CheckButton(int _button)
 
 }
 
-void Joycon::CheackAnalogStick()
+void Joycon::CheckAnalogStick()
 {
 	if (!m_IsConnect) return;
 
-	ANALOG_STICK_STATE Prev[MAX_TILT];
+	ANALOG_STICK_STATE Prev[MAX_DIRECTION];
 	memcpy(Prev, m_AnalogStickState, sizeof(m_AnalogStickState));
 
 	auto CheckState = [&](int State, bool IsInputed)
@@ -426,9 +426,51 @@ void Joycon::CheackAnalogStick()
 		m_AnalogStickState[State] = NEUTRAL_ANALOG_STICK;
 	};
 
-	for (int i = 0;i < MAX_TILT;++i)
+	for (int i = 0;i < MAX_DIRECTION;++i)
 	{
-		CheckState(i, InputDirection(i));
+		CheckState(i, InputDirectionAnalogStick(i));
+	}
+}
+
+void Joycon::CheckGyroSensor()
+{
+	if (!m_IsConnect) return;
+
+	GYRO_SENSOR_STATE Prev[MAX_DIRECTION];
+	memcpy(Prev, m_GyroSensorState, sizeof(m_GyroSensorState));
+
+	auto CheckState = [&](int State, bool IsInputed)
+	{
+		if (IsInputed)
+		{
+			if (Prev[State] == INPUT_GYRO_SENSOR ||
+				Prev[State] == MOVE_GYRO_SENSOR)
+			{
+				m_GyroSensorState[State] = MOVE_GYRO_SENSOR;
+
+				return;
+			}
+
+			m_GyroSensorState[State] = INPUT_GYRO_SENSOR;
+
+			return;
+		}
+
+		if (Prev[State] == INPUT_GYRO_SENSOR ||
+			Prev[State] == MOVE_GYRO_SENSOR)
+		{
+			m_GyroSensorState[State] = STOP_GYRO_SENSOR;
+
+			return;
+		}
+
+		m_GyroSensorState[State] = NEUTRAL_GYRO_SENSOR;
+
+	};
+
+	for (int i = 0;i < MAX_DIRECTION;++i)
+	{
+		CheckState(i, InputDirectionGyroSensor(i));
 	}
 }
 
@@ -560,30 +602,63 @@ void Joycon::SendRumble()
 	}
 }
 
-bool Joycon::InputDirection(int Direction)
+bool Joycon::InputDirectionAnalogStick(int Direction)
 {
 	const FLOAT THRESHOLD_VALUE = 0.15f;
 
 	switch (Direction)
 	{
-	case UP_TILT:
+	case UP_DIRECTION:
 		if (m_AnalogStick.y > THRESHOLD_VALUE) return true;
 
 		break;
 
-	case DOWN_TILT:
+	case DOWN_DIRECTION:
 		if (m_AnalogStick.y < -THRESHOLD_VALUE) return true;
 
 		break;
 
-	case RIGHT_TILT:
+	case RIGHT_DIRECTION:
 		if (m_AnalogStick.x > THRESHOLD_VALUE) return true;
 
 		break;
 
-	case LEFT_TILT:
+	case LEFT_DIRECTION:
 		if (m_AnalogStick.x < -THRESHOLD_VALUE) return true;
 
+		break;
+	}
+
+	return false;
+}
+
+bool Joycon::InputDirectionGyroSensor(int Direction)
+{
+	const float THRESHOLD_VALUE = 7.f;
+
+	switch (Direction)
+	{
+	case UP_DIRECTION:
+		if (m_GyroSensor.y < -THRESHOLD_VALUE) return true;
+
+		break;
+
+	case DOWN_DIRECTION:
+		if (m_GyroSensor.y > THRESHOLD_VALUE) return true;
+
+		break;
+
+	case LEFT_DIRECTION:
+		if (m_GyroSensor.z > THRESHOLD_VALUE) return true;
+
+		break;
+
+	case RIGHT_DIRECTION:
+		if (m_GyroSensor.z < -THRESHOLD_VALUE) return true;
+
+		break;
+
+	default:
 		break;
 	}
 
