@@ -1,4 +1,5 @@
 ﻿#include "Player1.h"
+#include <math.h>
 
 VOID PlayerOne::Init()
 {
@@ -29,26 +30,30 @@ VOID PlayerOne::Update()
 
 	//キー入力によってプレイヤーの動きを決める
 	//y座標の移動
-	if (m_rGameLib.PushJoyconAnalogStick(m_contrllerType,Joycon::UP_TILT) &&
-		*pPoY > 0)
+	if ((m_rGameLib.PushJoyconAnalogStick(m_contrllerType, Joycon::UP_DIRECTION) ||
+		 m_rGameLib.InputGyroSensor(m_contrllerType,Joycon::UP_DIRECTION)) && 
+		 *pPoY > 0)
 	{
 		HitKey = UP;
 	}
 
-	if (m_rGameLib.PushJoyconAnalogStick(m_contrllerType, Joycon::DOWN_TILT) &&
+	if ((m_rGameLib.PushJoyconAnalogStick(m_contrllerType, Joycon::DOWN_DIRECTION) ||
+		 m_rGameLib.InputGyroSensor(m_contrllerType, Joycon::DOWN_DIRECTION)) &&
 		*pPoY < (m_MAXYARRAYNUM - 1))
 	{
 		HitKey = DOWN;
 	}
 
 	//x座標の移動
-	if (m_rGameLib.PushJoyconAnalogStick(m_contrllerType, Joycon::LEFT_TILT) &&
+	if ((m_rGameLib.PushJoyconAnalogStick(m_contrllerType, Joycon::LEFT_DIRECTION) ||
+		 m_rGameLib.InputGyroSensor(m_contrllerType, Joycon::LEFT_DIRECTION))&&
 		*pPoX > 0)
 	{
 		HitKey = LEFT;
 	}
 
-	if (m_rGameLib.PushJoyconAnalogStick(m_contrllerType, Joycon::RIGHT_TILT) &&
+	if ((m_rGameLib.PushJoyconAnalogStick(m_contrllerType, Joycon::RIGHT_DIRECTION) ||
+		m_rGameLib.InputGyroSensor(m_contrllerType, Joycon::RIGHT_DIRECTION)) &&
 		*pPoX < (m_MAXXARRAYNUM - 1))
 	{
 		HitKey = RIGHT;
