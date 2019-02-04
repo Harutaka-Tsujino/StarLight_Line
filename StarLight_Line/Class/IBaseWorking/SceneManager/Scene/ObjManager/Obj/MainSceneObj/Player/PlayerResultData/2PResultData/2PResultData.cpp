@@ -25,7 +25,7 @@ VOID TwoPlayerResultData::Update()
 	{
 		m_rGameLib.OneShotSimultaneousSound(_T("HitWhite"));
 
-		const INT DEMERIT_POINT = -2000;
+		const INT DEMERIT_POINT = -400;
 
 		m_Score += DEMERIT_POINT;
 	}

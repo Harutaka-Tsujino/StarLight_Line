@@ -4,8 +4,8 @@ VOID StageSelectTwoPlayerSceneStageList::Update()
 {
 	if (m_isDecided) return;
 
-	if ((m_rGameLib.PushJoyconAnalogStick(Joycon::LEFT_CONTROLLER, Joycon::UP_TILT) ||
-		 m_rGameLib.PushJoyconAnalogStick(Joycon::RIGHT_CONTROLLER, Joycon::UP_TILT))&&
+	if ((m_rGameLib.PushJoyconAnalogStick(Joycon::LEFT_CONTROLLER, Joycon::UP_DIRECTION) ||
+		 m_rGameLib.PushJoyconAnalogStick(Joycon::RIGHT_CONTROLLER, Joycon::UP_DIRECTION))&&
 		 m_backIsSelected)
 	{
 		m_rGameLib.OneShotSimultaneousSound(_T("ChangeStage"));
@@ -13,8 +13,8 @@ VOID StageSelectTwoPlayerSceneStageList::Update()
 		m_backIsSelected = FALSE;
 	}
 
-	if ((m_rGameLib.PushJoyconAnalogStick(Joycon::LEFT_CONTROLLER, Joycon::DOWN_TILT) ||
-		 m_rGameLib.PushJoyconAnalogStick(Joycon::RIGHT_CONTROLLER, Joycon::DOWN_TILT))&&
+	if ((m_rGameLib.PushJoyconAnalogStick(Joycon::LEFT_CONTROLLER, Joycon::DOWN_DIRECTION) ||
+		 m_rGameLib.PushJoyconAnalogStick(Joycon::RIGHT_CONTROLLER, Joycon::DOWN_DIRECTION))&&
 		!m_backIsSelected)
 	{
 		m_rGameLib.OneShotSimultaneousSound(_T("ChangeStage"));
@@ -60,8 +60,8 @@ VOID StageSelectTwoPlayerSceneStageList::Update()
 
 	if (m_deg != 0) return;
 
-	if (m_rGameLib.HoldJoyconAnalogStick(Joycon::LEFT_CONTROLLER, Joycon::RIGHT_TILT) ||
-		m_rGameLib.HoldJoyconAnalogStick(Joycon::RIGHT_CONTROLLER, Joycon::RIGHT_TILT))
+	if (m_rGameLib.HoldJoyconAnalogStick(Joycon::LEFT_CONTROLLER, Joycon::RIGHT_DIRECTION) ||
+		m_rGameLib.HoldJoyconAnalogStick(Joycon::RIGHT_CONTROLLER, Joycon::RIGHT_DIRECTION))
 	{
 		m_deg = ROTATE_SPEED;	//! 回転の起動
 
@@ -70,8 +70,8 @@ VOID StageSelectTwoPlayerSceneStageList::Update()
 		return;
 	}
 		
-	if (m_rGameLib.HoldJoyconAnalogStick(Joycon::LEFT_CONTROLLER, Joycon::LEFT_TILT) ||
-		m_rGameLib.HoldJoyconAnalogStick(Joycon::RIGHT_CONTROLLER, Joycon::LEFT_TILT))
+	if (m_rGameLib.HoldJoyconAnalogStick(Joycon::LEFT_CONTROLLER, Joycon::LEFT_DIRECTION) ||
+		m_rGameLib.HoldJoyconAnalogStick(Joycon::RIGHT_CONTROLLER, Joycon::LEFT_DIRECTION))
 	{
 		m_deg = -ROTATE_SPEED;
 
@@ -293,8 +293,8 @@ VOID StageSelectTwoPlayerSceneLevelSelecter::Update()
 
 	if (m_alpha < 255) return;
 
-	if (m_rGameLib.PushJoyconAnalogStick(Joycon::LEFT_CONTROLLER, Joycon::UP_TILT) ||
-		m_rGameLib.PushJoyconAnalogStick(Joycon::RIGHT_CONTROLLER, Joycon::UP_TILT))
+	if (m_rGameLib.PushJoyconAnalogStick(Joycon::LEFT_CONTROLLER, Joycon::UP_DIRECTION) ||
+		m_rGameLib.PushJoyconAnalogStick(Joycon::RIGHT_CONTROLLER, Joycon::UP_DIRECTION))
 	{
 		m_rGameLib.OneShotSimultaneousSound(_T("ChangeStage"));
 
@@ -303,8 +303,8 @@ VOID StageSelectTwoPlayerSceneLevelSelecter::Update()
 		return;
 	}
 
-	if (m_rGameLib.PushJoyconAnalogStick(Joycon::LEFT_CONTROLLER, Joycon::DOWN_TILT) ||
-		m_rGameLib.PushJoyconAnalogStick(Joycon::RIGHT_CONTROLLER, Joycon::DOWN_TILT))
+	if (m_rGameLib.PushJoyconAnalogStick(Joycon::LEFT_CONTROLLER, Joycon::DOWN_DIRECTION) ||
+		m_rGameLib.PushJoyconAnalogStick(Joycon::RIGHT_CONTROLLER, Joycon::DOWN_DIRECTION))
 	{
 		m_rGameLib.OneShotSimultaneousSound(_T("ChangeStage"));
 
@@ -326,8 +326,8 @@ VOID StageSelectTwoPlayerSceneLevelSelecter::Update()
 
 	if (m_backIsSelected) return;
 
-	if (m_rGameLib.PushJoyconAnalogStick(Joycon::LEFT_CONTROLLER, Joycon::RIGHT_TILT) ||
-		m_rGameLib.PushJoyconAnalogStick(Joycon::RIGHT_CONTROLLER,Joycon::RIGHT_TILT))
+	if (m_rGameLib.PushJoyconAnalogStick(Joycon::LEFT_CONTROLLER, Joycon::RIGHT_DIRECTION) ||
+		m_rGameLib.PushJoyconAnalogStick(Joycon::RIGHT_CONTROLLER,Joycon::RIGHT_DIRECTION))
 	{
 		m_rGameLib.OneShotSimultaneousSound(_T("ChangeStage"));
 
@@ -336,8 +336,8 @@ VOID StageSelectTwoPlayerSceneLevelSelecter::Update()
 		return;
 	}
 
-	if (m_rGameLib.PushJoyconAnalogStick(Joycon::LEFT_CONTROLLER, Joycon::LEFT_TILT) ||
-		m_rGameLib.PushJoyconAnalogStick(Joycon::RIGHT_CONTROLLER,Joycon::LEFT_TILT))
+	if (m_rGameLib.PushJoyconAnalogStick(Joycon::LEFT_CONTROLLER, Joycon::LEFT_DIRECTION) ||
+		m_rGameLib.PushJoyconAnalogStick(Joycon::RIGHT_CONTROLLER,Joycon::LEFT_DIRECTION))
 	{
 		m_rGameLib.OneShotSimultaneousSound(_T("ChangeStage"));
 
