@@ -121,7 +121,7 @@ private:
 		FLOAT m_deg;
 	};
 	
-	VOID StageSelectSceneStageList::RenderSelectIconStaging(INT loopItr, ObjData* pObjData);
+	VOID RenderSelectIconStaging(INT loopItr, ObjData* pObjData);
 
 	VOID RenderBlackHole();
 
@@ -222,10 +222,10 @@ public:
 		{
 			if (m_level == SLK_HARD)
 			{
-				return (m_level = static_cast<INT>(SLK_EXTREME));
+				return static_cast<INT>(SLK_EXTREME);
 			}
 
-			m_level = static_cast<INT>(SLK_HARD);
+			return static_cast<INT>(SLK_HARD);
 		}
 
 		return  m_level;
@@ -242,6 +242,8 @@ private:
 	VOID RenderTarget() const;
 
 	VOID RenderBackButton() const;
+
+	VOID RenderStageData();
 
 	const BOOL& m_rStageIsDecided;
 
@@ -285,6 +287,7 @@ public:
 		m_pStageList->Update();
 		m_pLevelSelecter->SetBlackHoleIsSelected(m_pStageList->BlackHoleIconSelected());
 		m_pLevelSelecter->Update();
+		SendStageDataToSceneManager();
 	}
 
 	inline VOID Render()
