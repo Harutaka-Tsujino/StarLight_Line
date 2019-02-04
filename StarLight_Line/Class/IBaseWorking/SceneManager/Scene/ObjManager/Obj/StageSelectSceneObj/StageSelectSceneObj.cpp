@@ -532,6 +532,8 @@ VOID StageSelectSceneLevelSelecter::Render()
 	RenderTarget();
 
 	RenderBackButton();
+
+	RenderStageData();
 }
 
 VOID StageSelectSceneLevelSelecter::RenderBack() const
@@ -618,4 +620,50 @@ VOID StageSelectSceneLevelSelecter::RenderBackButton() const
 	m_rGameLib.CreateRect(backButton, backButtonData);
 
 	m_rGameLib.Render(backButton, m_rGameLib.GetTex(_T("LevelBackButton")));
+}
+
+VOID StageSelectSceneLevelSelecter::RenderStageData()
+{
+	StageData stageData;
+	SceneManager::GetInstance().GetStageData(&stageData);
+
+	const StageDetailData* pStageDetailData = DataSaver::GetInstance().GetStageDetailData(stageData.m_stage, stageData.m_level);
+
+	TextFormat textFormat;
+
+	textFormat.m_color = D3DCOLOR_ARGB(m_alpha, 0xFF, 0xFF, 23);
+
+	if (pStageDetailData->m_isClear)
+	{
+		textFormat.m_charHalfScale = { 22, 33 };
+		textFormat.m_topLeft = { m_WND_SIZE.m_x * 0.765f - 2.0f * textFormat.m_charHalfScale.m_x * 5 * 0.5f, m_WND_SIZE.m_y * 0.17f };
+		
+		TString clearString(_T("CLEAR"));
+		Text clearText(clearString, _T("2DTextures/Fonts/a_9.png"));
+		clearText.Write(textFormat);
+	}
+
+	textFormat.m_charHalfScale = { 10, 20 };
+	textFormat.m_topLeft = { m_WND_SIZE.m_x * 0.765f - 2.0f * textFormat.m_charHalfScale.m_x * 10 * 0.5f, m_WND_SIZE.m_y * 0.34f };
+
+	textFormat.m_color = D3DCOLOR_ARGB(m_alpha, 0x87, 0xCE, 0xFA);
+
+	TString highScoreString(_T("HIGH SCORE"));
+	Text highScoreText(highScoreString, _T("2DTextures/Fonts/a_9.png"));
+	highScoreText.Write(textFormat);
+
+	TString scoreNumString(pStageDetailData->m_score, _T("%d"));
+	Text scoreNumText(scoreNumString, _T("2DTextures/Fonts/a_9.png"));
+
+	INT scoreDigit = static_cast<INT>(log10(pStageDetailData->m_score) + 1);
+
+	if (pStageDetailData->m_score == 0)
+	{
+		scoreDigit = 1;
+	}
+
+	textFormat.m_charHalfScale = { 22, 33 };
+	textFormat.m_topLeft = { m_WND_SIZE.m_x * 0.765f - 2.0f * textFormat.m_charHalfScale.m_x * scoreDigit * 0.5f, m_WND_SIZE.m_y * 0.4f };
+
+	scoreNumText.Write(textFormat);
 }
