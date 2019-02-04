@@ -574,6 +574,26 @@ public:
 	{
 		return m_pJoyconManager->NeutralAnalogStick(controllerType, direction);
 	}
+	
+	inline BOOL InputGyroSensor(Joycon::CONTROLLER_TYPE controllerType, int direction) const
+	{
+		return m_pJoyconManager->InputGyroSensor(controllerType, direction);
+	}
+
+	inline BOOL MoveGyroSensor(Joycon::CONTROLLER_TYPE controllerType, int direction) const
+	{
+		return m_pJoyconManager->MoveGyroSensor(controllerType, direction);
+	}
+
+	inline BOOL StopGyroSensor(Joycon::CONTROLLER_TYPE controllerType, int direction) const
+	{
+		return m_pJoyconManager->StopGyroSensor(controllerType, direction);
+	}
+
+	inline BOOL NeutralGyroSensor(Joycon::CONTROLLER_TYPE controllerType, int direction) const
+	{
+		return m_pJoyconManager->NeutralGyroSensor(controllerType, direction);
+	}
 
 	inline VOID JoyconRumble(Joycon::CONTROLLER_TYPE controllerType)
 	{

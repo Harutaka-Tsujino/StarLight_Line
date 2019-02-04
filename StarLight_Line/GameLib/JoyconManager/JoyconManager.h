@@ -96,6 +96,62 @@ public:
 	}
 
 	/**
+	* @breif ジャイロが入力されているかを判断する
+	* @param controllerType 取得するコントローラの種類
+	* @param Direction ジャイロの向き
+	*/
+	bool InputGyroSensor(Joycon::CONTROLLER_TYPE controllerType, int direction) const
+	{
+		const Joycon::GYRO_SENSOR_STATE* GyroSensor = m_pJoycon[controllerType]->GetGyroSensorState();
+
+		if (GyroSensor[direction] == Joycon::INPUT_GYRO_SENSOR) return true;
+
+		return false;
+	}
+
+	/**
+	* @breif ジャイロが動き続けているかを判断する
+	* @param controllerType 取得するコントローラの種類
+	* @param Direction ジャイロの向き
+	*/
+	bool MoveGyroSensor(Joycon::CONTROLLER_TYPE controllerType, int direction) const
+	{
+		const Joycon::GYRO_SENSOR_STATE* GyroSensor = m_pJoycon[controllerType]->GetGyroSensorState();
+
+		if (GyroSensor[direction] == Joycon::MOVE_GYRO_SENSOR) return true;
+
+		return false;
+	}
+
+	/**
+	* @breif ジャイロが止まったかを判断する
+	* @param controllerType 取得するコントローラの種類
+	* @param Direction ジャイロの向き
+	*/
+	bool StopGyroSensor(Joycon::CONTROLLER_TYPE controllerType, int direction) const
+	{
+		const Joycon::GYRO_SENSOR_STATE* GyroSensor = m_pJoycon[controllerType]->GetGyroSensorState();
+
+		if (GyroSensor[direction] == Joycon::STOP_GYRO_SENSOR) return true;
+
+		return false;
+	}
+
+	/**
+	* @breif ジャイロがニュートラル状態かを判断する
+	* @param controllerType 取得するコントローラの種類
+	* @param Direction ジャイロの向き
+	*/
+	bool NeutralGyroSensor(Joycon::CONTROLLER_TYPE controllerType, int direction) const
+	{
+		const Joycon::GYRO_SENSOR_STATE* GyroSensor = m_pJoycon[controllerType]->GetGyroSensorState();
+
+		if (GyroSensor[direction] == Joycon::NEUTRAL_GYRO_SENSOR) return true;
+
+		return false;
+	}
+
+	/**
 	* @brief 引数で渡されたボタンの種類が押されたかを判断する
 	* @param controllerType 取得するコントローラの種類
 	* @param button ボタンの種類
@@ -157,9 +213,20 @@ private:
 		m_pJoycon[controllerType]->CheckButton(button);
 	}
 
-	void CheckAnalogStick(Joycon::CONTROLLER_TYPE controllerType) const
+	void CheckAnalogStick() const
 	{
-		m_pJoycon[controllerType]->CheackAnalogStick();
+		for (int i = 0;i < Joycon::MAX_CONTROLLER;++i)
+		{
+			m_pJoycon[i]->CheckAnalogStick();
+		}
+	}
+
+	void CheckGyroSensor() const
+	{
+		for (int i = 0;i < Joycon::MAX_CONTROLLER;++i)
+		{
+			m_pJoycon[i]->CheckGyroSensor();
+		}
 	}
 
 	JoyconManager(const JoyconManager&) = delete;

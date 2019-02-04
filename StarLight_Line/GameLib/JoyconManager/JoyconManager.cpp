@@ -34,7 +34,6 @@ void JoyconManager::InputState()
 	CheckButton(Joycon::RIGHT_CONTROLLER, Joycon::SR_BUTTON);
 	CheckButton(Joycon::RIGHT_CONTROLLER, Joycon::HOME_BUTTON);
 	CheckButton(Joycon::RIGHT_CONTROLLER, Joycon::MINUS_PLUS_BUTTON);
-	CheckAnalogStick(Joycon::RIGHT_CONTROLLER);
 	CheckButton(Joycon::LEFT_CONTROLLER, Joycon::DOWN_BUTTON);
 	CheckButton(Joycon::LEFT_CONTROLLER, Joycon::UP_BUTTON);
 	CheckButton(Joycon::LEFT_CONTROLLER, Joycon::LEFT_BUTTON);
@@ -44,5 +43,6 @@ void JoyconManager::InputState()
 	CheckButton(Joycon::LEFT_CONTROLLER, Joycon::SL_BUTTON);
 	CheckButton(Joycon::LEFT_CONTROLLER, Joycon::HOME_BUTTON);
 	CheckButton(Joycon::LEFT_CONTROLLER, Joycon::MINUS_PLUS_BUTTON);
-	CheckAnalogStick(Joycon::LEFT_CONTROLLER);
+	CheckAnalogStick();
+	CheckGyroSensor();
 }

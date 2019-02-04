@@ -72,13 +72,13 @@ public:
 		NEUTRAL_BUTTON
 	};
 
-	enum ANALOG_STICK_DIRECTION
+	enum JOYCON_DIRECTION
 	{
-		UP_TILT,
-		DOWN_TILT,
-		LEFT_TILT,
-		RIGHT_TILT,
-		MAX_TILT
+		UP_DIRECTION,
+		DOWN_DIRECTION,
+		LEFT_DIRECTION,
+		RIGHT_DIRECTION,
+		MAX_DIRECTION
 	};
 
 	enum ANALOG_STICK_STATE
@@ -87,6 +87,14 @@ public:
 		HOLD_ANALOG_STICK,
 		RELEASE_ANALOG_STICK,
 		NEUTRAL_ANALOG_STICK,
+	};
+
+	enum GYRO_SENSOR_STATE
+	{
+		INPUT_GYRO_SENSOR,
+		MOVE_GYRO_SENSOR,
+		STOP_GYRO_SENSOR,
+		NEUTRAL_GYRO_SENSOR
 	};
 
 	Joycon();
@@ -118,7 +126,15 @@ public:
 	*/
 	void CheckButton(int _button);
 
-	void CheackAnalogStick();
+	/**
+	* @brief アナログステックの状態を更新する
+	*/
+	void CheckAnalogStick();
+
+	/**
+	* @brief ジャイロの状態を更新する
+	*/
+	void CheckGyroSensor();
 
 	/**
 	* @brief アナログスティックの値を取得する
@@ -167,6 +183,15 @@ public:
 	}
 
 	/**
+	* @brief ジャイロの状態を取得する
+	* @return ジャイロの状態
+	*/
+	const GYRO_SENSOR_STATE* GetGyroSensorState() const
+	{
+		return m_GyroSensorState;
+	}
+	
+	/**
 	* @breif Joyconが繋がっているかを判断する
 	* @return 繋がっているのか
 	*/
@@ -183,14 +208,17 @@ public:
 private:
 	void Update();
 
-	bool InputDirection(int Direction);
+	bool InputDirectionAnalogStick(int Direction);
+
+	bool InputDirectionGyroSensor(int Direction);
 
 	hid_device*			m_Handle[MAX_CONTROLLER];
 	CONTROLLER_TYPE		m_ControllerType;
 	std::thread			m_Thread;
 	BUTTON_STATE		m_ButtonState[MAX_BUTTON];
 	BUTTON_STATE		m_OldButtonState[MAX_BUTTON];
-	ANALOG_STICK_STATE  m_AnalogStickState[MAX_TILT];
+	ANALOG_STICK_STATE  m_AnalogStickState[MAX_DIRECTION];
+	GYRO_SENSOR_STATE	m_GyroSensorState[MAX_DIRECTION];
 	D3DXVECTOR2			m_AnalogStick;
 	D3DXVECTOR3			m_GyroSensor; //!< 回転速度センサー(m/s)
 	D3DXVECTOR3			m_Accelerometer; //!< 加速度センサー(rad/s)
