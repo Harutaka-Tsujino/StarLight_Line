@@ -42,8 +42,8 @@ VOID ResultTwoPlayerFrame::PlayerTextRender()
 
 	TextFormat txt1pFormat;
 	txt1pFormat.m_charHalfScale = { 25, 30 };
-
 	txt1pFormat.m_topLeft = { m_WND_SIZE.m_x * 0.25f - txt1pFormat.m_charHalfScale.m_x * 2.0f * 4.0f, m_WND_SIZE.m_y * 0.25f };
+	txt1pFormat.m_color1 = 0xFFFFF462;
 
 	OnePlayerText.Write(txt1pFormat);
 
@@ -53,8 +53,8 @@ VOID ResultTwoPlayerFrame::PlayerTextRender()
 
 	TextFormat txt2PFormat;
 	txt2PFormat.m_charHalfScale = { 25, 30 };
-
 	txt2PFormat.m_topLeft = { m_WND_SIZE.m_x * 0.75f - txt2PFormat.m_charHalfScale.m_x * 2.0f * 4.0f , m_WND_SIZE.m_y * 0.25f };
+	txt2PFormat.m_color1 = 0xFFFFF462;
 
 	TwoPlayerText.Write(txt2PFormat);
 }
@@ -116,7 +116,7 @@ VOID ResultTwoPlayerScore::RenderCheckStar()
 		data.m_center = { m_WND_SIZE.m_x * (0.42f + 0.5f * i),m_WND_SIZE.m_y * 0.9f,0.0f };
 		data.m_halfScale = { 50.f,50.f,0.f };
 
-		data.m_aRGB = (m_pushButton[i]) ? D3DCOLOR_ARGB(255,  255, 255, 255) : 
+		data.m_aRGB = (m_pushButton[i]) ? D3DCOLOR_ARGB(255,  152, 217,  142): 
 										  D3DCOLOR_ARGB(80,   255, 255, 255);
 
 		m_rGameLib.CreateRect(CheakStar, data);
@@ -141,6 +141,7 @@ VOID ResultTwoPlayerScore::ScoreRender()
 
 		TextFormat txtFormat;
 		txtFormat.m_charHalfScale = { 30, 40 };
+		txtFormat.m_color1 = 0xFFFFFFF9;
 
 		//! SCOREの文字数の半分が2.5f
 		txtFormat.m_topLeft = { m_WND_SIZE.m_x * (0.25f + (0.25f * (i * 2))) - 2.0f * txtFormat.m_charHalfScale.m_x * stagingScoreDigitsNum * 0.5f , 400.0f };
@@ -160,8 +161,8 @@ VOID ResultTwoPlayerScore::ScoreRender()
 
 VOID ResultTwoPlayerScore::RenderDraw()
 {
-	TString winnerString(_T("DRAW"));
-	Text winnerText(winnerString, _T("2DTextures/Fonts/a_9.png"));
+	TString drawString(_T("DRAW"));
+	Text drawText(drawString, _T("2DTextures/Fonts/a_9.png"));
 
 	TextFormat txtFormat;
 	
@@ -170,7 +171,7 @@ VOID ResultTwoPlayerScore::RenderDraw()
 		txtFormat.m_charHalfScale = { 30,40 };
 		txtFormat.m_topLeft = { m_WND_SIZE.m_x * (0.25f + (0.25f * (i * 2))) - 2.0f * txtFormat.m_charHalfScale.m_x * 2.0f,m_WND_SIZE.m_y * 0.7f };
 
-		winnerText.Write(txtFormat);
+		drawText.Write(txtFormat);
 	}	
 }
 
@@ -182,8 +183,8 @@ VOID ResultTwoPlayerScore::RenderWinner()
 	TextFormat txtFormat;
 
 	txtFormat.m_charHalfScale = { 30,40 };
-
 	txtFormat.m_topLeft = { m_WND_SIZE.m_x * 0.75f - 2.0f * txtFormat.m_charHalfScale.m_x * 3.0f,m_WND_SIZE.m_y * 0.7f };
+	txtFormat.m_color1 = 0xFFEA5532;
 
 	if (m_Score[Joycon::LEFT_CONTROLLER] > m_Score[Joycon::RIGHT_CONTROLLER])
 	{
@@ -201,8 +202,8 @@ VOID ResultTwoPlayerScore::RenderLoser()
 	TextFormat txtFormat;
 
 	txtFormat.m_charHalfScale = { 30,40 };
-
 	txtFormat.m_topLeft = { m_WND_SIZE.m_x * 0.75f - 2.0f * txtFormat.m_charHalfScale.m_x * 2.5f,m_WND_SIZE.m_y * 0.7f };
+	txtFormat.m_color1 = 0xFF00A1E9;
 
 	if (m_Score[Joycon::LEFT_CONTROLLER] < m_Score[Joycon::RIGHT_CONTROLLER])
 	{
