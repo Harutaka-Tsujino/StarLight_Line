@@ -70,3 +70,83 @@ VOID CustomVertexEditor::Rescale(CustomVertex* pCustomVertices, const D3DXVECTOR
 		pCustomVertices[i].m_pos.y = rScaleRate.y*distancesVertexBetweenCenter[i].y + rectCenter.y;
 	}
 }
+
+VOID CustomVertexEditor::SetObliqueToBottomRightARGB(CustomVertex *pCustomVertices, DWORD topARGB, DWORD bottomARGB) const
+{
+	DWORD aveColor = 0;
+
+	//α値を求める
+	BYTE alphaValue[2] = { static_cast<BYTE>(topARGB >> 24) ,static_cast<BYTE>(bottomARGB >> 24) };
+	aveColor += (((alphaValue[0] + alphaValue[1]) / 2) << 24);
+
+	//r値を求める
+	BYTE redValue[2] = { static_cast<BYTE>(topARGB >> 16) ,static_cast<BYTE>(bottomARGB >> 16) };
+	aveColor += (((redValue[0] + redValue[1]) / 2) << 16);
+
+	//g値を求める
+	BYTE greenValue[2] = { static_cast<BYTE>(topARGB >> 8) ,static_cast<BYTE>(bottomARGB >> 8) };
+	aveColor += (((greenValue[0] + greenValue[1]) / 2) << 8);
+
+	//b値を求める
+	BYTE blueValue[2] = { static_cast<BYTE>(topARGB) ,static_cast<BYTE>(bottomARGB) };
+	aveColor += ((blueValue[0] + blueValue[1]) / 2);
+
+	for (int i = 0; i < m_RECT_VERTICES_NUM; ++i)
+	{
+		if (i == 0)
+		{
+			pCustomVertices[i].m_aRGB = topARGB;
+
+			continue;
+		}
+
+		if (i == 2)
+		{
+			pCustomVertices[i].m_aRGB = bottomARGB;
+
+			continue;
+		}
+
+		pCustomVertices[i].m_aRGB = aveColor;
+	}
+}
+
+VOID CustomVertexEditor::SetObliqueToBottomLeftARGB(CustomVertex *pCustomVertices, DWORD topARGB, DWORD bottomARGB) const
+{
+	DWORD aveColor = 0;
+
+	//α値を求める
+	BYTE alphaValue[2] = { static_cast<BYTE>(topARGB >> 24) ,static_cast<BYTE>(bottomARGB >> 24) };
+	aveColor += (((alphaValue[0] + alphaValue[1]) / 2) << 24);
+
+	//r値を求める
+	BYTE redValue[2] = { static_cast<BYTE>(topARGB >> 16) ,static_cast<BYTE>(bottomARGB >> 16) };
+	aveColor += (((redValue[0] + redValue[1]) / 2) << 16);
+
+	//g値を求める
+	BYTE greenValue[2] = { static_cast<BYTE>(topARGB >> 8) ,static_cast<BYTE>(bottomARGB >> 8) };
+	aveColor += (((greenValue[0] + greenValue[1]) / 2) << 8);
+
+	//b値を求める
+	BYTE blueValue[2] = { static_cast<BYTE>(topARGB) ,static_cast<BYTE>(bottomARGB) };
+	aveColor += ((blueValue[0] + blueValue[1]) / 2);
+
+	for (int i = 0; i < m_RECT_VERTICES_NUM; ++i)
+	{
+		if (i == 1)
+		{
+			pCustomVertices[i].m_aRGB = bottomARGB;
+
+			continue;
+		}
+
+		if (i == 3)
+		{
+			pCustomVertices[i].m_aRGB = topARGB;
+
+			continue;
+		}
+
+		pCustomVertices[i].m_aRGB = aveColor;
+	}
+}

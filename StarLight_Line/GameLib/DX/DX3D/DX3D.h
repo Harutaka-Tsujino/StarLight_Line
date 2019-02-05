@@ -282,6 +282,16 @@ public:
 		m_pCustomVertex->SetLeftRightARGB(pCustomVertices, leftARGB, rightARGB);
 	}
 
+	inline VOID SetObliqueToBottomRightARGB(CustomVertex *pCustomVertices, DWORD topARGB, DWORD bottomARGB) const
+	{
+		m_pCustomVertex->SetObliqueToBottomRightARGB(pCustomVertices, topARGB, bottomARGB);
+	}
+
+	inline VOID SetObliqueToBottomLeftARGB(CustomVertex *pCustomVertices, DWORD topARGB, DWORD bottomARGB) const
+	{
+		m_pCustomVertex->SetObliqueToBottomLeftARGB(pCustomVertices, topARGB, bottomARGB);
+	}
+
 	inline VOID FlashRect(CustomVertex* pVertices, INT* pFrameCnt, INT flashFlameMax, BYTE alphaMax, BYTE alphaMin = 0)
 	{
 		m_pCustomVertex->Flash(pVertices, pFrameCnt, flashFlameMax, alphaMax, alphaMin);
