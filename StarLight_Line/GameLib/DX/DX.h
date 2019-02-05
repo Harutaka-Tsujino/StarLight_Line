@@ -264,6 +264,16 @@ public:
 		m_pDX3D->SetLeftRightARGB(pCustomVertices, leftARGB, rightARGB);
 	}
 
+	inline VOID SetObliqueToBottomLeftARGB(CustomVertex *pCustomVertices, DWORD topARGB, DWORD bottomARGB) const
+	{
+		m_pDX3D->SetObliqueToBottomLeftARGB(pCustomVertices, topARGB, bottomARGB);
+	}
+
+	inline VOID SetObliqueToBottomRightARGB(CustomVertex *pCustomVertices, DWORD topARGB, DWORD bottomARGB) const
+	{
+		m_pDX3D->SetObliqueToBottomRightARGB(pCustomVertices, topARGB, bottomARGB);
+	}
+
 	inline VOID FlashRect(CustomVertex* pVertices, INT* pFrameCnt, INT flashFlameMax, BYTE alphaMax, BYTE alphaMin = 0)
 	{
 		m_pDX3D->FlashRect(pVertices, pFrameCnt, flashFlameMax, alphaMax, alphaMin);

@@ -206,6 +206,10 @@ public:
 		}
 	}
 
+	VOID SetObliqueToBottomRightARGB(CustomVertex *pCustomVertices, DWORD topARGB, DWORD bottomARGB) const;
+
+	VOID SetObliqueToBottomLeftARGB(CustomVertex *pCustomVertices, DWORD topARGB, DWORD bottomARGB) const;
+
 	inline VOID Flash(CustomVertex* pVertices ,INT* pFrameCnt, INT flashFlameMax, BYTE alphaMax, BYTE alphaMin = 0)
 	{
 		BYTE alpha = 0;
