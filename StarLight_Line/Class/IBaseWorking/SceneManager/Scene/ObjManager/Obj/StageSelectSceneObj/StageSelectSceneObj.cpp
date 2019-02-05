@@ -631,7 +631,7 @@ VOID StageSelectSceneLevelSelecter::RenderStageData()
 
 	TextFormat textFormat;
 
-	textFormat.m_color = D3DCOLOR_ARGB(m_alpha, 0xFF, 0xFF, 23);
+	textFormat.m_color1 = D3DCOLOR_ARGB(m_alpha, 0xFF, 0xFF, 23);
 
 	if (pStageDetailData->m_isClear)
 	{
@@ -646,7 +646,7 @@ VOID StageSelectSceneLevelSelecter::RenderStageData()
 	textFormat.m_charHalfScale = { 10, 20 };
 	textFormat.m_topLeft = { m_WND_SIZE.m_x * 0.765f - 2.0f * textFormat.m_charHalfScale.m_x * 10 * 0.5f, m_WND_SIZE.m_y * 0.34f };
 
-	textFormat.m_color = D3DCOLOR_ARGB(m_alpha, 0x87, 0xCE, 0xFA);
+	textFormat.m_color1 = D3DCOLOR_ARGB(m_alpha, 0x87, 0xCE, 0xFA);
 
 	TString highScoreString(_T("HIGH SCORE"));
 	Text highScoreText(highScoreString, _T("2DTextures/Fonts/a_9.png"));
