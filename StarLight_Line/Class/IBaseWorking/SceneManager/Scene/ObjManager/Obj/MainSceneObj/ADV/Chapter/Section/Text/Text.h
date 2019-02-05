@@ -94,6 +94,8 @@ protected:
 	virtual VOID CreateOneLineCharsRects(const TextFormat& textFormat, std::vector<ObjData*>* ppCharDatas,
 		std::vector<CustomVertex*>* ppChars, std::vector<TString*>& pOneLineStrings);
 
+	VOID GradationText(const TextFormat& textFormat, std::vector<CustomVertex*>* ppChars, int row, int column);
+
 	VOID CutTuTvA_Z_0_9(ObjData* pObjData, TCHAR tChar);
 
 	GameLib& m_rGameLib;

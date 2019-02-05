@@ -45,6 +45,8 @@ VOID Text::Write(const TextFormat& textFormat)
 		{
 			m_rGameLib.CreateRect(&pCustomVerticesVec[si][RECT_VERTICES_NUM * li], pCharData[si][li]);
 
+			GradationText(textFormat, &pCustomVerticesVec, si, RECT_VERTICES_NUM * li);
+
 			m_rGameLib.Render(&pCustomVerticesVec[si][RECT_VERTICES_NUM * li], m_rGameLib.GetTex(m_pFONT_KEY));
 		}
 	}
@@ -79,7 +81,7 @@ VOID Text::CreateOneLineCharsRects(const TextFormat& textFormat, std::vector<Obj
 
 			CutTuTvA_Z_0_9(&(*ppCharDatas)[si][li], m_pOneLineTstringVec[si]->GetTChar(li));
 
-			(*ppCharDatas)[si][li].m_aRGB = textFormat.m_color;
+			(*ppCharDatas)[si][li].m_aRGB = textFormat.m_color1;
 		}
 	}
 }
@@ -130,4 +132,32 @@ VOID Text::CutTuTvA_Z_0_9(ObjData* pObjData, TCHAR tChar)
 		FONT_SCALE.x * (fontNum % 6 + 1) / ILUUST_SIZE,
 		FONT_SCALE.y * (fontNum / 6 + 1) / ILUUST_SIZE
 	};
+}
+
+VOID Text::GradationText(const TextFormat& textFormat, std::vector<CustomVertex*>* ppChars, int row, int column)
+{
+	switch (textFormat.m_gradationType)
+	{
+	case GT_NONE:
+		break;
+
+	case GT_SIDE:
+		m_rGameLib.SetLeftRightARGB(&(*(ppChars))[row][column], textFormat.m_color1, textFormat.m_color2);
+		break;
+
+	case GT_HIGH_LOW:
+		m_rGameLib.SetTopBottomARGB(&(*(ppChars))[row][column], textFormat.m_color1, textFormat.m_color2);
+		break;
+
+	case GT_OBLIQUE_BOTTOM_LEFT:
+		m_rGameLib.SetObliqueToBottomLeftARGB(&(*(ppChars))[row][column], textFormat.m_color1, textFormat.m_color2);
+		break;
+
+	case GT_OBLIQUE_BOTTOM_RIGHT:
+		m_rGameLib.SetObliqueToBottomRightARGB(&(*(ppChars))[row][column], textFormat.m_color1, textFormat.m_color2);
+		break;
+
+	default:
+		break;
+	}
 }
