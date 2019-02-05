@@ -129,11 +129,18 @@ private:
 
 	const PreviewData* m_pPREVIEWS = nullptr;
 
-	const DWORD m_COLOR[m_SAVE_DATAS_MAX][2] =
+	const DWORD m_FRAME_COLOR[m_SAVE_DATAS_MAX][2] =
 	{
-		{ 0xEEFF7F7F, 0xEEEEEE43 },
-		{ 0xEE7FFF7F, 0xEEEEEE43 },
-		{ 0xEE7F7FFF, 0xEEEEEE43 },
+		{ 0xFFFFC1C1, 0xFFFFFFFF },
+		{ 0xFFC1FFC1, 0xFFFFFFFF },
+		{ 0xFFC1C1FF, 0xFFFFFFFF },
+	};
+
+	const DWORD m_WORD_COLOR[m_SAVE_DATAS_MAX] =
+	{
+		{ 0xFFFAAC58 },
+		{ 0xFFD8F781 },
+		{ 0xFFE3CEF6 },
 	};
 };
 
