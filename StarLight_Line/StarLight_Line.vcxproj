@@ -75,7 +75,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(DXSDK_DIR)Include;$(SolutionDir)StarLight_Line\SoundLib\Release_x64\Include;$(FBXSDK_DIR)include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(FBXSDK_DIR)lib\vs2015\x64\release;$(SolutionDir)StarLight_Line\SoundLib\Release_x64\Lib;$(DXSDK_DIR)Lib\x64;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(FBXSDK_DIR)lib\vs2015\x64\release;C:\Users\tatsu\OneDrive\デスクトップ\StarLight_Line\StarLight_Line\SoundLib\Release_x64\Lib;$(DXSDK_DIR)Lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
