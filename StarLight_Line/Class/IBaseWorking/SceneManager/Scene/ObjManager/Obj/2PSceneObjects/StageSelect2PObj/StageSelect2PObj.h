@@ -69,6 +69,7 @@ public:
 	inline VOID Init()
 	{
 		m_rGameLib.CreateTex(_T("Icons"), _T("2DTextures/StageSelect/StageSelect_icons.png"));
+		m_rGameLib.CreateTex(_T("Zodiacs"), _T("2DTextures/StageSelect/StageDetailZodiacs.png"));
 		m_rGameLib.CreateTex(_T("BackButton"), _T("2DTextures/StageSelect/StageSelect_BackButton.png"));
 	}
 
@@ -131,11 +132,15 @@ private:
 		pStageIconDatas[iconElementNum].m_objData.m_halfScale = { halfScale, halfScale, 0.0f };
 	}
 
+	VOID RenderZodiacs();
+
 	VOID RenderBackButton(FLOAT iconsCircleRadius) const;
 
 	VOID RenderStageName();
 
 	VOID GetStageStringAndCharsNum(TString* pTString, INT* pCharsNum);
+
+	VOID RenderSelectIconStaging(INT loopItr, ObjData* pObjData);
 
 	static const INT m_STAGE_ICONS_MAX = STAGE_MAX - 1;
 

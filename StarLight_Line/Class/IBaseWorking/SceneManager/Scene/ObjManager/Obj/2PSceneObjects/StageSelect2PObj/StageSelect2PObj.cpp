@@ -102,6 +102,8 @@ VOID StageSelectTwoPlayerSceneStageList::Render()
 		m_isDecided = !iconsCircleRadius;
 	}
 
+	RenderZodiacs();
+
 	BYTE alpha = NULL;
 
 	const RectSize ILLUST_SIZE = { 2048, 1024 };
@@ -138,6 +140,8 @@ VOID StageSelectTwoPlayerSceneStageList::Render()
 
 		m_rGameLib.Render(stageIcon, m_rGameLib.GetTex(_T("Icons")));
 
+		RenderSelectIconStaging(i, &stageIconDatas[i].m_objData);
+
 		if (m_deg != DEG_GAP && m_deg != -DEG_GAP) continue;
 		m_selectingStage -= static_cast<INT>(m_deg / DEG_GAP);												//! 角度が60を超えるとm_selectingStageを次の値に変える
 		m_deg = 0.0f;
@@ -151,6 +155,35 @@ VOID StageSelectTwoPlayerSceneStageList::Render()
 	RenderStageName();
 
 	if (iconsCircleRadius != 0.0f) RenderBackButton(iconsCircleRadius);
+}
+
+VOID StageSelectTwoPlayerSceneStageList::RenderZodiacs()
+{
+	if (m_deg != 0.0f)
+	{
+		return;
+	}
+
+	ObjData obj;
+	obj.m_center = { m_WND_SIZE.m_x * 0.2f, m_WND_SIZE.m_y * 0.65f, m_Z };
+	obj.m_halfScale = { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * 0.5f, 0.0f };
+
+	const D3DXVECTOR2 ILLUST_SCALE = { 1280.0f,720.0f };
+	const D3DXVECTOR2 TEX_SCALE = { 8192.0f,2048.0f };
+
+	const INT ILLUST_ROWS_MAX = 6;
+
+	obj.m_texUV =
+	{
+		ILLUST_SCALE.x * (m_selectingStage % ILLUST_ROWS_MAX) / TEX_SCALE.x,
+		ILLUST_SCALE.y * (m_selectingStage / ILLUST_ROWS_MAX) / TEX_SCALE.y,
+		ILLUST_SCALE.x * (m_selectingStage % ILLUST_ROWS_MAX + 1) / TEX_SCALE.x,
+		ILLUST_SCALE.y * (m_selectingStage / ILLUST_ROWS_MAX + 1) / TEX_SCALE.y
+	};
+
+	obj.m_aRGB = 0x99FFFFFF;
+
+	m_rGameLib.CreateAndRenderRect(obj, m_rGameLib.GetTex(_T("Zodiacs")));
 }
 
 VOID StageSelectTwoPlayerSceneStageList::RenderBackButton(FLOAT iconsCircleRadius) const
@@ -191,6 +224,26 @@ VOID StageSelectTwoPlayerSceneStageList::RenderStageName()
 	txtFormat.m_topLeft = { 640.0f - 2.0f * txtFormat.m_charHalfScale.m_x * stageCharsNum * 0.5f, 580.0f };
 
 	stageText.Write(txtFormat);
+}
+
+VOID StageSelectTwoPlayerSceneStageList::RenderSelectIconStaging(INT loopItr, ObjData* pObjData)
+{
+	if (loopItr == m_selectingStage)
+	{
+		CustomVertex vertices[4];
+
+		m_rGameLib.AddtionBlendMode();
+
+		pObjData->m_aRGB = 0xFFFFFF00;
+		m_rGameLib.CreateRect(vertices, *pObjData);
+
+		static INT selectIconFlashFrameCnt = 0;
+		m_rGameLib.FlashRect(vertices, &selectIconFlashFrameCnt, 120, 190, 70);
+
+		m_rGameLib.Render(vertices, m_rGameLib.GetTex(_T("Icons")));
+
+		m_rGameLib.DefaultBlendMode();
+	}
 }
 
 VOID StageSelectTwoPlayerSceneStageList::GetStageStringAndCharsNum(TString* pTString, INT* pCharsNum)
