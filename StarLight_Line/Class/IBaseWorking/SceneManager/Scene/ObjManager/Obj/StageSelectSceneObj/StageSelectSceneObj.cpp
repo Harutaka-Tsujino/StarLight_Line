@@ -631,7 +631,9 @@ VOID StageSelectSceneLevelSelecter::RenderStageData()
 
 	TextFormat textFormat;
 
-	textFormat.m_color1 = D3DCOLOR_ARGB(m_alpha, 0xFF, 0xFF, 23);
+	textFormat.m_color1 = 0xFFFFFF23;
+	textFormat.m_color2 = 0xFFFFF3B8;
+	textFormat.m_gradationType = GT_HIGH_LOW;
 
 	if (pStageDetailData->m_isClear)
 	{
