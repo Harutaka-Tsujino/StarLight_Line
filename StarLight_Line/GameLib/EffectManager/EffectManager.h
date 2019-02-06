@@ -19,13 +19,7 @@ public:
 
 	~EffectManager() 
 	{
-		for (auto i : m_pEffects)
-		{
-			delete i;
-		}
-
-		m_pEffects.clear();
-		m_pEffects.shrink_to_fit();
+		AllDelete();
 	}
 
 	inline VOID CreateEffect(const D3DXVECTOR3& center, INT effectId)
@@ -44,6 +38,11 @@ public:
 
 		case EI_DAMAGE:
 			m_pEffects.push_back(static_cast<Effect*>(new GetDamageStarEffect(center)));
+
+			break;
+
+		case EI_FLOWER_FALLING:
+			m_pEffects.push_back(static_cast<Effect*>(new FlowerFallingEffect()));
 
 			break;
 
@@ -72,6 +71,17 @@ public:
 		{
 			i->Render();
 		}
+	}
+
+	inline VOID AllDelete()
+	{
+		for (auto i : m_pEffects)
+		{
+			delete i;
+		}
+
+		m_pEffects.clear();
+		m_pEffects.shrink_to_fit();
 	}
 
 private:

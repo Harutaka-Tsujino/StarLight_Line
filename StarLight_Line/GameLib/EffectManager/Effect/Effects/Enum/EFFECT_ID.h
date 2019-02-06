@@ -6,6 +6,7 @@ enum EEFECT_ID
 	EI_DAMAGE,
 	EI_CLEAR,
 	EI_SCORE,
+	EI_FLOWER_FALLING,
 };
 
 #endif // !EEFECT_ID_H
