@@ -100,3 +100,25 @@ VOID MouseCursorEffect::Update()
 		m_particles[i]->Update();
 	}
 }
+
+VOID FlowerFallingEffect::Update()
+{
+	InitActivatedParticle();
+
+	std::uniform_real_distribution<FLOAT> degRand(0, D3DX_PI);
+
+	for (INT i = 0; i < m_particles.size(); ++i)
+	{
+		if (i > m_activeLimit) continue;
+
+		if (m_particles[i]->LifeFrame() > rand() % 80 + 220) Init(m_particles[i]);
+
+		D3DXVECTOR2 gravity = { cos(degRand(m_randEngine)) , 0.0f};
+
+		m_particles[i]->RotateX(static_cast<FLOAT>(rand() % 5));
+		m_particles[i]->RotateY(static_cast<FLOAT>(rand() % 5));
+		m_particles[i]->RotateZ(static_cast<FLOAT>(rand() % 5));
+		m_particles[i]->Accelarate(gravity);
+		m_particles[i]->Update();
+	}
+}

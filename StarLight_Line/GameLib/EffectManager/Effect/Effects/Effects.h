@@ -160,4 +160,48 @@ protected:
 	}
 };
 
+class FlowerFallingEffect :public Effect
+{
+public:
+	FlowerFallingEffect() :Effect(30, nullptr, 0)
+	{
+		if (m_COUNT_TO_ACTIVE_MAX != 0) return;
+
+		for (auto i : m_particles)
+		{
+			Init(i);
+		}
+
+		std::random_device randDevForSeed;
+		m_randEngine.seed(randDevForSeed());
+	}
+
+	~FlowerFallingEffect() {}
+
+	VOID Update();
+
+private:
+	VOID Init(Particle* pParticle)
+	{
+		D3DXVECTOR2 halfScale = { 3.5f, 3.5f };
+
+		DWORD colors[2] = { 0xCAF8F8F8,0xCA87CEFA };
+
+		pParticle->FormatShape(halfScale, 0.0f);
+		pParticle->SetColor(colors[rand() % 2]);
+
+		D3DXVECTOR3 center(static_cast<FLOAT>(rand() % 1280), static_cast<FLOAT>(-rand() % 1000), 0.0f);
+		pParticle->FormatCenter(center, 0.0f);
+
+		pParticle->ZeroLifeFrame();
+		pParticle->ZeroVelocity();
+
+		D3DXVECTOR2 gravity = { 0.0f , 3.0f };
+
+		pParticle->Accelarate(gravity);
+	}
+
+	std::minstd_rand m_randEngine;
+};
+
 #endif //! EFFECTS_H
