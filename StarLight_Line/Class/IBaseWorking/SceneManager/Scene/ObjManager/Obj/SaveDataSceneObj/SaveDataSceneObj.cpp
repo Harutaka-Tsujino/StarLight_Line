@@ -43,7 +43,7 @@ VOID SaveDataSaveDatas::RenderBriefFrame()
 		CustomVertex frame[4];
 		m_rGameLib.CreateRect(frame, frameData);
 
-		m_rGameLib.SetLeftRightARGB(frame, m_FRAME_COLOR[i][0], m_FRAME_COLOR[i][1]);
+		m_rGameLib.SetObliqueToBottomRightARGB(frame, m_COLOR[i][0], m_COLOR[i][1]);
 
 		m_rGameLib.Render(frame, m_rGameLib.GetTex(_T("Frame")));
 
@@ -78,7 +78,9 @@ VOID SaveDataSaveDatas::RenderTotalTimeBrief()
 		totalTimeTextFormat.m_charHalfScale = { 11, 15 };
 		totalTimeTextFormat.m_topLeft = { 400.0f, 70.0f + 215.0f * i };
 
-		totalTimeTextFormat.m_color1 = m_WORD_COLOR[i];
+		totalTimeTextFormat.m_color1 = m_COLOR[i][0];
+		totalTimeTextFormat.m_color2 = m_COLOR[i][1];
+		totalTimeTextFormat.m_gradationType = GT_OBLIQUE_BOTTOM_RIGHT;
 
 		totalTimeTextText.Write(totalTimeTextFormat);
 
@@ -91,7 +93,9 @@ VOID SaveDataSaveDatas::RenderTotalTimeBrief()
 		txtFormat.m_charHalfScale = { 11, 15 };
 		txtFormat.m_topLeft = { 400.0f, 105.0f + 215.0f * i };
 
-		txtFormat.m_color1 = m_WORD_COLOR[i];
+		txtFormat.m_color1 = m_COLOR[i][0];
+		txtFormat.m_color2 = m_COLOR[i][1];
+		txtFormat.m_gradationType = GT_OBLIQUE_BOTTOM_RIGHT;
 
 		totalTimeText.Write(txtFormat);
 	}
@@ -104,10 +108,9 @@ VOID SaveDataSaveDatas::RenderSaveDataNum()
 		TextFormat dataTextFormat;
 		dataTextFormat.m_charHalfScale = { 15, 22 };
 		dataTextFormat.m_topLeft = { 70.0f, 70.0f + 215.0f * i };
-
-		dataTextFormat.m_color1 = m_WORD_COLOR[i];
-		dataTextFormat.m_color2 = 0xFF000000;
-		dataTextFormat.m_gradationType = GT_OBLIQUE_BOTTOM_LEFT;
+		dataTextFormat.m_color1 = m_COLOR[i][0];
+		dataTextFormat.m_color2 = m_COLOR[i][1];
+		dataTextFormat.m_gradationType = GT_OBLIQUE_BOTTOM_RIGHT;
 
 		TString dataTextString(_T("DATA "));
 		dataTextString.WriteInNumPrevEnd(i + 1, _T("%d"));
@@ -131,7 +134,9 @@ VOID SaveDataSaveDatas::RenderClearAchievement()
 		clearTextFormat.m_charHalfScale = { 20, 30 };
 		clearTextFormat.m_topLeft = { 70.0f, 150.0f + 215.0f * i };
 
-		clearTextFormat.m_color1 = 0xCCFFFF23;
+		clearTextFormat.m_color1 = 0xFFFFFF23;
+		clearTextFormat.m_color2 = 0xFFFFF3B8;
+		clearTextFormat.m_gradationType = GT_HIGH_LOW;
 
 		TString clearTextString(_T("CLEAR"));
 		Text clearTextText(clearTextString, _T("2DTextures/Fonts/a_9.png"));
@@ -151,7 +156,9 @@ VOID SaveDataSaveDatas::RenderLastTimeBrief()
 		lastTimeTextFormat.m_charHalfScale = { 11, 15 };
 		lastTimeTextFormat.m_topLeft = { 400.0f, 150.0f + 215.0f * i };
 
-		lastTimeTextFormat.m_color1 = m_WORD_COLOR[i];
+		lastTimeTextFormat.m_color1 = m_COLOR[i][0];
+		lastTimeTextFormat.m_color2 = m_COLOR[i][1];
+		lastTimeTextFormat.m_gradationType = GT_OBLIQUE_BOTTOM_RIGHT;
 
 		lastTimeTextText.Write(lastTimeTextFormat);
 	
@@ -166,7 +173,9 @@ VOID SaveDataSaveDatas::RenderLastTimeBrief()
 		txtFormat.m_charHalfScale = { 11, 15 };
 		txtFormat.m_topLeft = { 400.0f, 185.0f + 215.0f * i };
 
-		txtFormat.m_color1 = m_WORD_COLOR[i];
+		txtFormat.m_color1 = m_COLOR[i][0];
+		txtFormat.m_color2 = m_COLOR[i][1];
+		txtFormat.m_gradationType = GT_OBLIQUE_BOTTOM_RIGHT;
 
 		lastPlayTxt.Write(txtFormat);
 	}
@@ -189,7 +198,7 @@ VOID SaveDataSaveDatas::RenderDetailFrame()
 	CustomVertex detailFrame[4];
 	m_rGameLib.CreateRect(detailFrame, detailFrameData);
 
-	m_rGameLib.SetLeftRightARGB(detailFrame, m_FRAME_COLOR[m_selectingData][0], m_FRAME_COLOR[m_selectingData][1]);
+	m_rGameLib.SetObliqueToBottomRightARGB(detailFrame, m_COLOR[m_selectingData][0], m_COLOR[m_selectingData][1]);
 
 	m_rGameLib.Render(detailFrame, m_rGameLib.GetTex(_T("DetailFrame")));
 }
@@ -240,7 +249,9 @@ VOID SaveDataSaveDatas::RenderDetailData()
 	dataTextFormat.m_charHalfScale = { 13, 19 };
 	dataTextFormat.m_topLeft = { 772.0f, 53.0f };
 
-	dataTextFormat.m_color1 = m_WORD_COLOR[m_selectingData];
+	dataTextFormat.m_color1 = m_COLOR[m_selectingData][0];
+	dataTextFormat.m_color2 = m_COLOR[m_selectingData][1];
+	dataTextFormat.m_gradationType = GT_OBLIQUE_BOTTOM_RIGHT;
 
 	dataTextText.Write(dataTextFormat);
 
