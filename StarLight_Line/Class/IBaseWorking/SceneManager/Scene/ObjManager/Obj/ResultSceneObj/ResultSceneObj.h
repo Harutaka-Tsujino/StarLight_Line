@@ -17,6 +17,8 @@
 
 #include <d3dx9.h>
 
+#include "../../../../../../../GameLib/EffectManager/EffectManager.h"
+#include "../../../../../../../GameLib/EffectManager/Effect/Effects/Enum/EFFECT_ID.h"
 #include "../Obj.h"
 #include "../../../../SceneManager.h"
 #include "../../../../Data/ResultData.h"
@@ -348,6 +350,7 @@ public:
 	~ResultSceneResultFont()
 	{
 		m_rGameLib.ReleaseTex();
+		m_rEffectManager.AllDelete();
 	}
 
 	inline VOID Init()
@@ -383,6 +386,8 @@ private:
 
 	const INT m_ADDITIONAL_ALPHA_FRAME = 120;
 	INT m_alphaCount = 0;
+
+	EffectManager& m_rEffectManager = EffectManager::GetInstance();
 };
 
 class ResultSceneContinue :public Obj

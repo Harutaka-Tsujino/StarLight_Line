@@ -389,6 +389,12 @@ VOID ResultSceneResultFont::Render()
 	}
 
 	m_rGameLib.OneShotStartSound(_T("Clear"));
+
+	for (int i = 0;i < 25;++i)
+	{
+		D3DXVECTOR3 startPoint = { static_cast<FLOAT>(rand() % m_WND_SIZE.m_x) ,-static_cast<FLOAT>(rand() % (m_WND_SIZE.m_y / 2)), 0.f };
+		m_rEffectManager.CreateEffect(startPoint, EI_FLOWER_FALLING);
+	}
 }
 
 VOID ResultSceneContinue::Update()
