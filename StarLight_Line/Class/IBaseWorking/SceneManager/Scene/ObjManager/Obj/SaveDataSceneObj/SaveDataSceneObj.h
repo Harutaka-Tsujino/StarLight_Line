@@ -129,19 +129,13 @@ private:
 
 	const PreviewData* m_pPREVIEWS = nullptr;
 
-	const DWORD m_FRAME_COLOR[m_SAVE_DATAS_MAX][2] =
+	const DWORD m_COLOR[m_SAVE_DATAS_MAX][2] =
 	{
-		{ 0xFFFFC1C1, 0xFFFFFFFF },
-		{ 0xFFC1FFC1, 0xFFFFFFFF },
-		{ 0xFFC1C1FF, 0xFFFFFFFF },
+		{ 0xFFFFC1C1, 0xFFFAFBFF },
+		{ 0xFFC1FFC1, 0xFFFAFBFF },
+		{ 0xFFC1C1FF, 0xFFFAFBFF },
 	};
 
-	const DWORD m_WORD_COLOR[m_SAVE_DATAS_MAX] =
-	{
-		{ 0xFFFAAC58 },
-		{ 0xFFD8F781 },
-		{ 0xFFE3CEF6 },
-	};
 };
 
 #endif //! SAVE_DATA_SCENE_OBJ_H
