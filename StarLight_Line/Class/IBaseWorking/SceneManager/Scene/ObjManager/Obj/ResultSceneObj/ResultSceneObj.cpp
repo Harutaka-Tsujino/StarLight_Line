@@ -57,6 +57,8 @@ VOID ResultDataScore::Render()
 	TextFormat txtFormat;
 	txtFormat.m_charHalfScale = { 25, 37 };
 	txtFormat.m_color1 = 0xEE87CEFA;
+	txtFormat.m_color2 = 0xEEE5E5FF;
+	txtFormat.m_gradationType = GT_OBLIQUE_BOTTOM_RIGHT;
 
 	//! SCOREの文字数の半分が2.5f
 	txtFormat.m_topLeft = { m_WND_SIZE.m_x * 0.85f - 2.0f * txtFormat.m_charHalfScale.m_x * stagingScoreDigitsNum , 150.0f };
@@ -81,6 +83,8 @@ VOID ResultDataScore::RenderHead()
 	TextFormat txtFormat;
 	txtFormat.m_charHalfScale = { 25, 37 };
 	txtFormat.m_color1 = 0xEE87CEFA;
+	txtFormat.m_color2 = 0xEEE5E5FF;
+	txtFormat.m_gradationType = GT_OBLIQUE_BOTTOM_RIGHT;
 
 	//! SCOREの文字数の半分が2.5f
 	txtFormat.m_topLeft = { m_WND_SIZE.m_x * 0.24f - 2.0f * txtFormat.m_charHalfScale.m_x * 2.5f , 150.0f };
@@ -232,6 +236,8 @@ VOID ResultDataStage::GetStageLevelAndCharsNum(TString* pTString, INT* pCharsNum
 		*pCharsNum = 5;
 
 		pTextFormat->m_color1 = 0xEEFF9123;
+		pTextFormat->m_color2 = 0xFFFFF2E5;
+		pTextFormat->m_gradationType = GT_OBLIQUE_BOTTOM_RIGHT;
 
 		return;
 	}
@@ -244,6 +250,7 @@ VOID ResultDataStage::GetStageLevelAndCharsNum(TString* pTString, INT* pCharsNum
 		*pCharsNum = 4;
 
 		pTextFormat->m_color1 = 0xEE23FF23;
+		pTextFormat->m_color2 = 0xEEE5FFE5;
 
 		break;
 
@@ -253,6 +260,7 @@ VOID ResultDataStage::GetStageLevelAndCharsNum(TString* pTString, INT* pCharsNum
 		*pCharsNum = 6;
 
 		pTextFormat->m_color1 = 0xEE23FFFF;
+		pTextFormat->m_color2 = 0xEEE5FFFF;
 
 		break;
 
@@ -262,6 +270,7 @@ VOID ResultDataStage::GetStageLevelAndCharsNum(TString* pTString, INT* pCharsNum
 		*pCharsNum = 4;
 
 		pTextFormat->m_color1 = 0xEEFF23FF;
+		pTextFormat->m_color2 = 0xEEFFE5FF;
 
 		break;
 
@@ -271,9 +280,12 @@ VOID ResultDataStage::GetStageLevelAndCharsNum(TString* pTString, INT* pCharsNum
 		*pCharsNum = 7;
 
 		pTextFormat->m_color1 = 0xEEFF2323;
+		pTextFormat->m_color2 = 0xEEFFE5E5;
 
 		break;
 	}
+
+	pTextFormat->m_gradationType = GT_OBLIQUE_BOTTOM_RIGHT;
 }
 
 VOID ResultDataClearStar::Render()
@@ -343,6 +355,8 @@ VOID ResultDataClearStar::RenderHead()
 	TextFormat txtFormat;
 	txtFormat.m_charHalfScale = { 15, 22 };
 	txtFormat.m_color1 = 0xEE98FF98;
+	txtFormat.m_color2 = 0xEEE5FFE5;
+	txtFormat.m_gradationType = GT_OBLIQUE_BOTTOM_RIGHT;
 
 	//! RESULTの文字数の半分が3
 	txtFormat.m_topLeft = { m_WND_SIZE.m_x * 0.691f - 2.0f * txtFormat.m_charHalfScale.m_x * 3 , 390.0f };
@@ -447,6 +461,9 @@ VOID ResultSceneContinue::RenderTexts() const
 	TextFormat txtFormat;
 	txtFormat.m_charHalfScale = { 30, 45 };
 	txtFormat.m_topLeft = { 640.0f - 2.0f * txtFormat.m_charHalfScale.m_x * 4.0f, m_WND_SIZE.m_y * 0.25f };
+	txtFormat.m_color1 = 0xFFCCCCCC;
+	txtFormat.m_color2 = 0xFF333333;
+	txtFormat.m_gradationType = GT_OBLIQUE_BOTTOM_RIGHT;
 
 	continueText.Write(txtFormat);
 
