@@ -7,16 +7,11 @@ VOID Player::Init()
 	m_rGameLib.CreateFbx(_T("Eiwi"), "3DModels/Eiwi/Eiwi.fbx");
 
 	count = 0;
-	m_PlayerPoint.x = m_MAXXARRAYNUM / 2;
-	m_PlayerPoint.y = m_MAXYARRAYNUM / 2;
-	m_PlayerPoint.z = 1;
-	m_PlayerPos.z = 0.2f;
+	m_PlayerPoint = { 1,1,0 };
 	m_Speed.x = m_Speed.y = m_Speed.z = 0.0f;
 	m_PlayerPos.x = m_BasePos[m_PlayerPoint.y][m_PlayerPoint.x].x;	//真ん中に自機を置く
 	m_PlayerPos.y = m_BasePos[m_PlayerPoint.y][m_PlayerPoint.x].y;
-
-	SceneManager& rSceneManager = SceneManager::GetInstance();
-	rSceneManager.GetStageData(&m_StageData);
+	m_PlayerPos.z = 0.2f;
 
 	m_rGameCollision.ResiterPlayerPoint(_T("Player"), &m_PlayerPos);
 }
