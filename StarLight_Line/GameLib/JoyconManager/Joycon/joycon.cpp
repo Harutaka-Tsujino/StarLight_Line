@@ -634,7 +634,7 @@ bool Joycon::InputDirectionAnalogStick(int Direction)
 
 bool Joycon::InputDirectionGyroSensor(int Direction)
 {
-	const float THRESHOLD_VALUE = 7.f;
+	const float THRESHOLD_VALUE = 13.f;
 
 	switch (Direction)
 	{
