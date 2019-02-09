@@ -198,6 +198,11 @@ private:
 
 		D3DXVECTOR2 gravity = { 0.0f , 3.0f };
 
+		if ((static_cast<INT>(pParticle->GetObjData().m_deg.x) % 180) == 0)
+		{
+			gravity.y = 3.5f;
+		}
+
 		pParticle->Accelarate(gravity);
 	}
 
