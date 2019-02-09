@@ -140,6 +140,11 @@ public:
 		return m_lifeFrame;
 	}
 
+	inline ObjData GetObjData()
+	{
+		return m_objData;
+	}
+
 	virtual inline VOID Update()
 	{
 		++m_lifeFrame;

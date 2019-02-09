@@ -118,6 +118,7 @@ VOID FlowerFallingEffect::Update()
 		m_particles[i]->RotateX(static_cast<FLOAT>(rand() % 5));
 		m_particles[i]->RotateY(static_cast<FLOAT>(rand() % 5));
 		m_particles[i]->RotateZ(static_cast<FLOAT>(rand() % 5));
+
 		m_particles[i]->Accelarate(gravity);
 		m_particles[i]->Update();
 	}
