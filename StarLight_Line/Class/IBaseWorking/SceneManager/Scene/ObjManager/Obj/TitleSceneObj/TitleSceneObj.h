@@ -165,6 +165,7 @@ public:
 		m_rGameLib.CreateTex(_T("NewGame"), _T("2DTextures/Title/TitleMenuNewGame.png"));
 		m_rGameLib.CreateTex(_T("LoadGame"), _T("2DTextures/Title/TitleMenuLoadGame.png"));
 		m_rGameLib.CreateTex(_T("EndGame"), _T("2DTextures/Title/TitleMenuEndGame.png"));
+		m_rGameLib.CreateTex(_T("PlayStylePlate"), _T("2DTextures/Title/PlayStylePlate_128_64.png"));
 	}	
 
 	inline VOID Update()
