@@ -78,9 +78,9 @@ VOID SaveDataSaveDatas::RenderTotalTimeBrief()
 		totalTimeTextFormat.m_charHalfScale = { 11, 15 };
 		totalTimeTextFormat.m_topLeft = { 400.0f, 70.0f + 215.0f * i };
 
-		totalTimeTextFormat.m_color1 = m_COLOR[i][0];
-		totalTimeTextFormat.m_color2 = m_COLOR[i][1];
-		totalTimeTextFormat.m_gradationType = GT_OBLIQUE_BOTTOM_RIGHT;
+		totalTimeTextFormat.m_color1 = 0xFFF0F0F0;
+		totalTimeTextFormat.m_color2 = 0xFFFAFAFA;
+		totalTimeTextFormat.m_gradationType = GT_HIGH_LOW;
 
 		totalTimeTextText.Write(totalTimeTextFormat);
 
@@ -93,9 +93,9 @@ VOID SaveDataSaveDatas::RenderTotalTimeBrief()
 		txtFormat.m_charHalfScale = { 11, 15 };
 		txtFormat.m_topLeft = { 400.0f, 105.0f + 215.0f * i };
 
-		txtFormat.m_color1 = m_COLOR[i][0];
-		txtFormat.m_color2 = m_COLOR[i][1];
-		txtFormat.m_gradationType = GT_OBLIQUE_BOTTOM_RIGHT;
+		txtFormat.m_color1 = 0xFFF0F0F0;
+		txtFormat.m_color2 = 0xFFFAFAFA;
+		txtFormat.m_gradationType = GT_HIGH_LOW;
 
 		totalTimeText.Write(txtFormat);
 	}
@@ -108,9 +108,9 @@ VOID SaveDataSaveDatas::RenderSaveDataNum()
 		TextFormat dataTextFormat;
 		dataTextFormat.m_charHalfScale = { 15, 22 };
 		dataTextFormat.m_topLeft = { 70.0f, 70.0f + 215.0f * i };
-		dataTextFormat.m_color1 = m_COLOR[i][0];
-		dataTextFormat.m_color2 = m_COLOR[i][1];
-		dataTextFormat.m_gradationType = GT_OBLIQUE_BOTTOM_RIGHT;
+		dataTextFormat.m_color1 = 0xFFF0F0F0;
+		dataTextFormat.m_color2 = 0xFFFAFAFA;
+		dataTextFormat.m_gradationType = GT_HIGH_LOW;
 
 		TString dataTextString(_T("DATA "));
 		dataTextString.WriteInNumPrevEnd(i + 1, _T("%d"));
@@ -156,9 +156,9 @@ VOID SaveDataSaveDatas::RenderLastTimeBrief()
 		lastTimeTextFormat.m_charHalfScale = { 11, 15 };
 		lastTimeTextFormat.m_topLeft = { 400.0f, 150.0f + 215.0f * i };
 
-		lastTimeTextFormat.m_color1 = m_COLOR[i][0];
-		lastTimeTextFormat.m_color2 = m_COLOR[i][1];
-		lastTimeTextFormat.m_gradationType = GT_OBLIQUE_BOTTOM_RIGHT;
+		lastTimeTextFormat.m_color1 = 0xFFF0F0F0;
+		lastTimeTextFormat.m_color2 = 0xFFFAFAFA;
+		lastTimeTextFormat.m_gradationType = GT_HIGH_LOW;
 
 		lastTimeTextText.Write(lastTimeTextFormat);
 	
@@ -173,9 +173,9 @@ VOID SaveDataSaveDatas::RenderLastTimeBrief()
 		txtFormat.m_charHalfScale = { 11, 15 };
 		txtFormat.m_topLeft = { 400.0f, 185.0f + 215.0f * i };
 
-		txtFormat.m_color1 = m_COLOR[i][0];
-		txtFormat.m_color2 = m_COLOR[i][1];
-		txtFormat.m_gradationType = GT_OBLIQUE_BOTTOM_RIGHT;
+		txtFormat.m_color1 = 0xFFF0F0F0;
+		txtFormat.m_color2 = 0xFFFAFAFA;
+		txtFormat.m_gradationType = GT_HIGH_LOW;
 
 		lastPlayTxt.Write(txtFormat);
 	}
@@ -249,9 +249,9 @@ VOID SaveDataSaveDatas::RenderDetailData()
 	dataTextFormat.m_charHalfScale = { 13, 19 };
 	dataTextFormat.m_topLeft = { 772.0f, 53.0f };
 
-	dataTextFormat.m_color1 = m_COLOR[m_selectingData][0];
-	dataTextFormat.m_color2 = m_COLOR[m_selectingData][1];
-	dataTextFormat.m_gradationType = GT_OBLIQUE_BOTTOM_RIGHT;
+	dataTextFormat.m_color1 = 0xFFF0F0F0;
+	dataTextFormat.m_color2 = 0xFFFAFAFA;
+	dataTextFormat.m_gradationType = GT_HIGH_LOW;
 
 	dataTextText.Write(dataTextFormat);
 

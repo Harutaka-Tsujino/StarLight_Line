@@ -44,6 +44,8 @@ VOID ResultTwoPlayerFrame::PlayerTextRender()
 	txt1pFormat.m_charHalfScale = { 25, 30 };
 	txt1pFormat.m_topLeft = { m_WND_SIZE.m_x * 0.25f - txt1pFormat.m_charHalfScale.m_x * 2.0f * 4.0f, m_WND_SIZE.m_y * 0.25f };
 	txt1pFormat.m_color1 = 0xFFFFF462;
+	txt1pFormat.m_color2 = 0xFFFFE5E5;
+	txt1pFormat.m_gradationType = GT_OBLIQUE_BOTTOM_RIGHT;
 
 	OnePlayerText.Write(txt1pFormat);
 
@@ -54,7 +56,9 @@ VOID ResultTwoPlayerFrame::PlayerTextRender()
 	TextFormat txt2PFormat;
 	txt2PFormat.m_charHalfScale = { 25, 30 };
 	txt2PFormat.m_topLeft = { m_WND_SIZE.m_x * 0.75f - txt2PFormat.m_charHalfScale.m_x * 2.0f * 4.0f , m_WND_SIZE.m_y * 0.25f };
-	txt2PFormat.m_color1 = 0xFFFFF462;
+	txt2PFormat.m_color1 = 0xFFC9171E;
+	txt2PFormat.m_color2 = 0xFFFFE5E5;
+	txt2PFormat.m_gradationType = GT_OBLIQUE_BOTTOM_RIGHT;
 
 	TwoPlayerText.Write(txt2PFormat);
 }
@@ -108,20 +112,21 @@ VOID ResultTwoPlayerScore::Render()
 
 VOID ResultTwoPlayerScore::RenderCheckStar()
 {
-	ObjData data;
-	CustomVertex CheakStar[4];
+	CustomVertex CheckStar[4];
 
 	for (int i = 0;i < Joycon::MAX_CONTROLLER;++i)
 	{
-		data.m_center = { m_WND_SIZE.m_x * (0.42f + 0.5f * i),m_WND_SIZE.m_y * 0.9f,0.0f };
-		data.m_halfScale = { 50.f,50.f,0.f };
+		m_checkStarData[i].m_center = { m_WND_SIZE.m_x * (0.42f + 0.5f * i),m_WND_SIZE.m_y * 0.9f,0.0f };
+		m_checkStarData[i].m_halfScale = { 50.f,50.f,0.f };
+		
+		m_checkStarData[i].m_deg.z = (m_pushButton[i]) ? 0 : m_checkStarData[i].m_deg.z += 0.25;
 
-		data.m_aRGB = (m_pushButton[i]) ? D3DCOLOR_ARGB(255,  152, 217,  142): 
+		m_checkStarData[i].m_aRGB = (m_pushButton[i]) ? D3DCOLOR_ARGB(255,  152, 217,  142):
 										  D3DCOLOR_ARGB(80,   255, 255, 255);
 
-		m_rGameLib.CreateRect(CheakStar, data);
+		m_rGameLib.CreateRect(CheckStar, m_checkStarData[i]);
 
-		m_rGameLib.Render(CheakStar, m_rGameLib.GetTex(_T("CheckStar")));
+		m_rGameLib.Render(CheckStar, m_rGameLib.GetTex(_T("CheckStar")));
 	}
 }
 
@@ -141,7 +146,7 @@ VOID ResultTwoPlayerScore::ScoreRender()
 
 		TextFormat txtFormat;
 		txtFormat.m_charHalfScale = { 30, 40 };
-		txtFormat.m_color1 = 0xFFFFFFF9;
+		txtFormat.m_color1 = 0xFFF5F5F5;
 
 		//! SCOREの文字数の半分が2.5f
 		txtFormat.m_topLeft = { m_WND_SIZE.m_x * (0.25f + (0.25f * (i * 2))) - 2.0f * txtFormat.m_charHalfScale.m_x * stagingScoreDigitsNum * 0.5f , 400.0f };
@@ -170,6 +175,9 @@ VOID ResultTwoPlayerScore::RenderDraw()
 	{
 		txtFormat.m_charHalfScale = { 30,40 };
 		txtFormat.m_topLeft = { m_WND_SIZE.m_x * (0.25f + (0.25f * (i * 2))) - 2.0f * txtFormat.m_charHalfScale.m_x * 2.0f,m_WND_SIZE.m_y * 0.7f };
+		txtFormat.m_color1 = 0xFFE5E5E5;
+		txtFormat.m_color2 = 0xFFFAFAFA;
+		txtFormat.m_gradationType = GT_HIGH_LOW;
 
 		drawText.Write(txtFormat);
 	}	
@@ -185,6 +193,8 @@ VOID ResultTwoPlayerScore::RenderWinner()
 	txtFormat.m_charHalfScale = { 30,40 };
 	txtFormat.m_topLeft = { m_WND_SIZE.m_x * 0.75f - 2.0f * txtFormat.m_charHalfScale.m_x * 3.0f,m_WND_SIZE.m_y * 0.7f };
 	txtFormat.m_color1 = 0xFFEA5532;
+	txtFormat.m_color2 = 0xFFE5FFFF;
+	txtFormat.m_gradationType = GT_OBLIQUE_BOTTOM_RIGHT;
 
 	if (m_Score[Joycon::LEFT_CONTROLLER] > m_Score[Joycon::RIGHT_CONTROLLER])
 	{
@@ -204,6 +214,8 @@ VOID ResultTwoPlayerScore::RenderLoser()
 	txtFormat.m_charHalfScale = { 30,40 };
 	txtFormat.m_topLeft = { m_WND_SIZE.m_x * 0.75f - 2.0f * txtFormat.m_charHalfScale.m_x * 2.5f,m_WND_SIZE.m_y * 0.7f };
 	txtFormat.m_color1 = 0xFF00A1E9;
+	txtFormat.m_color2 = 0xFFFFE5FF;
+	txtFormat.m_gradationType = GT_OBLIQUE_BOTTOM_RIGHT;
 
 	if (m_Score[Joycon::LEFT_CONTROLLER] < m_Score[Joycon::RIGHT_CONTROLLER])
 	{
@@ -231,7 +243,7 @@ VOID ResultTwoPlayerStage::Render()
 	TString levelString;
 	INT levelCharsNum = 0;
 
-	GetStageLevelAndCharsNum(&levelString, &levelCharsNum);
+	GetStageLevelAndCharsNum(&levelString, &levelCharsNum, &txtFormat);
 
 	Text levelText(levelString, _T("2DTextures/Fonts/a_9.png"));
 	txtFormat.m_charHalfScale = { 17, 25 };
@@ -331,7 +343,7 @@ VOID ResultTwoPlayerStage::GetStageStringAndCharsNum(TString* pTString, INT* pCh
 	}
 }
 
-VOID ResultTwoPlayerStage::GetStageLevelAndCharsNum(TString* pTString, INT* pCharsNum)
+VOID ResultTwoPlayerStage::GetStageLevelAndCharsNum(TString* pTString, INT* pCharsNum, TextFormat* pTextFormat)
 {
 	switch (m_stageData.m_level)
 	{
@@ -340,12 +352,18 @@ VOID ResultTwoPlayerStage::GetStageLevelAndCharsNum(TString* pTString, INT* pCha
 		pTString->WriteInAll(_T("EASY"));
 		*pCharsNum = 4;
 
+		pTextFormat->m_color1 = 0xEE23FF23;
+		pTextFormat->m_color2 = 0xEEE5FFE5;
+
 		break;
 
 	case SLK_NORMAL:
 
 		pTString->WriteInAll(_T("NORMAL"));
 		*pCharsNum = 6;
+
+		pTextFormat->m_color1 = 0xEE23FFFF;
+		pTextFormat->m_color2 = 0xEEE5FFFF;
 
 		break;
 
@@ -354,6 +372,11 @@ VOID ResultTwoPlayerStage::GetStageLevelAndCharsNum(TString* pTString, INT* pCha
 		pTString->WriteInAll(_T("HARD"));
 		*pCharsNum = 4;
 
+		pTextFormat->m_color1 = 0xEEFF23FF;
+		pTextFormat->m_color2 = 0xEEFFE5FF;
+
 		break;
 	}
+
+	pTextFormat->m_gradationType = GT_OBLIQUE_BOTTOM_RIGHT;
 }
