@@ -138,6 +138,16 @@ VOID TitleMenu::Render()
 
 VOID TitleMenu::ConnectPromptRender()
 {
+	ObjData BackData;
+	CustomVertex PromptBack[4];
+
+	BackData.m_center = { m_WND_SIZE.m_x * 0.5f , m_WND_SIZE.m_y * 0.6f , m_Z };
+	BackData.m_halfScale = { m_WND_SIZE.m_x  * 0.32f , m_WND_SIZE.m_y * 0.1f , 0.f };
+	
+	m_rGameLib.CreateRect(PromptBack, BackData);
+
+	m_rGameLib.Render(PromptBack, m_rGameLib.GetTex(_T("PlayStylePlate")));
+
 	ObjData Data;
 	CustomVertex Prompt[4];
 
@@ -161,7 +171,7 @@ VOID TitleMenu::ConnectJoyconRender()
 		Data.m_center = { m_WND_SIZE.m_x * (0.4f + 0.2f * i),m_WND_SIZE.m_y * 0.8f,m_Z };
 		Data.m_halfScale = { m_WND_SIZE.m_x * 0.05f,m_WND_SIZE.m_y * 0.1f,0.f };
 		
-		const FLOAT TU_MAX = 128.f;
+		const FLOAT TU_MAX = 512.f;
 		Data.m_texUV.m_startTU = (i * (TU_MAX / 2)) / TU_MAX;
 		Data.m_texUV.m_endTU = (i + 1)* (TU_MAX / 2) / TU_MAX;
 
@@ -175,13 +185,17 @@ VOID TitleMenu::SelectModeRender()
 {
 	ObjData Data;
 	CustomVertex Menu[4];
+	CustomVertex MenuPlate[4];
 
 	for (int i = 0;i < PM_MAX;++i)
 	{
-		Data.m_center = { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * (0.68f + 0.09f * i), m_Z };	//! 現物合わせ
+		Data.m_center = { m_WND_SIZE.m_x * 0.5f, m_WND_SIZE.m_y * (0.68f + 0.09f * i), 0.0f };	//! 現物合わせ
 		Data.m_halfScale = { m_WND_SIZE.m_x * 0.06f, m_WND_SIZE.m_y * 0.033f ,0.0f };			//! 現物合わせ
 
-		if (i == m_mode) Data.m_halfScale *= 1.25f;
+		if (i == m_mode)
+		{
+			Data.m_halfScale *= 1.25f;
+		}
 
 		const FLOAT TV_MAX = 128.f;
 		Data.m_texUV.m_startTV = (i * (TV_MAX / 2)) / TV_MAX;
