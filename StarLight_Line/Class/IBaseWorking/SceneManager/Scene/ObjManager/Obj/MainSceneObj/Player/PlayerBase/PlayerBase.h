@@ -30,8 +30,10 @@ public:
 class PlayerBase :public Obj
 {
 public:
-	PlayerBase():Obj(OT_TRANSPARENCY, 1.0f), m_rGameCollision(GameCollision::GetInstance())
+	PlayerBase() :Obj(OT_TRANSPARENCY, 1.0f), m_rGameCollision(GameCollision::GetInstance())
 	{
+		m_PlayerPoint = { 0, 0, 0 };
+		m_PlayerPos = { 0.0f, 0.0f, 0.0f };
 	}
 
 	virtual ~PlayerBase()
@@ -66,33 +68,17 @@ protected:
 	static const int m_MAXXARRAYNUM = 4;
 	static const int m_MAXYARRAYNUM = 3;
 
-	const FLOAT MOVE_X_LENGTH = 1.21f;
-	const FLOAT MOVE_X_MIDDLE_MULTI = 0.33f;
+	static const FLOAT MOVE_X_LENGTH;
+	static const FLOAT MOVE_X_MIDDLE_MULTI;
 
-	const FLOAT PLAYER_MOVE_X[m_MAXXARRAYNUM] =
-	{
-		-MOVE_X_LENGTH ,
-		-MOVE_X_LENGTH * MOVE_X_MIDDLE_MULTI ,
-		MOVE_X_LENGTH * MOVE_X_MIDDLE_MULTI ,
-		MOVE_X_LENGTH
-	};
+	static const FLOAT PLAYER_MOVE_X[m_MAXXARRAYNUM];
 
-	const FLOAT MOVE_Y_LENGTH = 0.7f;
-	const FLOAT MOVE_Y_BASE_POS = -0.88f;
+	static const FLOAT MOVE_Y_LENGTH;
+	static const FLOAT MOVE_Y_BASE_POS;
 
-	const FLOAT PLAYER_MOVE_Y[m_MAXYARRAYNUM] =
-	{
-		MOVE_Y_BASE_POS + MOVE_Y_LENGTH ,
-		MOVE_Y_BASE_POS ,
-		MOVE_Y_BASE_POS - MOVE_Y_LENGTH + 0.05f
-	};
+	static const FLOAT PLAYER_MOVE_Y[m_MAXYARRAYNUM];
 
-	const SurfaceCoordinate m_BasePos[m_MAXYARRAYNUM][m_MAXXARRAYNUM] =
-	{
-		{ { PLAYER_MOVE_Y[0],PLAYER_MOVE_X[0] },{ PLAYER_MOVE_Y[0],PLAYER_MOVE_X[1] },{ PLAYER_MOVE_Y[0],PLAYER_MOVE_X[2] },{ PLAYER_MOVE_Y[0],PLAYER_MOVE_X[3] } },
-		{ { PLAYER_MOVE_Y[1],PLAYER_MOVE_X[0] },{ PLAYER_MOVE_Y[1],PLAYER_MOVE_X[1] },{ PLAYER_MOVE_Y[1],PLAYER_MOVE_X[2] },{ PLAYER_MOVE_Y[1],PLAYER_MOVE_X[3] } },
-		{ { PLAYER_MOVE_Y[2],PLAYER_MOVE_X[0] },{ PLAYER_MOVE_Y[2],PLAYER_MOVE_X[1] },{ PLAYER_MOVE_Y[2],PLAYER_MOVE_X[2] },{ PLAYER_MOVE_Y[2],PLAYER_MOVE_X[3] } }
-	};
+	static const SurfaceCoordinate m_BasePos[m_MAXYARRAYNUM][m_MAXXARRAYNUM];
 
 	CoordinatePoint m_PlayerPoint;
 	D3DXVECTOR3 m_PlayerPos;
