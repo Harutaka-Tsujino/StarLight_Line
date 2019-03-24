@@ -31,7 +31,7 @@ const TCHAR* ADV::GetTextPath()
 		return _T("StageData/Chapter/LIBRA.txt");
 
 	case STAGE_VIRGO:
-		return _T("StageData/Chapter/VIRGO.csv");
+		return _T("StageData/Chapter/VIRGO.txt");
 
 	case STAGE_ARIES:
 		return _T("StageData/Chapter/ARIES.txt");
