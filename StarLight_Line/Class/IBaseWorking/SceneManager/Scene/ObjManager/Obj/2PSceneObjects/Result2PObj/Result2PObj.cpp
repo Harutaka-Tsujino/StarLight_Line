@@ -116,10 +116,10 @@ VOID ResultTwoPlayerScore::RenderCheckStar()
 
 	for (int i = 0;i < Joycon::MAX_CONTROLLER;++i)
 	{
-		m_checkStarData[i].m_center = { m_WND_SIZE.m_x * (0.42f + 0.5f * i),m_WND_SIZE.m_y * 0.9f,0.0f };
+		m_checkStarData[i].m_center = { m_WND_SIZE.m_x * (0.42f + 0.5f * i),m_WND_SIZE.m_y * 0.9f, 0.0f };
 		m_checkStarData[i].m_halfScale = { 50.f,50.f,0.f };
 		
-		m_checkStarData[i].m_deg.z = (m_pushButton[i]) ? 0 : m_checkStarData[i].m_deg.z += 0.25;
+		m_checkStarData[i].m_deg.z += 0.25f;
 
 		m_checkStarData[i].m_aRGB = (m_pushButton[i]) ? D3DCOLOR_ARGB(255,  152, 217,  142):
 										  D3DCOLOR_ARGB(80,   255, 255, 255);
