@@ -8,7 +8,7 @@ VOID PlayerTwo::Init()
 
 	m_rGameLib.CreateFbx(_T("Eiwi"), "3DModels/Eiwi/Eiwi.fbx");
 
-	m_PlayerPoint = { 2,1,1 };
+	m_PlayerPoint = { 2,2,0 };
 	m_PlayerPos.z = 0.2f;
 	m_Speed.x = m_Speed.y = m_Speed.z = 0.0f;
 	m_PlayerPos.x = m_BasePos[m_PlayerPoint.y][m_PlayerPoint.x].x;	
@@ -107,7 +107,7 @@ VOID PlayerTwo::SetPlayerFbxMaterial()
 	D3DXVECTOR4 EiwiAmbient(0.7f, 255.0f / 255.0f, 0.f/ 255.0f, 0.f / 255.0f);
 	rEiwi.SetAmbient(&EiwiAmbient);
 
-	D3DXVECTOR4 EiwiEmissive(0.8f, 255.0f / 255.0f, 0.f / 255.0f, 0.f / 255.0f);
+	D3DXVECTOR4 EiwiEmissive(0.8f, 230.0f / 255.0f, 90.f / 255.0f, 10.f / 255.0f);
 	rEiwi.SetEmissive(&EiwiEmissive);
 
 	rEiwi.SetPower(0.8f);

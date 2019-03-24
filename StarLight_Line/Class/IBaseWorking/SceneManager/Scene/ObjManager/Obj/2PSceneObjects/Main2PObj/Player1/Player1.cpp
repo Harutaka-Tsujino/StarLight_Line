@@ -9,7 +9,7 @@ VOID PlayerOne::Init()
 
 	m_rGameLib.CreateFbx(_T("Eiwi"), "3DModels/Eiwi/Eiwi.fbx");
 
-	m_PlayerPoint = { 1,1,0 };
+	m_PlayerPoint = { 1,2,0 };
 	m_PlayerPos.z = 0.2f;
 	m_Speed.x = m_Speed.y = m_Speed.z = 0.0f;
 	m_PlayerPos.x = m_BasePos[m_PlayerPoint.y][m_PlayerPoint.x].x;
