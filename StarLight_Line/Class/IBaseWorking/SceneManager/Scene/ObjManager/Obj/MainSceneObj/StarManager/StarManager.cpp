@@ -286,7 +286,7 @@ VOID StarManager::SetStar_ms(const std::vector<float>& rDropPerMinuteVec, StarPl
 	const FLOAT MINUTE_TO__ms = 60.0f * SEC_TO__ms_MULTI;
 
 	FLOAT formarBPM = 0;
-
+	
 	LONGLONG* pStart_ms = &pStarInfo->m_Time;
 	*pStart_ms = m_WAITING_TIME_ms;
 
